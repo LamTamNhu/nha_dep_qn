@@ -6,6 +6,7 @@ import { useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import Image from "next/image";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -20,11 +21,11 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-sm">
-      <div className="container mx-auto px-4 sm:px-2 lg:px-4">
+      <div className="container-fluid mx-auto px-4 sm:px-2 lg:px-4">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
-            <span className="text-white text-2xl lg:text-3xl font-bold tracking-wider">AMAZ</span>
+            <Image src="/logo_invert.png" alt="logo" width={200} height={150}/>
           </Link>
 
           {/* Desktop Navigation */}
@@ -33,7 +34,7 @@ export default function Navbar() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-white text-sm font-medium tracking-wide hover:text-gray-300 transition-colors duration-200"
+                className="text-white text-xs font-bold tracking-wide hover:text-gray-300 transition-colors duration-200"
               >
                 {item.name}
               </Link>
