@@ -1,0 +1,94 @@
+"use client"
+
+import { Facebook, Instagram, Menu } from "lucide-react"
+import Link from "next/link"
+import { useState } from "react"
+
+import { Button } from "@/components/ui/button"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+
+export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false)
+
+  const navigationItems = [
+    { name: "TRANG CHỦ", href: "/" },
+    { name: "DỰ ÁN", href: "/projects" },
+    { name: "BÀI VIẾT", href: "/blog" },
+    { name: "VỀ CHÚNG TÔI", href: "/about" },
+    { name: "TUYỂN DỤNG", href: "/careers" },
+  ]
+
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-sm">
+      <div className="container mx-auto px-4 sm:px-2 lg:px-4">
+        <div className="flex items-center justify-between h-16 lg:h-20">
+          {/* Logo */}
+          <Link href="/" className="flex-shrink-0">
+            <span className="text-white text-2xl lg:text-3xl font-bold tracking-wider">AMAZ</span>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center space-x-8">
+            {navigationItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="text-white text-sm font-medium tracking-wide hover:text-gray-300 transition-colors duration-200"
+              >
+                {item.name}
+              </Link>
+            ))}
+
+            {/* Social Icons */}
+            <div className="flex items-center space-x-4 ml-6">
+              <Link href="#" className="text-white hover:text-gray-300 transition-colors duration-200">
+                <Facebook className="h-5 w-5" />
+                <span className="sr-only">Facebook</span>
+              </Link>
+              <Link href="#" className="text-white hover:text-gray-300 transition-colors duration-200">
+                <Instagram className="h-5 w-5" />
+                <span className="sr-only">Instagram</span>
+              </Link>
+            </div>
+          </div>
+
+          {/* Mobile menu button */}
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="lg:hidden text-white hover:bg-white/10">
+                <Menu className="h-6 w-6" />
+                <span className="sr-only">Open menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="bg-black/95 border-gray-800">
+              <div className="flex flex-col space-y-6 mt-8">
+                {navigationItems.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className="text-white text-lg font-medium tracking-wide hover:text-gray-300 transition-colors duration-200"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+
+                {/* Mobile Social Icons */}
+                <div className="flex items-center space-x-6 pt-6 border-t border-gray-800">
+                  <Link href="#" className="text-white hover:text-gray-300 transition-colors duration-200">
+                    <Facebook className="h-6 w-6" />
+                    <span className="sr-only">Facebook</span>
+                  </Link>
+                  <Link href="#" className="text-white hover:text-gray-300 transition-colors duration-200">
+                    <Instagram className="h-6 w-6" />
+                    <span className="sr-only">Instagram</span>
+                  </Link>
+                </div>
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </div>
+    </nav>
+  )
+}
