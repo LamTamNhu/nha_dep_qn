@@ -1,10 +1,11 @@
 "use client";
-import Navbar from "./navbar";
-import { ShieldCheck, HandCoins, Hammer, Users } from "lucide-react";
+import Navbar from "./components/navbar";
+import { ShieldCheck, HandCoins, Hammer, Users, House} from "lucide-react";
 import * as React from "react";
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import AnimatedCounter from "@/components/animated-counter";
+import ContactFloatingButtons from "./components/contactFloatingButtons";
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -117,55 +118,89 @@ export default function Home() {
       </div>
 
       {/* Introduction section */}
-      <div className="py-20 px-6 md:px-10">
-        <div className="container mx-auto px-12">
-          <h2 className="text-xl font-bold text-left text-orange-400 mb-8">
+      <div className="py-20 px-4">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-4xl font-bold text-left text-orange-400 mb-20">
             CÔNG TY TNHH NHÀ ĐẸP QUẢNG NAM
           </h2>
-          <p className="text-base font-normal text-left mb-2 text-wrap: pretty lg:w-1/2">
-            Công ty TNHH NHÀ ĐẸP QUẢNG NAM do KTS Nguyên Tương thành lập là đơn
-            vị hàng đầu trong lĩnh vực Thiết kế và Thi công Nội thất hiện nay
-            với gần 10 năm kinh nghiệm thực chiến.
-          </p>
-          <p className="text-base font-normal text-left mb-2 lg:w-1/2">
-            Chúng tôi chuyên thiết kế thi công trọn gói cho Nhà Phố, Nhà Vườn,
-            Biệt Thực, Chung Cư, Văn Phòng, Nhà Hàng,...
-          </p>
-          <p className="text-base font-normal text-left mb-2 lg:w-1/2 text-wrap: pretty">
-            Với sự nhiệt huyết cùng đội ngũ nhân sự trẻ trung và năng động, NĐQN
-            với mong muốn và xứ mệnh kiến tạo không gian sống giá trị đa dạng
-            phong cách, mới lạ hiện đại, đáp ứng tốt nhất có thể mọi nhu cầu
-            khách hàng đưa ra.
-          </p>
         </div>
       </div>
-      {/* Stats Section with Animated Counter */}
-      <div className="py-20 px-6 md:px-10 bg-gray-50">
-        <div className="container mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-center">
-            <AnimatedCounter end={10} duration={3000} text="năm kinh nghiệm" />
+
+      {/* Features Section */}
+      <div className="py-20 bg-black/60 px-4 shadow-2xl border border-white/10">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:divide-x divide-white gap-8">
+          {/* Column 1 */}
+          <div className="flex-1 flex flex-col items-center px-4 text-center md:text-left">
+            <div className="mb-4">
+              <House size={60} className="mx-auto text-orange-400" />
+            </div>
+            <h3 className="text-lg font-semibold text-orange-400 mb-2">
+              ĐƠN VỊ HÀNG ĐẦU
+            </h3>
+            <p className="text-base font-normal text-white">
+              Công ty TNHH NHÀ ĐẸP QUẢNG NAM do KTS Nguyên Tương thành lập là
+              đơn vị hàng đầu trong lĩnh vực Thiết kế và Thi công Nội thất hiện
+              nay với gần 10 năm kinh nghiệm thực chiến.
+            </p>
+          </div>
+          {/* Column 2 */}
+          <div className="flex-1 flex flex-col items-center px-4 text-center md:text-left">
+            <div className="mb-4">
+              <Hammer size={40} className="mx-auto text-orange-400" />
+            </div>
+            <h3 className="text-lg font-semibold text-orange-400 mb-2">
+              DỊCH VỤ ĐA DẠNG
+            </h3>
+            <p className="text-base font-normal text-white">
+              Chúng tôi chuyên thiết kế thi công trọn gói cho Nhà Phố, Nhà Vườn,
+              Biệt Thự, Chung Cư, Văn Phòng, Nhà Hàng,...
+            </p>
+          </div>
+          {/* Column 3 */}
+          <div className="flex-1 flex flex-col items-center px-4 text-center md:text-left">
+            <div className="mb-4">
+              <Users size={40} className="mx-auto text-orange-400" />
+            </div>
+            <h3 className="text-lg font-semibold text-orange-400 mb-2">
+              ĐỘI NGŨ TRẺ TRUNG, NHIỆT HUYẾT
+            </h3>
+            <p className="text-base font-normal text-white">             
+              NĐQN với mong muốn và sứ mệnh kiến tạo không gian sống giá trị đa
+              dạng phong cách, đáp ứng tốt nhất có thể mọi nhu
+              cầu khách hàng đưa ra.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="py-20 bg-gray-50 px-4">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-xl font-bold text-center text-orange-400 mb-14">
+            NHỮNG CON SỐ ẤN TƯỢNG
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-center">
+            <AnimatedCounter end={10} duration={3000} text="Năm kinh nghiệm" />
             <AnimatedCounter
               end={100}
               duration={3000}
-              text="chuyên viên, công nhân"
+              text="Chuyên viên, công nhân"
             />
             <AnimatedCounter
               end={1000}
               duration={3000}
-              text="khách hàng thân thiết"
+              text="Khách hàng thân thiết"
             />
             <AnimatedCounter
               end={3000}
               duration={3000}
-              text="mẫu thiết kế hiện đại"
+              text="Mẫu thiết kế hiện đại"
             />
           </div>
         </div>
       </div>
 
       {/* Why Choose Us Section */}
-      <section className="py-20 px-6 md:px-10 bg-white">
-        <div className="container mx-auto">
+      <section className="py-20 px-4 bg-white">
+        <div className="container mx-auto max-w-6xl mx-auto px-4">
           <h2 className="text-xl font-bold text-left text-orange-400 mb-14">
             TẠI SAO CHỌN CHÚNG TÔI
           </h2>
@@ -234,6 +269,55 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Process Section */}
+      <section className="py-20 px-4 bg-black/60">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-center text-orange-400 mb-16 uppercase tracking-wider">
+            Quy trình thi công trọn gói
+          </h2>
+          <div className="flex flex-col md:flex-row md:justify-between items-center gap-12 relative">
+            {/* Step 1 */}
+            <div className="flex-1 flex flex-col items-center md:items-start">
+              <div className="w-20 h-20 rounded-full border-4 border-orange-400 flex items-center justify-center text-3xl font-bold text-orange-400 mb-4 bg-black/60">
+                1
+              </div>
+              <div className="text-white text-lg font-semibold mb-2">TRAO ĐỔI TƯ VẤN</div>
+              <div className="text-white/80 text-base mb-2">Tiếp nhận khảo sát mặt bằng</div>
+              <div className="text-white/80 text-base mb-2">Phân tích lập hồ sơ thiết kế sơ bộ</div>
+              <div className="text-white/80 text-base mb-2">Báo giá thiết kế</div>
+              <div className="text-white/80 text-base mb-2">Ký hợp đồng thiết kế</div>
+            </div>
+            {/* Timeline Line */}
+            <div className="hidden md:block h-1 w-16 bg-orange-400 rounded-full mx-2" />
+            {/* Step 2 */}
+            <div className="flex-1 flex flex-col items-center md:items-center">
+              <div className="w-20 h-20 rounded-full border-4 border-orange-400 flex items-center justify-center text-3xl font-bold text-orange-400 mb-4 bg-black/60">
+                2
+              </div>
+              <div className="text-white text-lg font-semibold mb-2">Lập hồ sơ thiết kế thi công</div>
+              <div className="text-white/80 text-base mb-2">Báo giá thi công</div>
+              <div className="text-white/80 text-base mb-2">Kí hợp đồng thi công</div>
+              <div className="text-white/80 text-base mb-2">Thiết kế nội thất</div>
+            </div>
+            {/* Timeline Line */}
+            <div className="hidden md:block h-1 w-16 bg-orange-400 rounded-full mx-2" />
+            {/* Step 3 */}
+            <div className="flex-1 flex flex-col items-center md:items-end">
+              <div className="w-20 h-20 rounded-full border-4 border-orange-400 flex items-center justify-center text-3xl font-bold text-orange-400 mb-4 bg-black/60">
+                3
+              </div>
+              <div className="text-white text-lg font-semibold mb-2">Báo giá thi công nội thất</div>
+              <div className="text-white/80 text-base mb-2">Kí hợp đồng thi công nội thất</div>
+              <div className="text-white/80 text-base mb-2">Nghiệm thu</div>
+              <div className="text-white/80 text-base mb-2">Bảo hành và hậu mãi</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Floating Buttons */}
+      <ContactFloatingButtons />
     </div>
   );
 }
