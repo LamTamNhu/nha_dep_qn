@@ -1,11 +1,48 @@
 "use client";
 import Navbar from "./components/navbar";
-import { ShieldCheck, HandCoins, Hammer, Users, House} from "lucide-react";
+import {
+  ShieldCheck,
+  HandCoins,
+  Hammer,
+  Users,
+  House,
+  ArrowUpRight,
+} from "lucide-react";
 import * as React from "react";
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import AnimatedCounter from "@/components/animated-counter";
 import ContactFloatingButtons from "./components/contactFloatingButtons";
+
+const slideTransitions = [
+  // Slide left/right (default)
+  (index, current) =>
+    index === current
+      ? "translate-x-0 z-10"
+      : index < current
+      ? "-translate-x-full z-0"
+      : "translate-x-full z-0",
+  // Fade
+  (index, current) =>
+    index === current
+      ? "opacity-100 z-10"
+      : "opacity-0 pointer-events-none z-0",
+  // Scale
+  (index, current) =>
+    index === current
+      ? "scale-100 opacity-100 z-10"
+      : "scale-90 opacity-0 pointer-events-none z-0",
+  // Rotate Y
+  (index, current) =>
+    index === current
+      ? "rotate-y-0 opacity-100 z-10"
+      : "rotate-y-12 opacity-0 pointer-events-none z-0",
+];
+
+// Add this utility for random selection
+function getRandomTransition() {
+  return slideTransitions[Math.floor(Math.random() * slideTransitions.length)];
+}
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -69,40 +106,40 @@ export default function Home() {
         className="h-screen w-full relative overflow-hidden flex items-center justify-center"
         style={{ perspective: "1px" }}
       >
-        {slides.map((slide, index) => (
-          <div
-            key={slide.id}
-            className={`absolute inset-0 transition-transform duration-700 ease-in-out ${
-              index === currentSlide
-                ? "translate-x-0 z-10"
-                : index < currentSlide
-                ? "-translate-x-full z-0"
-                : "translate-x-full z-0"
-            }`}
-          >
+        {slides.map((slide, index) => {
+          // Pick a random transition for this render
+          const transitionFn = getRandomTransition();
+          const transitionClass = transitionFn(index, currentSlide);
+
+          return (
             <div
-              className="h-full w-full relative"
-              style={
-                index === currentSlide
-                  ? {
-                      transform: `translateY(${parallax * 0.4}px)`,
-                      willChange: "transform",
-                    }
-                  : {}
-              }
+              key={slide.id}
+              className={`absolute inset-0 transition-all duration-700 ease-in-out ${transitionClass}`}
             >
-              <Image
-                src={slide.image || "/globe.svg"}
-                alt={slide.alt}
-                fill
-                priority={index === 0}
-                quality={90}
-                sizes="100vw"
-                className="object-cover"
-              />
+              <div
+                className="h-full w-full relative"
+                style={
+                  index === currentSlide
+                    ? {
+                        transform: `translateY(${parallax * 0.4}px)`,
+                        willChange: "transform",
+                      }
+                    : {}
+                }
+              >
+                <Image
+                  src={slide.image || "/globe.svg"}
+                  alt={slide.alt}
+                  fill
+                  priority={index === 0}
+                  quality={90}
+                  sizes="100vw"
+                  className="object-cover"
+                />
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
         {/* Overlay */}
         <div className="absolute inset-0 bg-black/40 z-20" />
         {/* Hero Content */}
@@ -118,9 +155,9 @@ export default function Home() {
       </div>
 
       {/* Introduction section */}
-      <div className="py-20 px-4">
+      <div className="py-12 px-4">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-4xl font-bold text-left text-orange-400 mb-20">
+          <h2 className="text-4xl font-bold text-left text-orange-400">
             CÔNG TY TNHH NHÀ ĐẸP QUẢNG NAM
           </h2>
         </div>
@@ -164,10 +201,10 @@ export default function Home() {
             <h3 className="text-lg font-semibold text-orange-400 mb-2">
               ĐỘI NGŨ TRẺ TRUNG, NHIỆT HUYẾT
             </h3>
-            <p className="text-base font-normal text-white">             
+            <p className="text-base font-normal text-white">
               NĐQN với mong muốn và sứ mệnh kiến tạo không gian sống giá trị đa
-              dạng phong cách, đáp ứng tốt nhất có thể mọi nhu
-              cầu khách hàng đưa ra.
+              dạng phong cách, đáp ứng tốt nhất có thể mọi nhu cầu khách hàng
+              đưa ra.
             </p>
           </div>
         </div>
@@ -273,44 +310,180 @@ export default function Home() {
       {/* Process Section */}
       <section className="py-20 px-4 bg-black/60">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-orange-400 mb-16 uppercase tracking-wider">
+          <h2 className="text-xl font-bold text-center text-orange-400 mb-14 uppercase tracking-wider">
             Quy trình thi công trọn gói
           </h2>
           <div className="flex flex-col md:flex-row md:justify-between items-center gap-12 relative">
             {/* Step 1 */}
             <div className="flex-1 flex flex-col items-center md:items-start">
-              <div className="w-20 h-20 rounded-full border-4 border-orange-400 flex items-center justify-center text-3xl font-bold text-orange-400 mb-4 bg-black/60">
+              <div className="w-20 h-20 rounded-full border-4 border-orange-400 flex items-center justify-center text-3xl font-bold text-orange-400 mb-4 bg-black/10">
                 1
               </div>
-              <div className="text-white text-lg font-semibold mb-2">TRAO ĐỔI TƯ VẤN</div>
-              <div className="text-white/80 text-base mb-2">Tiếp nhận khảo sát mặt bằng</div>
-              <div className="text-white/80 text-base mb-2">Phân tích lập hồ sơ thiết kế sơ bộ</div>
-              <div className="text-white/80 text-base mb-2">Báo giá thiết kế</div>
-              <div className="text-white/80 text-base mb-2">Ký hợp đồng thiết kế</div>
+              <div className="text-white text-lg font-semibold mb-2">
+                TRAO ĐỔI TƯ VẤN
+              </div>
+              <div className="text-white/80 text-base mb-2">
+                Tiếp nhận khảo sát mặt bằng
+              </div>
+              <div className="text-white/80 text-base mb-2">
+                Phân tích lập hồ sơ thiết kế sơ bộ
+              </div>
+              <div className="text-white/80 text-base mb-2">
+                Báo giá thiết kế
+              </div>
+              <div className="text-white/80 text-base mb-2">
+                Ký hợp đồng thiết kế
+              </div>
             </div>
             {/* Timeline Line */}
             <div className="hidden md:block h-1 w-16 bg-orange-400 rounded-full mx-2" />
             {/* Step 2 */}
             <div className="flex-1 flex flex-col items-center md:items-center">
-              <div className="w-20 h-20 rounded-full border-4 border-orange-400 flex items-center justify-center text-3xl font-bold text-orange-400 mb-4 bg-black/60">
+              <div className="w-20 h-20 rounded-full border-4 border-orange-400 flex items-center justify-center text-3xl font-bold text-orange-400 mb-4 bg-black/10">
                 2
               </div>
-              <div className="text-white text-lg font-semibold mb-2">Lập hồ sơ thiết kế thi công</div>
-              <div className="text-white/80 text-base mb-2">Báo giá thi công</div>
-              <div className="text-white/80 text-base mb-2">Kí hợp đồng thi công</div>
-              <div className="text-white/80 text-base mb-2">Thiết kế nội thất</div>
+              <div className="text-white text-lg font-semibold mb-2">
+                Lập hồ sơ thiết kế thi công
+              </div>
+              <div className="text-white/80 text-base mb-2">
+                Báo giá thi công
+              </div>
+              <div className="text-white/80 text-base mb-2">
+                Kí hợp đồng thi công
+              </div>
+              <div className="text-white/80 text-base mb-2">
+                Thiết kế nội thất
+              </div>
             </div>
             {/* Timeline Line */}
             <div className="hidden md:block h-1 w-16 bg-orange-400 rounded-full mx-2" />
             {/* Step 3 */}
             <div className="flex-1 flex flex-col items-center md:items-end">
-              <div className="w-20 h-20 rounded-full border-4 border-orange-400 flex items-center justify-center text-3xl font-bold text-orange-400 mb-4 bg-black/60">
+              <div className="w-20 h-20 rounded-full border-4 border-orange-400 flex items-center justify-center text-3xl font-bold text-orange-400 mb-4 bg-black/10">
                 3
               </div>
-              <div className="text-white text-lg font-semibold mb-2">Báo giá thi công nội thất</div>
-              <div className="text-white/80 text-base mb-2">Kí hợp đồng thi công nội thất</div>
+              <div className="text-white text-lg font-semibold mb-2">
+                Báo giá thi công nội thất
+              </div>
+              <div className="text-white/80 text-base mb-2">
+                Kí hợp đồng thi công nội thất
+              </div>
               <div className="text-white/80 text-base mb-2">Nghiệm thu</div>
-              <div className="text-white/80 text-base mb-2">Bảo hành và hậu mãi</div>
+              <div className="text-white/80 text-base mb-2">
+                Bảo hành và hậu mãi
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Công trình thiết kế Section */}
+      <section className="py-20 px-4 md:px-10 bg-gray-50">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 items-start">
+          {/* Text Column */}
+          <div className="md:col-span-1 flex flex-col h-full">
+            <div>
+              <h2 className="text-xl font-bold text-left text-orange-400 mb-14">
+                CÔNG TRÌNH THIẾT KẾ
+              </h2>
+              <p className="text-base mb-8 leading-relaxed">
+                Mỗi năm, NHÀ ĐẸP QUẢNG NAM thực hiện hàng trăm công trình thiết
+                kế ở mọi miền đất nước. Phong cách thiết kế chính là hiện đại -
+                tối giản - tiện nghi - thông thoáng. Ngoài ra, những ý tưởng và
+                sở thích của gia chủ cũng được ưu tiên hàng đầu, để tạo nên một
+                công trình nhà ở độc bản, mang đậm dấu ấn cá nhân.
+              </p>
+            </div>
+            <a
+              href="#"
+              className="inline-flex items-center gap-2 bg-orange-400 hover:bg-orange-500 text-white font-semibold px-6 py-3 rounded transition-colors duration-200 w-max"
+            >
+              Xem tất cả
+              <ArrowUpRight />
+            </a>
+          </div>
+          {/* Images Grid */}
+          <div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {/* Project 1 */}
+            <div className="group aspect-[4/5] bg-gray-200 rounded overflow-hidden relative cursor-pointer">
+              <img
+                src="https://placehold.co/400x500?text=Project+1"
+                alt="Project 1"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-orange-200 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="text-white text-lg font-semibold text-center px-4">
+                  Nhà phố hiện đại 3 tầng, tối ưu ánh sáng tự nhiên và không
+                  gian xanh.
+                </span>
+              </div>
+            </div>
+            {/* Project 2 */}
+            <div className="group aspect-[4/5] bg-gray-200 rounded overflow-hidden relative cursor-pointer">
+              <img
+                src="https://placehold.co/400x500?text=Project+2"
+                alt="Project 2"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-orange-200 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="text-white text-lg font-semibold text-center px-4">
+                  Biệt thự sân vườn sang trọng, không gian mở kết nối thiên
+                  nhiên.
+                </span>
+              </div>
+            </div>
+            {/* Project 3 */}
+            <div className="group aspect-[4/5] bg-gray-200 rounded overflow-hidden relative cursor-pointer">
+              <img
+                src="https://placehold.co/400x500?text=Project+3"
+                alt="Project 3"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-orange-200 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="text-white text-lg font-semibold text-center px-4">
+                  Nội thất phòng khách hiện đại, tối giản, tiện nghi và ấm cúng.
+                </span>
+              </div>
+            </div>
+            {/* Project 4 */}
+            <div className="group aspect-[4/5] bg-gray-200 rounded overflow-hidden relative cursor-pointer">
+              <img
+                src="https://placehold.co/400x500?text=Project+4"
+                alt="Project 4"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-orange-200 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="text-white text-lg font-semibold text-center px-4">
+                  Nhà cấp 4 mái Nhật, thiết kế tối ưu công năng cho gia đình
+                  trẻ.
+                </span>
+              </div>
+            </div>
+            {/* Project 5 */}
+            <div className="group aspect-[4/5] bg-gray-200 rounded overflow-hidden relative cursor-pointer">
+              <img
+                src="https://placehold.co/400x500?text=Project+5"
+                alt="Project 5"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-orange-200 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="text-white text-lg font-semibold text-center px-4">
+                  Biệt thự phố 2 mặt tiền, phong cách hiện đại, sang trọng.
+                </span>
+              </div>
+            </div>
+            {/* Project 6 */}
+            <div className="group aspect-[4/5] bg-gray-200 rounded overflow-hidden relative cursor-pointer">
+              <img
+                src="https://placehold.co/400x500?text=Project+6"
+                alt="Project 6"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-orange-200 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="text-white text-lg font-semibold text-center px-4">
+                  Nhà phố 4 tầng, thiết kế thông thoáng, tối ưu diện tích đất.
+                </span>
+              </div>
             </div>
           </div>
         </div>
