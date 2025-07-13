@@ -6,13 +6,13 @@ import {redirect, RedirectType} from "next/navigation";
 const socialLinks = [
   {
     href: "https://www.youtube.com/",
-    img: <Image src={"/youtube-svgrepo-com.svg"} alt="Youtube" width={24} height={24}/>,
+    img: <Image src={"/images/youtube-svgrepo-com.svg"} alt="Youtube" width={24} height={24}/>,
     alt: "YouTube",
     external: true,
   },
   {
     href: "https://m.me/",
-    img: <Image src="/messenger-color-svgrepo-com.svg" alt="Messenger" width={24} height={24} />,
+    img: <Image src="/images/messenger-color-svgrepo-com.svg" alt="Messenger" width={24} height={24} />,
     alt: "Messenger",
     external: true,
   },
@@ -24,7 +24,7 @@ const socialLinks = [
   },
   {
     href: "https://zalo.me/",
-    img: <Image src="/Icon_of_Zalo.svg" alt="Messenger" width={24} height={24} />,
+    img: <Image src="/images/Icon_of_Zalo.svg" alt="Messenger" width={24} height={24} />,
     alt: "Zalo",
     external: true,
   },

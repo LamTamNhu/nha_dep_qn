@@ -52,17 +52,17 @@ export default function Home() {
   const slides = [
     {
       id: 1,
-      image: "/wide_shot.jpg",
+      image: "/images/wide_shot.jpg",
       alt: "wide shot",
     },
     {
       id: 2,
-      image: "/wide_hands.jpg",
+      image: "/images/wide_hands.jpg",
       alt: "wide hands",
     },
     {
       id: 3,
-      image: "/group_walking.jpg",
+      image: "/images/group_walking.jpg",
       alt: "group shot",
     },
   ];
@@ -79,32 +79,32 @@ export default function Home() {
   useEffect(() => {
     const timer = setInterval(nextSlide, 5000);
     return () => clearInterval(timer);
-  }, []);
+  });
 
   // Partners data
   const partners = [
     {
-      logo: "/logo_kimdinh.png",
+      logo: "/images/logo_kimdinh.png",
       alt: "Kim Đỉnh Partner Logo",
     },
     {
-      logo: "/hoaphat.png",
+      logo: "/images/hoaphat.png",
       alt: "logo Hoa Phat",
     },
     {
-      logo: "/songgianh.png",
+      logo: "/images/songgianh.png",
       alt: "Songgianh logo",
     },
     {
-      logo: "/vina.png",
+      logo: "/images/vina.png",
       alt: "Vina logo",
     },
     {
-      logo: "/dongtam.jpg",
+      logo: "/images/dongtam.jpg",
       alt: "Dong Tam Logo",
     },
     {
-      logo: "/vigla.png",
+      logo: "/images/vigla.png",
       alt: "Viglacera Logo",
     },
   ];
@@ -466,9 +466,11 @@ export default function Home() {
                 key={i}
                 className="group aspect-[4/5] bg-gray-200 rounded overflow-hidden relative cursor-pointer"
               >
-                <img
+                <Image
                   src={project.img}
                   alt={project.alt}
+                  width={500}
+                  height={500}
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-orange-400 flex items-center justify-center opacity-0 group-hover:opacity-90 transition-opacity duration-300">
@@ -522,9 +524,11 @@ export default function Home() {
                 key={i}
                 className="group aspect-[4/5] bg-gray-200 rounded overflow-hidden relative cursor-pointer"
               >
-                <img
+                <Image
                   src={project.img}
                   alt={project.alt}
+                  width={500}
+                  height={500}
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-orange-400 flex items-center justify-center opacity-0 group-hover:opacity-90 transition-opacity duration-300">
@@ -613,7 +617,7 @@ export default function Home() {
             <div className="col-span-1 flex justify-center">
               <div className="relative w-72 h-80 overflow-hidden shadow-lg bg-white flex items-center justify-center">
                 <Image
-                  src="/testimonial.png"
+                  src="/images/testimonial.png"
                   alt="Chị Thảo Duyên testimonial"
                   fill
                   className="object-cover"
@@ -634,13 +638,13 @@ export default function Home() {
                 Chị Thảo Duyên | Nhà phố 2 tầng | Vĩnh Phú – Thuận An
               </h3>
               <p className="text-base text-gray-700 mb-8 text-center md:text-left">
-                "Mình có thể tự tin nói rằng lựa chọn Nhà Đẹp Quảng Nam thi công
+                &quot;Mình có thể tự tin nói rằng lựa chọn Nhà Đẹp Quảng Nam thi công
                 trọn gói là một quyết định đáng đồng tiền bát gạo nếu bạn cần
                 một đơn vị hội đủ các yếu tố TƯ DUY THIẾT KẾ, NĂNG LỰC THI CÔNG
                 và CÁI TÂM LÀM NGHỀ. Khi viết những dòng đánh giá này, nhà mình
                 đã làm xong được 5 tháng và mình đã rất tự tin giới thiệu thành
                 công thêm 3 công trình của bạn bè người thân mình như một lời
-                cảm ơn đến anh em Nhà Đẹp Quảng Nam."
+                cảm ơn đến anh em Nhà Đẹp Quảng Nam.&quot;
               </p>
               <a
                 href="#"
