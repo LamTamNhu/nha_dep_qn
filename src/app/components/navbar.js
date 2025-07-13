@@ -13,10 +13,12 @@ export default function Navbar() {
 
   const navigationItems = [
     { name: "TRANG CHỦ", href: "/" },
-    { name: "DỰ ÁN", href: "/projects" },
-    { name: "BÀI VIẾT", href: "/blog" },
-    { name: "VỀ CHÚNG TÔI", href: "/about" },
-    { name: "TUYỂN DỤNG", href: "/careers" },
+    { name: "GIỚI THIỆU", href: "/about" },
+    { name: "DỊCH VỤ", href: "/" },
+    { name: "DỰ ÁN", href: "/" },
+    { name: "THỰC TẾ THI CÔNG", href: "/" },
+    { name: "TIN TỨC", href: "/" },
+    { name: "LIÊN HỆ", href: "/contact" },
   ]
 
   return (
@@ -34,7 +36,7 @@ export default function Navbar() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-white text-xs font-medium tracking-wide hover:text-gray-300 transition-colors duration-200"
+                className="text-white text-xs font-bold tracking-wide hover:text-gray-300 transition-colors duration-200"
               >
                 {item.name}
               </Link>
