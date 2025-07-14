@@ -3,8 +3,8 @@ import ContactForm from "@/app/components/contactForm";
 
 export default function Contact() {
     return (
-        <div className="min-h-screen relative bg-gray-100">
-            <div className="py-10 bg-gray-100"/>
+        <div className="min-h-screen relative py-20">
+            <div className="py-10"/>
             <ContactForm/>
         </div>
     )
