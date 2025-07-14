@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import * as lucide from "lucide-react";
 import Image from "next/image";
@@ -6,7 +7,7 @@ import {redirect, RedirectType} from "next/navigation";
 const socialLinks = [
   {
     href: "https://www.youtube.com/",
-    img: <Image src={"/images/youtube-svgrepo-com.svg"} alt="Youtube" width={24} height={24}/>,
+    img: <lucide.Youtube size={24} className="text-red-500"/>,
     alt: "YouTube",
     external: true,
   },
@@ -17,17 +18,23 @@ const socialLinks = [
     external: true,
   },
   {
-    href: "tel:0123456789",
-    img: <lucide.Phone size={24} color="#0080ff"/>,
-    alt: "Phone",
-    external: false,
-  },
-  {
     href: "https://zalo.me/",
     img: <Image src="/images/Icon_of_Zalo.svg" alt="Messenger" width={24} height={24} />,
     alt: "Zalo",
     external: true,
   },
+  {
+    href: "tel:0123456789",
+    img: <lucide.Phone size={24} className="text-orange-400"/>,
+    alt: "Phone",
+    external: false,
+  },
+  {
+    href: "/contact",
+    img: <lucide.Send size={24} className="text-orange-400"/>,
+    alt: "Contact",
+    external: false,
+  }
 ];
 
 
@@ -87,7 +94,7 @@ function FloatingButtons() {
       {!collapsed && (
         <div
           ref={listRef}
-          className={`flex flex-col items-end gap-2 sm:gap-3 animate-fade-in max-h-screen overflow-y-auto ${isOverflow ? 'scale-90' : ''}`}
+          className={`flex flex-col items-end gap-2 sm:gap-3 animate-fade-in max-h-screen overflow-visible ${isOverflow ? 'max-height: 100vh' : ''}`}
         >
           {socialLinks.map((item) => (
             <a
@@ -99,14 +106,7 @@ function FloatingButtons() {
             >
               {item.img}
             </a>
-          ))}
-          <a
-            href="#contact"
-            onClick={handleContactClick}
-            className={`mt-2 rounded-full shadow-xl bg-white flex items-center justify-center hover:bg-orange-500 transition-colors ${isOverflow ? 'w-8 h-8 sm:w-10 sm:h-10' : 'w-10 h-10 sm:w-12 sm:h-12'}`}
-          >
-            <lucide.Send className={`text-orange-400 ${isOverflow ? 'w-4 h-4 sm:w-5 sm:h-5' : 'w-5 h-5 sm:w-6 sm:h-6'}`}/>
-          </a>
+          ))}          
         </div>
       )}
     </div>

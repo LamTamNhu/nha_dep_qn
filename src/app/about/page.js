@@ -1,12 +1,8 @@
 
 "use client";
-import Navbar from "../components/navbar";
 import Image from "next/image";
-
 import { useState } from "react";
-import Footer from "../components/footer";
 import { CheckIcon, CreditCard, Lock, ShieldUser } from "lucide-react";
-import FloatingButtons from "../components/floatingButtons";
 
 export default function AboutPage() {
   const [expanded, setExpanded] = useState(false);
@@ -96,7 +92,6 @@ export default function AboutPage() {
 
   return (
     <div className="min-h-screen relative bg-white">
-      <Navbar />
       {/* Banner */}
       <div className="relative w-full h-[32rem] flex items-center justify-center">
         <Image
@@ -276,8 +271,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-      <FloatingButtons />
-      <Footer />
     </div>
   );
 }

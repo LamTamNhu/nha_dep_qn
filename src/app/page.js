@@ -1,5 +1,4 @@
 "use client";
-import Navbar from "./components/navbar";
 import {
   ArrowUpRight,
   Facebook,
@@ -15,8 +14,6 @@ import * as React from "react";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import AnimatedCounter from "@/components/animated-counter";
-import FloatingButtons from "./components/floatingButtons";
-import Footer from "./components/footer";
 import ContactForm from "./components/contactForm";
 
 const slideTransitions = [
@@ -25,8 +22,8 @@ const slideTransitions = [
     index === current
       ? "translate-x-0 z-10"
       : index < current
-        ? "-translate-x-full z-0"
-        : "translate-x-full z-0",
+      ? "-translate-x-full z-0"
+      : "translate-x-full z-0",
   // Fade
   (index, current) =>
     index === current
@@ -36,7 +33,7 @@ const slideTransitions = [
   (index, current) =>
     index === current
       ? "scale-100 opacity-100 z-10"
-      : "scale-90 opacity-0 pointer-events-none z-0"
+      : "scale-90 opacity-0 pointer-events-none z-0",
 ];
 
 // Add this utility for random selection
@@ -126,7 +123,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen relative bg-white">
-      <Navbar />
       {/* Hero Section with Background Image and Overlay */}
       <div
         ref={bannerRef}
@@ -148,9 +144,9 @@ export default function Home() {
                 style={
                   index === currentSlide
                     ? {
-                      transform: `translateY(${parallax * 0.4}px)`,
-                      willChange: "transform",
-                    }
+                        transform: `translateY(${parallax * 0.4}px)`,
+                        willChange: "transform",
+                      }
                     : {}
                 }
               >
@@ -638,13 +634,13 @@ export default function Home() {
                 Chị Thảo Duyên | Nhà phố 2 tầng | Vĩnh Phú – Thuận An
               </h3>
               <p className="text-base text-gray-700 mb-8 text-center md:text-left">
-                &quot;Mình có thể tự tin nói rằng lựa chọn Nhà Đẹp Quảng Nam thi công
-                trọn gói là một quyết định đáng đồng tiền bát gạo nếu bạn cần
-                một đơn vị hội đủ các yếu tố TƯ DUY THIẾT KẾ, NĂNG LỰC THI CÔNG
-                và CÁI TÂM LÀM NGHỀ. Khi viết những dòng đánh giá này, nhà mình
-                đã làm xong được 5 tháng và mình đã rất tự tin giới thiệu thành
-                công thêm 3 công trình của bạn bè người thân mình như một lời
-                cảm ơn đến anh em Nhà Đẹp Quảng Nam.&quot;
+                &quot;Mình có thể tự tin nói rằng lựa chọn Nhà Đẹp Quảng Nam thi
+                công trọn gói là một quyết định đáng đồng tiền bát gạo nếu bạn
+                cần một đơn vị hội đủ các yếu tố TƯ DUY THIẾT KẾ, NĂNG LỰC THI
+                CÔNG và CÁI TÂM LÀM NGHỀ. Khi viết những dòng đánh giá này, nhà
+                mình đã làm xong được 5 tháng và mình đã rất tự tin giới thiệu
+                thành công thêm 3 công trình của bạn bè người thân mình như một
+                lời cảm ơn đến anh em Nhà Đẹp Quảng Nam.&quot;
               </p>
               <a
                 href="#"
@@ -656,10 +652,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       <ContactForm />
-      <FloatingButtons />
-      <Footer />
     </div>
   );
 }

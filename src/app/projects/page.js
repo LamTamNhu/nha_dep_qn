@@ -17,17 +17,17 @@ export default function ProjectsPage() {
   const slides = [
     {
       id: 1,
-      image: "/wide_shot.jpg",
+      image: "/images/wide_shot.jpg",
       alt: "wide shot",
     },
     {
       id: 2,
-      image: "/wide_hands.jpg",
+      image: "/images/wide_hands.jpg",
       alt: "wide hands",
     },
     {
       id: 3,
-      image: "/group_walking.jpg",
+      image: "/images/group_walking.jpg",
       alt: "group shot",
     },
   ];
