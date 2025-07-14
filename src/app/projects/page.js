@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Search } from 'lucide-react';
 import Link from 'next/link';
 import { debounce } from 'lodash';
+import ContactForm from '../components/contactForm';
 
 export default function ProjectsPage() {
   const bannerRef = useRef(null);
@@ -14,7 +15,7 @@ export default function ProjectsPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [filteredProjects, setFilteredProjects] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('Tất cả');
-  const projectsPerPage = 6;
+  const projectsPerPage = 10;
 
   const slides = [
     {
@@ -370,6 +371,7 @@ export default function ProjectsPage() {
           )}
         </div>
       </div>
+      <ContactForm />
     </div>
   );
 }

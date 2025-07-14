@@ -16,7 +16,7 @@ export default function Navbar() {
         {name: "GIỚI THIỆU", href: "/about"},
         {name: "DỊCH VỤ", href: "/"},
         {name: "DỰ ÁN", href: "/projects"},
-        {name: "THỰC TẾ THI CÔNG", href: "/"},
+        {name: "THỰC TẾ THI CÔNG", href: "/completed-projects"},
         {name: "TIN TỨC", href: "/"},
         {name: "LIÊN HỆ", href: "/contact"},
     ]
