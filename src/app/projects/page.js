@@ -17,9 +17,22 @@ export default function ProjectsPage() {
   const projectsPerPage = 6;
 
   const slides = [
-    { id: 1, image: "/wide_shot.jpg", alt: "Cảnh toàn rộng" },
-    { id: 2, image: "/wide_hands.jpg", alt: "Hình ảnh đôi tay" },
-    { id: 3, image: "/group_walking.jpg", alt: "Nhóm người đi bộ" },
+    {
+      id: 1,
+      image: "/images/wide_shot.jpg",
+      alt: "wide shot",
+    },
+    {
+      id: 2,
+      image: "/images/wide_hands.jpg",
+      alt: "wide hands",
+    },
+    {
+      id: 3,
+      image: "/images/group_walking.jpg",
+      alt: "group shot",
+    },
+
   ];
 
   const projects = [
