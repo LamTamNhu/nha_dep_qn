@@ -3,8 +3,7 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import Image from 'next/image';
 import { Search } from 'lucide-react';
-import Link from 'next/link';
-import { debounce } from 'lodash';
+import { debounce } from 'lodash'; // Thêm lodash để debounce scroll
 
 export default function ProjectsPage() {
   const bannerRef = useRef(null);
@@ -25,91 +24,147 @@ export default function ProjectsPage() {
   const projects = [
     {
       id: 1,
-      title: "Da House",
-      disc: "Hiện đại hóa không gian nhưng vẫn vẹn nguyên hồn Việt",
-      image: "https://nhadepquangnam.vn/wp-content/uploads/2025/06/Thiet-ke-chua-co-ten-2025-06-11T103306.138-1-700x700.jpg",
-      category: "Nhà Phố",
+      title: "Q’s House",
+      disc: "Nổi bật với lối kiến trúc đậm chất Châu Âu",
+      image: "https://nhadepquangnam.vn/wp-content/uploads/2025/06/Ban-sao-cua-File-hinh-vuong-1-1000x1000.jpg",
+      category: "Biệt thự",
     },
     {
       id: 2,
-      title: "H’s House",
-      disc: "Sống tiện nghi, kinh doanh hiệu quả, riêng tư trọn vẹn",
-      image: "https://nhadepquangnam.vn/wp-content/uploads/2025/06/Thiet-ke-chua-co-ten-41-700x700.jpg",
-      category: "Nhà Phố",
+      title: "LG Villa",
+      disc: "Biệt Thự Vườn Trên Mảnh Đất 800m2",
+      image: "https://nhadepquangnam.vn/wp-content/uploads/2025/05/Thiet-ke-chua-co-ten-2-700x700.jpg",
+      category: "Biệt thự",
     },
     {
       id: 3,
-      title: "Anh House",
-      disc: "Ngôi nhà không cần quá lớn chắc chắn chị em sẽ say mê",
-      image: "https://nhadepquangnam.vn/wp-content/uploads/2024/07/a4-700x700.jpg",
-      category: "Nhà Phố",
+      title: "NH – Villa",
+      disc: "Nổi bật bởi nghệ thuật đường cong",
+      image: "https://nhadepquangnam.vn/wp-content/uploads/2025/05/1-700x700.jpg",
+      category: "Biệt thự",
     },
     {
       id: 4,
-      title: "DT VILLA",
-      disc: "Hiện đại hoà quyện cùng thiên nhiên",
-      image: "https://nhadepquangnam.vn/wp-content/uploads/2024/07/d1-700x670.jpg",
-      category: "Biệt thự",
+      title: "T2 HOME",
+      disc: "",
+      image: "https://nhadepquangnam.vn/wp-content/uploads/2024/05/z5407387608918_018491daf8d36adbda84c97074f13783-700x700.jpg",
+      category: "Nhà phố, Biệt thự",
     },
     {
       id: 5,
-      title: "L VILLA",
-      disc: "Vẻ đẹp hiện đại hút mọi ánh nhìn",
-      image: "https://nhadepquangnam.vn/wp-content/uploads/2024/07/l4-700x700.jpg",
-      category: "Biệt thự",
+      title: "Ba Ninh Home",
+      disc: "",
+      image: "https://nhadepquangnam.vn/wp-content/uploads/2024/01/ba_ninh_home-3-1000x1000.jpg",
+      category: "Nhà phố, Biệt thự",
     },
     {
       id: 6,
-      title: "HUNG VILLA",
-      disc: "Đẳng cấp, tinh tế và sang trọng",
-      image: "https://nhadepquangnam.vn/wp-content/uploads/2024/05/z5584607005888_b33eb55a459a8eb774068487c34ea2a5-700x700.jpg",
-      category: "Biệt thự",
+      title: "T HOUSE",
+      disc: "",
+      image: "https://nhadepquangnam.vn/wp-content/uploads/2023/12/t_house-700x700.jpg",
+      category: "Nhà phố, Biệt thự",
     },
     {
       id: 7,
-      title: "NH Villa",
-      disc: "Dấu ấn khác biệt",
-      image: "https://nhadepquangnam.vn/wp-content/uploads/2024/05/z5438947266194_10ce32f18288a95eb825ced27ce28bc1-700x700.jpg",
-      category: "Biệt thự",
+      title: "PHUOC HOUSE",
+      disc: "",
+      image: "https://nhadepquangnam.vn/wp-content/uploads/2023/10/nha_anh_phuoc_truong_xuan-1-700x700.jpg",
+      category: "Nhà phố, Biệt thự",
     },
     {
       id: 8,
-      title: "ND House",
-      disc: "Nhà của đôi vợ chồng trẻ đam mê Kiến trúc mộc mạc và sự khác biệt",
-      image: "https://nhadepquangnam.vn/wp-content/uploads/2024/05/z5315711468255_2c6acce84a5ee9d59065c4df5fb51761-700x700.jpg",
-      category: "Nhà Phố",
+      title: "NT’HOUSE",
+      disc: "Nhà không cần quá lớn, miễn nơi đó có đầy đủ yêu thương",
+      image: "https://nhadepquangnam.vn/wp-content/uploads/2023/10/n_t_house-700x700.jpg",
+      category: "Nhà phố, Biệt thự",
     },
     {
       id: 9,
-      title: "TC House",
-      disc: "Câu chuyện nhà phố",
-      image: "https://nhadepquangnam.vn/wp-content/uploads/2024/05/ANH3-700x700.jpg",
-      category: "Nhà Phố",
+      title: " VA’HOUSE",
+      disc: "",
+      image: "https://nhadepquangnam.vn/wp-content/uploads/2023/10/NHA-VINH-ANH-1-700x700.jpg",
+      category: "Nhà phố, Biệt thự",
     },
     {
       id: 10,
-      title: "T House",
-      disc: "Sự kết nối giữa không gian và ánh sáng",
-      image: "https://nhadepquangnam.vn/wp-content/uploads/2024/05/z5424216518033_6d660521e1217af6c8203395aad94446-700x700.jpg",
-      category: "Nhà Phố",
+      title: "Ai Cuong house",
+      disc: "",
+      image: "https://nhadepquangnam.vn/wp-content/uploads/2023/10/BIET-THU-AI-CUONG-700x700.jpg",
+      category: "Nhà phố, Biệt thự",
     },
     {
       id: 11,
-      title: "NH House",
-      disc: "Nhà phố hướng tây, giải pháp tránh nắng",
-      image: "https://nhadepquangnam.vn/wp-content/uploads/2024/05/z5424216518033_6d660521e1217af6c8203395aad94446-700x700.jpg",
-      category: "Nhà Phố",
+      title: "HT HOUSE",
+      disc: "Nét pha trộn kiến trúc nhiệt đới cùng phong cách hiện đại kiến tạo một không gian sống lý tưởng, giao hòa cùng thiên nhiên",
+      image: "https://nhadepquangnam.vn/wp-content/uploads/2023/09/h_t_home-1-700x700.jpg",
+      category: "Nhà phố, Biệt thự",
     },
     {
       id: 12,
-      title: "T2 House",
-      disc: "Vẻ đẹp từ sự tinh tế và sang trọng",
-      image: "https://nhadepquangnam.vn/wp-content/uploads/2024/05/z5584642502208_30b3615bced844af16480f624b70d914-700x700.jpg",
-      category: "Nhà Phố",
+      title: "THY HOUSE",
+      disc: "Tiện nghi, gắn kết với thiên nhiên",
+      image: "https://nhadepquangnam.vn/wp-content/uploads/2023/09/nha_thy_cam-1-700x700.jpg",
+      category: "Nhà phố, Biệt thự",
+    },
+    {
+      id: 13,
+      title: "HT HOUSE",
+      disc: "",
+      image: "https://nhadepquangnam.vn/wp-content/uploads/2023/08/noi-that-anh-hai-chi-trang-7-of-34-700x700.jpg",
+      category: "Nhà phố, Biệt thự",
+    },
+    {
+      id: 14,
+      title: "PH HOUSE",
+      disc: "Ngôi nhà hạnh phúc từ những điều giản đơn",
+      image: "https://nhadepquangnam.vn/wp-content/uploads/2023/09/nha_anh_phuc-6-700x700.jpg",
+      category: "Nhà phố, Biệt thự",
+    },
+    {
+      id: 15,
+      title: "L HOUSE",
+      disc: "",
+      image: "https://nhadepquangnam.vn/wp-content/uploads/2023/09/nha_anh_linh-4-700x700.jpg",
+      category: "Nhà phố, Biệt thự",
+    },
+    {
+      id: 16,
+      title: "BH HOUSE",
+      disc: "TỔ ẤM XANH GIỮA LÒNG THÀNH PHỐ",
+      image: "https://nhadepquangnam.vn/wp-content/uploads/2023/09/nha_anh_bao_chi_huyen-6-700x700.jpg",
+      category: "Nhà phố, Biệt thự",
+    },
+    {
+      id: 17,
+      title: "T’VILLA",
+      disc: "BIỆT THỰ MÁI NHẬT NỔI BẬT TẠI THÀNH PHỐ TAM KỲ",
+      image: "https://nhadepquangnam.vn/wp-content/uploads/2023/03/Chu-tuong-32-700x700.jpg",
+      category: "Nhà phố, Biệt thự",
+    },
+    {
+      id: 18,
+      title: "TTT HOUSE",
+      disc: "BIỆT THỰ 2 MẶT TIỀN CỦA VỢ CHỒNG TRẺ",
+      image: "https://nhadepquangnam.vn/wp-content/uploads/2022/12/noi-that-trung-thuyen-44-700x700.jpg",
+      category: "Nhà phố, Biệt thự",
+    },
+    {
+      id: 19,
+      title: "TN HOUSE",
+      disc: "Dấu ấn khác biệt",
+      image: "https://nhadepquangnam.vn/wp-content/uploads/2022/03/noi-that-nha-hang-bep-do-9275-700x700.jpg",
+      category: "Biệt thự",
+    },
+    {
+      id: 20,
+      title: "ND House",
+      disc: "Nhà của đôi vợ chồng trẻ đam mê Kiến trúc mộc mạc và sự khác biệt",
+      image: "https://nhadepquangnam.vn/wp-content/uploads/2022/11/Hung_house-700x700.jpg",
+      category: "Biệt thự",
     },
   ];
 
-  const categories = ['Tất cả', 'Nhà Phố', 'Biệt thự'];
+  const categories = ['Tất cả', 'Nhà phố', 'Biệt thự'];
 
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -121,9 +176,10 @@ export default function ProjectsPage() {
 
   useEffect(() => {
     const timer = setInterval(nextSlide, 5000);
-    return () => clearInterval(timer);
+    return () => clearInterval(timer); // Đảm bảo dọn dẹp interval
   }, [nextSlide]);
 
+  // Debounce scroll handler để tối ưu hiệu suất
   const handleScroll = useCallback(
     debounce(() => {
       if (!bannerRef.current) return;
@@ -140,25 +196,25 @@ export default function ProjectsPage() {
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      handleScroll.cancel();
+      handleScroll.cancel(); // Hủy debounce khi unmount
     };
   }, [handleScroll]);
 
   useEffect(() => {
     const filtered = projects.filter(
       (project) =>
-        (selectedCategory === 'Tất cả' || project.category === selectedCategory) &&
+        (selectedCategory === 'Tất cả' || project.category.includes(selectedCategory)) &&
         (project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
           project.disc.toLowerCase().includes(searchTerm.toLowerCase()))
     );
     setFilteredProjects(filtered);
-    setCurrentPage(1); // Giữ reset page như file gốc
   }, [searchTerm, selectedCategory]);
 
   const handleSearch = (e) => {
     e.preventDefault();
   };
 
+  // Phân trang
   const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
   const startIndex = (currentPage - 1) * projectsPerPage;
   const endIndex = startIndex + projectsPerPage;
@@ -214,10 +270,10 @@ export default function ProjectsPage() {
                 alt={slide.alt}
                 fill
                 priority={index === 0}
-                quality={80}
-                sizes="100vw"
+                quality={80} // Giảm chất lượng để tối ưu tốc độ tải
+                sizes="(max-width: 768px) 100vw, 1200px" // Tối ưu hóa sizes
                 className="object-cover"
-                onError={(e) => (e.target.src = "/fallback-image.jpg")}
+                onError={(e) => (e.target.src = "/fallback-image.jpg")} // Fallback hình ảnh
               />
             </div>
           </div>
@@ -226,7 +282,7 @@ export default function ProjectsPage() {
         <div className="absolute inset-0 flex flex-col items-start justify-center z-30 text-left py-10 px-12 mx-auto md:px-10">
           <div className="container flex flex-col items-start mx-auto px-12">
             <h1 className="text-3xl md:text-5xl font-extrabold text-white drop-shadow-lg mb-6 animate-fade-in">
-              Dự án
+              Dự án đã hoàn thành
             </h1>
           </div>
         </div>
@@ -277,12 +333,11 @@ export default function ProjectsPage() {
       </div>
       <div className="py-20 px-6 md:px-10">
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {currentProjects.length > 0 ? (
               currentProjects.map((project) => (
-                <Link
+                <div
                   key={project.id}
-                  href={`/projects/${project.id}`}
                   className="relative bg-white border border-gray-200 overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 group"
                 >
                   <div className="relative w-full h-80 overflow-hidden">
@@ -292,7 +347,7 @@ export default function ProjectsPage() {
                       width={700}
                       height={700}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      sizes="(max-width: 768px) 50vw, 20vw"
+                      sizes="(max-width: 768px) 50vw, 25vw"
                       onError={(e) => (e.target.src = "/fallback-image.jpg")}
                     />
                     <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -304,7 +359,7 @@ export default function ProjectsPage() {
                       </p>
                     </div>
                   </div>
-                </Link>
+                </div>
               ))
             ) : (
               <p className="text-center text-gray-600 col-span-full">
