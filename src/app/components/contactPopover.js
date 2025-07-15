@@ -1,6 +1,6 @@
 'use client';
 import * as Popover from '@radix-ui/react-popover';
-import ContactForm from '.components/contactForm';
+import ContactForm from '@/app/components/contactForm';
 
 export default function ContactPopover({trigger}) {
     return (
