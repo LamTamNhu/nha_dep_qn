@@ -5,11 +5,12 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 const partners = [
-    { name: 'Pet One', logo: '/images/partner-petone.png' },
-    { name: 'Tropic Pet', logo: '/images/partner-tropicpet.png' },
-    { name: 'Cholon Vet', logo: '/images/partner-cholonvet.png' },
-    { name: 'Ngọc Hà', logo: '/images/partner-ngocha.png' },
-    { name: 'Thú Y Procare', logo: '/images/partner-procare.png' },
+    { name: 'Kim Đỉnh', logo: '/images/logo_kimdinh.png' },
+    { name: 'Hoa Phat', logo: '/images/hoaphat.png' },
+    { name: 'Song Gianh', logo: '/images/songgianh.png' },
+    { name: 'Viglacera', logo: '/images/vigla.png' },
+    { name: 'Vina', logo: '/images/vina.png' },
+    { name: 'Đồng Tâm', logo: '/images/dongtam.jpg' },
 ];
 
 export default function PartnerCarousel() {
