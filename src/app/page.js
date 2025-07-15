@@ -401,15 +401,8 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <ProcessSection />
-      {/* Process Section */}
-      <section className="py-12 px-4 bg-gray-50">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-orange-400 swing-in-top-fwd mb-12">
-            Quy trình thi công trọn gói
-          </h2>
-        </div>
-      </section>
+      
+      <ProcessSection />     
 
       {/* Công trình thiết kế Section */}
       <section className="py-12 px-4 md:px-10">

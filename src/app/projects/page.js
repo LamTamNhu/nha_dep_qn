@@ -268,7 +268,6 @@ export default function ProjectsPage() {
           )}
         </div>
       </div>
-      <ContactForm />
     </div>
   );
 }
