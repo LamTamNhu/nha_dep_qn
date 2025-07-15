@@ -579,38 +579,6 @@ export default function Home() {
             {/*Partners*/}
             <PartnerCarousel/>
 
-            <section className="py-12 px-4">
-                <div className="max-w-6xl mx-auto px-4">
-                    <h2 className="text-xl font-bold text-center text-orange-400 mb-14">
-                        ĐỐI TÁC VẬT LIỆU
-                    </h2>
-                    <div className="relative">
-                        <div className="overflow-x-auto scrollbar-hide">
-                            <div className="flex gap-8 animate-partners-scroll min-w-max py-4">
-                                {partners.map((partner, i) => (
-                                    <div
-                                        key={i}
-                                        className="bg-white rounded-xl shadow-md flex items-center justify-center min-w-[200px] h-32 px-8 mx-2 overflow-hidden"
-                                    >
-                                        <Image
-                                            src={partner.logo}
-                                            alt={partner.alt}
-                                            width={150}
-                                            height={20}
-                                            unoptimized
-                                        />
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                        {/* Gradient overlays for fade effect */}
-                        <div
-                            className="pointer-events-none absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-gray-50 to-transparent z-10"/>
-                        <div
-                            className="pointer-events-none absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-gray-50 to-transparent z-10"/>
-                    </div>
-                </div>
-            </section>
             {/* Testimonial Section */}
             <section className="py-12 px-4 bg-gray-50 ">
                 <div className="max-w-6xl mx-auto px-4">

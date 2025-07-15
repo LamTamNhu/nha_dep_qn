@@ -10,17 +10,13 @@ const partners = [
     { name: 'Cholon Vet', logo: '/images/partner-cholonvet.png' },
     { name: 'Ngọc Hà', logo: '/images/partner-ngocha.png' },
     { name: 'Thú Y Procare', logo: '/images/partner-procare.png' },
-    { name: 'Thú Y Procare', logo: '/images/partner-procare.png' },
-    { name: 'Thú Y Procare', logo: '/images/partner-procare.png' },
-    { name: 'Thú Y Procare', logo: '/images/partner-procare.png' },
-    { name: 'Thú Y Procare', logo: '/images/partner-procare.png' },
 ];
 
 export default function PartnerCarousel() {
     return (
         <div className="relative max-w-6xl mx-auto mb-24 px-4">
             {/* Blue rounded container */}
-            <div className="bg-sky-400 text-white text-center py-10 rounded-[2.5rem] shadow-md">
+            <div className="bg-orange-400 text-white text-center py-10 rounded-[2.5rem] shadow-md">
                 <h2 className="text-xl sm:text-2xl font-bold">ĐỐI TÁC CỦA CHÚNG TÔI</h2>
             </div>
 
