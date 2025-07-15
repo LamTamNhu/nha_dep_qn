@@ -4,7 +4,7 @@ import {Facebook, MapPin, Phone} from "lucide-react";
 export default function ContactForm() {
     return (
         <div
-            className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-start rounded-xl shadow-lg bg-white p-8">
+            className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-start rounded-xl shadow-lg bg-white p-8 z-50">
             {/* Left: Contact Info */}
             <div>
                 <h2 className="text-xl mb-2 flex items-center gap-2 font-bold text-orange-400">
@@ -101,7 +101,7 @@ export default function ContactForm() {
                         <input
                             type="text"
                             className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-300"
-                            placeholder="Nhập tên dịch vụ bạn đang quan tâm"
+                            placeholder="Nhập tên dịch vụ"
                             required
                         />
                     </div>
@@ -117,7 +117,7 @@ export default function ContactForm() {
                 </div>
                 <button
                     type="submit"
-                    className="w-full bg-orange-300 hover:bg-orange-400 text-white font-semibold py-3 rounded transition-colors duration-200 text-lg mt-2"
+                    className="w-full bg-orange-400 hover:bg-orange-300 text-white font-semibold py-3 rounded transition-colors duration-200 text-lg mt-2"
                 >
                     Gửi yêu cầu
                 </button>

@@ -630,7 +630,7 @@ export default function Home() {
               </p>
               <a
                 href="#"
-                className="inline-flex items-center gap-2 bg-orange-400 hover:bg-orange-500 text-white font-semibold px-6 py-3 rounded transition-colors duration-200 w-max mb-4"
+                className="inline-flex items-center gap-2 bg-orange-400 hover:bg-orange-300 text-white font-semibold px-6 py-3 rounded transition-colors duration-200 w-max mb-4"
               >
                 THAM QUAN NHÀ HOÀN THIỆN
               </a>
@@ -639,7 +639,6 @@ export default function Home() {
         </div>
       </section>
       <section className="py-12 px-4">
-        <ContactForm />
       </section>
     </div>
   );
