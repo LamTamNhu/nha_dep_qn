@@ -8,7 +8,7 @@ export default function Footer() {
       <footer className="relative">
         <div className="absolute ping border-2 border-orange-400 top-0 -translate-y-1/2 right-50 rounded-full pointer-events-none z-0" style={{ width: `${circleSize}`, height: `${circleSize}` }}>
         </div>
-        <div className="absolute border-2 border-orange-400 top-0 -translate-y-1/2 right-50 rounded-full z-20" style={{ width: `${circleSize}`, height: `${circleSize}` }}>
+        <div className="absolute top-0 -translate-y-1/2 right-50 rounded-full z-20" style={{ width: `${circleSize}`, height: `${circleSize}` }}>
           <div className="absolute inset-2 bg-orange-400 rounded-full z-20 text-center flex flex-col items-center justify-center px-8" >
             <Image src="/images/logo.png" alt="Logo" width={800} height={800} className="w-70 h-16 object-cover top-0" />
             <h2 className="text-white font-bold text-lg mb-3">
@@ -17,9 +17,9 @@ export default function Footer() {
             <p className="text-gray-50 text-sm text-justify leading-relaxed mb-8">
               Hãy để chúng tôi kiến tạo không gian sống tuyệt vời dành cho bạn với những kiến trúc sư hàng đầu.
             </p>
-            <ContactPopover
+            <ContactPopover className="z-50"
               trigger={
-                <button className="bg-white text-black px-6 py-4 rounded-full font-semibold hover:bg-black hover:text-white transition-colors z-50">
+                <button className="heartbeat bg-white text-black px-6 py-4 rounded-full font-semibold hover:bg-black hover:text-white transition-colors z-50">
                   Liên hệ ngay
                 </button>
               }
