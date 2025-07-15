@@ -113,12 +113,9 @@ const ProcessSection = () => {
                 ref={setRowRef(rowIndex)}
                 className={`flex items-stretch transition-all duration-700 transform group ${
                   visibleRows.has(rowIndex)
-                    ? "opacity-100 translate-y-0"
+                    ? "bounce-top"
                     : "opacity-0 translate-y-8"
-                }`}
-                style={{
-                  transitionDelay: `${rowIndex * 200}ms`,
-                }}
+                }`}                
                 onMouseEnter={() => setHoveredRow(rowIndex)}
                 onMouseLeave={() => setHoveredRow(null)}
               >
