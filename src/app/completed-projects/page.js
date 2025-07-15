@@ -1,25 +1,18 @@
 "use client";
 
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Search } from 'lucide-react';
-import { debounce } from 'lodash'; // Thêm lodash để debounce scroll
+import ContactForm from '../components/contactForm';
+import Banner from '@/components/ui/banner';
 
 export default function ProjectsPage() {
-  const bannerRef = useRef(null);
-  const [parallax, setParallax] = useState(0);
-  const [currentSlide, setCurrentSlide] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [filteredProjects, setFilteredProjects] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('Tất cả');
-  const projectsPerPage = 6;
+  const projectsPerPage = 10;
 
-  const slides = [
-    { id: 1, image: "/wide_shot.jpg", alt: "Cảnh toàn rộng" },
-    { id: 2, image: "/wide_hands.jpg", alt: "Hình ảnh đôi tay" },
-    { id: 3, image: "/group_walking.jpg", alt: "Nhóm người đi bộ" },
-  ];
 
   const projects = [
     {
@@ -166,40 +159,6 @@ export default function ProjectsPage() {
 
   const categories = ['Tất cả', 'Nhà phố', 'Biệt thự'];
 
-  const nextSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-  }, [slides.length]);
-
-  const prevSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  }, [slides.length]);
-
-  useEffect(() => {
-    const timer = setInterval(nextSlide, 5000);
-    return () => clearInterval(timer); // Đảm bảo dọn dẹp interval
-  }, [nextSlide]);
-
-  // Debounce scroll handler để tối ưu hiệu suất
-  const handleScroll = useCallback(
-    debounce(() => {
-      if (!bannerRef.current) return;
-      const rect = bannerRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      if (rect.top < windowHeight && rect.bottom > 0) {
-        setParallax(window.scrollY * 0.3);
-      }
-    }, 10),
-    []
-  );
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      handleScroll.cancel(); // Hủy debounce khi unmount
-    };
-  }, [handleScroll]);
-
   useEffect(() => {
     const filtered = projects.filter(
       (project) =>
@@ -238,55 +197,7 @@ export default function ProjectsPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <div
-        ref={bannerRef}
-        className="h-[50vh] w-full relative overflow-hidden flex items-center justify-center"
-        style={{ perspective: "1px" }}
-      >
-        {slides.map((slide, index) => (
-          <div
-            key={slide.id}
-            className={`absolute inset-0 transition-transform duration-700 ease-in-out ${
-              index === currentSlide
-                ? "translate-x-0 z-10"
-                : index < currentSlide
-                ? "-translate-x-full z-0"
-                : "translate-x-full z-0"
-            }`}
-          >
-            <div
-              className="h-full w-full relative"
-              style={
-                index === currentSlide
-                  ? {
-                      transform: `translateY(${parallax * 0.4}px)`,
-                      willChange: "transform",
-                    }
-                  : {}
-              }
-            >
-              <Image
-                src={slide.image}
-                alt={slide.alt}
-                fill
-                priority={index === 0}
-                quality={80} // Giảm chất lượng để tối ưu tốc độ tải
-                sizes="(max-width: 768px) 100vw, 1200px" // Tối ưu hóa sizes
-                className="object-cover"
-                onError={(e) => (e.target.src = "/fallback-image.jpg")} // Fallback hình ảnh
-              />
-            </div>
-          </div>
-        ))}
-        <div className="absolute inset-0 bg-black/40 z-20" />
-        <div className="absolute inset-0 flex flex-col items-start justify-center z-30 text-left py-10 px-12 mx-auto md:px-10">
-          <div className="container flex flex-col items-start mx-auto px-12">
-            <h1 className="text-3xl md:text-5xl font-extrabold text-white drop-shadow-lg mb-6 animate-fade-in">
-              Dự án đã hoàn thành
-            </h1>
-          </div>
-        </div>
-      </div>
+      <Banner title="Dự án đã hoàn thành" />
       <div className="py-20 px-6 md:px-10">
         <div className="container flex flex-col md:flex-row items-center justify-between mx-auto px-12 gap-4">
           <div className="relative">
@@ -294,7 +205,7 @@ export default function ProjectsPage() {
               Tất cả dự án
             </h2>
             <p className="text-gray-600 text-base mb-8 max-w-2xl">
-              Mỗi công trình là một tác phẩm nghệ thuật, mang trong mình câu chuyện và tâm huyết của những người sáng tạo. Từ những ngôi nhà hiện đại đến biệt thự sang trọng, mỗi dự án đều được thiết kế tỉ mỉ để mang lại không gian sống hoàn hảo nhất cho gia đình bạn.
+              Khám phá những dự án đã hoàn thành của chúng tôi, nơi mỗi chi tiết đều được chăm chút tỉ mỉ để mang lại không gian sống hoàn hảo.
             </p>
           </div>
           <div className="flex flex-col md:flex-row gap-4 items-center">
@@ -317,11 +228,10 @@ export default function ProjectsPage() {
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                  className={`px-4 py-2 rounded-full ${
-                    selectedCategory === category
+                  className={`px-4 py-2 rounded-full ${selectedCategory === category
                       ? "bg-orange-400 text-white"
                       : "bg-gray-200 text-gray-800 hover:bg-gray-300"
-                  } transition-colors duration-300`}
+                    } transition-colors duration-300`}
                   aria-pressed={selectedCategory === category}
                 >
                   {category}
@@ -333,7 +243,7 @@ export default function ProjectsPage() {
       </div>
       <div className="py-20 px-6 md:px-10">
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
             {currentProjects.length > 0 ? (
               currentProjects.map((project) => (
                 <div
@@ -372,11 +282,10 @@ export default function ProjectsPage() {
               <button
                 onClick={prevPage}
                 disabled={currentPage === 1}
-                className={`px-4 py-2 rounded-full ${
-                  currentPage === 1
+                className={`px-4 py-2 rounded-full ${currentPage === 1
                     ? "bg-gray-200 text-gray-500 cursor-not-allowed"
                     : "bg-orange-400 text-white hover:bg-orange-500"
-                } transition-colors duration-300`}
+                  } transition-colors duration-300`}
                 aria-label="Trang trước"
               >
                 Previous
@@ -385,11 +294,10 @@ export default function ProjectsPage() {
                 <button
                   key={index + 1}
                   onClick={() => goToPage(index + 1)}
-                  className={`px-4 py-2 rounded-full ${
-                    currentPage === index + 1
+                  className={`px-4 py-2 rounded-full ${currentPage === index + 1
                       ? "bg-orange-400 text-white"
                       : "bg-gray-200 text-gray-800 hover:bg-gray-300"
-                  } transition-colors duration-300`}
+                    } transition-colors duration-300`}
                   aria-label={`Trang ${index + 1}`}
                   aria-current={currentPage === index + 1 ? "page" : undefined}
                 >
@@ -399,11 +307,10 @@ export default function ProjectsPage() {
               <button
                 onClick={nextPage}
                 disabled={currentPage === totalPages}
-                className={`px-4 py-2 rounded-full ${
-                  currentPage === totalPages
+                className={`px-4 py-2 rounded-full ${currentPage === totalPages
                     ? "bg-gray-200 text-gray-500 cursor-not-allowed"
                     : "bg-orange-400 text-white hover:bg-orange-500"
-                } transition-colors duration-300`}
+                  } transition-colors duration-300`}
                 aria-label="Trang sau"
               >
                 Next
@@ -412,6 +319,7 @@ export default function ProjectsPage() {
           )}
         </div>
       </div>
+      <ContactForm />
     </div>
   );
 }

@@ -14,9 +14,9 @@ export default function Navbar() {
     const navigationItems = [
         {name: "TRANG CHỦ", href: "/"},
         {name: "GIỚI THIỆU", href: "/about"},
-        {name: "DỊCH VỤ", href: "/"},
+        {name: "DỊCH VỤ", href: "/services"},
         {name: "DỰ ÁN", href: "/projects"},
-        {name: "THỰC TẾ THI CÔNG", href: "/"},
+        {name: "THỰC TẾ THI CÔNG", href: "/completed-projects"},
         {name: "TIN TỨC", href: "/"},
         {name: "LIÊN HỆ", href: "/contact"},
     ]
@@ -27,7 +27,7 @@ export default function Navbar() {
                 <div className="flex items-center justify-between h-16 lg:h-20">
                     {/* Logo */}
                     <Link href="/" className="flex-shrink-0">
-                        <Image src="/images/logo_invert.png" alt="logo" width={200} height={150}/>
+                        <Image src="/images/logo_invert.png" alt="logo" width={200} height={150}  priority={true}/>
                     </Link>
 
                     {/* Desktop Navigation */}

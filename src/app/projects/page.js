@@ -1,39 +1,18 @@
 "use client";
 
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Search } from 'lucide-react';
 import Link from 'next/link';
-import { debounce } from 'lodash';
+import ContactForm from '../components/contactForm';
+import Banner from '@/components/ui/banner';
 
 export default function ProjectsPage() {
-  const bannerRef = useRef(null);
-  const [parallax, setParallax] = useState(0);
-  const [currentSlide, setCurrentSlide] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [filteredProjects, setFilteredProjects] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('Tất cả');
-  const projectsPerPage = 6;
-
-  const slides = [
-    {
-      id: 1,
-      image: "/images/wide_shot.jpg",
-      alt: "wide shot",
-    },
-    {
-      id: 2,
-      image: "/images/wide_hands.jpg",
-      alt: "wide hands",
-    },
-    {
-      id: 3,
-      image: "/images/group_walking.jpg",
-      alt: "group shot",
-    },
-
-  ];
+  const projectsPerPage = 10;
 
   const projects = [
     {
@@ -124,39 +103,6 @@ export default function ProjectsPage() {
 
   const categories = ['Tất cả', 'Nhà Phố', 'Biệt thự'];
 
-  const nextSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-  }, [slides.length]);
-
-  const prevSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  }, [slides.length]);
-
-  useEffect(() => {
-    const timer = setInterval(nextSlide, 5000);
-    return () => clearInterval(timer);
-  }, [nextSlide]);
-
-  const handleScroll = useCallback(
-    debounce(() => {
-      if (!bannerRef.current) return;
-      const rect = bannerRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      if (rect.top < windowHeight && rect.bottom > 0) {
-        setParallax(window.scrollY * 0.3);
-      }
-    }, 10),
-    []
-  );
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      handleScroll.cancel();
-    };
-  }, [handleScroll]);
-
   useEffect(() => {
     const filtered = projects.filter(
       (project) =>
@@ -195,55 +141,7 @@ export default function ProjectsPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <div
-        ref={bannerRef}
-        className="h-[50vh] w-full relative overflow-hidden flex items-center justify-center"
-        style={{ perspective: "1px" }}
-      >
-        {slides.map((slide, index) => (
-          <div
-            key={slide.id}
-            className={`absolute inset-0 transition-transform duration-700 ease-in-out ${
-              index === currentSlide
-                ? "translate-x-0 z-10"
-                : index < currentSlide
-                ? "-translate-x-full z-0"
-                : "translate-x-full z-0"
-            }`}
-          >
-            <div
-              className="h-full w-full relative"
-              style={
-                index === currentSlide
-                  ? {
-                      transform: `translateY(${parallax * 0.4}px)`,
-                      willChange: "transform",
-                    }
-                  : {}
-              }
-            >
-              <Image
-                src={slide.image}
-                alt={slide.alt}
-                fill
-                priority={index === 0}
-                quality={80}
-                sizes="100vw"
-                className="object-cover"
-                onError={(e) => (e.target.src = "/fallback-image.jpg")}
-              />
-            </div>
-          </div>
-        ))}
-        <div className="absolute inset-0 bg-black/40 z-20" />
-        <div className="absolute inset-0 flex flex-col items-start justify-center z-30 text-left py-10 px-12 mx-auto md:px-10">
-          <div className="container flex flex-col items-start mx-auto px-12">
-            <h1 className="text-3xl md:text-5xl font-extrabold text-white drop-shadow-lg mb-6 animate-fade-in">
-              Dự án
-            </h1>
-          </div>
-        </div>
-      </div>
+      <Banner title="Dự án" />
       <div className="py-20 px-6 md:px-10">
         <div className="container flex flex-col md:flex-row items-center justify-between mx-auto px-12 gap-4">
           <div className="relative">
@@ -370,6 +268,7 @@ export default function ProjectsPage() {
           )}
         </div>
       </div>
+      <ContactForm />
     </div>
   );
 }
