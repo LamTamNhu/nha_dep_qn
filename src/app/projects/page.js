@@ -4,8 +4,9 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Search } from 'lucide-react';
 import Link from 'next/link';
-import ContactForm from '../components/contactForm';
+import ContactForm from '../../components/contactForm';
 import Banner from '@/components/ui/banner';
+import SectionHeading from "@/components/sectionHeading";
 
 export default function ProjectsPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -145,9 +146,9 @@ export default function ProjectsPage() {
       <div className="py-20 px-6 md:px-10">
         <div className="container flex flex-col md:flex-row items-center justify-between mx-auto px-12 gap-4">
           <div className="relative">
-            <h2 className="text-xl font-bold text-left text-orange-400 mb-8 mt-10">
+            <SectionHeading>
               Tất cả dự án
-            </h2>
+            </SectionHeading>
             <p className="text-gray-600 text-base mb-8 max-w-2xl">
               Mỗi công trình là một tác phẩm nghệ thuật, mang trong mình câu chuyện và tâm huyết của những người sáng tạo. Từ những ngôi nhà hiện đại đến biệt thự sang trọng, mỗi dự án đều được thiết kế tỉ mỉ để mang lại không gian sống hoàn hảo nhất cho gia đình bạn.
             </p>

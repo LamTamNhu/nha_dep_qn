@@ -1,5 +1,6 @@
 import { Truck } from "lucide-react";
 import React, { useState, useEffect, useRef } from "react";
+import SectionHeading from "@/components/sectionHeading";
 
 const ProcessSection = () => {
   const [hoveredRow, setHoveredRow] = useState(null);
@@ -102,9 +103,9 @@ const ProcessSection = () => {
   return (
     <div className="py-12 px-4">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl font-bold text-center text-orange-400 swing-in-top-fwd mb-16">
-          QUY TRÌNH THI CÔNG TRỌN GÓI
-        </h2>
+        <SectionHeading>
+          Quy trình thi công trọn gói
+        </SectionHeading>
         <div className="flex items-start justify-center">
           <div className="flex-1 max-w-4xl">
             {services.map((row, rowIndex) => (

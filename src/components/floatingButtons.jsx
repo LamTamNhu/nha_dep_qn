@@ -4,7 +4,7 @@ import * as lucide from "lucide-react";
 import Image from "next/image";
 import * as Tooltip from "@radix-ui/react-tooltip";
 import {TooltipProvider} from "@radix-ui/react-tooltip";
-import ContactPopover from "@/app/components/contactPopover";
+import ContactPopover from "@/components/contactPopover";
 
 
 const socialLinks = [

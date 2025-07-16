@@ -8,10 +8,10 @@ export default function ContactForm() {
             {/* Left: Contact Info */}
             <div>
                 <h2 className="text-xl mb-2 flex items-center gap-2 font-bold text-orange-400">
-                    LIÊN HỆ NGAY
+                    Liên hệ ngay
                     <span className="flex-1 h-0.5 bg-orange-300 ml-2"/>
                 </h2>
-                <h3 className="text-md font-semibold text-left mb-8">
+                <h3 className="text-md italic text-left mb-8">
                     Hãy để Nhà Đẹp Quảng Nam giúp bạn tạo nên không gian sống giá trị.
                 </h3>
                 <h4 className="text-lg font-semibold text-gray-900 mb-4">
@@ -58,7 +58,7 @@ export default function ContactForm() {
             {/* Right: Contact Form */}
             <form className="space-y-6 contact" id="contact">
                 <p>
-                    Hãy để lại thông tin chi tiết để chúng tôi hiểu rõ nhu cầu và mong
+                    Xin để lại thông tin chi tiết để chúng tôi hiểu rõ nhu cầu và mong
                     muốn của bạn
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

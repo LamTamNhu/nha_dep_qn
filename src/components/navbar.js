@@ -26,7 +26,7 @@ export default function Navbar() {
             <div className="container-fluid mx-auto px-4 sm:px-2 lg:px-4">
                 <div className="flex items-center justify-between h-16 lg:h-20">
                     {/* Logo */}
-                    <Link href="/" className="flex-shrink-0">
+                    <Link href="/public" className="flex-shrink-0">
                         <Image src="/images/logo_invert.png" alt="logo" width={200} height={150}  priority={true}/>
                     </Link>
 

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { CheckIcon, CreditCard, Lock, ShieldUser } from "lucide-react";
+import SectionHeading from "@/components/sectionHeading";
 
 export default function AboutPage() {
   const [expanded, setExpanded] = useState(false);
@@ -114,9 +115,9 @@ export default function AboutPage() {
       <section className="py-12 px-4 bg-white">
         <div className="container mx-auto max-w-6xl mx-auto px-4">
           <div className="container mx-auto max-w-6xl mx-auto px-4">
-            <h2 className="text-xl font-bold text-left text-orange-400 mb-14">
-              CÂU CHUYỆN THƯƠNG HIỆU
-            </h2>
+            <SectionHeading>
+              Câu chuyện thương hiệu
+            </SectionHeading>
             <div>
               {aboutShort}
               {!expanded && <span>... </span>}
@@ -134,9 +135,9 @@ export default function AboutPage() {
 
       <section className="py-12 px-4">
         <div className="container mx-auto max-w-6xl mx-auto px-4">
-          <h2 className="text-xl font-bold text-left text-orange-400 mb-14">
-            ĐỘI NGŨ
-          </h2>
+          <SectionHeading>
+            Đội ngữ
+          </SectionHeading>
           <div>
             <Image
               src="/images/wide_shot.jpg"
@@ -186,9 +187,9 @@ export default function AboutPage() {
         <div className="max-w-6xl mx-auto mt-20">
           {/* Header */}
           <div className="text-left mb-12">
-            <h2 className="text-xl font-bold text-left text-orange-400 mb-2">
-              GIÁ TRỊ CỐT LÕI
-            </h2>
+            <SectionHeading>
+              Giá trị cốt lõi
+            </SectionHeading>
             <p className="text-lg text-gray-600 mb-6">
               Chân thành - Chính trực - Trách nhiệm - Sáng Tạo - Hiểu và Thương
             </p>
@@ -221,9 +222,9 @@ export default function AboutPage() {
         <div className="max-w-6xl mx-auto mt-20">
           {/* Header */}
           <div className="text-left mb-12">
-            <h2 className="text-xl font-bold text-left text-orange-400 mb-2">
-              CHÍNH SÁCH VÀ CAM KẾT CỦA NDQN
-            </h2>
+            <SectionHeading>
+              Chính sách và cam kết của Nhà Đẹp Quảng Nam
+            </SectionHeading>
           </div>
           {/* Policies Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

@@ -18,7 +18,9 @@ export default function PartnerCarousel() {
         <div className="relative max-w-6xl mx-auto mb-24 px-4">
             {/* Blue rounded container */}
             <div className="bg-orange-400 text-white text-center py-10 rounded-[2.5rem] shadow-md">
-                <h2 className="text-xl sm:text-2xl font-bold">ĐỐI TÁC CỦA CHÚNG TÔI</h2>
+                <h2 className="text-3xl sm:text-2xl font-bold">
+                    Đối tác của chúng tôi
+                </h2>
             </div>
 
             {/* Floating carousel */}

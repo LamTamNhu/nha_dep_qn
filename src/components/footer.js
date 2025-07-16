@@ -1,5 +1,5 @@
 import Image from "next/image";
-import ContactPopover from "@/app/components/contactPopover";
+import ContactPopover from "@/components/contactPopover";
 
 export default function Footer() {
   const circleSize = `400px`; 

@@ -3,7 +3,8 @@
 import Banner from '@/components/ui/banner';
 import Image from 'next/image';
 import React, { useEffect } from 'react';
-import ContactForm from '../components/contactForm';
+import ContactForm from '../../components/contactForm';
+import SectionHeading from "@/components/sectionHeading";
 
 const services = [
   {
@@ -109,9 +110,9 @@ const ServicesPage = () => {
             } ${service.id % 2 === 1 ? 'odd' : 'even'}`}
           >
             <div className="w-full md:w-1/2 p-4 service-description flex flex-col justify-center">
-              <h2 className="text-2xl font-bold text-orange-400 mb-4">
+              <SectionHeading>
                 0{index + 1}
-              </h2>
+              </SectionHeading>
               <h3 className="text-3xl font-bold text-orange-500 mb-4">
                 {service.title}
               </h3>
