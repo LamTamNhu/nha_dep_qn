@@ -2,7 +2,7 @@
 
 import {Facebook, Instagram, Menu} from "lucide-react"
 import Link from "next/link"
-import {useState} from "react"
+import {useEffect, useState} from "react"
 
 import {Button} from "@/components/ui/button"
 import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet"
@@ -10,7 +10,6 @@ import Image from "next/image";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false)
-
     const navigationItems = [
         {name: "TRANG CHỦ", href: "/"},
         {name: "GIỚI THIỆU", href: "/about"},
@@ -20,14 +19,29 @@ export default function Navbar() {
         {name: "TIN TỨC", href: "/"},
         {name: "LIÊN HỆ", href: "/contact"},
     ]
+    let animationTriggered = false;
+    useEffect(() => {
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+
+            if (scrollY >= 100 && !animationTriggered) {
+                const borderDrawElements = document.querySelectorAll('.border-draw');
+                borderDrawElements.forEach(el => {
+                    el.classList.add('animate');
+                });
+
+                animationTriggered = true;
+            }
+        });
+    })
 
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-sm">
             <div className="container-fluid mx-auto px-4 sm:px-2 lg:px-4">
-                <div className="flex items-center justify-between h-16 lg:h-20">
+                <div className="flex items-center justify-between h-16 lg:h-20 py-10">
                     {/* Logo */}
-                    <Link href="/public" className="flex-shrink-0">
-                        <Image src="/images/logo_invert.png" alt="logo" width={200} height={150}  priority={true}/>
+                    <Link href="/" className="flex border-draw p-3">
+                        <Image  src="/images/logo_invert_crop.png" alt="logo" width={150} height={50}  priority={true}/>
                     </Link>
 
                     {/* Desktop Navigation */}
