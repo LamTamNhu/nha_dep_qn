@@ -170,6 +170,14 @@ body {
 .text-focus-in{animation:text-focus-in 1s cubic-bezier(.55,.085,.68,.53) both}
 .text-shadow-drop-bl{animation:text-shadow-drop-bl .6s both}
 .swing-in-top-fwd{animation:swing-in-top-fwd 1.2s cubic-bezier(.175,.885,.32,1.275) both}
+.swing-in-top-fwd-2 {
+  opacity: 0;
+  transform: rotateX(-100deg);
+  transform-origin: top;
+}
+.swing-in-top-fwd-2.animate {
+  animation: swing-in-top-fwd 1.2s cubic-bezier(.175,.885,.32,1.275) both;
+}
 .puff-in-center{animation:puff-in-center .7s cubic-bezier(.47,0.000,.745,.715) both}
 .fade-in{animation:fade-in 1.5s cubic-bezier(.47,0.000,.745,.715) both}
 .kenburns-top{animation:kenburns-top 5s ease-out both}

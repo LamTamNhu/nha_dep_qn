@@ -17,231 +17,90 @@ import ContactForm from "../components/contactForm";
 import PartnerCarousel from "@/components/partnerCarousel";
 import ProcessSection from "../components/processSection";
 import SectionHeading from "@/components/sectionHeading";
+import HeroCarousel from "@/components/heroCarousel";
+import animateOnObserve from "@/lib/animateOnView";
 
-const slideTransitions = [
-    // Puff in center
-    (index, current) =>
-        index === current ? "puff-in-center" : "opacity-0 pointer-events-none z-0",
-
-    // Fade in center
-    (index, current) =>
-        index === current ? "fade-in" : "opacity-0 pointer-events-none z-0",
-
-    (index, current) =>
-        index === current
-            ? "jello-horizontal"
-            : "opacity-0 pointer-events-none z-0",
-
-    (index, current) =>
-        index === current
-            ? "wobble-hor-bottom"
-            : "opacity-0 pointer-events-none z-0",
-
-    (index, current) =>
-        index === current ? "bounce-top" : "opacity-0 pointer-events-none z-0",
-
-    (index, current) =>
-        index === current ? "kenburns-top" : "opacity-0 pointer-events-none z-0",
-
-    // Scale in horizontal center
-    (index, current) =>
-        index === current
-            ? "scale-in-hor-center"
-            : "opacity-0 pointer-events-none z-0",
-
-    // Scale in horizontal left
-    (index, current) =>
-        index === current
-            ? "scale-in-hor-left "
-            : "opacity-0 pointer-events-none z-0",
+const cardData = [
+    {
+        id: "core-values",
+        icon: <HeartHandshake size={70}/>,
+        title: "Giá trị cốt lõi",
+        description:
+            "Chúng tôi cam kết chất lượng xây dựng, an toàn lao động và đổi mới công nghệ để mang lại những công trình bền vững và hiệu quả nhất. Sự hài lòng của khách hàng là ưu tiên hàng đầu của chúng tôi.",
+        cardBgColor: "bg-orange-400",
+        titleColor: "text-white",
+        descriptionColor: "text-white",
+        iconWrapperBgColor: "bg-orange-50",
+        iconColorClass: "text-orange-500",
+        iconBorderColor: "border-orange-500",
+    },
+    {
+        id: "mission",
+        icon: <Goal/>,
+        title: "Sứ mệnh",
+        description:
+            "Xây dựng những công trình chất lượng cao, an toàn và thân thiện với môi trường, góp phần phát triển hạ tầng và nâng cao chất lượng cuộc sống cộng đồng. Chúng tôi luôn đồng hành cùng đối tác để hiện thực hóa mọi dự án.",
+        cardBgColor: "bg-gray-50",
+        titleColor: "text-gray-800",
+        descriptionColor: "text-gray-500",
+        iconWrapperBgColor: "bg-gray-50",
+        iconColorClass: "text-gray-800",
+        iconBorderColor: "border-gray-800",
+    },
+    {
+        id: "vision",
+        icon: <Eye/>,
+        title: "Tầm nhìn",
+        description:
+            "Trở thành công ty xây dựng hàng đầu tại Việt Nam, được công nhận về sự xuất sắc trong thiết kế, thi công và quản lý dự án. Chúng tôi hướng tới việc tạo ra những công trình mang tính biểu tượng, đóng góp vào sự phát triển bền vững của đất nước.",
+        cardBgColor: "bg-gray-50",
+        titleColor: "text-gray-800",
+        descriptionColor: "text-gray-500",
+        iconWrapperBgColor: "bg-gray-50",
+        iconColorClass: "text-gray-800",
+        iconBorderColor: "border-gray-800",
+    },
 ];
-
-function getRandomTransition() {
-    return slideTransitions[Math.floor(Math.random() * slideTransitions.length)];
-}
-
+// Partners data
+const partners = [
+    {
+        logo: "/images/logo_kimdinh.png",
+        alt: "Kim Đỉnh Partner Logo",
+    },
+    {
+        logo: "/images/hoaphat.png",
+        alt: "logo Hoa Phat",
+    },
+    {
+        logo: "/images/songgianh.png",
+        alt: "Songgianh logo",
+    },
+    {
+        logo: "/images/vina.png",
+        alt: "Vina logo",
+    },
+    {
+        logo: "/images/dongtam.jpg",
+        alt: "Dong Tam Logo",
+    },
+    {
+        logo: "/images/vigla.png",
+        alt: "Viglacera Logo",
+    },
+];
 export default function Home() {
-    const [currentSlide, setCurrentSlide] = useState(0);
-    const [parallax, setParallax] = useState(0);
-    const bannerRef = useRef(null);
-    const [currentTransitionIndex, setCurrentTransitionIndex] = useState(0);
-    const cardData = [
-        {
-            id: "core-values",
-            icon: <HeartHandshake size={70}/>,
-            title: "Giá trị cốt lõi",
-            description:
-                "Chúng tôi cam kết chất lượng xây dựng, an toàn lao động và đổi mới công nghệ để mang lại những công trình bền vững và hiệu quả nhất. Sự hài lòng của khách hàng là ưu tiên hàng đầu của chúng tôi.",
-            cardBgColor: "bg-orange-400",
-            titleColor: "text-white",
-            descriptionColor: "text-white",
-            iconWrapperBgColor: "bg-orange-50",
-            iconColorClass: "text-orange-500",
-            iconBorderColor: "border-orange-500",
-        },
-        {
-            id: "mission",
-            icon: <Goal/>,
-            title: "Sứ mệnh",
-            description:
-                "Xây dựng những công trình chất lượng cao, an toàn và thân thiện với môi trường, góp phần phát triển hạ tầng và nâng cao chất lượng cuộc sống cộng đồng. Chúng tôi luôn đồng hành cùng đối tác để hiện thực hóa mọi dự án.",
-            cardBgColor: "bg-gray-50",
-            titleColor: "text-gray-800",
-            descriptionColor: "text-gray-500",
-            iconWrapperBgColor: "bg-gray-50",
-            iconColorClass: "text-gray-800",
-            iconBorderColor: "border-gray-800",
-        },
-        {
-            id: "vision",
-            icon: <Eye/>,
-            title: "Tầm nhìn",
-            description:
-                "Trở thành công ty xây dựng hàng đầu tại Việt Nam, được công nhận về sự xuất sắc trong thiết kế, thi công và quản lý dự án. Chúng tôi hướng tới việc tạo ra những công trình mang tính biểu tượng, đóng góp vào sự phát triển bền vững của đất nước.",
-            cardBgColor: "bg-gray-50",
-            titleColor: "text-gray-800",
-            descriptionColor: "text-gray-500",
-            iconWrapperBgColor: "bg-gray-50",
-            iconColorClass: "text-gray-800",
-            iconBorderColor: "border-gray-800",
-        },
-    ];
-    const slides = [
-        {
-            id: 1,
-            image: "/images/wide_shot.jpg",
-            alt: "wide shot",
-        },
-        {
-            id: 2,
-            image: "/images/wide_hands.jpg",
-            alt: "wide hands",
-        },
-        {
-            id: 3,
-            image: "/images/group_walking.jpg",
-            alt: "group shot",
-        },
-    ];
-
-    const nextSlide = () => {
-        setCurrentSlide((prev) => (prev + 1) % slides.length);
-        setCurrentTransitionIndex(
-            Math.floor(Math.random() * slideTransitions.length)
-        );
-    };
-
-    const prevSlide = () => {
-        setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-        setCurrentTransitionIndex(
-            Math.floor(Math.random() * slideTransitions.length)
-        );
-    };
-
-    // Auto-advance slides every 5 seconds
     useEffect(() => {
-        const timer = setInterval(nextSlide, 3500);
-        return () => clearInterval(timer);
-    }, []);
-    const getCurrentTransition = () => slideTransitions[currentTransitionIndex];
+        // Set up animations after DOM is ready
+        const swingObserver = animateOnObserve('.swing-in-top-fwd-2');
 
-    // Partners data
-    const partners = [
-        {
-            logo: "/images/logo_kimdinh.png",
-            alt: "Kim Đỉnh Partner Logo",
-        },
-        {
-            logo: "/images/hoaphat.png",
-            alt: "logo Hoa Phat",
-        },
-        {
-            logo: "/images/songgianh.png",
-            alt: "Songgianh logo",
-        },
-        {
-            logo: "/images/vina.png",
-            alt: "Vina logo",
-        },
-        {
-            logo: "/images/dongtam.jpg",
-            alt: "Dong Tam Logo",
-        },
-        {
-            logo: "/images/vigla.png",
-            alt: "Viglacera Logo",
-        },
-    ];
-    // Parallax effect
-    useEffect(() => {
-        const handleScroll = () => {
-            if (!bannerRef.current) return;
-            const rect = bannerRef.current.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
-            // Only apply parallax when banner is in view
-            if (rect.top < windowHeight && rect.bottom > 0) {
-                // Adjust the multiplier for stronger/weaker effect
-                setParallax(window.scrollY * 0.3);
-            }
+        // Cleanup function to disconnect observers
+        return () => {
+            swingObserver.disconnect();
         };
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
     }, []);
-
     return (
         <div className="min-h-screen relative bg-white">
-            {/* Hero Section with Background Image and Overlay */}
-            <div
-                ref={bannerRef}
-                className="h-screen w-full relative overflow-hidden flex items-center justify-center"
-                style={{perspective: "1px"}}
-            >
-                {slides.map((slide, index) => {
-                    const currentTransition = getCurrentTransition();
-                    return (
-                        <div
-                            key={slide.id}
-                            className={`absolute inset-0 ${currentTransition(
-                                index,
-                                currentSlide
-                            )}`}
-                        >
-                            <div
-                                className="h-full w-full relative"
-                                style={
-                                    index === currentSlide
-                                        ? {
-                                            transform: `translateY(${parallax * 0.4}px)`,
-                                            willChange: "transform",
-                                        }
-                                        : {}
-                                }
-                            >
-                                <Image
-                                    src={slide.image || "/globe.svg"}
-                                    alt={slide.alt}
-                                    fill
-                                    priority={index === 0}
-                                    quality={90}
-                                    sizes="100vw"
-                                    className="object-cover"
-                                />
-                            </div>
-                        </div>
-                    );
-                })}
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-black/40 z-20"/>
-                {/* Hero Content */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center z-30 text-center px-4 ">
-                    <h1 className="text-4xl md:text-6xl font-extrabold text-white drop-shadow-lg mb-4 fade-in hover:text-orange-400 transition-colors duration-500">
-                        Kiến tạo không gian sống hiện đại
-                    </h1>
-                    <p className="text-lg md:text-2xl text-white/90 font-medium mb-8 animate-fade-in delay-200 hover:text-orange-300 transition-colors duration-300">
-                        Thiết kế & Thi công nội thất chuyên nghiệp tại Quảng Nam
-                    </p>
-                </div>
-            </div>
+            <HeroCarousel/>
 
             {/* Introduction section */}
             <div className="py-12 px-4">
