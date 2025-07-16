@@ -1,6 +1,5 @@
-import {useEffect, useRef, useState} from "react";
-import Image from "next/image";
 import * as React from "react";
+import {useEffect, useRef, useState} from "react";
 
 const slideTransitions = [
     // Puff in center
@@ -107,43 +106,49 @@ export default function HeroCarousel() {
     return (
         <div
             ref={bannerRef}
-            className="h-screen w-full relative overflow-hidden flex items-center justify-center"
+            className="h-screen w-full relative overflow-hidden flex items-center justify-center video-container"
             style={{perspective: "1px"}}
         >
-            {slides.map((slide, index) => {
-                const currentTransition = getCurrentTransition();
-                return (
-                    <div
-                        key={slide.id}
-                        className={`absolute inset-0 ${currentTransition(
-                            index,
-                            currentSlide
-                        )}`}
-                    >
-                        <div
-                            className="h-full w-full relative"
-                            style={
-                                index === currentSlide
-                                    ? {
-                                        transform: `translateY(${parallax * 0.4}px)`,
-                                        willChange: "transform",
-                                    }
-                                    : {}
-                            }
-                        >
-                            <Image
-                                src={slide.image || "/globe.svg"}
-                                alt={slide.alt}
-                                fill
-                                priority={index === 0}
-                                quality={90}
-                                sizes="100vw"
-                                className="object-cover"
-                            />
-                        </div>
-                    </div>
-                );
-            })}
+            <iframe
+                src="https://www.youtube.com/embed/NoWyNgAQe34?si=VUk_ZT_5lKwmeLG6&amp;controls=0&autoplay=1&mute=1&loop=1&color=white&modestbranding=0&rel=0&playinline=1&enablejsapi=1&playlist=NoWyNgAQe34"
+                title="YouTube video player" frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin" allowFullScreen
+                className="w-screen h-full pointer-events-none"/>
+            {/*{slides.map((slide, index) => {*/}
+            {/*    const currentTransition = getCurrentTransition();*/}
+            {/*    return (*/}
+            {/*        <div*/}
+            {/*            key={slide.id}*/}
+            {/*            className={`absolute inset-0 ${currentTransition(*/}
+            {/*                index,*/}
+            {/*                currentSlide*/}
+            {/*            )}`}*/}
+            {/*        >*/}
+            {/*            <div*/}
+            {/*                className="h-full w-full relative"*/}
+            {/*                style={*/}
+            {/*                    index === currentSlide*/}
+            {/*                        ? {*/}
+            {/*                            transform: `translateY(${parallax * 0.4}px)`,*/}
+            {/*                            willChange: "transform",*/}
+            {/*                        }*/}
+            {/*                        : {}*/}
+            {/*                }*/}
+            {/*            >*/}
+            {/*                <Image*/}
+            {/*                    src={slide.image || "/globe.svg"}*/}
+            {/*                    alt={slide.alt}*/}
+            {/*                    fill*/}
+            {/*                    priority={index === 0}*/}
+            {/*                    quality={90}*/}
+            {/*                    sizes="100vw"*/}
+            {/*                    className="object-cover"*/}
+            {/*                />*/}
+            {/*            </div>*/}
+            {/*        </div>*/}
+            {/*    );*/}
+            {/*})}*/}
             {/* Overlay */}
             <div className="absolute inset-0 bg-black/40 z-20"/>
             {/* Hero Content */}

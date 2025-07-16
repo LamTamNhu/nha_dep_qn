@@ -1,24 +1,14 @@
 "use client";
-import {
-    ArrowUpRight,
-    Eye,
-    Goal,
-    Paintbrush,
-    HandCoins,
-    HeartHandshake,
-    ShieldCheck,
-    Users,
-} from "lucide-react";
+import {ArrowUpRight, Eye, Goal, HandCoins, HeartHandshake, Paintbrush, ShieldCheck, Users,} from "lucide-react";
 import * as React from "react";
-import {useEffect, useRef, useState} from "react";
+import {useEffect} from "react";
 import Image from "next/image";
 import AnimatedCounter from "@/components/animated-counter";
-import ContactForm from "../components/contactForm";
 import PartnerCarousel from "@/components/partnerCarousel";
 import ProcessSection from "../components/processSection";
 import SectionHeading from "@/components/sectionHeading";
-import HeroCarousel from "@/components/heroCarousel";
 import animateOnObserve from "@/lib/animateOnView";
+import HeroCarousel from "@/components/heroCarousel";
 
 const cardData = [
     {
@@ -100,8 +90,8 @@ export default function Home() {
     }, []);
     return (
         <div className="min-h-screen relative bg-white">
-            <HeroCarousel/>
-
+            {/*<HeroCarousel/>*/}
+           <HeroCarousel/>
             {/* Introduction section */}
             <div className="py-12 px-4">
                 <div className="max-w-6xl mx-auto px-4">
@@ -156,12 +146,12 @@ export default function Home() {
                     </div>
                 </div>
             </section>
-            <div className="py-12 bg-gray-50 px-4">
+            <div className="py-12 bg-black px-4">
                 <div className="max-w-6xl mx-auto px-4">
                     <SectionHeading>
                         Những con số ấn tượng
                     </SectionHeading>
-                    <h3 className="text-md font-semibold mb-2 text-gray-500 text-justify mb-12">
+                    <h3 className="text-md font-semibold mb-2 text-white text-justify mb-12">
                         Chính những trăn trở ấy đã trở thành động lực để chúng tôi xây dựng
                         một quy trình thi công CHẶT CHẼ - MINH BẠCH - CHẤT LƯỢNG, đảm bảo
                         mỗi ngôi nhà khi bàn giao không chỉ đạt chuẩn kỹ thuật, mà còn mang
