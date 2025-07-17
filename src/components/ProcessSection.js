@@ -1,6 +1,6 @@
 import { Truck } from "lucide-react";
 import React, { useState, useEffect, useRef } from "react";
-import SectionHeading from "@/components/sectionHeading";
+import SectionHeading from "@/components/SectionHeading";
 
 const ProcessSection = () => {
   const [hoveredRow, setHoveredRow] = useState(null);

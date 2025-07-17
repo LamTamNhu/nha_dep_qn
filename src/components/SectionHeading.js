@@ -1,5 +1,5 @@
 "use client";
-import animateOnObserve from "@/lib/animateOnView";
+import animateOnObserve from "@/lib/animateOnObserve";
 import {useEffect} from "react";
 
 function SectionHeading({ children, className = '' }) {

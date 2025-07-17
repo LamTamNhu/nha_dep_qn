@@ -1,8 +1,9 @@
 "use client";
 import Image from "next/image";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {CreditCard, Lock, ShieldUser} from "lucide-react";
-import SectionHeading from "@/components/sectionHeading";
+import SectionHeading from "@/components/SectionHeading";
+import animateOnObserve from "@/lib/animateOnObserve";
 
 export default function AboutPage() {
     const [expanded, setExpanded] = useState(false);
@@ -100,215 +101,268 @@ export default function AboutPage() {
             description: "Với phương châm không ngừng phát triển Nhà Đẹp Quảng Nam luôn tập trung cải tiến toàn diện để mang đến dịch vụ tốt nhất đáp ứng mọi nhu cầu khách hàng."
         }
     ];
+    useEffect(() => {
+        // Set up animations after DOM is ready
+        const puffObserver = animateOnObserve('.puff-in-center');
+        const swingObserver = animateOnObserve('.swing-in-top-fwd')
 
+        // Cleanup function to disconnect observers
+        return () => {
+            puffObserver.disconnect();
+        };
+    }, []);
 
     return (
-        <div className="min-h-screen relative bg-white">
-            {/* Banner */}
-            <div className="relative w-full h-[32rem] flex items-center justify-center">
-                <Image
-                    src="/images/aboutus.png"
-                    alt="About Us Banner"
-                    fill
-                    priority
-                    className="object-cover object-[55%_85%] z-0"
-                />
-                <div className="absolute inset-0 bg-black/50 z-10 flex flex-col items-left justify-center px-4">
-                    <h1 className="text-xl md:text-6xl font-extrabold text-white drop-shadow-lg mb-4">
-                        Nhà Đẹp Quảng Nam
-                    </h1>
-                    <p className="text-lg md:text-2xl text-white/90 font-medium mb-8">
-                        Nâng tầm những ngôi nhà xứ Quảng
-                    </p>
-                </div>
+        <div className="relative w-full h-[200vh] overflow-hidden">
+            {/* Background image */}
+            <div
+                className="absolute inset-0 bg-[url('/images/sus.jpg')] bg-cover bg-center bg-no-repeat"
+            >
             </div>
+            <div className="absolute inset-0 bg-black/40"></div>
 
-            <section className="py-12 px-4 bg-black">
-                <div className="container mx-auto max-w-6xl mx-auto px-4">
+            {/* Fade to black overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent">
+            </div>
+            <div className="min-h-screen relative z-10">
+                <h1 className="text-white text-center text-extrabold text-3xl mt-40">
+                    GIỚI THIỆU
+                </h1>
+                <section className="py-12 px-4">
                     <div className="container mx-auto max-w-6xl mx-auto px-4">
-                        <SectionHeading>
-                            Câu chuyện thương hiệu
-                        </SectionHeading>
-                        <div>
-                            {aboutShort}
-                            {!expanded && <span>... </span>}
-                            {expanded && <span>{aboutFull}</span>}
-                            <button
-                                className="ml-2 text-orange-400 underline hover:text-orange-300 transition-colors text-sm font-semibold"
-                                onClick={() => setExpanded((v) => !v)}
-                            >
-                                {expanded ? "Thu gọn" : "Xem thêm"}
-                            </button>
+                        <div className="container mx-auto max-w-6xl mx-auto px-4">
+                            <SectionHeading>
+                                Câu Chuyện Thương Hiệu
+                            </SectionHeading>
+                            <div className="swing-in-top-fwd">
+                                {aboutShort}
+                                {!expanded && <span>... </span>}
+                                {expanded && <span>{aboutFull}</span>}
+                                <button
+                                    className="ml-2 text-orange-400 underline hover:text-orange-300 transition-colors text-sm font-semibold"
+                                    onClick={() => setExpanded((v) => !v)}
+                                >
+                                    {expanded ? "Thu gọn" : "Xem thêm"}
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <section className="py-12 px-4">
-                <div className="container mx-auto max-w-6xl mx-auto px-4">
-                    <SectionHeading>
-                        Đội ngũ
-                    </SectionHeading>
-                    <div>
-                        <Image
-                            src="/images/wide_shot.jpg"
-                            alt="team"
-                            width={1920}
-                            height={500}
-                            className="h-auto object-cover shadow-lg"
-                        />
-                        <p className="bg-orange-400 text-white py-2 text-center text-xl">Toàn thể cán bộ nhân viên</p>
-                    </div>
-                </div>
-            </section>
-
-            <section className="py-12 px-4 bg-black">
-                <div className="max-w-6xl mx-auto">
-                    {/* Header */}
-                    <div className="text-center mb-12">
+                <section className="py-12 px-4">
+                    <div className="container mx-auto max-w-6xl mx-auto px-4">
                         <SectionHeading>
-                            5 "KHÔNG"<span className="text-white"> tại Nhà Đẹp Quảng Nam</span>
+                            Đội Ngũ
                         </SectionHeading>
-
+                        <div>
+                            <Image
+                                src="/images/wide_shot.jpg"
+                                alt="team"
+                                width={1920}
+                                height={500}
+                                className="h-auto object-cover shadow-lg puff-in-center"
+                            />
+                            <p className="bg-orange-400 text-white py-2 text-center text-xl">Toàn thể cán bộ nhân viên</p>
+                        </div>
                     </div>
+                </section>
 
-                    {/* Cards Grid - 5 Individual Cards */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {khongItems.map((item, index) => (
-                            <div key={index} className="relative overflow-hidden rounded-lg shadow-lg group border-2 solid border-orange-400">
-                                {/* Image Section */}
-                                <div className="relative h-48">
-                                    <Image
-                                        src={index % 2 === 0 ? "/images/wide_shot.jpg" : "/images/aboutus.png"}
-                                        alt={`Commitment ${index + 1}`}
-                                        fill
-                                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                                    />
+                <section className="py-12 px-4">
+                    <div className="max-w-6xl mx-auto">
+                        {/* Header */}
+                        <div className="text-center mb-12">
+                            <SectionHeading>
+                                5 "KHÔNG"<span className="text-white"> tại Nhà Đẹp Quảng Nam</span>
+                            </SectionHeading>
+
+                        </div>
+
+                        {/* Cards Grid - 5 Individual Cards */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {khongItems.map((item, index) => (
+                                <div key={index} className="relative overflow-hidden rounded-lg shadow-lg group border-2 solid border-orange-400">
+                                    {/* Image Section */}
+                                    <div className="relative h-48">
+                                        <Image
+                                            src={index % 2 === 0 ? "/images/wide_shot.jpg" : "/images/aboutus.png"}
+                                            alt={`Commitment ${index + 1}`}
+                                            fill
+                                            className="object-cover group-hover:scale-105 transition-transform duration-300"
+                                        />
+                                    </div>
+
+                                    {/* Content Section */}
+                                    <div className="bg-black">
+                                        {/* Large Title */}
+                                        <h3 className="text-md items-center flex justify-center font-bold text-white mb-4 leading-tight bg-orange-400 h-12 px-6">
+                                            {item.text}
+                                        </h3>
+
+                                        {/* Subtitle */}
+                                        <p className="text-white mb-6 leading-relaxed px-6 text-justify">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+                                        </p>
+
+                                        {/* Button */}
+                                        <button
+                                            className="bg-orange-400 text-white px-6 py-3 ml-6 mb-4 rounded-lg font-medium hover:bg-orange-300 transition-colors duration-200">
+                                            XEM ĐẦY ĐỦ NỘI DUNG
+                                        </button>
+                                    </div>
                                 </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+                <section className="py-12 px-4 bg-whtie">
+                    <div className="max-w-6xl mx-auto">
+                        {/* Header */}
+                        <div className="text-center mb-12">
+                            <SectionHeading>
+                                Giá Trị Cốt Lõi
+                            </SectionHeading>
 
-                                {/* Content Section */}
-                                <div className="bg-black">
-                                    {/* Large Title */}
-                                    <h3 className="text-md items-center flex text-center font-bold text-white mb-4 leading-tight bg-orange-400 h-12 px-6">
-                                        {item.text}
-                                    </h3>
+                        </div>
 
-                                    {/* Subtitle */}
-                                    <p className="text-white mb-6 leading-relaxed px-6 text-justify">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+                        {/* Cards Grid - 5 Individual Cards */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {coreValues.map((item, index) => (
+                                <div key={index} className="relative overflow-hidden rounded-lg shadow-lg group">
+                                    {/* Image Section */}
+                                    <div className="relative h-48">
+                                        <Image
+                                            src={index % 2 === 0 ? "/images/wide_shot.jpg" : "/images/aboutus.png"}
+                                            alt={`Commitment ${index + 1}`}
+                                            fill
+                                            className="object-cover group-hover:scale-105 transition-transform duration-300"
+                                        />
+                                    </div>
+
+                                    {/* Content Section */}
+                                    <div className="bg-white">
+                                        {/* Large Title */}
+                                        <h3 className="text-md items-center flex justify-center font-bold text-white mb-4 leading-tight bg-orange-400 h-12 px-6">
+                                            {item.title}
+                                        </h3>
+
+                                        {/* Subtitle */}
+                                        <p className="text-black mb-6 leading-relaxed px-6 text-justify">
+                                            {item.description}
+                                        </p>
+
+                                        {/* Button */}
+                                        <button
+                                            className="bg-orange-400 text-white px-6 py-3 ml-6 mb-4 rounded-lg font-medium hover:bg-orange-300 transition-colors duration-200">
+                                            XEM ĐẦY ĐỦ NỘI DUNG
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                <section className="py-12 px-4">
+                    <div className="max-w-6xl mx-auto mt-20">
+                        {/* Header */}
+                        <div className="text-left mb-12">
+                            <SectionHeading>
+                                Giá trị cốt lõi
+                            </SectionHeading>
+                            <p className="text-lg text-gray-600 mb-6">
+                                Chân thành - Chính trực - Trách nhiệm - Sáng Tạo - Hiểu và Thương
+                            </p>
+                        </div>
+
+                        {/* Values Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {coreValues.map((value, index) => (
+                                <div
+                                    key={index}
+                                    className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-t-4 border-orange-400"
+                                >
+                                    <div className="mb-4">
+                                        <h3 className="text-xl font-bold text-orange-400 mb-2">
+                                            {value.title}
+                                        </h3>
+                                        <div className="w-12 h-0.5 bg-orange-400 rounded-full"></div>
+                                    </div>
+                                    <p className="text-gray-700 leading-relaxed">
+                                        {value.description}
                                     </p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
 
-                                    {/* Button */}
+                <section className="bg-white py-12 px-4 sm:px-6 lg:px-8">
+                    {/* Policies and Commitments Section */}
+                    <div className="max-w-6xl mx-auto mt-20">
+                        {/* Header */}
+                        <div className="text-left mb-12">
+                            <SectionHeading>
+                                Chính sách và cam kết của Nhà Đẹp Quảng Nam
+                            </SectionHeading>
+                        </div>
+                        {/* Policies Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div
+                                className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-gray-100 hover:border-orange-400 group">
+                                <div className="text-center">
+                                    <div
+                                        className="w-16 h-16 bg-orange-400 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                                        <ShieldUser size={40} className="text-white"/>
+                                    </div>
+                                    <h3 className="text-lg text-gray-900 mb-2">
+                                        Chính sách bảo hành
+                                    </h3>
                                     <button
-                                        className="bg-orange-400 text-white px-6 py-3 ml-6 mb-4 rounded-lg font-medium hover:bg-orange-300 transition-colors duration-200">
-                                        XEM ĐẦY ĐỦ NỘI DUNG
+                                        className="text-orange-400 hover:text-orange-600 font-medium text-sm underline transition-colors duration-200">
+                                        Xem thêm
                                     </button>
                                 </div>
                             </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
-            <section className="py-12 px-4">
-                <div className="max-w-6xl mx-auto mt-20">
-                    {/* Header */}
-                    <div className="text-left mb-12">
-                        <SectionHeading>
-                            Giá trị cốt lõi
-                        </SectionHeading>
-                        <p className="text-lg text-gray-600 mb-6">
-                            Chân thành - Chính trực - Trách nhiệm - Sáng Tạo - Hiểu và Thương
-                        </p>
-                    </div>
-
-                    {/* Values Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {coreValues.map((value, index) => (
                             <div
-                                key={index}
-                                className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-t-4 border-orange-400"
-                            >
-                                <div className="mb-4">
-                                    <h3 className="text-xl font-bold text-orange-400 mb-2">
-                                        {value.title}
+                                className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-gray-100 hover:border-orange-400 group">
+                                <div className="text-center">
+                                    <div
+                                        className="w-16 h-16 bg-orange-400 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                                        <CreditCard size={40} className="text-white"/>
+                                    </div>
+                                    <h3 className="text-lg text-gray-900 mb-2">
+                                        Chính sách thanh toán
                                     </h3>
-                                    <div className="w-12 h-0.5 bg-orange-400 rounded-full"></div>
+                                    <button
+                                        className="text-orange-400 hover:text-orange-600 font-medium text-sm underline transition-colors duration-200">
+                                        Xem thêm
+                                    </button>
                                 </div>
-                                <p className="text-gray-700 leading-relaxed">
-                                    {value.description}
-                                </p>
                             </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
-            <section className="bg-white py-12 px-4 sm:px-6 lg:px-8">
-                {/* Policies and Commitments Section */}
-                <div className="max-w-6xl mx-auto mt-20">
-                    {/* Header */}
-                    <div className="text-left mb-12">
-                        <SectionHeading>
-                            Chính sách và cam kết của Nhà Đẹp Quảng Nam
-                        </SectionHeading>
-                    </div>
-                    {/* Policies Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div
-                            className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-gray-100 hover:border-orange-400 group">
-                            <div className="text-center">
-                                <div
-                                    className="w-16 h-16 bg-orange-400 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                                    <ShieldUser size={40} className="text-white"/>
+                            <div
+                                className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-gray-100 hover:border-orange-400 group">
+                                <div className="text-center">
+                                    <div
+                                        className="w-16 h-16 bg-orange-400 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                                        <Lock size={40} className="text-white"/>
+                                    </div>
+                                    <h3 className="text-lg text-gray-900 mb-2">
+                                        Chính sách bảo mật thông tin
+                                    </h3>
+                                    <button
+                                        className="text-orange-400 hover:text-orange-600 font-medium text-sm underline transition-colors duration-200">
+                                        Xem thêm
+                                    </button>
                                 </div>
-                                <h3 className="text-lg text-gray-900 mb-2">
-                                    Chính sách bảo hành
-                                </h3>
-                                <button
-                                    className="text-orange-400 hover:text-orange-600 font-medium text-sm underline transition-colors duration-200">
-                                    Xem thêm
-                                </button>
-                            </div>
-                        </div>
-
-                        <div
-                            className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-gray-100 hover:border-orange-400 group">
-                            <div className="text-center">
-                                <div
-                                    className="w-16 h-16 bg-orange-400 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                                    <CreditCard size={40} className="text-white"/>
-                                </div>
-                                <h3 className="text-lg text-gray-900 mb-2">
-                                    Chính sách thanh toán
-                                </h3>
-                                <button
-                                    className="text-orange-400 hover:text-orange-600 font-medium text-sm underline transition-colors duration-200">
-                                    Xem thêm
-                                </button>
-                            </div>
-                        </div>
-
-                        <div
-                            className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-gray-100 hover:border-orange-400 group">
-                            <div className="text-center">
-                                <div
-                                    className="w-16 h-16 bg-orange-400 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                                    <Lock size={40} className="text-white"/>
-                                </div>
-                                <h3 className="text-lg text-gray-900 mb-2">
-                                    Chính sách bảo mật thông tin
-                                </h3>
-                                <button
-                                    className="text-orange-400 hover:text-orange-600 font-medium text-sm underline transition-colors duration-200">
-                                    Xem thêm
-                                </button>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </div>
         </div>
+
     );
 }

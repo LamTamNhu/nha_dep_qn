@@ -1,8 +1,8 @@
 import { Montserrat } from "next/font/google";
 import "./globals.css";
-import Navbar from "../components/navbar";
-import Footer from "../components/footer";
-import FloatingButtons from "../components/floatingButtons";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import FloatingButtons from "../components/FloatingButtons";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",

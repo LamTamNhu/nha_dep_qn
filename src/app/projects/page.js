@@ -4,9 +4,9 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Search } from 'lucide-react';
 import Link from 'next/link';
-import ContactForm from '../../components/contactForm';
+import ContactForm from '../../components/ContactForm';
 import Banner from '@/components/ui/banner';
-import SectionHeading from "@/components/sectionHeading";
+import SectionHeading from "@/components/SectionHeading";
 
 export default function ProjectsPage() {
   const [searchTerm, setSearchTerm] = useState('');

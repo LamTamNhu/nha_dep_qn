@@ -3,8 +3,8 @@
 import Banner from '@/components/ui/banner';
 import Image from 'next/image';
 import React, { useEffect } from 'react';
-import ContactForm from '../../components/contactForm';
-import SectionHeading from "@/components/sectionHeading";
+import ContactForm from '../../components/ContactForm';
+import SectionHeading from "@/components/SectionHeading";
 
 const services = [
   {

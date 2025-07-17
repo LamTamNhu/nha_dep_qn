@@ -3,12 +3,12 @@ import {ArrowUpRight, Eye, Goal, HandCoins, HeartHandshake, Paintbrush, ShieldCh
 import * as React from "react";
 import {useEffect} from "react";
 import Image from "next/image";
-import AnimatedCounter from "@/components/animated-counter";
-import PartnerCarousel from "@/components/partnerCarousel";
-import ProcessSection from "../components/processSection";
-import SectionHeading from "@/components/sectionHeading";
-import animateOnObserve from "@/lib/animateOnView";
-import HeroCarousel from "@/components/heroCarousel";
+import AnimatedCounter from "@/components/AnimatedCounter";
+import PartnerCarousel from "@/components/PartnerCarousel";
+import ProcessSection from "../components/ProcessSection";
+import SectionHeading from "@/components/SectionHeading";
+import animateOnObserve from "@/lib/animateOnObserve";
+import HeroCarousel from "@/components/HeroCarousel";
 
 const cardData = [
     {
@@ -81,7 +81,7 @@ const partners = [
 export default function Home() {
     useEffect(() => {
         // Set up animations after DOM is ready
-        const swingObserver = animateOnObserve('.swing-in-top-fwd-2');
+        const swingObserver = animateOnObserve('.swing-in-top-fwd');
 
         // Cleanup function to disconnect observers
         return () => {
@@ -99,7 +99,7 @@ export default function Home() {
                         Công Ty TNHH Nhà Đẹp Quảng Nam
                     </SectionHeading>
 
-                    <h3 className="text-md font-semibold mb-2 text-gray-500 text-justify">
+                    <h3 className="text-md font-semibold mb-2 text-gray-500 text-justify swing-in-top-fwd">
                         Công ty TNHH NHÀ ĐẸP QUẢNG NAM do KTS Nguyên Tương thành lập là đơn
                         vị hàng đầu trong lĩnh vực Thiết kế và Thi công Nội thất hiện nay
                         với gần 10 năm kinh nghiệm thực chiến. Chúng tôi chuyên thiết kế thi
@@ -109,8 +109,8 @@ export default function Home() {
                 </div>
             </div>
 
-            {/* Features Section */}
-            <section className="py-16 px-4 font-sans">
+            {/* Core Values Section */}
+            <section className="py-16 px-4 font-sans swing-in-top-fwd">
                 <div className="max-w-6xl mx-auto">
                     {/* Cards Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
@@ -146,6 +146,7 @@ export default function Home() {
                     </div>
                 </div>
             </section>
+
             <div className="py-12 bg-black px-4">
                 <div className="max-w-6xl mx-auto px-4">
                     <SectionHeading>
