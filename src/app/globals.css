@@ -232,11 +232,7 @@
 }
 
 .swing-in-top-fwd {
-    opacity: 0;
-}
-
-.swing-in-top-fwd.animate {
-    animation: swing-in-top-fwd 1.2s 0.7s cubic-bezier(.175, .885, .32, 1.275) both
+    animation: swing-in-top-fwd 0.8s 0.3s cubic-bezier(.175, .885, .32, 1.275) both
 }
 
 .swing-in-top-fwd-2 {
@@ -582,5 +578,24 @@
     45% {
         transform: scale(1);
         animation-timing-function: ease-out
+    }
+}
+
+.slide-in-bottom {
+    opacity: 0;
+}
+
+.slide-in-bottom.animate {
+    animation: slide-in-bottom 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes slide-in-bottom {
+    0% {
+        transform: translateY(1000px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
     }
 }

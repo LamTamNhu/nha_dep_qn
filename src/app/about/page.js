@@ -2,7 +2,6 @@
 import Image from "next/image";
 import {useEffect, useState} from "react";
 import {CreditCard, Lock, ShieldUser} from "lucide-react";
-import SectionHeading from "@/components/SectionHeading";
 import animateOnObserve from "@/lib/animateOnObserve";
 
 export default function AboutPage() {
@@ -140,27 +139,29 @@ export default function AboutPage() {
         const swingObserver = animateOnObserve('.swing-in-top-fwd');
         const borderObserver = animateOnObserve('.border-draw')
         const puffObserver = animateOnObserve('.puff-in-center')
+        const slideObserver = animateOnObserve('.slide-in-bottom')
 
         // Cleanup function to disconnect observers
         return () => {
             swingObserver.disconnect()
             puffObserver.disconnect();
             borderObserver.disconnect()
+            slideObserver.disconnect();
         };
     }, []);
 
     return (
-        <div className="relative w-full bg-black">
+        <div className="relative w-full bg-[#373737]">
             {/* Hero section with background image */}
             <div className="relative">
                 {/* Background image */}
-                <div className="absolute inset-0 bg-[url('/images/sus.jpg')] bg-cover bg-center bg-no-repeat" />
+                <div className="absolute inset-0 bg-[url('/images/sus.jpg')] bg-cover bg-center bg-no-repeat"/>
 
                 {/* Dark overlay */}
-                <div className="absolute inset-0 bg-black/40" />
+                <div className="absolute inset-0 bg-black/40"/>
 
                 {/* Gradient fade to gray at bottom */}
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-gray-600" />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#373737]"/>
 
                 {/* Content */}
                 <div className="relative z-10">
@@ -172,7 +173,7 @@ export default function AboutPage() {
                             <h2 className="text-white text-center text-extrabold text-5xl font-bold mb-12">
                                 NÂNG TẦM NHỮNG NGÔI NHÀ XỨ QUẢNG
                             </h2>
-                            <div className="swing-in-top-fwd">
+                            <div>
                                 {aboutShort}
                                 {!expanded && <span>... </span>}
                                 {expanded && <span>{aboutFull}</span>}
@@ -185,47 +186,46 @@ export default function AboutPage() {
                             </div>
                         </div>
                     </section>
-                </div>
-            </div>
-
-            {/* Rest of the page with gray background */}
-            <div className="">
-                <section className="py-12 px-4">
-                    <div className="container mx-auto max-w-6xl mx-auto px-4">
-                        <div className="text-center">
-                            {/*Title*/}
-                            <h2 className="text-white text-extrabold text-3xl font-bold my-20 tracking-[.5em] p-4 border-draw inline-block">
-                                ĐỘI NGŨ
-                            </h2>
-                        </div>
-                        <div className="grid grid-cols-3 gap-4">
-                            <div/>
+                    <section className="py-12 px-4">
+                        <div className="container mx-auto max-w-6xl mx-auto px-4">
                             <div className="text-center">
-                                <Image width={300} height={300} src="/thumbnails/nguyen-tuong.jpg" alt="nguyen-tuong"
-                                       className="size-70 object-cover mx-auto mb-4"/>
-                                <h3 className="text-white font-bold text-xl mb-2">
-                                    KTS. TRẦN NGUYÊN TƯƠNG
-                                </h3>
-                                <p className="text-white font-base text-sm">GIÁM ĐỐC</p>
+                                {/*Title*/}
+                                <h2 className="text-white text-extrabold text-3xl font-bold my-20 tracking-[.5em] p-4 border-draw inline-block">
+                                    ĐỘI NGŨ
+                                </h2>
                             </div>
-                            <div/>
-                            {members.map((member) => (
-                                <div className="text-center" key={member.name}>
-                                    <Image width={300} height={300} src={member.thumbnail}
-                                           alt={member.name}
-                                           className="size-70 object-top object-cover mx-auto mb-4"/>
+                            <div className="grid grid-cols-3 gap-4">
+                                <div/>
+                                <div className="text-center slide-in-bottom">
+                                    <Image width={300} height={300} src="/thumbnails/nguyen-tuong.jpg"
+                                           alt="nguyen-tuong"
+                                           className="size-70 object-cover mx-auto mb-4"/>
                                     <h3 className="text-white font-bold text-xl mb-2">
-                                        {member.name}
+                                        KTS. TRẦN NGUYÊN TƯƠNG
                                     </h3>
-                                    <p className="text-white font-base text-sm">
-                                        {member.title}
-                                    </p>
+                                    <p className="text-white font-base text-sm">GIÁM ĐỐC</p>
                                 </div>
-                            ))}
+                                <div/>
+                                {members.map((member) => (
+                                    <div className="text-center slide-in-bottom" key={member.name}>
+                                        <Image width={300} height={300} src={member.thumbnail}
+                                               alt={member.name}
+                                               className="size-70 object-top object-cover mx-auto mb-4"/>
+                                        <h3 className="text-white font-bold text-xl mb-2">
+                                            {member.name}
+                                        </h3>
+                                        <p className="text-white font-base text-sm">
+                                            {member.title}
+                                        </p>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
+                </div>
 
+            </div>
+            <div>
                 {/*Office pictures*/}
                 <section className="py-12 px-4">
                     <div className="max-w-6xl mx-auto text-center">
@@ -244,7 +244,6 @@ export default function AboutPage() {
                         </div>
                     </div>
                 </section>
-
                 {/*Activities pictures*/}
                 <section className="py-12 px-4">
                     <div className="max-w-6xl mx-auto text-center">
@@ -252,42 +251,13 @@ export default function AboutPage() {
                             HÌNH ẢNH HOẠT ĐỘNG
                         </h2>
                         <div className="grid grid-cols-3 justify-center gap-6">
-                            <div className="overflow-hidden">
-                                <Image width={300} height={500} src="/images/Thiet-ke-chua-co-ten-2.jpg" alt="van phong"
-                                       className="w-full transition-transform duration-300 ease-in-out hover:scale-110"/>
-                            </div>
-                            <div className="overflow-hidden">
-                                <Image width={300} height={500} src="/images/Thiet-ke-chua-co-ten-7.jpg" alt="van phong"
-                                       className="w-full transition-transform duration-300 ease-in-out hover:scale-110"/>
-                            </div>
-                            <div className="overflow-hidden">
-                                <Image width={300} height={500} src="/images/Thiet-ke-chua-co-ten-7.jpg" alt="van phong"
-                                       className="w-full transition-transform duration-300 ease-in-out hover:scale-110"/>
-                            </div>
-                            <div className="overflow-hidden">
-                                <Image width={300} height={500} src="/images/Thiet-ke-chua-co-ten-7.jpg" alt="van phong"
-                                       className="w-full transition-transform duration-300 ease-in-out hover:scale-110"/>
-                            </div>
-                            <div className="overflow-hidden">
-                                <Image width={300} height={500} src="/images/Thiet-ke-chua-co-ten-7.jpg" alt="van phong"
-                                       className="w-full transition-transform duration-300 ease-in-out hover:scale-110"/>
-                            </div>
-                            <div className="overflow-hidden">
-                                <Image width={300} height={500} src="/images/Thiet-ke-chua-co-ten-7.jpg" alt="van phong"
-                                       className="w-full transition-transform duration-300 ease-in-out hover:scale-110"/>
-                            </div>
-                            <div className="overflow-hidden">
-                                <Image width={300} height={500} src="/images/Thiet-ke-chua-co-ten-7.jpg" alt="van phong"
-                                       className="w-full transition-transform duration-300 ease-in-out hover:scale-110"/>
-                            </div>
-                            <div className="overflow-hidden">
-                                <Image width={300} height={500} src="/images/Thiet-ke-chua-co-ten-2.jpg" alt="van phong"
-                                       className="w-full transition-transform duration-300 ease-in-out hover:scale-110"/>
-                            </div>
-                            <div className="overflow-hidden">
-                                <Image width={300} height={500} src="/images/Thiet-ke-chua-co-ten-2.jpg" alt="van phong"
-                                       className="w-full transition-transform duration-300 ease-in-out hover:scale-110"/>
-                            </div>
+                            {Array.from({length: 9}, (_, index) => (
+                                <div key={index} className="overflow-hidden slide-in-bottom">
+                                    <Image width={300} height={500} src="/images/Thiet-ke-chua-co-ten-2.jpg"
+                                           alt="van phong"
+                                           className="w-full transition-transform duration-300 ease-in-out hover:scale-110"/>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </section>
@@ -306,7 +276,7 @@ export default function AboutPage() {
                             {khongItems.map((item, index) => (
                                 <div
                                     key={index}
-                                    className="relative overflow-hidden rounded-lg shadow-lg group"
+                                    className="relative overflow-hidden rounded-lg shadow-lg group puff-in-center"
                                 >
                                     {/* Image Section */}
                                     <div className="relative h-48">
@@ -356,7 +326,7 @@ export default function AboutPage() {
                         {/* Cards Grid - 5 Individual Cards */}
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {coreValues.map((item, index) => (
-                                <div key={index} className="relative overflow-hidden rounded-lg shadow-lg group">
+                                <div key={index} className="relative overflow-hidden rounded-lg shadow-lg group puff-in-center">
                                     {/* Image Section */}
                                     <div className="relative h-48">
                                         <Image
@@ -368,7 +338,7 @@ export default function AboutPage() {
                                     </div>
 
                                     {/* Content Section */}
-                                    <div className="bg-white">
+                                    <div className="bg-white h-full">
                                         {/* Large Title */}
                                         <h3 className="text-md items-center flex justify-center font-bold text-white mb-4 leading-tight bg-orange-400 h-12 px-6">
                                             {item.title}
@@ -400,9 +370,9 @@ export default function AboutPage() {
                             </h2>
                         </div>
                         {/* Policies Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-60">
                             <div
-                                className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-gray-100 hover:border-orange-400 group">
+                                className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-gray-100 hover:border-orange-400 group puff-in-center">
                                 <div className="text-center">
                                     <div
                                         className="w-16 h-16 bg-orange-400 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
@@ -419,7 +389,7 @@ export default function AboutPage() {
                             </div>
 
                             <div
-                                className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-gray-100 hover:border-orange-400 group">
+                                className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-gray-100 hover:border-orange-400 group puff-in-center">
                                 <div className="text-center">
                                     <div
                                         className="w-16 h-16 bg-orange-400 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
@@ -436,7 +406,7 @@ export default function AboutPage() {
                             </div>
 
                             <div
-                                className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-gray-100 hover:border-orange-400 group">
+                                className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-gray-100 hover:border-orange-400 group puff-in-center">
                                 <div className="text-center">
                                     <div
                                         className="w-16 h-16 bg-orange-400 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
