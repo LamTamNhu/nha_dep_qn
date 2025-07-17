@@ -473,7 +473,7 @@ export default function Home() {
                             </div>
                         </div>
                         {/* Right: Details */}
-                        <div className="col-span-1 flex flex-col items-center md:items-start">
+                        <div className="col-span-1 flex flex-col items-center md:items-start mb-16">
                             <h3 className="text-2xl font-bold text-gray-800 mb-4 text-justify md:text-left">
                                 Chị Thảo Duyên | Nhà phố 2 tầng | Vĩnh Phú – Thuận An
                             </h3>
