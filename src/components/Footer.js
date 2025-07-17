@@ -28,7 +28,7 @@ export default function Footer() {
 
           </div>
         </div>
-        <div className="relative z-10 w-full h-full flex items-center justify-center bg-black text-white pt-12 pb-8 px-4 mt-12">
+        <div className="relative z-10 w-full h-full flex items-center justify-center bg-black text-white pt-12 pb-8 px-4">
           <div className="max-w-6xl mx-auto grid grid-cols-1 gap-8">
             {/* Company Info */}
             <div className="md:col-span-2">

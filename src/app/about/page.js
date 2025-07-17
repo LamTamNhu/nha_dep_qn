@@ -8,7 +8,7 @@ import animateOnObserve from "@/lib/animateOnObserve";
 export default function AboutPage() {
     const [expanded, setExpanded] = useState(false);
     const aboutShort =
-        <div className="text-white">
+        <div className="text-white text-lg">
             <p>
                 Với ước mơ tạo ra những ngôi nhà thật đẹp chàng kĩ sư trẻ Nguyên Tương Tổng Giám Đốc tại công ty Nhà Đẹp
                 Quảng Nam chia sẻ.
@@ -101,68 +101,193 @@ export default function AboutPage() {
             description: "Với phương châm không ngừng phát triển Nhà Đẹp Quảng Nam luôn tập trung cải tiến toàn diện để mang đến dịch vụ tốt nhất đáp ứng mọi nhu cầu khách hàng."
         }
     ];
+
+    const members = [
+        {
+            thumbnail: "/thumbnails/nhu-hien.jpg",
+            name: "TRẦN NHƯ HIỀN",
+            title: "PHÓ GIÁM ĐỐC"
+        },
+        {
+            thumbnail: "/thumbnails/thanh-my.jpg",
+            name: "KTS. ĐINH THANH MỸ",
+            title: "CHỦ TRÌ THIẾT KẾ"
+        },
+        {
+            thumbnail: "/thumbnails/thanh-tuan.jpg",
+            name: "KTS. LÂM THANH TUẤN",
+            title: "KIẾN TRÚC SƯ"
+        },
+        {
+            thumbnail: "/thumbnails/thuy-duong.jpg",
+            name: "KTS. LÊ THỊ THÙY DƯƠNG",
+            title: "KIẾN TRÚC SƯ"
+        },
+        {
+            thumbnail: "/thumbnails/hong-tham.jpg",
+            name: "PHẠM HỒNG THẮM",
+            title: "THIẾT KẾ NỘI THẤT"
+        },
+        {
+            thumbnail: "/thumbnails/van-thong.jpg",
+            name: "KS. NGUYỄN VĂN THỐNG",
+            title: "KỸ SƯ KẾT CẤU "
+        },
+
+    ]
     useEffect(() => {
         // Set up animations after DOM is ready
-        const puffObserver = animateOnObserve('.puff-in-center');
-        const swingObserver = animateOnObserve('.swing-in-top-fwd')
+        const swingObserver = animateOnObserve('.swing-in-top-fwd');
+        const borderObserver = animateOnObserve('.border-draw')
+        const puffObserver = animateOnObserve('.puff-in-center')
 
         // Cleanup function to disconnect observers
         return () => {
+            swingObserver.disconnect()
             puffObserver.disconnect();
+            borderObserver.disconnect()
         };
     }, []);
 
     return (
-        <div className="relative w-full h-[200vh] overflow-hidden">
-            {/* Background image */}
-            <div
-                className="absolute inset-0 bg-[url('/images/sus.jpg')] bg-cover bg-center bg-no-repeat"
-            >
-            </div>
-            <div className="absolute inset-0 bg-black/40"></div>
+        <div className="relative w-full bg-black">
+            {/* Hero section with background image */}
+            <div className="relative">
+                {/* Background image */}
+                <div className="absolute inset-0 bg-[url('/images/sus.jpg')] bg-cover bg-center bg-no-repeat" />
 
-            {/* Fade to black overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent">
-            </div>
-            <div className="min-h-screen relative z-10">
-                <h1 className="text-white text-center text-extrabold text-3xl mt-40">
-                    GIỚI THIỆU
-                </h1>
-                <section className="py-12 px-4">
-                    <div className="container mx-auto max-w-6xl mx-auto px-4">
+                {/* Dark overlay */}
+                <div className="absolute inset-0 bg-black/40" />
+
+                {/* Gradient fade to gray at bottom */}
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-gray-600" />
+
+                {/* Content */}
+                <div className="relative z-10">
+                    <h1 className="text-white text-center text-extrabold text-3xl font-bold py-70 tracking-[.5em]">
+                        GIỚI THIỆU
+                    </h1>
+                    <section className="py-12 px-4">
                         <div className="container mx-auto max-w-6xl mx-auto px-4">
-                            <SectionHeading>
-                                Câu Chuyện Thương Hiệu
-                            </SectionHeading>
+                            <h2 className="text-white text-center text-extrabold text-5xl font-bold mb-12">
+                                NÂNG TẦM NHỮNG NGÔI NHÀ XỨ QUẢNG
+                            </h2>
                             <div className="swing-in-top-fwd">
                                 {aboutShort}
                                 {!expanded && <span>... </span>}
                                 {expanded && <span>{aboutFull}</span>}
                                 <button
-                                    className="ml-2 text-orange-400 underline hover:text-orange-300 transition-colors text-sm font-semibold"
+                                    className="ml-2 text-white underline hover:text-gray-300 transition-colors text-sm font-semibold"
                                     onClick={() => setExpanded((v) => !v)}
                                 >
                                     {expanded ? "Thu gọn" : "Xem thêm"}
                                 </button>
                             </div>
                         </div>
+                    </section>
+                </div>
+            </div>
+
+            {/* Rest of the page with gray background */}
+            <div className="">
+                <section className="py-12 px-4">
+                    <div className="container mx-auto max-w-6xl mx-auto px-4">
+                        <div className="text-center">
+                            {/*Title*/}
+                            <h2 className="text-white text-extrabold text-3xl font-bold my-20 tracking-[.5em] p-4 border-draw inline-block">
+                                ĐỘI NGŨ
+                            </h2>
+                        </div>
+                        <div className="grid grid-cols-3 gap-4">
+                            <div/>
+                            <div className="text-center">
+                                <Image width={300} height={300} src="/thumbnails/nguyen-tuong.jpg" alt="nguyen-tuong"
+                                       className="size-70 object-cover mx-auto mb-4"/>
+                                <h3 className="text-white font-bold text-xl mb-2">
+                                    KTS. TRẦN NGUYÊN TƯƠNG
+                                </h3>
+                                <p className="text-white font-base text-sm">GIÁM ĐỐC</p>
+                            </div>
+                            <div/>
+                            {members.map((member) => (
+                                <div className="text-center" key={member.name}>
+                                    <Image width={300} height={300} src={member.thumbnail}
+                                           alt={member.name}
+                                           className="size-70 object-top object-cover mx-auto mb-4"/>
+                                    <h3 className="text-white font-bold text-xl mb-2">
+                                        {member.name}
+                                    </h3>
+                                    <p className="text-white font-base text-sm">
+                                        {member.title}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </section>
 
+                {/*Office pictures*/}
                 <section className="py-12 px-4">
-                    <div className="container mx-auto max-w-6xl mx-auto px-4">
-                        <SectionHeading>
-                            Đội Ngũ
-                        </SectionHeading>
-                        <div>
-                            <Image
-                                src="/images/wide_shot.jpg"
-                                alt="team"
-                                width={1920}
-                                height={500}
-                                className="h-auto object-cover shadow-lg puff-in-center"
-                            />
-                            <p className="bg-orange-400 text-white py-2 text-center text-xl">Toàn thể cán bộ nhân viên</p>
+                    <div className="max-w-6xl mx-auto text-center">
+                        <h2 className="text-white text-extrabold text-3xl font-bold my-20 tracking-[.5em] p-4 border-draw inline-block">
+                            HÌNH ẢNH VĂN PHÒNG
+                        </h2>
+                        <div className="flex justify-center gap-6">
+                            <div className="overflow-hidden">
+                                <Image width={300} height={500} src="/images/Thiet-ke-chua-co-ten-2.jpg" alt="van phong"
+                                       className="w-full transition-transform duration-300 ease-in-out hover:scale-110"/>
+                            </div>
+                            <div className="overflow-hidden">
+                                <Image width={300} height={500} src="/images/Thiet-ke-chua-co-ten-7.jpg" alt="van phong"
+                                       className="w-full transition-transform duration-300 ease-in-out hover:scale-110"/>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/*Activities pictures*/}
+                <section className="py-12 px-4">
+                    <div className="max-w-6xl mx-auto text-center">
+                        <h2 className="text-white text-extrabold text-3xl font-bold my-20 tracking-[.5em] p-4 border-draw inline-block">
+                            HÌNH ẢNH HOẠT ĐỘNG
+                        </h2>
+                        <div className="grid grid-cols-3 justify-center gap-6">
+                            <div className="overflow-hidden">
+                                <Image width={300} height={500} src="/images/Thiet-ke-chua-co-ten-2.jpg" alt="van phong"
+                                       className="w-full transition-transform duration-300 ease-in-out hover:scale-110"/>
+                            </div>
+                            <div className="overflow-hidden">
+                                <Image width={300} height={500} src="/images/Thiet-ke-chua-co-ten-7.jpg" alt="van phong"
+                                       className="w-full transition-transform duration-300 ease-in-out hover:scale-110"/>
+                            </div>
+                            <div className="overflow-hidden">
+                                <Image width={300} height={500} src="/images/Thiet-ke-chua-co-ten-7.jpg" alt="van phong"
+                                       className="w-full transition-transform duration-300 ease-in-out hover:scale-110"/>
+                            </div>
+                            <div className="overflow-hidden">
+                                <Image width={300} height={500} src="/images/Thiet-ke-chua-co-ten-7.jpg" alt="van phong"
+                                       className="w-full transition-transform duration-300 ease-in-out hover:scale-110"/>
+                            </div>
+                            <div className="overflow-hidden">
+                                <Image width={300} height={500} src="/images/Thiet-ke-chua-co-ten-7.jpg" alt="van phong"
+                                       className="w-full transition-transform duration-300 ease-in-out hover:scale-110"/>
+                            </div>
+                            <div className="overflow-hidden">
+                                <Image width={300} height={500} src="/images/Thiet-ke-chua-co-ten-7.jpg" alt="van phong"
+                                       className="w-full transition-transform duration-300 ease-in-out hover:scale-110"/>
+                            </div>
+                            <div className="overflow-hidden">
+                                <Image width={300} height={500} src="/images/Thiet-ke-chua-co-ten-7.jpg" alt="van phong"
+                                       className="w-full transition-transform duration-300 ease-in-out hover:scale-110"/>
+                            </div>
+                            <div className="overflow-hidden">
+                                <Image width={300} height={500} src="/images/Thiet-ke-chua-co-ten-2.jpg" alt="van phong"
+                                       className="w-full transition-transform duration-300 ease-in-out hover:scale-110"/>
+                            </div>
+                            <div className="overflow-hidden">
+                                <Image width={300} height={500} src="/images/Thiet-ke-chua-co-ten-2.jpg" alt="van phong"
+                                       className="w-full transition-transform duration-300 ease-in-out hover:scale-110"/>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -171,16 +296,18 @@ export default function AboutPage() {
                     <div className="max-w-6xl mx-auto">
                         {/* Header */}
                         <div className="text-center mb-12">
-                            <SectionHeading>
-                                5 "KHÔNG"<span className="text-white"> tại Nhà Đẹp Quảng Nam</span>
-                            </SectionHeading>
-
+                            <h2 className="text-white text-extrabold text-3xl font-bold my-20 tracking-[.5em] p-4 border-draw inline-block">
+                                5 KHÔNG TẠI NHÀ ĐẸP QUẢNG NAM
+                            </h2>
                         </div>
 
                         {/* Cards Grid - 5 Individual Cards */}
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {khongItems.map((item, index) => (
-                                <div key={index} className="relative overflow-hidden rounded-lg shadow-lg group border-2 solid border-orange-400">
+                                <div
+                                    key={index}
+                                    className="relative overflow-hidden rounded-lg shadow-lg group"
+                                >
                                     {/* Image Section */}
                                     <div className="relative h-48">
                                         <Image
@@ -192,16 +319,17 @@ export default function AboutPage() {
                                     </div>
 
                                     {/* Content Section */}
-                                    <div className="bg-black">
+                                    <div className="bg-white">
                                         {/* Large Title */}
                                         <h3 className="text-md items-center flex justify-center font-bold text-white mb-4 leading-tight bg-orange-400 h-12 px-6">
                                             {item.text}
                                         </h3>
 
                                         {/* Subtitle */}
-                                        <p className="text-white mb-6 leading-relaxed px-6 text-justify">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+                                        <p className="text-black mb-6 leading-relaxed px-6 text-justify">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                            tempor incididunt ut
+                                            labore et dolore magna aliqua. Ut enim ad minim veniam
                                         </p>
 
                                         {/* Button */}
@@ -215,14 +343,14 @@ export default function AboutPage() {
                         </div>
                     </div>
                 </section>
-                <section className="py-12 px-4 bg-whtie">
+
+                <section className="py-12 px-4">
                     <div className="max-w-6xl mx-auto">
                         {/* Header */}
                         <div className="text-center mb-12">
-                            <SectionHeading>
-                                Giá Trị Cốt Lõi
-                            </SectionHeading>
-
+                            <h2 className="text-white text-extrabold text-3xl font-bold my-20 tracking-[.5em] p-4 border-draw inline-block">
+                                GIÁ TRỊ CỐT LÕI
+                            </h2>
                         </div>
 
                         {/* Cards Grid - 5 Individual Cards */}
@@ -262,49 +390,14 @@ export default function AboutPage() {
                         </div>
                     </div>
                 </section>
-
-                <section className="py-12 px-4">
-                    <div className="max-w-6xl mx-auto mt-20">
-                        {/* Header */}
-                        <div className="text-left mb-12">
-                            <SectionHeading>
-                                Giá trị cốt lõi
-                            </SectionHeading>
-                            <p className="text-lg text-gray-600 mb-6">
-                                Chân thành - Chính trực - Trách nhiệm - Sáng Tạo - Hiểu và Thương
-                            </p>
-                        </div>
-
-                        {/* Values Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {coreValues.map((value, index) => (
-                                <div
-                                    key={index}
-                                    className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-t-4 border-orange-400"
-                                >
-                                    <div className="mb-4">
-                                        <h3 className="text-xl font-bold text-orange-400 mb-2">
-                                            {value.title}
-                                        </h3>
-                                        <div className="w-12 h-0.5 bg-orange-400 rounded-full"></div>
-                                    </div>
-                                    <p className="text-gray-700 leading-relaxed">
-                                        {value.description}
-                                    </p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-
-                <section className="bg-white py-12 px-4 sm:px-6 lg:px-8">
+                <section className="py-12 px-4 sm:px-6 lg:px-8">
                     {/* Policies and Commitments Section */}
                     <div className="max-w-6xl mx-auto mt-20">
                         {/* Header */}
                         <div className="text-left mb-12">
-                            <SectionHeading>
-                                Chính sách và cam kết của Nhà Đẹp Quảng Nam
-                            </SectionHeading>
+                            <h2 className="text-white text-extrabold text-3xl font-bold my-20 tracking-[.5em] p-4 border-draw inline-block">
+                                CHÍNH SÁCH VÀ CAM KẾT CỦA NHÀ ĐẸP QUẢNG NAM
+                            </h2>
                         </div>
                         {/* Policies Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -363,6 +456,5 @@ export default function AboutPage() {
                 </section>
             </div>
         </div>
-
     );
 }
