@@ -1,5 +1,6 @@
 import * as React from "react";
 import {useEffect, useRef, useState} from "react";
+import AnimatedCounter from "@/components/AnimatedCounter";
 
 const slideTransitions = [
     // Puff in center
@@ -115,40 +116,6 @@ export default function HeroCarousel() {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerPolicy="strict-origin-when-cross-origin" allowFullScreen
                 className="w-screen h-full pointer-events-none"/>
-            {/*{slides.map((slide, index) => {*/}
-            {/*    const currentTransition = getCurrentTransition();*/}
-            {/*    return (*/}
-            {/*        <div*/}
-            {/*            key={slide.id}*/}
-            {/*            className={`absolute inset-0 ${currentTransition(*/}
-            {/*                index,*/}
-            {/*                currentSlide*/}
-            {/*            )}`}*/}
-            {/*        >*/}
-            {/*            <div*/}
-            {/*                className="h-full w-full relative"*/}
-            {/*                style={*/}
-            {/*                    index === currentSlide*/}
-            {/*                        ? {*/}
-            {/*                            transform: `translateY(${parallax * 0.4}px)`,*/}
-            {/*                            willChange: "transform",*/}
-            {/*                        }*/}
-            {/*                        : {}*/}
-            {/*                }*/}
-            {/*            >*/}
-            {/*                <Image*/}
-            {/*                    src={slide.image || "/globe.svg"}*/}
-            {/*                    alt={slide.alt}*/}
-            {/*                    fill*/}
-            {/*                    priority={index === 0}*/}
-            {/*                    quality={90}*/}
-            {/*                    sizes="100vw"*/}
-            {/*                    className="object-cover"*/}
-            {/*                />*/}
-            {/*            </div>*/}
-            {/*        </div>*/}
-            {/*    );*/}
-            {/*})}*/}
             {/* Overlay */}
             <div className="absolute inset-0 bg-black/40 z-20"/>
             {/* Hero Content */}
@@ -159,6 +126,31 @@ export default function HeroCarousel() {
                 <p className="text-lg md:text-2xl text-white/90 font-medium mb-8 animate-fade-in delay-200 hover:text-orange-300 transition-colors duration-300">
                     Thiết kế & Thi công nội thất chuyên nghiệp tại Quảng Nam
                 </p>
+            </div>
+            <div className="absolute bottom-0 mx-auto px-4 z-50">
+                <div className="max-w-6xl mx-auto px-4">
+                    <div className="grid grid-cols-[1fr_2px_1fr_2px_1fr_2px_1fr] gap-6 border-2 border-black rounded-t-4xl p-8 bg-white">
+                        <AnimatedCounter end={10} duration={3000} text="Năm kinh nghiệm"/>
+                        <div className="bg-black"/>
+                        <AnimatedCounter
+                            end={100}
+                            duration={3000}
+                            text="Chuyên viên, công nhân"
+                        />
+                        <div className="bg-black"/>
+                        <AnimatedCounter
+                            end={1000}
+                            duration={3000}
+                            text="Khách hàng thân thiết"
+                        />
+                        <div className="bg-black"/>
+                        <AnimatedCounter
+                            end={3000}
+                            duration={3000}
+                            text="Mẫu thiết kế hiện đại"
+                        />
+                    </div>
+                </div>
             </div>
         </div>
 

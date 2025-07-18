@@ -5,6 +5,7 @@ import Image from 'next/image';
 import React, { useEffect } from 'react';
 import ContactForm from '../../components/ContactForm';
 import SectionHeading from "@/components/SectionHeading";
+import HeroCarousel from "@/components/HeroCarousel";
 
 const services = [
   {
@@ -99,7 +100,7 @@ const ServicesPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#272727]">
       <Banner title="Dịch vụ" />
       <div className="container mx-auto px-6 md:px-10">
         {services.map((service, index) => (
@@ -116,7 +117,7 @@ const ServicesPage = () => {
               <h3 className="text-3xl font-bold text-orange-500 mb-4">
                 {service.title}
               </h3>
-              <p className="text-gray-600 mb-4">{service.description}</p>
+              <p className="text-white mb-4">{service.description}</p>
               <a
                 href={`/services/${service.id}`}
                 className="w-fit inline-block px-3 py-2 border border-orange-400 bg-white text-orange-400 text-center hover:bg-orange-400 hover:text-white font-semibold rounded-full transition-colors duration-200 text-lg"
@@ -171,6 +172,7 @@ const ServicesPage = () => {
         }
       `}</style>
       <ContactForm />
+      <div className="h-70 bg-[#272727]"/>
     </div>
   );
 };

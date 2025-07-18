@@ -276,8 +276,11 @@
 }
 
 .slide-in-right {
-    -webkit-animation: slide-in-right .5s cubic-bezier(.25, .46, .45, .94) both;
-    animation: slide-in-right .5s cubic-bezier(.25, .46, .45, .94) both
+   opacity: 0;
+}
+.slide-in-right.animate {
+    -webkit-animation: slide-in-right .5s 1s cubic-bezier(.25, .46, .45, .94) both;
+    animation: slide-in-right .5s 1s cubic-bezier(.25, .46, .45, .94) both
 }
 
 .heartbeat {
@@ -598,4 +601,26 @@
         transform: translateY(0);
         opacity: 1;
     }
+}
+.half-ring {
+    clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%);
+    background: transparent;
+}
+
+.pulsate-bck {
+    animation: pulsate-bck 0.5s ease-in-out infinite both;
+}
+@keyframes pulsate-bck {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+.swiper {
+    padding: 0 10px 14px 14px !important;
 }

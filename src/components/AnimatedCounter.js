@@ -54,13 +54,15 @@ export default function AnimatedCounter({
     }, [isVisible, end, duration])
 
     return (
-        <div ref={counterRef} className={`text-center ${className}`}>
-            <div
-                className="text-4xl md:text-8xl font-bold mb-2 bg-gradient-to-b from-orange-500 to-orange-300 text-transparent bg-clip-text"
-            >
+        <div
+            ref={counterRef}
+            className={`text-center flex flex-col justify-center items-center h-full ${className}`}
+        >
+            <div className="text-4xl font-bold mb-2 text-black">
                 {count.toLocaleString()}+
             </div>
-            <div className="text-lg md:text-xl text-white font-bold text-grey-400">{text}</div>
+            <div className="text-lg font-bold text-grey-400">{text}</div>
         </div>
+
     )
 }

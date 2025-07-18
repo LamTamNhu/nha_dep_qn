@@ -197,7 +197,7 @@ export default function ProjectsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#272727]">
       <Banner title="Dự án đã hoàn thành" />
       <div className="py-20 px-6 md:px-10">
         <div className="container flex flex-col md:flex-row items-center justify-between mx-auto px-12 gap-4">
@@ -205,7 +205,7 @@ export default function ProjectsPage() {
             <SectionHeading>
               Tất cả dự án
             </SectionHeading>
-            <p className="text-gray-600 text-base mb-8 max-w-2xl">
+            <p className="text-white text-base mb-8 max-w-2xl">
               Khám phá những dự án đã hoàn thành của chúng tôi, nơi mỗi chi tiết đều được chăm chút tỉ mỉ để mang lại không gian sống hoàn hảo.
             </p>
           </div>
@@ -320,6 +320,7 @@ export default function ProjectsPage() {
           )}
         </div>
       </div>
+      <div className="pb-70 bg-[#272727]"/>
     </div>
   );
 }

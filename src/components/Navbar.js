@@ -73,8 +73,20 @@ export default function Navbar() {
                             {item.name}
                         </Link>
                     ))}
-                    <Youtube size={22} className="text-white"/>
-                    <Facebook size={22} className="text-white"/>
+                    <Link
+                        key="youtube"
+                        href="https://www.youtube.com"
+                        target=" ">
+                        <Youtube size={22} className="text-white"/>
+                    </Link>
+                    <Link
+                        key="facebook"
+                        href="https://www.facebook.com"
+                        target=" ">
+                        <Facebook size={22} className="text-white"/>
+                    </Link>
+
+
                     <Popover.Root>
                         <Popover.Trigger asChild>
                             <button className="text-white focus:outline-none">

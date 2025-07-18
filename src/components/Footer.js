@@ -4,7 +4,7 @@ import ContactPopover from "@/components/ContactPopover";
 export default function Footer() {
   const circleSize = `400px`; 
   return (
-    <div>
+    <div className="bg-black">
       <footer className="relative">
         <div className="absolute ping border-8 border-orange-400 top-0 -translate-y-1/2 right-50 rounded-full pointer-events-none z-0 opacity-60" style={{ width: `${circleSize}`, height: `${circleSize}` }}>
         </div>

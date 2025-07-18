@@ -62,10 +62,10 @@ export default function Banner({ title }) {
 
 
   return (
-    <div className="bg-white mb-30">
+    <div className="bg-[#272727] text-center mb-30">
       <div
         ref={bannerRef}
-        className="h-[50vh] w-full relative overflow-hidden flex items-center justify-center"
+        className="h-[80vh] w-full relative overflow-hidden flex items-center justify-center"
         style={{ perspective: "1px" }}
       >
         {slides.map((slide, index) => (
@@ -102,15 +102,10 @@ export default function Banner({ title }) {
             </div>
           </div>
         ))}
-        <div className="absolute inset-0 bg-black/40 z-20" />
-        <div className="absolute inset-0 flex flex-col items-start justify-center z-30 text-left py-10 px-12 mx-auto md:px-10">
-          <div className="container flex flex-col items-start mx-auto px-12">
-            <h1 className="text-3xl md:text-5xl font-extrabold text-white drop-shadow-lg mb-6 animate-fade-in">
-              {title}
-            </h1>
-          </div>
-        </div>
       </div>
+        <h2 className="text-white text-extrabold text-3xl font-bold my-20 tracking-[.5em] p-4 border-draw inline-block">
+            {title}
+        </h2>
     </div>
   );
 }

@@ -15,16 +15,17 @@ const partners = [
 
 export default function PartnerCarousel() {
     return (
-        <div className="relative max-w-6xl mx-auto mb-24 px-4">
+        <section>
+        <div className="relative max-w-6xl mx-auto mb-28 px-4">
             {/* Blue rounded container */}
-            <div className="bg-orange-400 text-white text-center py-10 rounded-[2.5rem] shadow-md">
-                <h2 className="text-3xl sm:text-2xl font-bold">
+            <div className="bg-orange-400 text-white text-center pb-24 pt-8 rounded-[2.5rem] shadow-md">
+                <h2 className="text-4xl font-bold">
                     Đối tác của chúng tôi
                 </h2>
             </div>
 
             {/* Floating carousel */}
-            <div className="absolute -bottom-20 left-0 w-full px-6 z-10">
+            <div className="absolute -bottom-18 left-0 w-full px-6 z-10 pb-4">
                 <Swiper
                     modules={[Navigation]}
                     navigation={{
@@ -38,7 +39,7 @@ export default function PartnerCarousel() {
                         768: { slidesPerView: 4 },
                         1024: { slidesPerView: 5 },
                     }}
-                    className="pt-6"
+                    className=""
                 >
                     {partners.map((partner) => (
                         <SwiperSlide key={partner.name}>
@@ -70,5 +71,6 @@ export default function PartnerCarousel() {
                 </div>
             </div>
         </div>
+        </section>
     );
 }

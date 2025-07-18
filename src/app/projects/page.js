@@ -141,7 +141,7 @@ export default function ProjectsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#272727]">
       <Banner title="Dự án" />
       <div className="py-20 px-6 md:px-10">
         <div className="container flex flex-col md:flex-row items-center justify-between mx-auto px-12 gap-4">
@@ -149,7 +149,7 @@ export default function ProjectsPage() {
             <SectionHeading>
               Tất cả dự án
             </SectionHeading>
-            <p className="text-gray-600 text-base mb-8 max-w-2xl">
+            <p className="text-white text-base mb-8 max-w-2xl">
               Mỗi công trình là một tác phẩm nghệ thuật, mang trong mình câu chuyện và tâm huyết của những người sáng tạo. Từ những ngôi nhà hiện đại đến biệt thự sang trọng, mỗi dự án đều được thiết kế tỉ mỉ để mang lại không gian sống hoàn hảo nhất cho gia đình bạn.
             </p>
           </div>
@@ -269,6 +269,7 @@ export default function ProjectsPage() {
           )}
         </div>
       </div>
+      <div className="pb-70 bg-[#272727]"/>
     </div>
   );
 }
