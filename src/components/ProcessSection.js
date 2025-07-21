@@ -1,19 +1,19 @@
-import {RulerDimensionLine,NotebookPen,Gem,UserRoundPen,PencilLine,FilePen,HandCoins} from "lucide-react";
+import {RulerDimensionLine, NotebookPen, Gem, UserRoundPen, PencilLine, FilePen, HandCoins} from "lucide-react";
 import React, {useState, useEffect, useRef} from "react";
 import SectionHeading from "@/components/SectionHeading";
 
 const ProcessSection = () => {
     const [visibleRows, setVisibleRows] = useState(new Set());
     const rowRefs = useRef([]);
-    const iconSetting="text-white size-15"
-    const cardIcon = [
-        <RulerDimensionLine className={iconSetting}/>,
-        <NotebookPen className={iconSetting}/>,
-        <Gem className={iconSetting}/>,
-        <UserRoundPen className={iconSetting}/>,
-        <FilePen className={iconSetting}/>,
-        <HandCoins className={iconSetting}/>,
-        <PencilLine className={iconSetting}/>,
+    const iconSetting = "text-white size-15"
+    const cardIcons = [
+        {id: "ruler", Icon: RulerDimensionLine},
+        {id: "notebook", Icon: NotebookPen},
+        {id: "gem", Icon: Gem},
+        {id: "user", Icon: UserRoundPen},
+        {id: "file", Icon: FilePen},
+        {id: "hand", Icon: HandCoins},
+        {id: "pencil", Icon: PencilLine},
     ];
 
     useEffect(() => {
@@ -153,7 +153,14 @@ const ProcessSection = () => {
                                                 <div
                                                     className={`p-4 rounded-full transition-all duration-300 ${isVisible ? "bg-orange-500 scale-110 opacity-100" : "bg-orange-400 opacity-20 scale-100"}`}>
                                                     <div
-                                                        className={`transition-transform duration-300 ${isVisible ? "scale-110" : "scale-100"}`}>{cardIcon[rowIndex]}</div>
+                                                        className={`transition-transform duration-300 ${isVisible ? "scale-110" : "scale-100"}`}>
+                                                        {(() => {
+                                                            const {Icon, id} = cardIcons[rowIndex];
+                                                            return (
+                                                                <Icon key={id} className={iconSetting}/>
+                                                            );
+                                                        })()}
+                                                    </div>
                                                 </div>
                                             </div>
                                         )}
@@ -190,7 +197,14 @@ const ProcessSection = () => {
                                                 <div
                                                     className={`p-4 rounded-full transition-all duration-300 ${isVisible ? "bg-orange-500 scale-110 opacity-100" : "bg-orange-400 opacity-20 scale-100"}`}>
                                                     <div
-                                                        className={`transition-transform duration-300 ${isVisible ? "scale-110" : "scale-100"}`} key={rowIndex}>{cardIcon[rowIndex]}</div>
+                                                        className={`transition-transform duration-300 ${isVisible ? "scale-110" : "scale-100"}`}>
+                                                        {(() => {
+                                                            const {Icon, id} = cardIcons[rowIndex];
+                                                            return (
+                                                                <Icon key={id} className={iconSetting}/>
+                                                            );
+                                                        })()}
+                                                    </div>
                                                 </div>
                                             </div>
                                         )}
