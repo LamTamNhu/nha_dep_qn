@@ -498,7 +498,7 @@ export default function Home() {
                 </div>
             </section>
             <ContactForm/>
-            <div className="py-70 bg-white"/>
+            <div className="pb-70 bg-white"/>
         </div>
     );
 }
