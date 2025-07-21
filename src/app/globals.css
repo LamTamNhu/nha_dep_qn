@@ -157,6 +157,7 @@
     box-sizing: border-box;
     border: solid 3px #0000;
     border-radius: 2em;
+    --p: 0%;
     border-image: conic-gradient(white var(--p, 0%), #0000 0%) 1;
 }
 
