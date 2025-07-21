@@ -190,7 +190,7 @@ const ProcessSection = () => {
                                                 <div
                                                     className={`p-4 rounded-full transition-all duration-300 ${isVisible ? "bg-orange-500 scale-110 opacity-100" : "bg-orange-400 opacity-20 scale-100"}`}>
                                                     <div
-                                                        className={`transition-transform duration-300 ${isVisible ? "scale-110" : "scale-100"}`}>{cardIcon[rowIndex]}</div>
+                                                        className={`transition-transform duration-300 ${isVisible ? "scale-110" : "scale-100"}`} key={rowIndex}>{cardIcon[rowIndex]}</div>
                                                 </div>
                                             </div>
                                         )}

@@ -364,7 +364,7 @@ export default function AboutPage() {
                     {/* Policies and Commitments Section */}
                     <div className="max-w-6xl mx-auto mt-20">
                         {/* Header */}
-                        <div className="text-left mb-12">
+                        <div className="mb-12 text-center">
                             <h2 className="text-white text-extrabold text-3xl font-bold my-20 tracking-[.5em] p-4 border-draw inline-block">
                                 CHÍNH SÁCH VÀ CAM KẾT CỦA NHÀ ĐẸP QUẢNG NAM
                             </h2>

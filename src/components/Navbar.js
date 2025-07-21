@@ -12,7 +12,6 @@ import * as Popover from "@radix-ui/react-popover";
 
 export default function Navbar() {
     const pathname = usePathname();
-    console.log("Current path:", pathname);
     const [isOpen, setIsOpen] = useState(false)
     const navigationItems = [
         {name: "GIỚI THIỆU", href: "/about"},
@@ -59,7 +58,8 @@ export default function Navbar() {
             <div className="grid grid-cols-2 justify-items-center items-center justify-center h-20">
                 {/* Logo */}
                 <Link href="/" className="border-draw p-3">
-                    <Image src="/images/logo_invert_crop.png" alt="logo" width={100} height={30} priority={true}/>
+                    <Image src="/images/logo_invert_crop.png" alt="logo" width={100} height={100}
+                           style={{ width: '100px', height: 'auto' }} priority={true}/>
                 </Link>
 
                 {/* Desktop Navigation */}
