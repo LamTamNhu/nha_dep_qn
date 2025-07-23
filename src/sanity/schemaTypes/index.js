@@ -2,14 +2,8 @@ import {blockContentType} from './blockContentType'
 import {categoryType} from './categoryType'
 import {postType} from './postType'
 import {authorType} from './authorType'
-import {homepageType} from './homepageType'
+import introduction from "@/sanity/schemaTypes/introduction";
 
 export const schema = {
-  types: [
-    blockContentType,
-    categoryType,
-    postType,
-    authorType,
-    homepageType,
-  ],
+  types: [blockContentType, categoryType, postType, authorType,introduction],
 }
