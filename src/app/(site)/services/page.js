@@ -3,7 +3,7 @@
 import Banner from '@/components/ui/banner';
 import Image from 'next/image';
 import React, { useEffect } from 'react';
-import ContactForm from '../../components/ContactForm';
+import ContactForm from '../../../components/ContactForm';
 import SectionHeading from "@/components/SectionHeading";
 import HeroCarousel from "@/components/HeroCarousel";
 

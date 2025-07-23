@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import Image from "next/image";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import PartnerCarousel from "@/components/PartnerCarousel";
-import ProcessSection from "../components/ProcessSection";
+import ProcessSection from "../../components/ProcessSection";
 import SectionHeading from "@/components/SectionHeading";
 import animateOnObserve from "@/lib/animateOnObserve";
 import HeroCarousel from "@/components/HeroCarousel";
