@@ -44,12 +44,12 @@ function getRandomTransition() {
     return slideTransitions[Math.floor(Math.random() * slideTransitions.length)];
 }
 
-export default function HeroCarousel() {
+export default function HeroCarousel({slides: slidesProp, title, subtitle}) {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [parallax, setParallax] = useState(0);
     const bannerRef = useRef(null);
     const [currentTransitionIndex, setCurrentTransitionIndex] = useState(0);
-    const slides = [
+    const defaultSlides = [
         {
             id: 1,
             image: "/images/wide_shot.jpg",
@@ -66,6 +66,8 @@ export default function HeroCarousel() {
             alt: "group shot",
         },
     ];
+
+    const slides = slidesProp && slidesProp.length ? slidesProp : defaultSlides;
 
     const nextSlide = () => {
         setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -121,10 +123,10 @@ export default function HeroCarousel() {
             {/* Hero Content */}
             <div className="absolute inset-0 flex flex-col items-center justify-center z-30 text-center px-4 ">
                 <h1 className="text-4xl md:text-6xl font-extrabold text-white drop-shadow-lg mb-4 fade-in hover:text-orange-400 transition-colors duration-500">
-                    Kiến tạo không gian sống hiện đại
+                    {title || 'Kiến tạo không gian sống hiện đại'}
                 </h1>
                 <p className="text-lg md:text-2xl text-white/90 font-medium mb-8 animate-fade-in delay-200 hover:text-orange-300 transition-colors duration-300">
-                    Thiết kế & Thi công nội thất chuyên nghiệp tại Quảng Nam
+                    {subtitle || 'Thiết kế & Thi công nội thất chuyên nghiệp tại Quảng Nam'}
                 </p>
             </div>
             <div className="absolute bottom-0 mx-auto px-4 z-50">

@@ -1,7 +1,7 @@
 "use client";
 import {ArrowUpRight, Eye, Goal, HandCoins, HeartHandshake, Paintbrush, ShieldCheck, Users,} from "lucide-react";
 import * as React from "react";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import Image from "next/image";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import PartnerCarousel from "@/components/PartnerCarousel";
@@ -11,77 +11,27 @@ import animateOnObserve from "@/lib/animateOnObserve";
 import HeroCarousel from "@/components/HeroCarousel";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import ContactForm from "@/components/ContactForm";
+import {client} from "@/sanity/lib/client";
+import {urlFor} from "@/sanity/lib/image";
+import {homepageQuery} from "@/sanity/lib/queries";
 
-const cardData = [
-    {
-        id: "core-values",
-        icon: <HeartHandshake size={70}/>,
-        title: "Giá trị cốt lõi",
-        description:
-            "Chúng tôi cam kết chất lượng xây dựng, an toàn lao động và đổi mới công nghệ để mang lại những công trình bền vững và hiệu quả nhất. Sự hài lòng của khách hàng là ưu tiên hàng đầu của chúng tôi.",
-        cardBgColor: "bg-orange-400",
-        titleColor: "text-white",
-        descriptionColor: "text-white",
-        iconWrapperBgColor: "bg-orange-50",
-        iconColorClass: "text-orange-500",
-        iconBorderColor: "border-orange-500",
-    },
-    {
-        id: "mission",
-        icon: <Goal/>,
-        title: "Sứ mệnh",
-        description:
-            "Xây dựng những công trình chất lượng cao, an toàn và thân thiện với môi trường, góp phần phát triển hạ tầng và nâng cao chất lượng cuộc sống cộng đồng. Chúng tôi luôn đồng hành cùng đối tác để hiện thực hóa mọi dự án.",
-        cardBgColor: "bg-gray-50",
-        titleColor: "text-gray-800",
-        descriptionColor: "text-gray-500",
-        iconWrapperBgColor: "bg-gray-50",
-        iconColorClass: "text-gray-800",
-        iconBorderColor: "border-gray-800",
-    },
-    {
-        id: "vision",
-        icon: <Eye/>,
-        title: "Tầm nhìn",
-        description:
-            "Trở thành công ty xây dựng hàng đầu tại Việt Nam, được công nhận về sự xuất sắc trong thiết kế, thi công và quản lý dự án. Chúng tôi hướng tới việc tạo ra những công trình mang tính biểu tượng, đóng góp vào sự phát triển bền vững của đất nước.",
-        cardBgColor: "bg-gray-50",
-        titleColor: "text-gray-800",
-        descriptionColor: "text-gray-500",
-        iconWrapperBgColor: "bg-gray-50",
-        iconColorClass: "text-gray-800",
-        iconBorderColor: "border-gray-800",
-    },
-];
-// Partners data
-const partners = [
-    {
-        logo: "/images/logo_kimdinh.png",
-        alt: "Kim Đỉnh Partner Logo",
-    },
-    {
-        logo: "/images/hoaphat.png",
-        alt: "logo Hoa Phat",
-    },
-    {
-        logo: "/images/songgianh.png",
-        alt: "Songgianh logo",
-    },
-    {
-        logo: "/images/vina.png",
-        alt: "Vina logo",
-    },
-    {
-        logo: "/images/dongtam.jpg",
-        alt: "Dong Tam Logo",
-    },
-    {
-        logo: "/images/vigla.png",
-        alt: "Viglacera Logo",
-    },
-];
 export default function Home() {
+    const [content, setContent] = useState(null);
+
     useEffect(() => {
+        client.fetch(homepageQuery).then((data) => {
+            if (data?.heroSlides) {
+                data.heroSlides = data.heroSlides.map((img) => ({
+                    ...img,
+                    url: urlFor(img).url(),
+                }));
+            }
+            if (data?.testimonialImage) {
+                data.testimonialImageUrl = urlFor(data.testimonialImage).url();
+            }
+            setContent(data);
+        });
+
         // Set up animations after DOM is ready
         const swingObserver = animateOnObserve('.swing-in-top-fwd-2');
         const slideObserver = animateOnObserve('.slide-in-bottom');
@@ -96,23 +46,40 @@ export default function Home() {
             puffInObserver.disconnect();
         };
     }, []);
+
+    if (!content) return null;
+
+    const iconComponents = [HeartHandshake, Goal, Eye];
+    const cardData = content.coreValues?.map((cv, idx) => ({
+        id: `core-${idx}`,
+        icon: React.createElement(iconComponents[idx] || HeartHandshake, { size: 70 }),
+        title: cv.title,
+        description: cv.description,
+        cardBgColor: idx === 0 ? 'bg-orange-400' : 'bg-gray-50',
+        titleColor: idx === 0 ? 'text-white' : 'text-gray-800',
+        descriptionColor: idx === 0 ? 'text-white' : 'text-gray-500',
+        iconWrapperBgColor: idx === 0 ? 'bg-orange-50' : 'bg-gray-50',
+        iconColorClass: idx === 0 ? 'text-orange-500' : 'text-gray-800',
+        iconBorderColor: idx === 0 ? 'border-orange-500' : 'border-gray-800',
+    }));
+
     return (
         <div className="min-h-screen relative bg-white">
             {/*<HeroCarousel/>*/}
-            <HeroCarousel/>
+            <HeroCarousel
+                slides={content.heroSlides}
+                title={content.heroTitle}
+                subtitle={content.heroSubtitle}
+            />
             {/* Introduction section */}
             <div className="py-12 px-4 bg-black">
                 <div className="max-w-6xl mx-auto px-4">
                     <SectionHeading>
-                        Công Ty TNHH Nhà Đẹp Quảng Nam
+                        {content.introHeading}
                     </SectionHeading>
 
                     <h3 className="text-md font-semibold mb-2 text-white text-justify swing-in-top-fwd-2">
-                        Công ty TNHH NHÀ ĐẸP QUẢNG NAM do KTS Nguyên Tương thành lập là đơn
-                        vị hàng đầu trong lĩnh vực Thiết kế và Thi công Nội thất hiện nay
-                        với gần 10 năm kinh nghiệm thực chiến. Chúng tôi chuyên thiết kế thi
-                        công trọn gói cho Nhà Phố, Nhà Vườn, Biệt Thực, Chung Cư, Văn Phòng,
-                        Nhà Hàng,...
+                        {content.introText}
                     </h3>
                 </div>
             </div>
@@ -160,30 +127,18 @@ export default function Home() {
             <section className="py-12 px-4 bg-white">
                 <div className="container mx-auto max-w-6xl mx-auto px-4">
                     <SectionHeading>
-                        Tại sao chọn chúng tôi
+                        {content.chooseUsTitle}
                     </SectionHeading>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-40 items-center">
                         <div className="swing-in-top-fwd-2">
                             <WhyChooseUs/>
                         </div>
                         <div className="slide-in-bottom">
-                            <p className="w-full text-md text-justify leading-relaxed">
-                                <span className="font-semibold">Ưu tiên chất lượng hàng đầu:</span> Sử dụng vật liệu đạt
-                                chuẩn, đảm bảo an toàn và bền vững lâu dài cam kết chất lượng 100% như báo giá
-                            </p>
-                            <p className="w-full text-md text-justify leading-relaxed">
-                                <span className="font-semibold">Đầu tư chất lượng đội ngũ:</span> Hầu hết KTS, kỹ sư,
-                                chuyên viên có kinh nghiệm 7-15 năm trong lĩnh vực nghiên cứu, thiết kế kiến trúc và thi
-                                công xây dựng
-                            </p>
-                            <p className="w-full text-md text-justify leading-relaxed">
-                                <span className="font-semibold">Đa dạng mẫu mã:</span> Sở hữu hơn 3000 mẫu thiết kế hiện
-                                đại, liên tục cập nhật xu hướng sẵn sàng điều chỉnh đến khi khách hàng thật sự hài lòng.
-                            </p>
-                            <p className="w-full text-md text-justify leading-relaxed">
-                                <span className="font-semibold">Giá cả cạnh tranh:</span> Báo đúng giá rõ ràng, minh
-                                bạch đảm bảo cạnh tranh trên thị trường
-                            </p>
+                            {content.chooseUsBullets?.map((item, i) => (
+                                <p key={i} className="w-full text-md text-justify leading-relaxed">
+                                    {item}
+                                </p>
+                            ))}
                         </div>
                     </div>
 
@@ -270,15 +225,11 @@ export default function Home() {
                     <div className="md:col-span-1 flex flex-col h-full ">
                         <div>
                             <SectionHeading>
-                                Công trình thiết kế
+                                {content.designHeading}
                             </SectionHeading>
 
                             <p className="text-base mb-8 leading-relaxed text-white">
-                                Mỗi năm, NHÀ ĐẸP QUẢNG NAM thực hiện hàng trăm công trình thiết
-                                kế ở mọi miền đất nước. Phong cách thiết kế chính là hiện đại -
-                                tối giản - tiện nghi - thông thoáng. Ngoài ra, những ý tưởng và
-                                sở thích của gia chủ cũng được ưu tiên hàng đầu, để tạo nên một
-                                công trình nhà ở độc bản, mang đậm dấu ấn cá nhân.
+                                {content.designText}
                             </p>
                         </div>
                         <a
@@ -408,14 +359,10 @@ export default function Home() {
                     <div className="md:col-span-1 flex flex-col h-full">
                         <div>
                             <SectionHeading>
-                                Thi công thực tế
+                                {content.thiCongHeading}
                             </SectionHeading>
                             <p className="text-base mb-8 leading-relaxed">
-                                Mỗi năm, NHÀ ĐẸP QUẢNG NAM thực hiện hàng trăm công trình thiết
-                                kế ở mọi miền đất nước. Phong cách thiết kế chính là hiện đại -
-                                tối giản - tiện nghi - thông thoáng. Ngoài ra, những ý tưởng và
-                                sở thích của gia chủ cũng được ưu tiên hàng đầu, để tạo nên một
-                                công trình nhà ở độc bản, mang đậm dấu ấn cá nhân.
+                                {content.thiCongText}
                             </p>
                         </div>
                         <a
@@ -436,7 +383,7 @@ export default function Home() {
             <section className="py-12 px-4 bg-white">
                 <div className="max-w-6xl mx-auto px-4">
                     <SectionHeading>
-                        Khách hàng nói gì về Nhà Đẹp Quảng Nam
+                        {content.testimonialHeading}
                     </SectionHeading>
                     <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
                         {/* Left: Quote */}
@@ -444,10 +391,7 @@ export default function Home() {
                             <div className="text-orange-500 text-5xl mb-4">“</div>
                             <blockquote
                                 className="text-2xl font-semibold italic text-gray-900 mb-6 text-justify md:text-left">
-                                Nhà chị rộng hơn nhiều.
-                                <br/>
-                                Nếu chị xây nhà tiếp, chị vẫn muốn bên NHÀ ĐẸP QUẢNG NAM xây cho
-                                chị!
+                                {content.testimonialQuote}
                             </blockquote>
                             <div className="text-orange-500 text-5xl self-end">”</div>
                             <div className="w-16 h-1 bg-orange-400 mt-8 mb-2"/>
@@ -458,8 +402,8 @@ export default function Home() {
                             <div
                                 className="relative w-72 h-80 overflow-hidden shadow-lg bg-white flex items-center justify-center">
                                 <Image
-                                    src="/images/testimonial.png"
-                                    alt="Chị Thảo Duyên testimonial"
+                                    src={content.testimonialImageUrl}
+                                    alt={content.testimonialAuthor}
                                     fill
                                     className="object-cover"
                                 />
@@ -476,16 +420,10 @@ export default function Home() {
                         {/* Right: Details */}
                         <div className="col-span-1 flex flex-col items-center md:items-start mb-16 slide-in-right">
                             <h3 className="text-2xl font-bold text-gray-800 mb-4 text-justify md:text-left">
-                                Chị Thảo Duyên | Nhà phố 2 tầng | Vĩnh Phú – Thuận An
+                                {content.testimonialAuthor}
                             </h3>
                             <p className="text-base text-gray-700 mb-8 text-justify md:text-left">
-                                &quot;Mình có thể tự tin nói rằng lựa chọn Nhà Đẹp Quảng Nam thi
-                                công trọn gói là một quyết định đáng đồng tiền bát gạo nếu bạn
-                                cần một đơn vị hội đủ các yếu tố TƯ DUY THIẾT KẾ, NĂNG LỰC THI
-                                CÔNG và CÁI TÂM LÀM NGHỀ. Khi viết những dòng đánh giá này, nhà
-                                mình đã làm xong được 5 tháng và mình đã rất tự tin giới thiệu
-                                thành công thêm 3 công trình của bạn bè người thân mình như một
-                                lời cảm ơn đến anh em Nhà Đẹp Quảng Nam.&quot;
+                                {content.testimonialText}
                             </p>
                             <a
                                 href="#"
