@@ -2,7 +2,7 @@
 
 import {Facebook, Menu, Search, Youtube} from "lucide-react"
 import Link from "next/link"
-import {useEffect, useState} from "react"
+import {useEffect, useState, useRef} from "react"
 import {usePathname} from "next/navigation";
 import {Button} from "@/components/ui/button"
 import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet"
@@ -21,37 +21,40 @@ export default function Navbar() {
         {name: "TIN TỨC", href: "/news"},
         {name: "LIÊN HỆ", href: "/contact"},
     ]
-    let animationTriggered = false;
-    let navbarBgHidden = true;
+    const animationTriggered = useRef(false);
+    const navbarBgHidden = useRef(true);
     useEffect(() => {
-        window.addEventListener('scroll', () => {
+        const handleScroll = () => {
             const scrollY = window.scrollY;
 
-            if (scrollY < 100 && !navbarBgHidden) {
-                const navbar = document.getElementById("navbar")
-                navbar.classList.remove("bg-black/60")
-                navbar.classList.remove("backdrop-blur-xs")
-                navbar.classList.add("bg-transparent")
-                navbarBgHidden = true
+            if (scrollY < 100 && !navbarBgHidden.current) {
+                const navbar = document.getElementById("navbar");
+                navbar.classList.remove("bg-black/60");
+                navbar.classList.remove("backdrop-blur-xs");
+                navbar.classList.add("bg-transparent");
+                navbarBgHidden.current = true;
             }
 
-            if (scrollY >= 100 && navbarBgHidden) {
-                const navbar = document.getElementById("navbar")
-                navbar.classList.add("bg-black/40")
-                navbar.classList.add("backdrop-blur-xs")
-                navbar.classList.remove("bg-transparent")
-                navbarBgHidden = false
+            if (scrollY >= 100 && navbarBgHidden.current) {
+                const navbar = document.getElementById("navbar");
+                navbar.classList.add("bg-black/40");
+                navbar.classList.add("backdrop-blur-xs");
+                navbar.classList.remove("bg-transparent");
+                navbarBgHidden.current = false;
 
-                if (!animationTriggered) {
+                if (!animationTriggered.current) {
                     const borderDrawElements = document.querySelectorAll('.border-draw');
                     borderDrawElements.forEach(el => {
                         el.classList.add('animate');
                     });
-                    animationTriggered = true;
+                    animationTriggered.current = true;
                 }
             }
-        });
-    })
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     return (
         <nav id="navbar" className="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-xs pr-40">
@@ -76,13 +79,17 @@ export default function Navbar() {
                     <Link
                         key="youtube"
                         href="https://www.youtube.com"
-                        target=" ">
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
                         <Youtube size={22} className="text-white"/>
                     </Link>
                     <Link
                         key="facebook"
                         href="https://www.facebook.com"
-                        target=" ">
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
                         <Facebook size={22} className="text-white"/>
                     </Link>
 

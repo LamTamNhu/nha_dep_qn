@@ -99,7 +99,8 @@ function FloatingButtons() {
                 {!collapsed && (
                     <div
                         ref={listRef}
-                        className={`flex flex-col items-end gap-2 sm:gap-3 animate-fade-in max-h-screen overflow-visible ${isOverflow ? 'max-height: 100vh' : ''}`}
+                        className="flex flex-col items-end gap-2 sm:gap-3 animate-fade-in max-h-screen overflow-visible"
+                        style={isOverflow ? { maxHeight: '100vh' } : undefined}
                     >
                         {socialLinks.map((item) =>
                             item.id === 'contact' ? (
