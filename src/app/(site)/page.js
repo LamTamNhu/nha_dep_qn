@@ -1,16 +1,18 @@
 "use client";
 import {ArrowUpRight, Eye, Goal, HandCoins, HeartHandshake, Paintbrush, ShieldCheck, Users,} from "lucide-react";
 import * as React from "react";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import Image from "next/image";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import PartnerCarousel from "@/components/PartnerCarousel";
-import ProcessSection from "../components/ProcessSection";
+import ProcessSection from "../../components/ProcessSection";
 import SectionHeading from "@/components/SectionHeading";
 import animateOnObserve from "@/lib/animateOnObserve";
 import HeroCarousel from "@/components/HeroCarousel";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import ContactForm from "@/components/ContactForm";
+import {client} from "@/sanity/lib/client";
+import {introQuery} from "@/sanity/lib/queries";
 
 const cardData = [
     {
@@ -80,8 +82,15 @@ const partners = [
         alt: "Viglacera Logo",
     },
 ];
+
+
 export default function Home() {
+    const [intro, setIntro] = useState(null);
     useEffect(() => {
+        client.fetch(introQuery).then((data) => {
+            setIntro(data);
+        });
+
         // Set up animations after DOM is ready
         const swingObserver = animateOnObserve('.swing-in-top-fwd-2');
         const slideObserver = animateOnObserve('.slide-in-bottom');
@@ -104,15 +113,11 @@ export default function Home() {
             <div className="py-12 px-4 bg-black">
                 <div className="max-w-6xl mx-auto px-4">
                     <SectionHeading>
-                        Công Ty TNHH Nhà Đẹp Quảng Nam
+                        {intro ? intro.heading : "Loading heading..."}
                     </SectionHeading>
 
                     <h3 className="text-md font-semibold mb-2 text-white text-justify swing-in-top-fwd-2">
-                        Công ty TNHH NHÀ ĐẸP QUẢNG NAM do KTS Nguyên Tương thành lập là đơn
-                        vị hàng đầu trong lĩnh vực Thiết kế và Thi công Nội thất hiện nay
-                        với gần 10 năm kinh nghiệm thực chiến. Chúng tôi chuyên thiết kế thi
-                        công trọn gói cho Nhà Phố, Nhà Vườn, Biệt Thực, Chung Cư, Văn Phòng,
-                        Nhà Hàng,...
+                        {intro ? intro.description : "Loading description..."}
                     </h3>
                 </div>
             </div>

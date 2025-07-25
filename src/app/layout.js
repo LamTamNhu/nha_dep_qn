@@ -1,7 +1,5 @@
+// src/app/layout.js (minimal root)
 import "./globals.css";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import FloatingButtons from "../components/FloatingButtons";
 import localFont from 'next/font/local'
 
 const utmAvo = localFont({
@@ -21,12 +19,9 @@ export const metadata = {
 export default function RootLayout({children}) {
     return (
         <html lang="en" suppressHydrationWarning className={utmAvo.className}>
-            <body suppressHydrationWarning>
-                <Navbar/>
-                {children}
-                <FloatingButtons/>
-                <Footer/>
-            </body>
+        <body suppressHydrationWarning>
+        {children}
+        </body>
         </html>
     );
 }

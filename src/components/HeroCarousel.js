@@ -1,108 +1,11 @@
 import * as React from "react";
-import {useEffect, useRef, useState} from "react";
+import {useRef} from "react";
 import AnimatedCounter from "@/components/AnimatedCounter";
 
-const slideTransitions = [
-    // Puff in center
-    (index, current) =>
-        index === current ? "puff-in-center" : "opacity-0 pointer-events-none z-0",
 
-    // Fade in center
-    (index, current) =>
-        index === current ? "fade-in" : "opacity-0 pointer-events-none z-0",
-
-    (index, current) =>
-        index === current
-            ? "jello-horizontal"
-            : "opacity-0 pointer-events-none z-0",
-
-    (index, current) =>
-        index === current
-            ? "wobble-hor-bottom"
-            : "opacity-0 pointer-events-none z-0",
-
-    (index, current) =>
-        index === current ? "bounce-top" : "opacity-0 pointer-events-none z-0",
-
-    (index, current) =>
-        index === current ? "kenburns-top" : "opacity-0 pointer-events-none z-0",
-
-    // Scale in horizontal center
-    (index, current) =>
-        index === current
-            ? "scale-in-hor-center"
-            : "opacity-0 pointer-events-none z-0",
-
-    // Scale in horizontal left
-    (index, current) =>
-        index === current
-            ? "scale-in-hor-left "
-            : "opacity-0 pointer-events-none z-0",
-];
-
-function getRandomTransition() {
-    return slideTransitions[Math.floor(Math.random() * slideTransitions.length)];
-}
 
 export default function HeroCarousel() {
-    const [currentSlide, setCurrentSlide] = useState(0);
-    const [parallax, setParallax] = useState(0);
     const bannerRef = useRef(null);
-    const [currentTransitionIndex, setCurrentTransitionIndex] = useState(0);
-    const slides = [
-        {
-            id: 1,
-            image: "/images/wide_shot.jpg",
-            alt: "wide shot",
-        },
-        {
-            id: 2,
-            image: "/images/wide_hands.jpg",
-            alt: "wide hands",
-        },
-        {
-            id: 3,
-            image: "/images/group_walking.jpg",
-            alt: "group shot",
-        },
-    ];
-
-    const nextSlide = () => {
-        setCurrentSlide((prev) => (prev + 1) % slides.length);
-        setCurrentTransitionIndex(
-            Math.floor(Math.random() * slideTransitions.length)
-        );
-    };
-
-    const prevSlide = () => {
-        setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-        setCurrentTransitionIndex(
-            Math.floor(Math.random() * slideTransitions.length)
-        );
-    };
-
-    // Auto-advance slides every 5 seconds
-    useEffect(() => {
-        const timer = setInterval(nextSlide, 3500);
-        return () => clearInterval(timer);
-    }, []);
-    const getCurrentTransition = () => slideTransitions[currentTransitionIndex];
-
-    // Parallax effect
-    useEffect(() => {
-        const handleScroll = () => {
-            if (!bannerRef.current) return;
-            const rect = bannerRef.current.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
-            // Only apply parallax when banner is in view
-            if (rect.top < windowHeight && rect.bottom > 0) {
-                // Adjust the multiplier for stronger/weaker effect
-                setParallax(window.scrollY * 0.3);
-            }
-        };
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
 
     return (
         <div
