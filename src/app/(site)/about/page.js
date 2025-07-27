@@ -80,22 +80,29 @@ export default function AboutPage() {
 
     const coreValues = [
         {
+            img: "/images/honest.png",
             title: "Chân thành",
             description: "Trong phong cách làm việc Nhà Đẹp Quảng Nam luôn ưu tiên tư vấn trung thực, không tô vẽ những điều xa vời mà tập trung vào giá trị thực tế cho khách hàng."
         },
         {
+            img:"/images/trust.png",
             title: "Chính trực",
             description: "Trong quá trình thi công xây dựng chúng tôi tuân thủ đạo đức nghề nghiệp, không gian dối hay làm trái nguyên tắc, không chạy theo lợi nhuận mà bỏ qua yếu tố an toàn."
         },
         {
+            img:"/images/responsibility.png",
             title: "Trách nhiệm",
             description: "Không phải cứ bàn giao xong là hết nghĩa vụ, mà là đảm bảo công trình ấy thực sự đáng sống, đáng tin cậy trong nhiều năm sau."
-        },
+        }
+    ];
+    const coreValues2 = [
         {
+            img:"/images/compass.png",
             title: "Hiểu và Thương",
             description: "Chúng tôi không đơn thuần là đơn vị thi công theo yêu cầu, mà còn là thấu hiểu mong muốn của họ, để tư vấn giải pháp phù hợp nhất."
         },
         {
+            img:"/images/creata.png",
             title: "Sáng tạo",
             description: "Với phương châm không ngừng phát triển Nhà Đẹp Quảng Nam luôn tập trung cải tiến toàn diện để mang đến dịch vụ tốt nhất đáp ứng mọi nhu cầu khách hàng."
         }
@@ -155,7 +162,7 @@ export default function AboutPage() {
             {/* Hero section with background image */}
             <div className="relative">
                 {/* Background image */}
-                <div className="absolute inset-0 bg-[url('/images/sus.jpg')] bg-cover bg-center bg-no-repeat"/>
+                <div className="absolute inset-0 bg-[url('/images/bg-2.webp')] bg-cover bg-center bg-no-repeat"/>
 
                 {/* Dark overlay */}
                 <div className="absolute inset-0 bg-black/40"/>
@@ -173,20 +180,9 @@ export default function AboutPage() {
                             <h2 className="text-white text-center text-extrabold text-5xl font-bold mb-12">
                                 NÂNG TẦM NHỮNG NGÔI NHÀ XỨ QUẢNG
                             </h2>
-                            <div>
-                                {aboutShort}
-                                {!expanded && <span>... </span>}
-                                {expanded && <span>{aboutFull}</span>}
-                                <button
-                                    className="ml-2 text-white underline hover:text-gray-300 transition-colors text-sm font-semibold"
-                                    onClick={() => setExpanded((v) => !v)}
-                                >
-                                    {expanded ? "Thu gọn" : "Xem thêm"}
-                                </button>
-                            </div>
                         </div>
                     </section>
-                    <section className="py-12 px-4">
+                    <section className="py-12">
                         <div className="container mx-auto max-w-6xl mx-auto px-4">
                             <div className="text-center">
                                 {/*Title*/}
@@ -195,7 +191,6 @@ export default function AboutPage() {
                                 </h2>
                             </div>
                             <div className="grid grid-cols-3 gap-4">
-                                <div/>
                                 <div className="text-center slide-in-bottom">
                                     <Image width={300} height={300} src="/thumbnails/nguyen-tuong.jpg"
                                            alt="nguyen-tuong"
@@ -205,7 +200,7 @@ export default function AboutPage() {
                                     </h3>
                                     <p className="text-white font-base text-sm">GIÁM ĐỐC</p>
                                 </div>
-                                <div/>
+                                <div className="col-span-2 slide-in-bottom">{aboutShort}</div>
                                 {members.map((member) => (
                                     <div className="text-center slide-in-bottom" key={member.name}>
                                         <Image width={300} height={300} src={member.thumbnail}
@@ -261,16 +256,6 @@ export default function AboutPage() {
                                     key={index}
                                     className="relative overflow-hidden rounded-lg shadow-lg group puff-in-center"
                                 >
-                                    {/* Image Section */}
-                                    <div className="relative h-48">
-                                        <Image
-                                            src={index % 2 === 0 ? "/images/wide_shot.jpg" : "/images/aboutus.png"}
-                                            alt={`Commitment ${index + 1}`}
-                                            fill
-                                            className="object-cover group-hover:scale-105 transition-transform duration-300"
-                                        />
-                                    </div>
-
                                     {/* Content Section */}
                                     <div className="bg-white">
                                         {/* Large Title */}
@@ -284,12 +269,6 @@ export default function AboutPage() {
                                             tempor incididunt ut
                                             labore et dolore magna aliqua. Ut enim ad minim veniam
                                         </p>
-
-                                        {/* Button */}
-                                        <button
-                                            className="bg-orange-400 text-white px-6 py-3 ml-6 mb-4 rounded-lg font-medium hover:bg-orange-300 transition-colors duration-200">
-                                            XEM ĐẦY ĐỦ NỘI DUNG
-                                        </button>
                                     </div>
                                 </div>
                             ))}
@@ -305,25 +284,20 @@ export default function AboutPage() {
                                 GIÁ TRỊ CỐT LÕI
                             </h2>
                         </div>
-
                         {/* Cards Grid - 5 Individual Cards */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-3 gap-4 justify-center">
                             {coreValues.map((item, index) => (
-                                <div key={index} className="relative overflow-hidden rounded-lg shadow-lg group puff-in-center">
-                                    {/* Image Section */}
-                                    <div className="relative h-48">
-                                        <Image
-                                            src={index % 2 === 0 ? "/images/wide_shot.jpg" : "/images/aboutus.png"}
-                                            alt={`Commitment ${index + 1}`}
-                                            fill
-                                            className="object-cover group-hover:scale-105 transition-transform duration-300"
-                                        />
-                                    </div>
-
+                                <div key={index}
+                                     className="relative overflow-hidden rounded-lg shadow-lg group puff-in-center">
                                     {/* Content Section */}
-                                    <div className="bg-white h-full">
+                                    <div className="bg-white h-full p-6">
+                                        <div
+                                            className="rounded-full bg-orange-400 w-22 h-22 flex items-center justify-center text-white mx-auto p-4 my-6">
+                                            <Image src={item.img} alt="res" width={50} height={50}
+                                                   className="object-cover"/>
+                                        </div>
                                         {/* Large Title */}
-                                        <h3 className="text-md items-center flex justify-center font-bold text-white mb-4 leading-tight bg-orange-400 h-12 px-6">
+                                        <h3 className="text-lg items-center flex justify-center font-bold text-black mb-4 leading-tight h-12 px-6">
                                             {item.title}
                                         </h3>
 
@@ -331,12 +305,31 @@ export default function AboutPage() {
                                         <p className="text-black mb-6 leading-relaxed px-6 text-justify">
                                             {item.description}
                                         </p>
+                                    </div>
+                                </div>
+                            ))}
 
-                                        {/* Button */}
-                                        <button
-                                            className="bg-orange-400 text-white px-6 py-3 ml-6 mb-4 rounded-lg font-medium hover:bg-orange-300 transition-colors duration-200">
-                                            XEM ĐẦY ĐỦ NỘI DUNG
-                                        </button>
+                        </div>
+                        <div className="flex justify-center mt-8 gap-4">
+                            {coreValues2.map((item, index) => (
+                                <div key={index}
+                                     className="relative overflow-hidden rounded-lg shadow-lg group puff-in-center w-sm">
+                                    {/* Content Section */}
+                                    <div className="bg-white h-full p-6">
+                                        <div
+                                            className="rounded-full bg-orange-400 w-22 h-22 flex items-center justify-center text-white mx-auto p-4 my-6">
+                                            <Image src={item.img} alt="res" width={50} height={50}
+                                                   className="object-cover"/>
+                                        </div>
+                                        {/* Large Title */}
+                                        <h3 className="text-lg items-center flex justify-center font-bold text-black mb-4 leading-tight h-12 px-6">
+                                            {item.title}
+                                        </h3>
+
+                                        {/* Subtitle */}
+                                        <p className="text-black mb-6 leading-relaxed px-6 text-justify">
+                                            {item.description}
+                                        </p>
                                     </div>
                                 </div>
                             ))}
