@@ -18,7 +18,7 @@ export const metadata = {
 
 export default function RootLayout({children}) {
     return (
-        <html lang="en" suppressHydrationWarning className={utmAvo.className}>
+        <html lang="en" suppressHydrationWarning className={`${utmAvo.className} antialiased`}>
         <body suppressHydrationWarning>
         {children}
         </body>

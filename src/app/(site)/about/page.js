@@ -244,23 +244,6 @@ export default function AboutPage() {
                         </div>
                     </div>
                 </section>
-                {/*Activities pictures*/}
-                <section className="py-12 px-4">
-                    <div className="max-w-6xl mx-auto text-center">
-                        <h2 className="text-white text-extrabold text-3xl font-bold my-20 tracking-[.5em] p-4 border-draw inline-block">
-                            HÌNH ẢNH HOẠT ĐỘNG
-                        </h2>
-                        <div className="grid grid-cols-3 justify-center gap-6">
-                            {Array.from({length: 9}, (_, index) => (
-                                <div key={index} className="overflow-hidden slide-in-bottom">
-                                    <Image width={300} height={500} src="/images/Thiet-ke-chua-co-ten-2.jpg"
-                                           alt="van phong"
-                                           className="w-full transition-transform duration-300 ease-in-out hover:scale-110"/>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
 
                 <section className="py-12 px-4">
                     <div className="max-w-6xl mx-auto">

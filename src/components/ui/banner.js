@@ -2,7 +2,7 @@ import { debounce } from "lodash";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from 'next/image';
 
-export default function Banner({ title }) {
+export default function Banner({title}) {
     const bannerRef = useRef(null);
     const [parallax, setParallax] = useState(0);
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -10,18 +10,33 @@ export default function Banner({ title }) {
       const slides = [
     {
       id: 1,
-      image: "/images/wide_shot.jpg",
+      image: "/images/slide1.jpg",
       alt: "wide shot",
     },
     {
       id: 2,
-      image: "/images/wide_hands.jpg",
+      image: "/images/slide2.jpg",
       alt: "wide hands",
     },
     {
       id: 3,
-      image: "/images/group_walking.jpg",
-      alt: "group shot",
+      image: "/images/slide3.jpg",
+      alt: "3",
+    },
+    {
+      id: 4,
+      image: "/images/slide4.jpg",
+      alt: "4",
+    },
+    {
+      id: 5,
+      image: "/images/slide5.jpg",
+      alt: "5",
+    },
+    {
+      id: 6,
+      image: "/images/slide6.jpg",
+      alt: "6",
     },
 
   ];
