@@ -216,6 +216,7 @@ const ProcessSection = () => {
                 </div>
             </div>
         </div>
+
     );
 };
 
