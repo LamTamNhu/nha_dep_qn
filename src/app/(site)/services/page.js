@@ -133,7 +133,6 @@ const ServicesPage = () => {
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
                 priority={index === 0}
-                onError={(e) => (e.target.src = "/fallback-image.jpg")}
               />
             </div>
           </div>

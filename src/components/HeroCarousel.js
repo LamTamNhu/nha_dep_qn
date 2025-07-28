@@ -51,15 +51,6 @@ export default function HeroCarousel(counterContent) {
                     </div>
                 </div>
             </div>
-            {/* ✅ Blinking Ad */}
-            <div className="absolute top-24 right-2 z-50">
-                <div className="bg-orange-500 text-white font-semibold text-xl rounded-xl shadow-lg px-4 py-3 flicker-1">
-                    <p className="leading-snug text-center">
-                        Miễn phí <span className="font-bold">100%</span> chi phí thiết kế khi thi công trọn gói!<br />
-                        Miễn phí <span className="font-bold">50%</span> chi phí thiết kế khi thi công phần thô!
-                    </p>
-                </div>
-            </div>
         </div>
     );
 }

@@ -106,41 +106,33 @@ function ProjectsContent({pageTitle}) {
 
     const categories = ['Tất cả', 'Nhà Phố', 'Biệt thự', 'Nhà vườn', 'Nhà tân cổ điển', 'Công trình dịch vụ', 'Mẫu nhà 2 tầng đẹp', 'Mẫu nhà 3 tầng đẹp', 'Nhà phố 4 tầng đẹp', 'Căn hộ cho thuê, Nhà trọ, Chung cư, Văn phòng', '55+ mẫu nhà cấp 4 đẹp, hiện đại và đơn giản nhất 2025'];
 
-    // Handle search params safely
     useEffect(() => {
         try {
-            const categoryParam = searchParams?.get("category");
+            const categoryParam = searchParams?.get("category") || null;
             setCategoryFromUrl(categoryParam);
+
+            if (categoryParam && categories.includes(categoryParam)) {
+                setSelectedCategory(categoryParam);
+            }
+
+            const filtered = projects.filter(
+                (project) =>
+                    (selectedCategory === 'Tất cả' || project.category === selectedCategory) &&
+                    (project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                        project.disc.toLowerCase().includes(searchTerm.toLowerCase()))
+            );
+            setFilteredProjects(filtered);
+            setCurrentPage(1);
+
+            if (typeof window !== 'undefined' && window.location.hash === "#projects-section") {
+                const section = document.getElementById("projects-section");
+                section?.scrollIntoView({ behavior: "smooth" });
+            }
         } catch (error) {
             console.warn('Error reading search params:', error);
             setCategoryFromUrl(null);
         }
-    }, [searchParams]);
-
-    useEffect(() => {
-        const filtered = projects.filter(
-            (project) =>
-                (selectedCategory === 'Tất cả' || project.category === selectedCategory) &&
-                (project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                    project.disc.toLowerCase().includes(searchTerm.toLowerCase()))
-        );
-        setFilteredProjects(filtered);
-        setCurrentPage(1);
-    }, [searchTerm, selectedCategory, projects]);
-
-    useEffect(() => {
-        if (categoryFromUrl && categories.includes(categoryFromUrl)) {
-            setSelectedCategory(categoryFromUrl);
-        }
-
-        // Scroll to results if hash exists (client-side only)
-        if (typeof window !== 'undefined' && window.location.hash === "#projects-section") {
-            const section = document.getElementById("projects-section");
-            if (section) {
-                section.scrollIntoView({behavior: "smooth"});
-            }
-        }
-    }, [categoryFromUrl, categories]);
+    }, [searchParams, searchTerm, selectedCategory]);
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -232,7 +224,6 @@ function ProjectsContent({pageTitle}) {
                                             height={700}
                                             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                             sizes="(max-width: 768px) 50vw, 20vw"
-                                            onError={(e) => (e.target.src = "/fallback-image.jpg")}
                                         />
                                         <div
                                             className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
