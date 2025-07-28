@@ -1,5 +1,6 @@
 "use client";
-import {ArrowUpRight, Eye, Goal, HandCoins, HeartHandshake, Paintbrush, Quote, ShieldCheck, Users,} from "lucide-react";
+import {ArrowUpRight, Eye, Goal, HandCoins, HeartHandshake, Paintbrush, Quote, ShieldCheck, Users} from "lucide-react";
+import * as Icons from "lucide-react";
 import * as React from "react";
 import {useEffect, useState} from "react";
 import Image from "next/image";
@@ -12,7 +13,7 @@ import HeroCarousel from "@/components/HeroCarousel";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import ContactForm from "@/components/ContactForm";
 import {client} from "@/sanity/lib/client";
-import {introQuery} from "@/sanity/lib/queries";
+import {introQuery, homepageQuery} from "@/sanity/lib/queries";
 import ProcessTabs from "@/components/ui/ProcessTabs";
 
 const cardData = [
@@ -84,12 +85,48 @@ const partners = [
     },
 ];
 
+const designProjectsFallback = [
+    { img: "/thumbnails/1.jpg", alt: "Tổng hợp 30+ mẫu nhà phố đẹp nhất", desc: "Nhà phố hiện đại 3 tầng, tối ưu ánh sáng tự nhiên và không gian xanh." },
+    { img: "/thumbnails/2.jpg", alt: "Project 2", desc: "Biệt thự sân vườn sang trọng, không gian mở kết nối thiên nhiên." },
+    { img: "/thumbnails/3.jpg", alt: "Project 3", desc: "Nội thất phòng khách hiện đại, tối giản, tiện nghi và ấm cúng." },
+    { img: "/thumbnails/4.jpg", alt: "Project 4", desc: "Nhà cấp 4 mái Nhật, thiết kế tối ưu công năng cho gia đình trẻ." },
+    { img: "/thumbnails/5.jpg", alt: "Project 5", desc: "Biệt thự phố 2 mặt tiền, phong cách hiện đại, sang trọng." },
+    { img: "/thumbnails/6.jpg", alt: "Project 6", desc: "Nhà phố 4 tầng, thiết kế thông thoáng, tối ưu diện tích đất." },
+];
+
+const executionProjectsFallback = [
+    { img: "/thumbnails/7.jpg", alt: "Project 1", desc: "Nhà phố hiện đại 3 tầng, tối ưu ánh sáng tự nhiên và không gian xanh." },
+    { img: "/thumbnails/8.jpg", alt: "Project 2", desc: "Biệt thự sân vườn sang trọng, không gian mở kết nối thiên nhiên." },
+    { img: "/thumbnails/9.jpg", alt: "Project 3", desc: "Nội thất phòng khách hiện đại, tối giản, tiện nghi và ấm cúng." },
+    { img: "/thumbnails/10.jpg", alt: "Project 4", desc: "Nhà cấp 4 mái Nhật, thiết kế tối ưu công năng cho gia đình trẻ." },
+    { img: "/thumbnails/11.jpg", alt: "Project 5", desc: "Biệt thự phố 2 mặt tiền, phong cách hiện đại, sang trọng." },
+    { img: "/thumbnails/12.jpg", alt: "Project 6", desc: "Nhà phố 4 tầng, thiết kế thông thoáng, tối ưu diện tích đất." },
+];
+
+const whyChooseUsFallback = [
+    "Ưu tiên chất lượng hàng đầu: Sử dụng vật liệu đạt chuẩn, đảm bảo an toàn và bền vững lâu dài cam kết chất lượng 100% như báo giá",
+    "Đầu tư chất lượng đội ngũ: Hầu hết KTS, kỹ sư, chuyên viên có kinh nghiệm 7-15 năm trong lĩnh vực nghiên cứu, thiết kế kiến trúc và thi công xây dựng",
+    "Đa dạng mẫu mã: Sở hữu hơn 3000 mẫu thiết kế hiện đại, liên tục cập nhật xu hướng sẵn sàng điều chỉnh đến khi khách hàng thật sự hài lòng.",
+    "Giá cả cạnh tranh: Báo đúng giá rõ ràng, minh bạch đảm bảo cạnh tranh trên thị trường",
+];
+
+const testimonialFallback = {
+    quote: "Cảm ơn các anh đã thiết kế và thi công cho vợ chồng em căn nhà rất ưng ý.\nChất lượng thì không cần phải đề cập vì đã tin tưởng làm công trình thứ 3 rồi!",
+    author: "Chị Thảo Duyên | Nhà phố 2 tầng | Vĩnh Phú – Thuận An",
+    link: "#",
+    avatarUrl: "/images/quote.jpg",
+};
+
 
 export default function Home() {
     const [intro, setIntro] = useState(null);
+    const [homeData, setHomeData] = useState(null);
     useEffect(() => {
         client.fetch(introQuery).then((data) => {
             setIntro(data);
+        });
+        client.fetch(homepageQuery).then((data) => {
+            setHomeData(data);
         });
 
         // Set up animations after DOM is ready
@@ -106,6 +143,38 @@ export default function Home() {
             puffInObserver.disconnect();
         };
     }, []);
+
+    const cards = homeData?.coreValues?.length
+        ? homeData.coreValues.map((cv, idx) => {
+            const Icon = Icons[cv.iconName] || Icons.HeartHandshake;
+            return {
+                id: idx,
+                icon: <Icon size={70} />,
+                title: cv.title,
+                description: cv.description,
+                cardBgColor: "bg-gray-50",
+                titleColor: "text-gray-800",
+                descriptionColor: "text-gray-500",
+                iconWrapperBgColor: "bg-gray-50",
+                iconColorClass: "text-gray-800",
+                iconBorderColor: "border-gray-800",
+            };
+        })
+        : cardData;
+
+    const designProjects = homeData?.designProjects?.length
+        ? homeData.designProjects.map((p) => ({ img: p.imageUrl, alt: p.title, desc: p.description }))
+        : designProjectsFallback;
+
+    const executionProjects = homeData?.executionProjects?.length
+        ? homeData.executionProjects.map((p) => ({ img: p.imageUrl, alt: p.title, desc: p.description }))
+        : executionProjectsFallback;
+
+    const whyChooseUs = homeData?.whyChooseUs?.length
+        ? homeData.whyChooseUs.map((r) => r.reason)
+        : whyChooseUsFallback;
+
+    const testimonial = homeData?.testimonial || testimonialFallback;
     return (
         <div className="min-h-screen relative bg-white">
             {/*<HeroCarousel/>*/}
@@ -127,7 +196,7 @@ export default function Home() {
                 <div className="max-w-6xl mx-auto">
                     {/* Cards Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-                        {cardData.map((card) => (
+                        {cards.map((card) => (
                             <div
                                 key={card.id}
                                 className={`slide-in-right relative rounded-4xl shadow-xl p-8 flex flex-col items-center text-justify transition-transform duration-300 hover:scale-105 ${card.cardBgColor}`}
@@ -172,23 +241,14 @@ export default function Home() {
                             <WhyChooseUs/>
                         </div>
                         <div className="slide-in-bottom">
-                            <p className="w-full text-md text-justify leading-relaxed">
-                                <span className="font-semibold">Ưu tiên chất lượng hàng đầu:</span> Sử dụng vật liệu đạt
-                                chuẩn, đảm bảo an toàn và bền vững lâu dài cam kết chất lượng 100% như báo giá
-                            </p>
-                            <p className="w-full text-md text-justify leading-relaxed">
-                                <span className="font-semibold">Đầu tư chất lượng đội ngũ:</span> Hầu hết KTS, kỹ sư,
-                                chuyên viên có kinh nghiệm 7-15 năm trong lĩnh vực nghiên cứu, thiết kế kiến trúc và thi
-                                công xây dựng
-                            </p>
-                            <p className="w-full text-md text-justify leading-relaxed">
-                                <span className="font-semibold">Đa dạng mẫu mã:</span> Sở hữu hơn 3000 mẫu thiết kế hiện
-                                đại, liên tục cập nhật xu hướng sẵn sàng điều chỉnh đến khi khách hàng thật sự hài lòng.
-                            </p>
-                            <p className="w-full text-md text-justify leading-relaxed">
-                                <span className="font-semibold">Giá cả cạnh tranh:</span> Báo đúng giá rõ ràng, minh
-                                bạch đảm bảo cạnh tranh trên thị trường
-                            </p>
+                            {whyChooseUs.map((reason, idx) => {
+                                const [first, ...rest] = reason.split(":");
+                                return (
+                                    <p key={idx} className="w-full text-md text-justify leading-relaxed">
+                                        {first && <span className="font-semibold">{first}:</span>} {rest.join(":")}
+                                    </p>
+                                );
+                            })}
                         </div>
                     </div>
                 </div>
@@ -224,38 +284,7 @@ export default function Home() {
                     </div>
                     {/* Images Grid */}
                     <div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 slide-in-right">
-                        {[
-                            {
-                                img: "/thumbnails/1.jpg",
-                                alt: "Tổng hợp 30+ mẫu nhà phố đẹp nhất",
-                                desc: "Nhà phố hiện đại 3 tầng, tối ưu ánh sáng tự nhiên và không gian xanh.",
-                            },
-                            {
-                                img: "/thumbnails/2.jpg",
-                                alt: "Project 2",
-                                desc: "Biệt thự sân vườn sang trọng, không gian mở kết nối thiên nhiên.",
-                            },
-                            {
-                                img: "/thumbnails/3.jpg",
-                                alt: "Project 3",
-                                desc: "Nội thất phòng khách hiện đại, tối giản, tiện nghi và ấm cúng.",
-                            },
-                            {
-                                img: "/thumbnails/4.jpg",
-                                alt: "Project 4",
-                                desc: "Nhà cấp 4 mái Nhật, thiết kế tối ưu công năng cho gia đình trẻ.",
-                            },
-                            {
-                                img: "/thumbnails/5.jpg",
-                                alt: "Project 5",
-                                desc: "Biệt thự phố 2 mặt tiền, phong cách hiện đại, sang trọng.",
-                            },
-                            {
-                                img: "/thumbnails/6.jpg",
-                                alt: "Project 6",
-                                desc: "Nhà phố 4 tầng, thiết kế thông thoáng, tối ưu diện tích đất.",
-                            },
-                        ].map((project, i) => (
+                        {designProjects.map((project, i) => (
                             <div
                                 key={i}
                                 className="group aspect-[3/2] bg-gray-200 rounded-2xl overflow-hidden relative cursor-pointer"
@@ -284,38 +313,7 @@ export default function Home() {
                 <div className="max-w-370 grid grid-cols-1 md:grid-cols-4 gap-8 items-end mr-auto">
                     {/* Images Grid */}
                     <div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 puff-in-center">
-                        {[
-                            {
-                                img: "/thumbnails/7.jpg",
-                                alt: "Project 1",
-                                desc: "Nhà phố hiện đại 3 tầng, tối ưu ánh sáng tự nhiên và không gian xanh.",
-                            },
-                            {
-                                img: "/thumbnails/8.jpg",
-                                alt: "Project 2",
-                                desc: "Biệt thự sân vườn sang trọng, không gian mở kết nối thiên nhiên.",
-                            },
-                            {
-                                img: "/thumbnails/9.jpg",
-                                alt: "Project 3",
-                                desc: "Nội thất phòng khách hiện đại, tối giản, tiện nghi và ấm cúng.",
-                            },
-                            {
-                                img: "/thumbnails/10.jpg",
-                                alt: "Project 4",
-                                desc: "Nhà cấp 4 mái Nhật, thiết kế tối ưu công năng cho gia đình trẻ.",
-                            },
-                            {
-                                img: "/thumbnails/11.jpg",
-                                alt: "Project 5",
-                                desc: "Biệt thự phố 2 mặt tiền, phong cách hiện đại, sang trọng.",
-                            },
-                            {
-                                img: "/thumbnails/12.jpg",
-                                alt: "Project 6",
-                                desc: "Nhà phố 4 tầng, thiết kế thông thoáng, tối ưu diện tích đất.",
-                            },
-                        ].map((project, i) => (
+                        {executionProjects.map((project, i) => (
                             <div
                                 key={i}
                                 className="group aspect-[3/2] bg-gray-200 rounded-2xl overflow-hidden relative cursor-pointer"
@@ -374,26 +372,29 @@ export default function Home() {
                                 <Quote className="text-orange-500 text-5xl mb-2 text-center"/>
                                 <blockquote
                                     className="text-md font-normal italic text-black mb-2 text-center md:text-left">
-                                    Cảm ơn các anh đã thiết kế và thi công cho vợ chồng em căn nhà rất ưng ý.
-                                    <br/>
-                                    Chất lượng thì không cần phải đề cập vì đã tin tưởng làm công trình thứ 3 rồi!
+                                    {testimonial.quote.split("\n").map((line, i) => (
+                                        <React.Fragment key={i}>
+                                            {line}
+                                            <br/>
+                                        </React.Fragment>
+                                    ))}
                                 </blockquote>
                                 <Quote className="text-orange-500 text-5xl justify-self-end mb-6"/>
-                                <a
-                                    href="#"
-                                    className="justify-self-end underline text-orange-400"
-                                >
-                                    Tham quan nhà hoàn thiện
-                                </a>
+                                {testimonial.link && (
+                                    <a
+                                        href={testimonial.link}
+                                        className="justify-self-end underline text-orange-400"
+                                    >
+                                        Tham quan nhà hoàn thiện
+                                    </a>
+                                )}
                             </div>
 
                             <div className="text-orange-400 p-2 text-center flex items-center justify-center gap-4 mt-4">
                                 <div className="w-12 h-12">
-                                    <Image src="/images/quote.jpg" alt="Profile" className="rounded-full object-cover w-full h-full" width={50} height={50} />
+                                    <Image src={testimonial.avatarUrl} alt="Profile" className="rounded-full object-cover w-full h-full" width={50} height={50} />
                                 </div>
-                                <div>
-                                    Chị Thảo Duyên | Nhà phố 2 tầng | Vĩnh Phú – Thuận An
-                                </div>
+                                <div>{testimonial.author}</div>
                             </div>
                         </div>
                     </div>
