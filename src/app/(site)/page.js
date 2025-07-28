@@ -113,7 +113,7 @@ export default function Home() {
             {/* Introduction section */}
             <div className="py-12 px-4 bg-black">
                 <div className="max-w-6xl mx-auto px-4">
-                    <h1 className="text-4xl font-bold text-center text-orange-400 swing-in-top-fwd-2 mb-6 whitespace-nowrap">
+                    <h1 className="text-xl md:text-4xl font-bold text-center text-orange-400 swing-in-top-fwd-2 mb-6 md:whitespace-nowrap">
                         {intro ? intro.heading : "Loading heading..."}
                     </h1>
                     <h3 className="text-md font-semibold mb-2 text-white text-justify swing-in-top-fwd-2">
