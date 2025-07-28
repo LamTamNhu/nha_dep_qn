@@ -61,7 +61,7 @@ export default function AnimatedCounter({
             <div className="text-4xl font-bold mb-2 text-black">
                 {count.toLocaleString()}+
             </div>
-            <div className="text-lg font-bold text-grey-400">{text}</div>
+            <div className="text-lg font-bold text-black">{text}</div>
         </div>
     )
 }

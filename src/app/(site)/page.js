@@ -1,5 +1,5 @@
 "use client";
-import {ArrowUpRight, Eye, Goal, HandCoins, HeartHandshake, Paintbrush, ShieldCheck, Users,} from "lucide-react";
+import {ArrowUpRight, Eye, Goal, HandCoins, HeartHandshake, Paintbrush, Quote, ShieldCheck, Users,} from "lucide-react";
 import * as React from "react";
 import {useEffect, useState} from "react";
 import Image from "next/image";
@@ -13,6 +13,7 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 import ContactForm from "@/components/ContactForm";
 import {client} from "@/sanity/lib/client";
 import {introQuery} from "@/sanity/lib/queries";
+import ProcessTabs from "@/components/ui/ProcessTabs";
 
 const cardData = [
     {
@@ -112,10 +113,9 @@ export default function Home() {
             {/* Introduction section */}
             <div className="py-12 px-4 bg-black">
                 <div className="max-w-6xl mx-auto px-4">
-                    <SectionHeading>
+                    <h1 className="text-6xl font-bold text-center text-orange-400 swing-in-top-fwd-2 mb-6">
                         {intro ? intro.heading : "Loading heading..."}
-                    </SectionHeading>
-
+                    </h1>
                     <h3 className="text-md font-semibold mb-2 text-white text-justify swing-in-top-fwd-2">
                         {intro ? intro.description : "Loading description..."}
                     </h3>
@@ -191,82 +191,10 @@ export default function Home() {
                             </p>
                         </div>
                     </div>
-
-                    {/*<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">*/}
-                    {/*    /!* Card 1 *!/*/}
-                    {/*    <div*/}
-                    {/*        className="rounded-4xl group relative bg-white shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl cursor-pointer">*/}
-                    {/*        <div className="flex flex-col items-center p-10">*/}
-                    {/*            <div*/}
-                    {/*                className="w-20 h-20 mb-4 rounded-full bg-orange-300 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">*/}
-                    {/*                <ShieldCheck width={48} height={48} color="white"/>*/}
-                    {/*            </div>*/}
-                    {/*            <h3 className="text-lg font-semibold text-orange-500 mb-2 group-hover:text-orange-300 transition-colors duration-300  text-justify">*/}
-                    {/*                Ưu tiên chất lượng hàng đầu*/}
-                    {/*            </h3>*/}
-                    {/*            <p className="text-gray-700 text-base leading-relaxed  text-justify mt-2 group-hover:text-gray-500">*/}
-                    {/*                Sử dụng vật liệu đạt chuẩn, đảm bảo an toàn và bền vững lâu*/}
-                    {/*                dài, cam kết chất lượng 100% như báo giá.*/}
-                    {/*            </p>*/}
-                    {/*        </div>*/}
-                    {/*    </div>*/}
-
-                    {/*    <div*/}
-                    {/*        className="rounded-4xl group relative bg-white shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl cursor-pointer">*/}
-                    {/*        <div className="flex flex-col items-center p-10">*/}
-                    {/*            <div*/}
-                    {/*                className="w-20 h-20 mb-4 rounded-full bg-orange-300 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">*/}
-                    {/*                <Users width={48} height={48} color="white"/>*/}
-                    {/*            </div>*/}
-                    {/*            <h3 className="text-lg font-semibold text-orange-500 mb-2 group-hover:text-orange-300 transition-colors duration-300  text-justify">*/}
-                    {/*                Đầu tư chất lượng đội ngũ*/}
-                    {/*            </h3>*/}
-                    {/*            <p className="text-gray-700 text-base leading-relaxed  text-justify mt-2 group-hover:text-gray-500">*/}
-                    {/*                Hầu hết KTS, kỹ sư, chuyên viên có kinh nghiệm 7-15 năm trong*/}
-                    {/*                lĩnh vực nghiên cứu, thiết kế kiến trúc và thi công xây dựng.*/}
-                    {/*            </p>*/}
-                    {/*        </div>*/}
-                    {/*    </div>*/}
-
-                    {/*    <div*/}
-                    {/*        className="rounded-4xl group relative bg-white shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl cursor-pointer">*/}
-                    {/*        <div className="flex flex-col items-center p-10">*/}
-                    {/*            <div*/}
-                    {/*                className="w-20 h-20 mb-4 rounded-full bg-orange-300 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">*/}
-                    {/*                <Paintbrush width={48} height={48} color="white"/>*/}
-                    {/*            </div>*/}
-                    {/*            <h3 className="text-lg font-semibold text-orange-500 mb-2 group-hover:text-orange-300 transition-colors duration-300  text-justify">*/}
-                    {/*                Đa dạng mẫu mã*/}
-                    {/*            </h3>*/}
-                    {/*            <p className="text-gray-700 text-base leading-relaxed  text-justify mt-2 group-hover:text-gray-500">*/}
-                    {/*                Sở hữu hơn 3000 mẫu thiết kế hiện đại, liên tục cập nhật xu*/}
-                    {/*                hướng, sẵn sàng điều chỉnh đến khi khách hàng thật sự hài*/}
-                    {/*                lòng.*/}
-                    {/*            </p>*/}
-                    {/*        </div>*/}
-                    {/*    </div>*/}
-
-                    {/*    <div*/}
-                    {/*        className="rounded-4xl group relative bg-white shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl cursor-pointer">*/}
-                    {/*        <div className="flex flex-col items-center p-10">*/}
-                    {/*            <div*/}
-                    {/*                className="w-20 h-20 mb-4 rounded-full bg-orange-300 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">*/}
-                    {/*                <HandCoins width={48} height={48} color="white"/>*/}
-                    {/*            </div>*/}
-                    {/*            <h3 className="text-lg font-semibold text-orange-500 mb-2 group-hover:text-orange-300 transition-colors duration-300  text-justify">*/}
-                    {/*                Giá cả cạnh tranh*/}
-                    {/*            </h3>*/}
-                    {/*            <p className="text-gray-700 text-base leading-relaxed  text-justify mt-2 group-hover:text-gray-500">*/}
-                    {/*                Báo đúng giá rõ ràng, minh bạch, đảm bảo cạnh tranh trên thị*/}
-                    {/*                trường.*/}
-                    {/*            </p>*/}
-                    {/*        </div>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
                 </div>
             </section>
 
-            <ProcessSection/>
+            <ProcessTabs/>
 
             {/* Công trình thiết kế Section */}
             <section className="py-12 px-4 md:px-10 bg-black">
@@ -438,66 +366,35 @@ export default function Home() {
             <PartnerCarousel/>
 
             {/* Testimonial Section */}
-            <section className="py-12 px-4 bg-white">
+            <section className="py-12 px-4 bg-black">
                 <div className="max-w-6xl mx-auto px-4">
-                    <SectionHeading>
-                        Khách hàng nói gì về Nhà Đẹp Quảng Nam
-                    </SectionHeading>
-                    <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-                        {/* Left: Quote */}
-                        <div className="col-span-1 flex flex-col items-center md:items-start puff-in-center">
-                            <div className="text-orange-500 text-5xl mb-4">“</div>
-                            <blockquote
-                                className="text-2xl font-semibold italic text-gray-900 mb-6 text-justify md:text-left">
-                                Nhà chị rộng hơn nhiều.
-                                <br/>
-                                Nếu chị xây nhà tiếp, chị vẫn muốn bên NHÀ ĐẸP QUẢNG NAM xây cho
-                                chị!
-                            </blockquote>
-                            <div className="text-orange-500 text-5xl self-end">”</div>
-                            <div className="w-16 h-1 bg-orange-400 mt-8 mb-2"/>
-                        </div>
+                    <div className="max-w-6xl mx-auto">
+                        <div className="grid gril-cols-1 swing-in-top-fwd-2 place-content-center">
+                            <div className="bg-white grid grid-cols-1 p-6">
+                                <Quote className="text-orange-500 text-5xl mb-2 text-center"/>
+                                <blockquote
+                                    className="text-md font-normal italic text-black mb-2 text-center md:text-left">
+                                    Cảm ơn các anh đã thiết kế và thi công cho vợ chồng em căn nhà rất ưng ý.
+                                    <br/>
+                                    Chất lượng thì không cần phải đề cập vì đã tin tưởng làm công trình thứ 3 rồi!
+                                </blockquote>
+                                <Quote className="text-orange-500 text-5xl justify-self-end mb-6"/>
+                                <a
+                                    href="#"
+                                    className="justify-self-end underline text-orange-400"
+                                >
+                                    Tham quan nhà hoàn thiện
+                                </a>
+                            </div>
 
-                        {/* Center: Image */}
-                        <div className="col-span-1 flex justify-center swing-in-top-fwd-2">
-                            <div
-                                className="relative w-72 h-80 overflow-hidden shadow-lg bg-white flex items-center justify-center">
-                                <Image
-                                    src="/images/testimonial.png"
-                                    alt="Chị Thảo Duyên testimonial"
-                                    fill
-                                    className="object-cover"
-                                />
-                                <div className="absolute top-0 right-0 m-4 grid grid-cols-3 gap-1">
-                                    {Array.from({length: 9}).map((_, i) => (
-                                        <span
-                                            key={i}
-                                            className="w-2 h-2 rounded-full bg-orange-300 inline-block"
-                                        />
-                                    ))}
+                            <div className="text-orange-400 p-2 text-center flex items-center justify-center gap-4 mt-4">
+                                <div className="w-12 h-12">
+                                    <Image src="/images/quote.jpg" alt="Profile" className="rounded-full object-cover w-full h-full" width={50} height={50} />
+                                </div>
+                                <div>
+                                    Chị Thảo Duyên | Nhà phố 2 tầng | Vĩnh Phú – Thuận An
                                 </div>
                             </div>
-                        </div>
-                        {/* Right: Details */}
-                        <div className="col-span-1 flex flex-col items-center md:items-start mb-16 slide-in-right">
-                            <h3 className="text-2xl font-bold text-gray-800 mb-4 text-justify md:text-left">
-                                Chị Thảo Duyên | Nhà phố 2 tầng | Vĩnh Phú – Thuận An
-                            </h3>
-                            <p className="text-base text-gray-700 mb-8 text-justify md:text-left">
-                                &quot;Mình có thể tự tin nói rằng lựa chọn Nhà Đẹp Quảng Nam thi
-                                công trọn gói là một quyết định đáng đồng tiền bát gạo nếu bạn
-                                cần một đơn vị hội đủ các yếu tố TƯ DUY THIẾT KẾ, NĂNG LỰC THI
-                                CÔNG và CÁI TÂM LÀM NGHỀ. Khi viết những dòng đánh giá này, nhà
-                                mình đã làm xong được 5 tháng và mình đã rất tự tin giới thiệu
-                                thành công thêm 3 công trình của bạn bè người thân mình như một
-                                lời cảm ơn đến anh em Nhà Đẹp Quảng Nam.&quot;
-                            </p>
-                            <a
-                                href="#"
-                                className="inline-flex items-center gap-2 bg-orange-400 hover:bg-orange-300 text-white font-semibold px-6 py-3 rounded transition-colors duration-200 w-max mb-4"
-                            >
-                                THAM QUAN NHÀ HOÀN THIỆN
-                            </a>
                         </div>
                     </div>
                 </div>

@@ -14,7 +14,7 @@ export default function ContactPopover({trigger}) {
                     side="left" // or "top", "bottom", "right"
                     sideOffset={12}
                     align="end"
-                    className="bg-transparent shadow-xl"
+                    className="bg-transparent shadow-xl z-50"
                 >
                     <ContactForm/>
                 </Popover.Content>
