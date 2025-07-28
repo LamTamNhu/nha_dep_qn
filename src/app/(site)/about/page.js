@@ -102,7 +102,7 @@ export default function AboutPage() {
             description: "Chúng tôi không đơn thuần là đơn vị thi công theo yêu cầu, mà còn là thấu hiểu mong muốn của họ, để tư vấn giải pháp phù hợp nhất."
         },
         {
-            img:"/images/creata.png",
+            img:"/images/design-thinking.png",
             title: "Sáng tạo",
             description: "Với phương châm không ngừng phát triển Nhà Đẹp Quảng Nam luôn tập trung cải tiến toàn diện để mang đến dịch vụ tốt nhất đáp ứng mọi nhu cầu khách hàng."
         }
@@ -162,7 +162,7 @@ export default function AboutPage() {
             {/* Hero section with background image */}
             <div className="relative">
                 {/* Background image */}
-                <div className="absolute inset-0 bg-[url('/images/bg-2.webp')] bg-cover bg-center bg-no-repeat"/>
+                <div className="absolute inset-0 bg-[url('/images/bg-about.jpg')] bg-cover bg-center bg-no-repeat"/>
 
                 {/* Dark overlay */}
                 <div className="absolute inset-0 bg-black/40"/>
@@ -342,7 +342,7 @@ export default function AboutPage() {
                         {/* Header */}
                         <div className="mb-12 text-center">
                             <h2 className="text-white text-extrabold text-3xl font-bold my-20 tracking-[.5em] p-4 border-draw inline-block">
-                                CHÍNH SÁCH VÀ CAM KẾT CỦA NHÀ ĐẸP QUẢNG NAM
+                                CHÍNH SÁCH TẠI NHÀ ĐẸP QUẢNG NAM
                             </h2>
                         </div>
                         {/* Policies Grid */}
