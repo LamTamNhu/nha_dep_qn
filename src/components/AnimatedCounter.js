@@ -6,6 +6,7 @@ export default function AnimatedCounter({
                                             end = 1000,
                                             duration = 2000,
                                             text = "khách hàng thân thiết",
+                                            text2 = "",
                                             className = "",
                                         }) {
     const [count, setCount] = useState(0)
@@ -58,10 +59,10 @@ export default function AnimatedCounter({
             ref={counterRef}
             className={`text-center flex flex-col justify-center items-center h-full ${className}`}
         >
-            <div className="text-4xl font-bold mb-2 text-black">
-                {count.toLocaleString()}+
+            <div className="text-4xl font-bold mb-2 text-black whitespace-nowrap">
+                {text}
             </div>
-            <div className="text-lg font-bold text-black">{text}</div>
+            <div className="text-lg font-bold text-black whitespace-nowrap">{text2}</div>
         </div>
     )
 }

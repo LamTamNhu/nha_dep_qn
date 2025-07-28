@@ -42,12 +42,10 @@ export default function HeroCarousel(counterContent) {
                         <div/>
                         <div/>
                         {!counterContent?<AnimatedCounter end={counterContent[0].number} duration={3000} text={counterContent[0].text}/>:
-                            <AnimatedCounter end={10} duration={3000} text="Năm kinh nghiệm"/> }
-
+                            <AnimatedCounter text="Miễn phí 100%" text2="Chi phí thiết kế khi thi công trọn gói!"/> }
                         <div className="bg-black"/>
                         {!counterContent?<AnimatedCounter end={counterContent[1].number} duration={3000} text={counterContent[1].text}/>:
-                            <AnimatedCounter end={1000} duration={3000} text="Khách hàng thân thiết"/> }
-
+                            <AnimatedCounter text="Miễn phí 50% " text2="Chi phí thiết kế khi thi công phần thô!"/> }
                     </div>
                 </div>
             </div>
