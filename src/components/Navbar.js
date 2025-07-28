@@ -72,6 +72,15 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 
+    useEffect(() => {
+        const element = document.querySelector('.border-draw');
+        if (element) {
+            console.log('CSS custom property value:', getComputedStyle(element).getPropertyValue('--p'));
+            element.addEventListener('animationstart', () => console.log('Animation started'));
+            element.addEventListener('animationend', () => console.log('Animation ended'));
+        }
+    }, []);
+
     return (
         <nav id="navbar" className="fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur-xs pr-40">
             <div className="grid grid-cols-2 justify-items-center items-center justify-center h-20">
