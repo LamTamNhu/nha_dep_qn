@@ -3,6 +3,7 @@ import Image from "next/image";
 import {useEffect, useState} from "react";
 import {CreditCard, Lock, ShieldUser} from "lucide-react";
 import animateOnObserve from "@/lib/animateOnObserve";
+import BorderDraw from "@/components/ui/BorderDraw";
 
 export default function AboutPage() {
     const [expanded, setExpanded] = useState(false);
@@ -85,24 +86,24 @@ export default function AboutPage() {
             description: "Trong phong cách làm việc Nhà Đẹp Quảng Nam luôn ưu tiên tư vấn trung thực, không tô vẽ những điều xa vời mà tập trung vào giá trị thực tế cho khách hàng."
         },
         {
-            img:"/images/trust.png",
+            img: "/images/trust.png",
             title: "Chính trực",
             description: "Trong quá trình thi công xây dựng chúng tôi tuân thủ đạo đức nghề nghiệp, không gian dối hay làm trái nguyên tắc, không chạy theo lợi nhuận mà bỏ qua yếu tố an toàn."
         },
         {
-            img:"/images/responsibility.png",
+            img: "/images/responsibility.png",
             title: "Trách nhiệm",
             description: "Không phải cứ bàn giao xong là hết nghĩa vụ, mà là đảm bảo công trình ấy thực sự đáng sống, đáng tin cậy trong nhiều năm sau."
         }
     ];
     const coreValues2 = [
         {
-            img:"/images/compass.png",
+            img: "/images/compass.png",
             title: "Hiểu và Thương",
             description: "Chúng tôi không đơn thuần là đơn vị thi công theo yêu cầu, mà còn là thấu hiểu mong muốn của họ, để tư vấn giải pháp phù hợp nhất."
         },
         {
-            img:"/images/design-thinking.png",
+            img: "/images/design-thinking.png",
             title: "Sáng tạo",
             description: "Với phương châm không ngừng phát triển Nhà Đẹp Quảng Nam luôn tập trung cải tiến toàn diện để mang đến dịch vụ tốt nhất đáp ứng mọi nhu cầu khách hàng."
         }
@@ -172,7 +173,7 @@ export default function AboutPage() {
 
                 {/* Content */}
                 <div className="relative z-10">
-                    <h1 className="text-white text-center text-extrabold text-3xl font-bold py-70 tracking-[.5em]">
+                    <h1 className="text-white text-center text-extrabold text-3xl font-bold py-70 tracking-[.5em] py-2">
                         GIỚI THIỆU
                     </h1>
                     <section className="py-12 px-4">
@@ -186,9 +187,10 @@ export default function AboutPage() {
                         <div className="container mx-auto max-w-6xl mx-auto px-4">
                             <div className="text-center">
                                 {/*Title*/}
-                                <h2 className="text-white text-extrabold text-3xl font-bold my-20 tracking-[.5em] p-4 border-draw inline-block">
+                                <h2 className="text-white text-extrabold text-3xl font-bold my-20 tracking-[.5em] p-4 inline-block border-2 border-white">
                                     ĐỘI NGŨ
                                 </h2>
+
                             </div>
                             <div className="grid grid-cols-3 gap-4">
                                 <div className="text-center slide-in-bottom">
@@ -224,7 +226,7 @@ export default function AboutPage() {
                 {/*Office pictures*/}
                 <section className="py-12 px-4">
                     <div className="max-w-6xl mx-auto text-center">
-                        <h2 className="text-white text-extrabold text-3xl font-bold my-20 tracking-[.5em] p-4 border-draw inline-block">
+                        <h2 className="text-white text-extrabold text-3xl font-bold my-20 tracking-[.5em] p-4 inline-block border-2 border-white">
                             HÌNH ẢNH VĂN PHÒNG
                         </h2>
                         <div className="flex justify-center gap-6">
@@ -244,7 +246,7 @@ export default function AboutPage() {
                     <div className="max-w-6xl mx-auto">
                         {/* Header */}
                         <div className="text-center mb-12">
-                            <h2 className="text-white text-extrabold text-3xl font-bold my-20 tracking-[.5em] p-4 border-draw inline-block">
+                            <h2 className="text-white text-extrabold text-3xl font-bold my-20 tracking-[.5em] p-4 border-2 border-white inline-block">
                                 5 KHÔNG TẠI NHÀ ĐẸP QUẢNG NAM
                             </h2>
                         </div>
@@ -280,7 +282,7 @@ export default function AboutPage() {
                     <div className="max-w-6xl mx-auto">
                         {/* Header */}
                         <div className="text-center mb-12">
-                            <h2 className="text-white text-extrabold text-3xl font-bold my-20 tracking-[.5em] p-4 border-draw inline-block">
+                            <h2 className="text-white text-extrabold text-3xl font-bold my-20 tracking-[.5em] p-4 border-2 border-white inline-block">
                                 GIÁ TRỊ CỐT LÕI
                             </h2>
                         </div>
@@ -341,7 +343,7 @@ export default function AboutPage() {
                     <div className="max-w-6xl mx-auto mt-20">
                         {/* Header */}
                         <div className="mb-12 text-center">
-                            <h2 className="text-white text-extrabold text-3xl font-bold my-20 tracking-[.5em] p-4 border-draw inline-block">
+                            <h2 className="text-white text-extrabold text-3xl font-bold my-20 tracking-[.5em] p-4 border-2 border-white inline-block">
                                 CHÍNH SÁCH TẠI NHÀ ĐẸP QUẢNG NAM
                             </h2>
                         </div>
