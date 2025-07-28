@@ -1,13 +1,9 @@
 import * as React from "react";
-import { useRef } from "react";
 import AnimatedCounter from "@/components/AnimatedCounter";
-
 export default function HeroCarousel(counterContent) {
 
-    const bannerRef = useRef(null);
     return (
         <div
-            ref={bannerRef}
             className="h-screen w-full relative overflow-hidden flex items-center justify-center video-container"
             style={{ perspective: "1px" }}
         >

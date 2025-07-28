@@ -1,20 +1,15 @@
-"use client";
 import {ArrowUpRight, Eye, Goal, HandCoins, HeartHandshake, Paintbrush, Quote, ShieldCheck, Users,} from "lucide-react";
 import * as React from "react";
-import {useEffect, useState} from "react";
 import Image from "next/image";
-import AnimatedCounter from "@/components/AnimatedCounter";
 import PartnerCarousel from "@/components/PartnerCarousel";
-import ProcessSection from "../../components/ProcessSection";
 import SectionHeading from "@/components/SectionHeading";
-import animateOnObserve from "@/lib/animateOnObserve";
 import HeroCarousel from "@/components/HeroCarousel";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import ContactForm from "@/components/ContactForm";
 import {client} from "@/sanity/lib/client";
-import {introQuery} from "@/sanity/lib/queries";
+import { introQuery} from "@/sanity/lib/queries";
 import ProcessTabs from "@/components/ui/ProcessTabs";
-
+import ClientSideAnimations from "@/lib/clientSideAnimations";
 const cardData = [
     {
         id: "core-values",
@@ -83,41 +78,22 @@ const partners = [
         alt: "Viglacera Logo",
     },
 ];
+export default async function Home() {
+    const data = await client.fetch(introQuery);
 
-
-export default function Home() {
-    const [intro, setIntro] = useState(null);
-    useEffect(() => {
-        client.fetch(introQuery).then((data) => {
-            setIntro(data);
-        });
-
-        // Set up animations after DOM is ready
-        const swingObserver = animateOnObserve('.swing-in-top-fwd-2');
-        const slideObserver = animateOnObserve('.slide-in-bottom');
-        const slideInObserver = animateOnObserve('.slide-in-right');
-        const puffInObserver = animateOnObserve('.puff-in-center');
-
-        // Cleanup function to disconnect observers
-        return () => {
-            swingObserver.disconnect();
-            slideObserver.disconnect();
-            slideInObserver.disconnect();
-            puffInObserver.disconnect();
-        };
-    }, []);
     return (
         <div className="min-h-screen relative bg-white">
+            <ClientSideAnimations/>
             {/*<HeroCarousel/>*/}
             <HeroCarousel/>
             {/* Introduction section */}
             <div className="py-12 px-4 bg-black">
                 <div className="max-w-6xl mx-auto px-4">
                     <h1 className="text-xl md:text-4xl font-bold text-center text-orange-400 swing-in-top-fwd-2 mb-6 md:whitespace-nowrap">
-                        {intro ? intro.heading : "Loading heading..."}
+                        {data ? data.heading : "Loading heading..."}
                     </h1>
                     <h3 className="text-md font-semibold mb-2 text-white text-justify swing-in-top-fwd-2">
-                        {intro ? intro.description : "Loading description..."}
+                        {data ? data.description : "Loading description..."}
                     </h3>
                 </div>
             </div>
@@ -387,9 +363,11 @@ export default function Home() {
                                 </a>
                             </div>
 
-                            <div className="text-orange-400 p-2 text-center flex items-center justify-center gap-4 mt-4">
+                            <div
+                                className="text-orange-400 p-2 text-center flex items-center justify-center gap-4 mt-4">
                                 <div className="w-12 h-12">
-                                    <Image src="/images/quote.jpg" alt="Profile" className="rounded-full object-cover w-full h-full" width={50} height={50} />
+                                    <Image src="/images/quote.jpg" alt="Profile"
+                                           className="rounded-full object-cover w-full h-full" width={50} height={50}/>
                                 </div>
                                 <div>
                                     Chị Thảo Duyên | Nhà phố 2 tầng | Vĩnh Phú – Thuận An

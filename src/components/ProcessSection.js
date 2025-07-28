@@ -1,3 +1,4 @@
+'use client'
 import {RulerDimensionLine, NotebookPen, Gem, UserRoundPen, PencilLine, FilePen, HandCoins} from "lucide-react";
 import React, {useState, useEffect, useRef} from "react";
 import SectionHeading from "@/components/SectionHeading";
