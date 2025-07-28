@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import {useState, useEffect, useRef} from "react"
 
 export default function AnimatedCounter({
                                             end = 1000,
@@ -19,7 +19,7 @@ export default function AnimatedCounter({
                     setIsVisible(true)
                 }
             },
-            { threshold: 0.1 },
+            {threshold: 0.1},
         )
 
         if (counterRef.current) {
@@ -63,6 +63,5 @@ export default function AnimatedCounter({
             </div>
             <div className="text-lg font-bold text-black">{text}</div>
         </div>
-
     )
 }

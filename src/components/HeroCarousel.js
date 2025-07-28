@@ -2,9 +2,9 @@ import * as React from "react";
 import { useRef } from "react";
 import AnimatedCounter from "@/components/AnimatedCounter";
 
-export default function HeroCarousel() {
-    const bannerRef = useRef(null);
+export default function HeroCarousel(counterContent) {
 
+    const bannerRef = useRef(null);
     return (
         <div
             ref={bannerRef}
@@ -38,18 +38,19 @@ export default function HeroCarousel() {
             {/* Counters */}
             <div className="absolute bottom-0 mx-auto px-4 z-50">
                 <div className="max-w-6xl mx-auto px-4">
-                    <div className="grid grid-cols-[1fr_2px_1fr_2px_1fr_2px_1fr] gap-6 border-2 border-black rounded-t-4xl p-8 bg-white">
-                        <AnimatedCounter end={10} duration={3000} text="Năm kinh nghiệm" />
-                        <div className="bg-black" />
-                        <AnimatedCounter end={100} duration={3000} text="Chuyên viên, công nhân" />
-                        <div className="bg-black" />
-                        <AnimatedCounter end={1000} duration={3000} text="Khách hàng thân thiết" />
-                        <div className="bg-black" />
-                        <AnimatedCounter end={3000} duration={3000} text="Mẫu thiết kế hiện đại" />
+                    <div className="grid grid-cols-[1fr_2px_1fr_2px_1fr_2px_1fr] justify-center gap-6 border-2 border-black rounded-t-4xl p-8 bg-white">
+                        <div/>
+                        <div/>
+                        {!counterContent?<AnimatedCounter end={counterContent[0].number} duration={3000} text={counterContent[0].text}/>:
+                            <AnimatedCounter end={10} duration={3000} text="Năm kinh nghiệm"/> }
+
+                        <div className="bg-black"/>
+                        {!counterContent?<AnimatedCounter end={counterContent[1].number} duration={3000} text={counterContent[1].text}/>:
+                            <AnimatedCounter end={1000} duration={3000} text="Khách hàng thân thiết"/> }
+
                     </div>
                 </div>
             </div>
-
             {/* ✅ Blinking Ad */}
             <div className="absolute top-24 right-2 z-50">
                 <div className="bg-orange-500 text-white font-semibold text-xl rounded-xl shadow-lg px-4 py-3 flicker-1">
