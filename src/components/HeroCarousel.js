@@ -4,9 +4,8 @@ import AnimatedCounter from "@/components/AnimatedCounter";
 
 
 
-export default function HeroCarousel() {
+export default function HeroCarousel(counterContent) {
     const bannerRef = useRef(null);
-
     return (
         <div
             ref={bannerRef}
@@ -32,26 +31,15 @@ export default function HeroCarousel() {
             </div>
             <div className="absolute bottom-0 mx-auto px-4 z-50">
                 <div className="max-w-6xl mx-auto px-4">
-                    <div className="grid grid-cols-[1fr_2px_1fr_2px_1fr_2px_1fr] gap-6 border-2 border-black rounded-t-4xl p-8 bg-white">
-                        <AnimatedCounter end={10} duration={3000} text="Năm kinh nghiệm"/>
+                    <div className="grid grid-cols-[1fr_2px_1fr_2px_1fr_2px_1fr] justify-center gap-6 border-2 border-black rounded-t-4xl p-8 bg-white">
+                        <div/>
+                        <div/>
+                        {!counterContent?<AnimatedCounter end={counterContent[0].number} duration={3000} text={counterContent[0].text}/>:
+                            <AnimatedCounter end={10} duration={3000} text="Năm kinh nghiệm"/> }
+
                         <div className="bg-black"/>
-                        <AnimatedCounter
-                            end={100}
-                            duration={3000}
-                            text="Chuyên viên, công nhân"
-                        />
-                        <div className="bg-black"/>
-                        <AnimatedCounter
-                            end={1000}
-                            duration={3000}
-                            text="Khách hàng thân thiết"
-                        />
-                        <div className="bg-black"/>
-                        <AnimatedCounter
-                            end={3000}
-                            duration={3000}
-                            text="Mẫu thiết kế hiện đại"
-                        />
+                        {!counterContent?<AnimatedCounter end={counterContent[1].number} duration={3000} text={counterContent[1].text}/>:
+                            <AnimatedCounter end={1000} duration={3000} text="Khách hàng thân thiết"/> }
                     </div>
                 </div>
             </div>
