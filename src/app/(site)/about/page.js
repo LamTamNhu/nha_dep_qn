@@ -149,7 +149,7 @@ export default function AboutPage() {
     ]
     useEffect(() => {
         // Set up animations after DOM is ready
-        const swingObserver = animateOnObserve('.swing-in-top-fwd');
+        const swingObserver = animateOnObserve('.swing-in-top-fwd-2');
         const borderObserver = animateOnObserve('.border-draw')
         const puffObserver = animateOnObserve('.puff-in-center')
         const slideObserver = animateOnObserve('.slide-in-bottom')
@@ -254,9 +254,9 @@ export default function AboutPage() {
                     <div className="z-0 pointer-events-none bg-[url('/images/5khong-bg.jpg')] bg-cover bg-top bg-no-repeat w-screen">
                         {/*Content*/}
                         <div className="max-w-6xl py-30 mx-auto">
-                            <div className="pt-18 mx-auto px-16">
+                            <div className="pt-18 mx-auto px-16 swing-in-top-fwd-2">
                                 <div
-                                    className="text-orange-400 text-extrabold text-6xl font-bold mb-2 opacity-70 ">
+                                    className="text-orange-400 text-extrabold text-6xl font-bold mb-2 opacity-70">
                                     5 GIÁ TRỊ
                                 </div>
                                 <div className="flex h-16 gap-2">
@@ -276,14 +276,14 @@ export default function AboutPage() {
                                                 className={`flex p-4 ${index < 3 ? `border-b-1 border-b-orange-400/20` : ""} ${index === 2 ? "" : "border-r-1 border-r-orange-400/20"}`}
                                                 key={index}>
                                                 <div
-                                                    className="z-0 opacity-40 text-orange-400 text-extrabold text-5xl font-bold mb-2 mb-6">
+                                                    className="z-0 opacity-40 text-orange-400 text-extrabold text-5xl font-bold mb-2 mb-6 swing-in-top-fwd-2">
                                                     {`0${index + 1}`}
                                                 </div>
                                                 <div className="-ml-2 mt-4 z-10">
-                                                    <div className="text-white font-semibold text-md mb-4">
+                                                    <div className="text-white font-semibold text-md mb-4 swing-in-top-fwd-2">
                                                         {item.text}
                                                     </div>
-                                                    <div className="text-white text-xs">
+                                                    <div className="text-white text-xs swing-in-top-fwd-2">
                                                         {item.description}
                                                     </div>
                                                 </div>
@@ -308,9 +308,9 @@ export default function AboutPage() {
                         <div className="grid grid-cols-3 gap-4 justify-center">
                             {coreValues.map((item, index) => (
                                 <div key={index}
-                                     className="relative overflow-hidden rounded-lg shadow-lg group puff-in-center">
+                                     className="relative overflow-hidden rounded-lg shadow-lg group puff-in-center overflow-hidden">
                                     {/* Content Section */}
-                                    <div className="bg-white h-full p-6">
+                                    <div className="bg-white h-full p-6 hover:scale-110 duration-300 ease-in-out">
                                         <div
                                             className="rounded-full bg-orange-400 w-24 h-24 flex items-center justify-center text-white mx-auto p-4 my-6">
                                             <Image src={item.img} alt="res" width={50} height={50}
@@ -333,9 +333,9 @@ export default function AboutPage() {
                         <div className="flex justify-center mt-8 gap-4">
                             {coreValues2.map((item, index) => (
                                 <div key={index}
-                                     className="relative overflow-hidden rounded-lg shadow-lg group puff-in-center w-sm">
+                                     className="relative overflow-hidden rounded-lg shadow-lg group puff-in-center w-sm overflow-hidden">
                                     {/* Content Section */}
-                                    <div className="bg-white h-full p-6">
+                                    <div className="bg-white h-full p-6 hover:scale-110 duration-300 ease-in-out">
                                         <div
                                             className="rounded-full bg-orange-400 w-24 h-24 flex items-center justify-center text-white mx-auto p-4 my-6">
                                             <Image src={item.img} alt="res" width={50} height={50}
