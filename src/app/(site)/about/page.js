@@ -3,7 +3,7 @@ import Image from "next/image";
 import {useEffect, useState} from "react";
 import {CreditCard, Lock, ShieldUser} from "lucide-react";
 import animateOnObserve from "@/lib/animateOnObserve";
-import BorderDraw from "@/components/ui/BorderDraw";
+import {fancyFont} from "@/app/fonts";
 
 export default function AboutPage() {
     const [expanded, setExpanded] = useState(false);
@@ -63,19 +63,24 @@ export default function AboutPage() {
 
     const khongItems = [
         {
-            text: "KHÔNG sử dụng vật tư kém chất lượng."
+            text: "KHÔNG sử dụng vật tư kém chất lượng.",
+            description: "Chỉ sử dụng vật liệu chất lượng cao, đạt tiêu chuẩn nghiêm ngặt, đảm bảo độ bền và hiệu quả lâu dài."
         },
         {
-            text: "KHÔNG sử dụng vật tư sai báo giá."
+            text: "KHÔNG sử dụng vật tư sai báo giá.",
+            description: "Giá cả minh bạch theo đúng thông số thực tế, không có chi phí ẩn hay báo giá sai lệch."
         },
         {
-            text: "KHÔNG cắt giảm vật tư, thi công đủ và đúng tiêu chuẩn."
+            text: "KHÔNG cắt giảm vật tư, thi công đủ và đúng tiêu chuẩn.",
+            description: "Mọi công trình được thực hiện với đủ khối lượng vật tư và phương pháp thi công đúng kỹ thuật, tuân thủ tiêu chuẩn không cắt giảm."
         },
         {
-            text: "KHÔNG bán thầu – kiểm soát chất lượng từ A-Z."
+            text: "KHÔNG bán thầu – kiểm soát chất lượng từ A-Z.",
+            description: "Giám sát chất lượng toàn bộ quy trình từ đầu đến cuối, loại bỏ rủi ro bán thầu, đảm bảo chất lượng thống nhất."
         },
         {
-            text: "KHÔNG giấu giếm – minh bạch trong từng khâu thi công."
+            text: "KHÔNG giấu giếm – minh bạch trong từng khâu thi công.",
+            description: "Mọi giai đoạn thi công được thực hiện công khai, khách hàng có thể theo dõi tiến độ và phương pháp mọi lúc."
         }
     ];
 
@@ -220,60 +225,75 @@ export default function AboutPage() {
                         </div>
                     </section>
                 </div>
-
             </div>
             <div>
                 {/*Office pictures*/}
-                <section className="py-12 px-4">
-                    <div className="max-w-6xl mx-auto text-center">
+                <section className="pt-12 px-4">
+                    <div className="w-screen mx-auto text-center">
                         <h2 className="text-white text-extrabold text-3xl font-bold my-20  p-4 inline-block border-2 border-white">
                             HÌNH ẢNH VĂN PHÒNG
                         </h2>
-                        <div className="flex justify-center gap-6">
+                        <div className="flex justify-center">
                             <div className="overflow-hidden">
-                                <Image width={300} height={500} src="/images/Thiet-ke-chua-co-ten-2.jpg" alt="van phong"
-                                       className="w-full transition-transform duration-300 ease-in-out hover:scale-110"/>
+                                <Image width={300} height={500} src="/images/office1.jpg" alt="van phong"
+                                       className="object-cover w-full h-full transition-transform duration-300 ease-in-out hover:scale-110"/>
                             </div>
                             <div className="overflow-hidden">
                                 <Image width={300} height={500} src="/images/Thiet-ke-chua-co-ten-7.jpg" alt="van phong"
-                                       className="w-full transition-transform duration-300 ease-in-out hover:scale-110"/>
+                                       className="w-full h-full object-cover transition-transform duration-300 ease-in-out hover:scale-110"/>
+                            </div>
+                            <div className="overflow-hidden">
+                                <Image width={300} height={500} src="/images/Thiet-ke-chua-co-ten-7.jpg" alt="van phong"
+                                       className="w-full object-cover transition-transform duration-300 ease-in-out hover:scale-110"/>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <section className="py-12 px-4">
+                <section className="px-4">
                     <div className="max-w-6xl mx-auto">
-                        {/* Header */}
-                        <div className="text-center mb-12">
-                            <h2 className="text-white text-extrabold text-3xl font-bold my-20  p-4 border-2 border-white inline-block">
-                                5 KHÔNG TẠI NHÀ ĐẸP QUẢNG NAM
-                            </h2>
-                        </div>
-
                         {/* Cards Grid - 5 Individual Cards */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {khongItems.map((item, index) => (
-                                <div
-                                    key={index}
-                                    className="relative overflow-hidden rounded-lg shadow-lg group puff-in-center"
-                                >
-                                    {/* Content Section */}
-                                    <div className="bg-white">
-                                        {/* Large Title */}
-                                        <h3 className="text-md items-center flex justify-center font-bold text-white mb-4 leading-tight bg-orange-400 h-12 px-6">
-                                            {item.text}
-                                        </h3>
-
-                                        {/* Subtitle */}
-                                        <p className="text-black mb-6 leading-relaxed px-6 text-justify">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor incididunt ut
-                                            labore et dolore magna aliqua. Ut enim ad minim veniam
-                                        </p>
+                        <div
+                            className="py-30 flex-cols bg-[url('/images/5khong-bg.jpg')] bg-cover bg-center bg-no-repeat min-h-screen w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
+                            <div>
+                                <div className="max-w-6xl mx-auto px-16">
+                                    <div
+                                        className="text-orange-400 text-extrabold text-6xl font-bold mb-2 opacity-70 ">
+                                        5 GIÁ TRỊ
+                                    </div>
+                                    <div className="flex h-16 gap-2">
+                                        <div className={`${fancyFont.className} text-white text-6xl self-start`}>Khác
+                                            biệt
+                                        </div>
+                                        <div
+                                            className="text-white text-extrabold text-xl  self-end">
+                                            của Nhà Đẹp
+                                        </div>
                                     </div>
                                 </div>
-                            ))}
+                                <div className="grid grid-cols-3 max-w-6xl mx-auto mt-12">
+                                    <div className="grid grid-cols-3 w-full col-span-2 divide-orange-500">
+                                        {khongItems.map((item,index) => (
+                                            <div className={`flex p-4 ${index+1<khongItems.length?`border-b-1 border-b-orange-400/20 ${index===2?"":"border-r-1 border-r-orange-400/20"}`:""}`} key={index}>
+                                                <div
+                                                    className="z-0 opacity-40 text-orange-400 text-extrabold text-5xl font-bold mb-2 mb-6">
+                                                    {`0${index + 1}`}
+                                                </div>
+                                                <div className="-ml-2 mt-4 z-10">
+                                                    <div className="text-white font-semibold text-md mb-4">
+                                                        {item.text}
+                                                    </div>
+                                                    <div className="text-white text-xs">
+                                                        {item.description}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div/>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </section>
