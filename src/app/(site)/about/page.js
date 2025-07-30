@@ -173,7 +173,7 @@ export default function AboutPage() {
 
                 {/* Content */}
                 <div className="relative z-10">
-                    <h1 className="text-white text-center text-extrabold text-3xl font-bold py-70 tracking-[.5em] py-2">
+                    <h1 className="text-white text-center text-extrabold text-3xl font-bold py-70 py-2">
                         GIỚI THIỆU
                     </h1>
                     <section className="py-12 px-4">
@@ -187,7 +187,7 @@ export default function AboutPage() {
                         <div className="container mx-auto max-w-6xl mx-auto px-4">
                             <div className="text-center">
                                 {/*Title*/}
-                                <h2 className="text-white text-extrabold text-3xl font-bold my-20 tracking-[.5em] p-4 inline-block border-2 border-white">
+                                <h2 className="text-white text-extrabold text-3xl font-bold my-20  p-4 inline-block border-2 border-white">
                                     ĐỘI NGŨ
                                 </h2>
 
@@ -226,7 +226,7 @@ export default function AboutPage() {
                 {/*Office pictures*/}
                 <section className="py-12 px-4">
                     <div className="max-w-6xl mx-auto text-center">
-                        <h2 className="text-white text-extrabold text-3xl font-bold my-20 tracking-[.5em] p-4 inline-block border-2 border-white">
+                        <h2 className="text-white text-extrabold text-3xl font-bold my-20  p-4 inline-block border-2 border-white">
                             HÌNH ẢNH VĂN PHÒNG
                         </h2>
                         <div className="flex justify-center gap-6">
@@ -246,7 +246,7 @@ export default function AboutPage() {
                     <div className="max-w-6xl mx-auto">
                         {/* Header */}
                         <div className="text-center mb-12">
-                            <h2 className="text-white text-extrabold text-3xl font-bold my-20 tracking-[.5em] p-4 border-2 border-white inline-block">
+                            <h2 className="text-white text-extrabold text-3xl font-bold my-20  p-4 border-2 border-white inline-block">
                                 5 KHÔNG TẠI NHÀ ĐẸP QUẢNG NAM
                             </h2>
                         </div>
@@ -282,7 +282,7 @@ export default function AboutPage() {
                     <div className="max-w-6xl mx-auto">
                         {/* Header */}
                         <div className="text-center mb-12">
-                            <h2 className="text-white text-extrabold text-3xl font-bold my-20 tracking-[.5em] p-4 border-2 border-white inline-block">
+                            <h2 className="text-white text-extrabold text-3xl font-bold my-20  p-4 border-2 border-white inline-block">
                                 GIÁ TRỊ CỐT LÕI
                             </h2>
                         </div>
@@ -294,9 +294,9 @@ export default function AboutPage() {
                                     {/* Content Section */}
                                     <div className="bg-white h-full p-6">
                                         <div
-                                            className="rounded-full bg-orange-400 w-22 h-22 flex items-center justify-center text-white mx-auto p-4 my-6">
+                                            className="rounded-full bg-orange-400 w-24 h-24 flex items-center justify-center text-white mx-auto p-4 my-6">
                                             <Image src={item.img} alt="res" width={50} height={50}
-                                                   className="object-cover"/>
+                                                   className="object-cover fill-white"/>
                                         </div>
                                         {/* Large Title */}
                                         <h3 className="text-lg items-center flex justify-center font-bold text-black mb-4 leading-tight h-12 px-6">
@@ -319,7 +319,7 @@ export default function AboutPage() {
                                     {/* Content Section */}
                                     <div className="bg-white h-full p-6">
                                         <div
-                                            className="rounded-full bg-orange-400 w-22 h-22 flex items-center justify-center text-white mx-auto p-4 my-6">
+                                            className="rounded-full bg-orange-400 w-24 h-24 flex items-center justify-center text-white mx-auto p-4 my-6">
                                             <Image src={item.img} alt="res" width={50} height={50}
                                                    className="object-cover"/>
                                         </div>
@@ -343,7 +343,7 @@ export default function AboutPage() {
                     <div className="max-w-6xl mx-auto mt-20">
                         {/* Header */}
                         <div className="mb-12 text-center">
-                            <h2 className="text-white text-extrabold text-3xl font-bold my-20 tracking-[.5em] p-4 border-2 border-white inline-block">
+                            <h2 className="text-white text-extrabold text-3xl font-bold my-20  p-4 border-2 border-white inline-block">
                                 CHÍNH SÁCH TẠI NHÀ ĐẸP QUẢNG NAM
                             </h2>
                         </div>

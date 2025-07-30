@@ -101,7 +101,7 @@ const ServicesPage = () => {
 
   return (
     <div className="min-h-screen bg-[#272727]">
-      <Banner title="Dịch vụ" />
+      <Banner title="DỊCH VỤ" />
       <div className="container mx-auto px-6 md:px-10">
         {services.map((service, index) => (
           <div
@@ -111,12 +111,9 @@ const ServicesPage = () => {
             } ${service.id % 2 === 1 ? 'odd' : 'even'}`}
           >
             <div className="w-full md:w-1/2 p-4 service-description flex flex-col justify-center">
-              <SectionHeading>
-                0{index + 1}
-              </SectionHeading>
-              <h3 className="text-3xl font-bold text-orange-500 mb-4">
+              <h2 className="text-lg md:text-4xl md:whitespace-nowrap font-bold text-left text-orange-400 mb-6 ">
                 {service.title}
-              </h3>
+              </h2>
               <p className="text-white mb-4">{service.description}</p>
               <a
                 href={`/services/${service.id}`}

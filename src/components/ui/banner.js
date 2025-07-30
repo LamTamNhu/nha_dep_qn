@@ -127,7 +127,7 @@ export default function Banner({title}) {
                     </div>
                 ))}
             </div>
-            <h2 className="text-white font-extrabold text-3xl my-20 tracking-[.5em] p-4 border-2 border-white inline-block">
+            <h2 className="text-white font-extrabold text-3xl my-20 p-4 border-2 border-white inline-block">
                 {title}
             </h2>
         </div>
