@@ -74,7 +74,7 @@ export default function Navbar() {
     }, [])
 
     return (
-        <nav id="navbar" className="fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur-xs pr-20 py-4">
+        <nav id="navbar" className="fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur-xs pr-20">
             <div className="grid grid-cols-2 items-center justify-items-center">
                 {/* Logo */}
                 <BorderDraw
@@ -98,7 +98,7 @@ export default function Navbar() {
                 {/* Desktop Navigation */}
                 <div className="hidden lg:flex items-center space-x-4 h-full">
                     {navigationItems.map((item) => (
-                        <div key={item.name} className="relative group h-full flex items-center">
+                        <div key={item.name} className="relative group h-full py-5 flex items-center">
                             <Link
                                 href={item.href}
                                 className={`flex items-center h-full whitespace-nowrap text-white text-md font-medium tracking-wide px-3 after-effect ${
@@ -114,7 +114,7 @@ export default function Navbar() {
                         opacity-0 group-hover:opacity-100
                         pointer-events-none group-hover:pointer-events-auto
                         transition duration-200
-                        bg-black/60 text-white rounded-md shadow-lg w-56
+                        bg-black/60 text-white rounded-sm shadow-lg w-56
                         backdrop-blur-xs
                     "
                                 >
