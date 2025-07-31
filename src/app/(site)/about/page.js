@@ -274,13 +274,13 @@ export default function AboutPage() {
                                 {khongItems.map((item, index) => {
                                         return (
                                             <div
-                                                className={`grid grid-cols-[auto_1fr] gap-y-2 p-4 ${index < 3 ? `border-b-1 border-b-orange-400/20` : ""} ${index === 2 ? "" : "border-r-1 border-r-orange-400/20"}`}
+                                                className={`grid grid-cols-[auto_1fr] justify-items-end gap-2 p-4 ${index < 3 ? `border-b-1 border-b-orange-400/20` : ""} ${index === 2 ? "" : "border-r-1 border-r-orange-400/20"}`}
                                                 key={index}>
                                                 <div
                                                     className="shrink opacity-40 text-orange-400 text-extrabold text-5xl font-bold swing-in-top-fwd-2">
                                                     {`0${index + 1}`}
                                                 </div>
-                                                <div className="text-white font-semibold text-md swing-in-top-fwd-2 line-clamp-2">
+                                                <div className="mt-1 text-white font-semibold text-md swing-in-top-fwd-2 line-clamp-2">
                                                     {item.text}
                                                 </div>
                                                 <div/>
