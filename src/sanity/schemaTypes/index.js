@@ -1,7 +1,7 @@
-import introduction from "@/sanity/schemaTypes/introduction";
 import homepage from "@/sanity/schemaTypes/homepage";
 import youtubeEmbed from "@/sanity/schemaTypes/youtubeEmbed";
+import titleAndDescription from "@/sanity/schemaTypes/titleAndDescription";
 
 export const schemas = {
-  types: [introduction,homepage,youtubeEmbed],
+  types: [homepage,youtubeEmbed,titleAndDescription],
 }

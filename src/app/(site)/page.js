@@ -7,9 +7,10 @@ import HeroCarousel from "@/components/HeroCarousel";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import ContactForm from "@/components/ContactForm";
 import {client} from "@/sanity/lib/client";
-import { introQuery} from "@/sanity/lib/queries";
 import ProcessTabs from "@/components/ui/ProcessTabs";
 import ClientSideAnimations from "@/lib/clientSideAnimations";
+import {homepageQuery} from "@/sanity/lib/queries";
+
 const cardData = [
     {
         id: "core-values",
@@ -79,21 +80,22 @@ const partners = [
     },
 ];
 export default async function Home() {
-    const data = await client.fetch(introQuery);
+    const data = await client.fetch(homepageQuery);
+    console.log(data);
 
     return (
         <div className="min-h-screen relative bg-white">
             <ClientSideAnimations/>
             {/*<HeroCarousel/>*/}
-            <HeroCarousel/>
+            <HeroCarousel data={data.bannerTitle}/>
             {/* Introduction section */}
             <div className="py-12 px-4 bg-black">
                 <div className="max-w-6xl mx-auto px-4">
                     <h1 className="text-xl md:text-4xl font-bold text-center text-orange-400 swing-in-top-fwd-2 mb-6 md:whitespace-nowrap">
-                        {data ? data.heading : "Loading heading..."}
+                        {data?.introduction?.title || "Loading heading..."}
                     </h1>
                     <h3 className="text-md font-semibold mb-2 text-white text-justify swing-in-top-fwd-2">
-                        {data ? data.description : "Loading description..."}
+                        {data?.introduction?.description || "Loading description..."}
                     </h3>
                 </div>
             </div>

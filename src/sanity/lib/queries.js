@@ -1,28 +1,23 @@
-export const introQuery = `*[_type == "introduction"][0]{
-  heading,
-  description
-}`
-
-export const homepageQuery = `*[_type == "homepage"][0] {
-  heroSlides[]{asset->{url}},
-  introHeading,
-  introDescription,
-  coreValues[]{title, description, iconName},
-  whyChooseUs[]{reason},
-  designProjects[]{
+export const homepageQuery = `*[_type == "homepage"][0]{
+  videoBanner {
     title,
-    description,
-    "imageUrl": image.asset->url
+    url
   },
-  executionProjects[]{
+  bannerTitle {
     title,
-    description,
-    "imageUrl": image.asset->url
+    description
   },
-  testimonial {
-    quote,
-    author,
-    link,
-    "avatarUrl": avatar.asset->url
+  sale[] {
+    topText,
+    bottomText
+  },
+  introduction {
+    title,
+    description
+  },
+  coreValues[] {
+    title,
+    description
   }
-}`;
+}
+`;
