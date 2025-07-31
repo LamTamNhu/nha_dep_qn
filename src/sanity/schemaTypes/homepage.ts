@@ -4,10 +4,9 @@ export default {
   title: 'Trang chủ',
   fields: [
     {
-      name: 'heroSlides',
-      type: 'array',
-      title: 'Slide chính',
-      of: [{ type: 'image', options: { hotspot: true } }],
+      name: 'title',
+      title: 'Video banner homepage',
+      type: 'youtubeEmbed'
     },
     {
       name: 'introHeading',
