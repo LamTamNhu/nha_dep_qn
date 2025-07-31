@@ -67,7 +67,7 @@ export default function AboutPage() {
             description: "Chỉ sử dụng vật liệu chất lượng cao, đạt tiêu chuẩn nghiêm ngặt, đảm bảo độ bền và hiệu quả lâu dài"
         },
         {
-            text: "KHÔNG sử dụng vật tư sai báo giá",
+            text: "KHÔNG sử dụng vật tư khác với báo giá",
             description: "Giá cả minh bạch theo đúng thông số thực tế, không có chi phí ẩn hay báo giá sai lệch"
         },
         {
@@ -251,7 +251,8 @@ export default function AboutPage() {
                 </section>
                 {/*5 qualities*/}
                 <section className="px-4">
-                    <div className="z-0 pointer-events-none bg-[url('/images/5khong-bg.jpg')] bg-cover bg-top bg-no-repeat w-screen">
+                    <div
+                        className="z-0 pointer-events-none bg-[url('/images/5khong-bg.jpg')] bg-cover bg-top bg-no-repeat w-screen">
                         {/*Content*/}
                         <div className="max-w-6xl py-30 mx-auto">
                             <div className="pt-18 mx-auto px-16 swing-in-top-fwd-2">
@@ -269,23 +270,22 @@ export default function AboutPage() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="grid grid-cols-3 divide-orange-500 max-w-4xl">
+                            <div className="grid grid-cols-3 divide-orange-500 max-w-6xl">
                                 {khongItems.map((item, index) => {
                                         return (
                                             <div
-                                                className={`flex p-4 ${index < 3 ? `border-b-1 border-b-orange-400/20` : ""} ${index === 2 ? "" : "border-r-1 border-r-orange-400/20"}`}
+                                                className={`grid grid-cols-[auto_1fr] gap-y-2 p-4 ${index < 3 ? `border-b-1 border-b-orange-400/20` : ""} ${index === 2 ? "" : "border-r-1 border-r-orange-400/20"}`}
                                                 key={index}>
                                                 <div
-                                                    className="z-0 opacity-40 text-orange-400 text-extrabold text-5xl font-bold mb-2 mb-6 swing-in-top-fwd-2">
+                                                    className="shrink opacity-40 text-orange-400 text-extrabold text-5xl font-bold swing-in-top-fwd-2">
                                                     {`0${index + 1}`}
                                                 </div>
-                                                <div className="-ml-2 mt-4 z-10">
-                                                    <div className="text-white font-semibold text-md mb-4 swing-in-top-fwd-2">
-                                                        {item.text}
-                                                    </div>
-                                                    <div className="text-white text-xs swing-in-top-fwd-2">
-                                                        {item.description}
-                                                    </div>
+                                                <div className="text-white font-semibold text-md swing-in-top-fwd-2 line-clamp-2">
+                                                    {item.text}
+                                                </div>
+                                                <div/>
+                                                <div className="text-white text-xs swing-in-top-fwd-2">
+                                                    {item.description}
                                                 </div>
                                             </div>
                                         )
