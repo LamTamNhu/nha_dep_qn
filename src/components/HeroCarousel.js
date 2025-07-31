@@ -1,11 +1,11 @@
 import * as React from "react";
 import AnimatedCounter from "@/components/AnimatedCounter";
-export default function HeroCarousel(counterContent) {
 
+export default function HeroCarousel({data}) {
     return (
         <div
             className="h-screen w-full relative overflow-hidden flex items-center justify-center video-container"
-            style={{ perspective: "1px" }}
+            style={{perspective: "1px"}}
         >
             {/* Background Video */}
             <iframe
@@ -19,29 +19,29 @@ export default function HeroCarousel(counterContent) {
             />
 
             {/* Overlay */}
-            <div className="absolute inset-0 bg-black/40 z-20" />
+            <div className="absolute inset-0 bg-black/40 z-20"/>
 
             {/* Hero Content */}
             <div className="absolute inset-0 flex flex-col items-center justify-center z-30 text-center px-4">
                 <h1 className="text-4xl md:text-6xl font-extrabold text-white drop-shadow-lg mb-4 fade-in hover:text-orange-400 transition-colors duration-500">
-                    Kiến tạo không gian sống hiện đại
+                    {data?.bannerTitle?.title || "Kiến tạo không gian sống hiện đại"}
                 </h1>
                 <p className="text-lg md:text-2xl text-white/90 font-medium mb-8 animate-fade-in delay-200 hover:text-orange-300 transition-colors duration-300">
-                    Thiết kế & Thi công nội thất chuyên nghiệp tại Quảng Nam
+                    {data?.bannerTitle?.description || "Thiết kế & Thi công nội thất chuyên nghiệp tại Quảng Nam"}
                 </p>
             </div>
 
             {/* Counters */}
             <div className="absolute bottom-0 mx-auto px-4 z-50">
                 <div className="max-w-6xl mx-auto px-4">
-                    <div className="grid grid-cols-[1fr_2px_1fr_2px_1fr_2px_1fr] justify-center gap-6 border-2 border-black rounded-t-4xl p-8 bg-white">
+                    <div
+                        className="grid grid-cols-[1fr_2px_1fr_2px_1fr_2px_1fr] justify-center gap-6 border-2 border-black rounded-t-4xl p-8 bg-white">
                         <div/>
                         <div/>
-                        {!counterContent?<AnimatedCounter end={counterContent[0].number} duration={3000} text={counterContent[0].text}/>:
-                            <AnimatedCounter text="Miễn phí 100%" text2="Chi phí thiết kế khi thi công trọn gói!"/> }
+                        <AnimatedCounter text={data.sale[0].topText} text2={data.sale[0].bottomText}/>
                         <div className="bg-black"/>
-                        {!counterContent?<AnimatedCounter end={counterContent[1].number} duration={3000} text={counterContent[1].text}/>:
-                            <AnimatedCounter text="Miễn phí 50% " text2="Chi phí thiết kế khi thi công phần thô!"/> }
+                        <AnimatedCounter text={data.sale[1].topText} text2={data.sale[1].bottomText}/>
+
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 "use client"
 
-import {Facebook, Menu, Search, Youtube} from "lucide-react"
+import {Facebook, ChevronDown, Menu, Search, Youtube} from "lucide-react"
 import Link from "next/link"
 import {useEffect, useState} from "react"
 import {usePathname} from "next/navigation";
@@ -20,8 +20,8 @@ export default function Navbar() {
     const navigationItems = [
         {name: "GIỚI THIỆU", href: "/about"},
         {name: "DỊCH VỤ", href: "/services"},
-        {name: "DỰ ÁN", href: "/projects", dropdown: true},
-        {name: "THI CÔNG THỰC TẾ", href: "/completed-projects", dropdown: true},
+        {name: "DỰ ÁN", href: "/projects", dropdown: true, chevron: true},
+        {name: "THI CÔNG THỰC TẾ", href: "/completed-projects", dropdown: true, chevron: true},
         {name: "LIÊN HỆ", href: "/contact"},
     ]
 
@@ -104,6 +104,7 @@ export default function Navbar() {
                                 className={`flex items-center h-full whitespace-nowrap text-white text-md font-medium tracking-wide px-3 after-effect ${
                                     pathname.startsWith(item.href) ? 'active-link' : ''}`}>
                                 {item.name}
+                                {item.chevron ? <ChevronDown size={18} className="ml-1"/> : null}
                             </Link>
 
                             {/* Dropdown */}

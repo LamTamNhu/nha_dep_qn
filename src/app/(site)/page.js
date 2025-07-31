@@ -81,13 +81,12 @@ const partners = [
 ];
 export default async function Home() {
     const data = await client.fetch(homepageQuery);
-    console.log(data);
 
     return (
         <div className="min-h-screen relative bg-white">
             <ClientSideAnimations/>
             {/*<HeroCarousel/>*/}
-            <HeroCarousel data={data.bannerTitle}/>
+            <HeroCarousel data={data}/>
             {/* Introduction section */}
             <div className="py-12 px-4 bg-black">
                 <div className="max-w-6xl mx-auto px-4">
@@ -102,79 +101,101 @@ export default async function Home() {
 
             {/* Core Values Section */}
             <section className="py-16 px-4 font-sans bg-black">
-                <div className="max-w-6xl mx-auto">
+                <div className="max-w-6xl flex gap-4 mx-auto">
                     {/* Cards Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-                        {cardData.map((card) => (
+                    {cardData.map((card, index) => (
+                        <div
+                            key={card.id}
+                            className={`slide-in-right relative rounded-4xl shadow-xl p-8 flex flex-col items-center text-justify transition-transform duration-300 hover:scale-105 ${card.cardBgColor}`}
+                        >
+                            {/* Icon Wrapper */}
                             <div
-                                key={card.id}
-                                className={`slide-in-right relative rounded-4xl shadow-xl p-8 flex flex-col items-center text-justify transition-transform duration-300 hover:scale-105 ${card.cardBgColor}`}
+                                className={`absolute -top-12 w-24 h-24 ${card.iconWrapperBgColor} rounded-full flex items-center justify-center shadow-md border-4 ${card.iconBorderColor}`}
                             >
-                                {/* Icon Wrapper */}
-                                <div
-                                    className={`absolute -top-12 w-24 h-24 ${card.iconWrapperBgColor} rounded-full flex items-center justify-center shadow-md border-4 ${card.iconBorderColor}`}
-                                >
-                                    {/* Clone the icon and apply specific color for the icon itself */}
-                                    {React.cloneElement(card.icon, {
-                                        className: `w-12 h-12 ${card.iconColorClass}`,
-                                    })}
-                                </div>
-
-                                {/* Adjust padding-top for content to account for the absolute icon */}
-                                <div className="pt-10">
-                                    {/* Title */}
-                                    <h3 className={`text-2xl font-bold mb-4 ${card.titleColor}`}>
-                                        {card.title}
-                                    </h3>
-
-                                    {/* Description */}
-                                    <p className={`leading-relaxed ${card.descriptionColor}`}>
-                                        {card.description}
-                                    </p>
-                                </div>
+                                {/* Clone the icon and apply specific color for the icon itself */}
+                                {React.cloneElement(card.icon, {
+                                    className: `w-12 h-12 ${card.iconColorClass}`,
+                                })}
                             </div>
-                        ))}
-                    </div>
+
+                            {/* Adjust padding-top for content to account for the absolute icon */}
+                            <div className="pt-10">
+                                {/* Title */}
+                                <h3 className={`text-2xl text-center font-bold mb-4 ${card.titleColor}`}>
+                                    {data?.coreValues?.[index].title || card.title}
+                                </h3>
+
+                                {/* Description */}
+                                <p className={`leading-relaxed ${card.descriptionColor}`}>
+                                    {data?.coreValues?.[index].description || card.description}
+                                </p>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </section>
 
 
-            {/* Why Choose Us Section */}
+            {/* Why Choose Us Section */
+            }
             <section className="py-12 px-4 bg-white">
                 <div className="container mx-auto max-w-6xl mx-auto px-4">
                     <SectionHeading>
-                        Tại sao chọn chúng tôi
+                        {data?.whyChooseUs?.title || "Tại sao chọn chúng tôi"}
                     </SectionHeading>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-40 items-center">
                         <div className="swing-in-top-fwd-2">
-                            <WhyChooseUs/>
+                            <WhyChooseUs data={data}/>
                         </div>
                         <div className="slide-in-bottom">
                             <p className="w-full text-md text-justify leading-relaxed">
-                                <span className="font-semibold">Ưu tiên chất lượng hàng đầu:</span> Sử dụng vật liệu đạt
-                                chuẩn, đảm bảo an toàn và bền vững lâu dài cam kết chất lượng 100% như báo giá
+                                {data?.whyChooseUs?.text1 ||
+                                    <><span className="font-semibold">Ưu tiên chất lượng hàng đầu:</span> Sử dụng vật
+                                        liệu đạt
+                                        chuẩn, đảm bảo an toàn và bền vững lâu dài cam kết chất lượng 100% như báo giá
+                                    </>}
+
                             </p>
                             <p className="w-full text-md text-justify leading-relaxed">
-                                <span className="font-semibold">Đầu tư chất lượng đội ngũ:</span> Hầu hết KTS, kỹ sư,
-                                chuyên viên có kinh nghiệm 7-15 năm trong lĩnh vực nghiên cứu, thiết kế kiến trúc và thi
-                                công xây dựng
+                                {data?.whyChooseUs?.text2 ||
+                                    <>
+                                        <span className="font-semibold">Đầu tư chất lượng đội ngũ:</span> Hầu hết KTS,
+                                        kỹ
+                                        sư,
+                                        chuyên viên có kinh nghiệm 7-15 năm trong lĩnh vực nghiên cứu, thiết kế kiến
+                                        trúc và
+                                        thi
+                                        công xây dựng
+                                    </>}
+
                             </p>
                             <p className="w-full text-md text-justify leading-relaxed">
-                                <span className="font-semibold">Đa dạng mẫu mã:</span> Sở hữu hơn 3000 mẫu thiết kế hiện
-                                đại, liên tục cập nhật xu hướng sẵn sàng điều chỉnh đến khi khách hàng thật sự hài lòng.
+                                {data?.whyChooseUs?.text3 ||
+                                    <>
+                                        <span className="font-semibold">Đa dạng mẫu mã:</span> Sở hữu hơn 3000 mẫu thiết
+                                        kế hiện
+                                        đại, liên tục cập nhật xu hướng sẵn sàng điều chỉnh đến khi khách hàng thật sự
+                                        hài lòng
+                                    </>}
+
                             </p>
                             <p className="w-full text-md text-justify leading-relaxed">
-                                <span className="font-semibold">Giá cả cạnh tranh:</span> Báo đúng giá rõ ràng, minh
-                                bạch đảm bảo cạnh tranh trên thị trường
+                                {data?.whyChooseUs?.text4 ||
+                                    <>
+                                        <span className="font-semibold">Giá cả cạnh tranh:</span> Báo đúng giá rõ ràng,
+                                        minh
+                                        bạch đảm bảo cạnh tranh trên thị trường
+                                    </>}
                             </p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <ProcessTabs/>
+            <ProcessTabs data={data}/>
 
-            {/* Công trình thiết kế Section */}
+            {/* Công trình thiết kế Section */
+            }
             <section className="py-12 px-4 md:px-10 bg-black">
                 <div className="max-w-370 grid grid-cols-1 md:grid-cols-4 gap-8 items-end ml-auto">
                     {/* Text Column */}
@@ -257,7 +278,8 @@ export default async function Home() {
                     </div>
                 </div>
             </section>
-            {/*THI CÔNG THỰC TẾ section*/}
+            {/*THI CÔNG THỰC TẾ section*/
+            }
             <section className="py-12 px-4 md:px-10 bg-gray-50">
                 <div className="max-w-370 grid grid-cols-1 md:grid-cols-4 gap-8 items-end mr-auto">
                     {/* Images Grid */}
@@ -340,10 +362,12 @@ export default async function Home() {
                 </div>
             </section>
 
-            {/*Partners*/}
+            {/*Partners*/
+            }
             <PartnerCarousel/>
 
-            {/* Testimonial Section */}
+            {/* Testimonial Section */
+            }
             <section className="py-12 px-4 bg-black">
                 <div className="max-w-6xl mx-auto px-4">
                     <div className="max-w-6xl mx-auto">
@@ -382,5 +406,6 @@ export default async function Home() {
             <ContactForm/>
             <div className="pb-70 bg-white"/>
         </div>
-    );
+    )
+        ;
 }

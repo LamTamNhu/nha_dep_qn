@@ -3,7 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
-export default function ProcessTabs() {
+export default function ProcessTabs({data}) {
     const [activeTab, setActiveTab] = useState("design");
 
     const tabs = [

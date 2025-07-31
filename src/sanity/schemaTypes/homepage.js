@@ -23,8 +23,8 @@ export default {
                 {
                     name: 'saleTitle',
                     title: 'Mục sale',
-                    type: 'document',
-                    fields:[
+                    type: 'object',
+                    fields: [
                         {
                             name: 'topText',
                             title: 'Top Text',
@@ -52,6 +52,33 @@ export default {
                 titleAndDescription
             ]
         },
+        {
+            name: 'whyChooseUs',
+            title: 'Tại sao chọn chúng tôi?',
+            type: 'object',
+            fields: [
+                {
+                    name: 'title',
+                    title:'Tiêu đề',
+                    type: 'string',
+                },
+                {
+                    name: 'text1',
+                    title:'Đoạn văn bản 1',
+                    type: 'string',
+                },
+                {
+                    name: 'text2',
+                    title:'Đoạn văn bản 2',
+                    type: 'string',
+                },
+                {
+                    name: 'text3',
+                    title:'Đoạn văn bản 3',
+                    type: 'string',
+                },
+            ]
+        }
     ],
     preview: {
         prepare() {
