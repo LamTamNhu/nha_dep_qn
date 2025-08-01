@@ -1,6 +1,9 @@
 // src/app/layout.js (minimal root)
 import "./globals.css";
 import {utmAvo} from "@/app/fonts";
+import { VisualEditing } from "next-sanity";
+import { draftMode } from "next/headers";
+import DisableVisualEditing from "@/components/DisableVisualEditing";
 
 
 export const metadata = {
@@ -13,6 +16,10 @@ export default function RootLayout({children}) {
         <html lang="en" suppressHydrationWarning className={`${utmAvo.className} antialiased`}>
         <body suppressHydrationWarning>
         {children}
+        <DisableVisualEditing />
+        {draftMode().isEnabled && (
+          <VisualEditing />
+        )}
         </body>
         </html>
     );

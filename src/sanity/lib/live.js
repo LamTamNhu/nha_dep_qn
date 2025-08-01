@@ -11,3 +11,15 @@ export const { sanityFetch, SanityLive } = defineLive({
     apiVersion: 'vX' 
   }) 
 });
+
+// Export visual editing client for use in components
+export const visualEditingClient = client.withConfig({
+  // Use the same API version as your regular client
+  apiVersion: client.config().apiVersion,
+  // Enable draft mode to see unpublished content
+  perspective: 'previewDrafts',
+  // Disable CDN to get the freshest content
+  useCdn: false,
+  // Add your auth token for authenticated requests (if needed)
+  token: process.env.SANITY_API_READ_TOKEN,
+});
