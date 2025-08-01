@@ -3,7 +3,7 @@ import titleAndDescription from "@/sanity/schemaTypes/titleAndDescription";
 export default {
     name: 'homepage',
     type: 'document',
-    title: 'Trang chủ',
+    title: 'Trang chủ nội dung',
     fields: [
         {
             name: 'videoBanner',
@@ -49,7 +49,11 @@ export default {
             title: 'Giá trị cốt lõi',
             type: "array",
             of: [
-                titleAndDescription
+                {
+                    name: 'coreValue',
+                    title: "Giá trị",
+                    type: 'titleAndDescription'
+                }
             ]
         },
         {
@@ -59,25 +63,35 @@ export default {
             fields: [
                 {
                     name: 'title',
-                    title:'Tiêu đề',
+                    title: 'Tiêu đề',
                     type: 'string',
                 },
                 {
                     name: 'text1',
-                    title:'Đoạn văn bản 1',
+                    title: 'Đoạn văn bản 1',
                     type: 'string',
                 },
                 {
                     name: 'text2',
-                    title:'Đoạn văn bản 2',
+                    title: 'Đoạn văn bản 2',
                     type: 'string',
                 },
                 {
                     name: 'text3',
-                    title:'Đoạn văn bản 3',
+                    title: 'Đoạn văn bản 3',
+                    type: 'string',
+                },
+                {
+                    name: 'text4',
+                    title: 'Đoạn văn bản 4',
                     type: 'string',
                 },
             ]
+        },
+        {
+            name:'processTabs',
+            title: 'Quy trình',
+            type: 'processTab'
         }
     ],
     preview: {
