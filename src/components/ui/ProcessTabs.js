@@ -1,7 +1,7 @@
 'use client'
-import { useState } from "react";
+import {useState} from "react";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import {ArrowRight} from "lucide-react";
 
 export default function ProcessTabs({data}) {
     const [activeTab, setActiveTab] = useState("design");
@@ -73,13 +73,13 @@ export default function ProcessTabs({data}) {
         <section>
             {/* Tabs Header */}
             <div className="container mx-auto flex justify-center bg-white">
-                {tabs.map((tab) => (
+                {tabs.map((tab, index) => (
                     <button
                         key={tab.id}
                         className={`text-xl w-sm px-4 py-2 ${activeTab === tab.id ? "bg-orange-400 text-white" : "bg-black text-white"}`}
                         onClick={() => setActiveTab(tab.id)}
                     >
-                        {tab.label}
+                        {data?.[index]?.label || tab.label}
                     </button>
                 ))}
             </div>
@@ -93,14 +93,14 @@ export default function ProcessTabs({data}) {
                                 <div key={index} className="flex items-start w-1/4 h-64 text-ellipsis">
                                     <div>
                                         <div className="w-32 h-32 mx-auto mb-2">
-                                            <Image src={step.iconSrc} alt={step.alt} width={150} height={150} />
+                                            <Image src={step.iconSrc} alt={step.alt} width={150} height={150}/>
                                         </div>
                                         <h3 className="text-orange-400 text-lg text-center font-semibold mb-2">{step.title}</h3>
                                         <p className="text-sm text-gray-300 text-center">{step.description}</p>
                                     </div>
                                     {index < tabs.find((tab) => tab.id === activeTab)?.steps.length - 1 ? (
                                         <div className="w-16 flex justify-center self-center">
-                                            <ArrowRight className="text-gray-300" size={40} />
+                                            <ArrowRight className="text-gray-300" size={40}/>
                                         </div>
                                     ) : null}
                                 </div>

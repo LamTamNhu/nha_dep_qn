@@ -192,7 +192,7 @@ export default async function Home() {
                 </div>
             </section>
 
-            <ProcessTabs data={data}/>
+            <ProcessTabs data={data?.processTabs?.tabs}/>
 
             {/* Công trình thiết kế Section */
             }

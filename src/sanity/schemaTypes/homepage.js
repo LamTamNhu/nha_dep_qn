@@ -91,7 +91,7 @@ export default {
         {
             name:'processTabs',
             title: 'Quy trình',
-            type: 'processTab'
+            type: 'processTabs'
         }
     ],
     preview: {
