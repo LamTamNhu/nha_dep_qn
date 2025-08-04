@@ -5,5 +5,6 @@ export const homepageQuery = `*[_type == "homepage"][0] {
   introduction,
   coreValues,
   whyChooseUs,
-  processTabs
+  processesTabs,
+  constructionVideoSection
 }`;

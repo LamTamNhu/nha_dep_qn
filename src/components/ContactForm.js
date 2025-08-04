@@ -108,19 +108,19 @@ export default function ContactForm() {
                     <div className="flex flex-wrap gap-3">
                         <label className="flex items-center space-x-2">
                             <input type="checkbox" className="form-checkbox text-yellow-400" />
-                            <span>1.5 - 1.6 tỷ</span>
+                            <span>1 tỷ -1.5 tỷ</span>
                         </label>
                         <label className="flex items-center space-x-2">
                             <input type="checkbox" className="form-checkbox text-yellow-400" />
-                            <span>1.7 - 1.9 tỷ</span>
+                            <span>1.6 tỷ - 2 tỷ</span>
                         </label>
                         <label className="flex items-center space-x-2">
                             <input type="checkbox" className="form-checkbox text-yellow-400" />
-                            <span>2 - 2.4 tỷ</span>
+                            <span>2 tỷ - 2,5 tỷ</span>
                         </label>
                         <label className="flex items-center space-x-2">
                             <input type="checkbox" className="form-checkbox text-yellow-400" />
-                            <span>Trên 2.5 tỷ</span>
+                            <span>3 tỷ trở lên</span>
                         </label>
                     </div>
                 </div>

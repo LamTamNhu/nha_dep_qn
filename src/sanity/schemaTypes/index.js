@@ -1,9 +1,9 @@
 import homepage from "@/sanity/schemaTypes/homepage";
 import youtubeEmbed from "@/sanity/schemaTypes/youtubeEmbed";
 import titleAndDescription from "@/sanity/schemaTypes/titleAndDescription";
-import step from "@/sanity/schemaTypes/step";
-import processTabs from "@/sanity/schemaTypes/processTabs";
+import process from "@/sanity/schemaTypes/process";
+import constructionVideo from "@/sanity/schemaTypes/constructionVideo";
 
 export const schemas = {
-    types: [homepage, youtubeEmbed, titleAndDescription, step, processTabs],
+    types: [homepage, youtubeEmbed, titleAndDescription, process, constructionVideo],
 }

@@ -11,7 +11,7 @@ export default function Footer() {
         <div className="absolute top-0 border-8 border-orange-400 -translate-y-1/2 right-50 rounded-full z-0 opacity-60" style={{ width: `${circleSize}`, height: `${circleSize}` }}/>
         <div className="absolute top-0 -translate-y-1/2 right-50 rounded-full z-20" style={{ width: `${circleSize}`, height: `${circleSize}` }}>
           <div className="absolute inset-6 bg-orange-400 rounded-full z-20 text-center flex flex-col items-center justify-center px-8" >
-            <Image src="/images/logo.png" alt="Logo" width={800} height={800} className="w-70 h-16 object-cover top-0" />
+            <Image src="/images/logo_footer.png" alt="Logo" width={800} height={800} className="w-70 h-16 object-cover top-0" />
             <h2 className="text-white font-bold text-lg mb-6">
               LIÊN HỆ NGAY VỚI CHÚNG TÔI
             </h2>

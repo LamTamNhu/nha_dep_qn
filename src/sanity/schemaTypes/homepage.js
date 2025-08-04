@@ -1,5 +1,3 @@
-import titleAndDescription from "@/sanity/schemaTypes/titleAndDescription";
-
 export default {
     name: 'homepage',
     type: 'document',
@@ -89,9 +87,14 @@ export default {
             ]
         },
         {
-            name:'processTabs',
+            name: 'processesTabs',
             title: 'Quy trình',
-            type: 'processTabs'
+            type: 'process'
+        },
+        {
+            name: 'constructionVideoSection',
+            title: 'Video công trình',
+            type: 'constructionVideo'
         }
     ],
     preview: {
