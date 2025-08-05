@@ -95,7 +95,44 @@ export default {
             name: 'constructionVideoSection',
             title: 'Video công trình',
             type: 'constructionVideo'
-        }
+        },
+        {
+            name: 'showcases',
+            title: 'Các phần showcase',
+            type: 'array',
+            of: [
+                {
+                    name: "showcase",
+                    title: "showcase",
+                    type: 'object',
+                    fields: [
+                        {
+                            name: "id",
+                            title: 'ID',
+                            type: 'string',
+                        },
+                        {
+                            name: "titleAndDescription",
+                            title: "Tiêu đề và mô tả",
+                            type: "titleAndDescription"
+                        },
+                        {
+                            name: "thumbnails",
+                            title: "Các hình showcase",
+                            type: "array",
+                            of: [
+                                {
+                                    name: "thumbnail",
+                                    title: "Hình thumbnail",
+                                    type: 'imageAndThumbnail'
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+
     ],
     preview: {
         prepare() {

@@ -6,5 +6,6 @@ export const homepageQuery = `*[_type == "homepage"][0] {
   coreValues,
   whyChooseUs,
   processesTabs,
-  constructionVideoSection
+  constructionVideoSection,
+  showcases
 }`;

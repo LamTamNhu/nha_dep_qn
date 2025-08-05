@@ -1,4 +1,4 @@
-import { ArrowUpRight, Eye, Goal, HandCoins, HeartHandshake, Paintbrush, Quote, ShieldCheck, Users, } from "lucide-react";
+import {ArrowUpRight, Eye, Goal, HandCoins, HeartHandshake, Paintbrush, Quote, ShieldCheck, Users,} from "lucide-react";
 import * as React from "react";
 import Image from "next/image";
 import PartnerCarousel from "@/components/PartnerCarousel";
@@ -6,16 +6,16 @@ import SectionHeading from "@/components/SectionHeading";
 import HeroCarousel from "@/components/HeroCarousel";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import ContactForm from "@/components/ContactForm";
-import { client } from "@/sanity/lib/client";
-import ProcessTabs from "@/components/ui/ProcessTabs";
+import {client} from "@/sanity/lib/client";
+import ProcessTabs from "@/components/ProcessTabs";
 import ClientSideAnimations from "@/lib/clientSideAnimations";
-import { homepageQuery } from "@/sanity/lib/queries";
+import {homepageQuery} from "@/sanity/lib/queries";
 import ConstructionVideo from "@/components/ConstructionVideo";
 
 const cardData = [
     {
         id: "core-values",
-        icon: <HeartHandshake size={70} />,
+        icon: <HeartHandshake size={70}/>,
         title: "Giá trị cốt lõi",
         description:
             "Chúng tôi cam kết chất lượng xây dựng, an toàn lao động và đổi mới công nghệ để mang lại những công trình bền vững và hiệu quả nhất. Sự hài lòng của khách hàng là ưu tiên hàng đầu của chúng tôi.",
@@ -28,7 +28,7 @@ const cardData = [
     },
     {
         id: "mission",
-        icon: <Goal />,
+        icon: <Goal/>,
         title: "Sứ mệnh",
         description:
             "Xây dựng những công trình chất lượng cao, an toàn và thân thiện với môi trường, góp phần phát triển hạ tầng và nâng cao chất lượng cuộc sống cộng đồng. Chúng tôi luôn đồng hành cùng đối tác để hiện thực hóa mọi dự án.",
@@ -41,7 +41,7 @@ const cardData = [
     },
     {
         id: "vision",
-        icon: <Eye />,
+        icon: <Eye/>,
         title: "Tầm nhìn",
         description:
             "Trở thành công ty xây dựng hàng đầu tại Việt Nam, được công nhận về sự xuất sắc trong thiết kế, thi công và quản lý dự án. Chúng tôi hướng tới việc tạo ra những công trình mang tính biểu tượng, đóng góp vào sự phát triển bền vững của đất nước.",
@@ -84,10 +84,10 @@ export default async function Home() {
     const data = await client.fetch(homepageQuery);
 
     return (
-        <div className="min-h-screen relative bg-white">
-            <ClientSideAnimations />
+        <div className="min-h-screen overflow-x-hidden relative bg-white">
+            <ClientSideAnimations/>
             {/*<HeroCarousel/>*/}
-            <HeroCarousel data={data} />
+            <HeroCarousel data={data}/>
             {/* Introduction section */}
             <div className="py-12 px-4 bg-black">
                 <div className="max-w-6xl mx-auto px-4">
@@ -101,7 +101,7 @@ export default async function Home() {
             </div>
 
             {/* Core Values Section */}
-            <section className="py-16 px-4 font-sans bg-black">
+            <section className="py-16 px-4 bg-black">
                 <div className="max-w-6xl flex gap-4 mx-auto">
                     {/* Cards Grid */}
                     {cardData.map((card, index) => (
@@ -146,7 +146,7 @@ export default async function Home() {
                     </SectionHeading>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-40 items-center">
                         <div className="swing-in-top-fwd-2">
-                            <WhyChooseUs data={data} />
+                            <WhyChooseUs data={data}/>
                         </div>
                         <div className="slide-in-bottom">
                             <p className="w-full text-md text-justify leading-relaxed">
@@ -193,7 +193,7 @@ export default async function Home() {
                 </div>
             </section>
 
-            <ProcessTabs data={data?.processesTabs} />
+            <ProcessTabs data={data?.processesTabs}/>
 
             {/* Công trình thiết kế Section */
             }
@@ -203,15 +203,17 @@ export default async function Home() {
                     <div className="md:col-span-1 flex flex-col h-full ">
                         <div>
                             <SectionHeading>
-                                Công trình thiết kế
+                                {data?.showcases?.find((showCase) => showCase.id === "design")?.titleAndDescription.title || 'Công trình thiết kế'}
                             </SectionHeading>
 
                             <p className="text-base mb-8 leading-relaxed text-white">
-                                Mỗi năm, NHÀ ĐẸP QUẢNG NAM thực hiện hàng trăm công trình thiết
-                                kế ở mọi miền đất nước. Phong cách thiết kế chính là hiện đại -
-                                tối giản - tiện nghi - thông thoáng. Ngoài ra, những ý tưởng và
-                                sở thích của gia chủ cũng được ưu tiên hàng đầu, để tạo nên một
-                                công trình nhà ở độc bản, mang đậm dấu ấn cá nhân.
+                                {data?.showcases?.find((showCase) => showCase.id === "design")?.
+                                        description || 'Mỗi năm, NHÀ ĐẸP QUẢNG NAM thực hiện hàng trăm công trình thiết\n' +
+                                    '                                kế ở mọi miền đất nước. Phong cách thiết kế chính là hiện đại -\n' +
+                                    '                                tối giản - tiện nghi - thông thoáng. Ngoài ra, những ý tưởng và\n' +
+                                    '                                sở thích của gia chủ cũng được ưu tiên hàng đầu, để tạo nên một\n' +
+                                    '                                công trình nhà ở độc bản, mang đậm dấu ấn cá nhân.'}
+
                             </p>
                         </div>
                         <a
@@ -219,7 +221,7 @@ export default async function Home() {
                             className="inline-flex items-center gap-2 bg-orange-400 hover:bg-orange-500 text-white font-semibold px-6 py-3 rounded transition-colors duration-200 w-max"
                         >
                             Xem thêm
-                            <ArrowUpRight />
+                            <ArrowUpRight/>
                         </a>
                     </div>
                     {/* Images Grid */}
@@ -357,7 +359,7 @@ export default async function Home() {
                             className="inline-flex items-center gap-2 bg-orange-400 hover:bg-orange-500 text-white font-semibold px-6 py-3 rounded transition-colors duration-200 w-max"
                         >
                             Xem thêm
-                            <ArrowUpRight />
+                            <ArrowUpRight/>
                         </a>
                     </div>
                 </div>
@@ -366,7 +368,7 @@ export default async function Home() {
             <ConstructionVideo data={data?.constructionVideoSection}/>
             {/*Partners*/
             }
-            <PartnerCarousel />
+            <PartnerCarousel/>
 
             {/* Testimonial Section */
             }
@@ -375,14 +377,14 @@ export default async function Home() {
                     <div className="max-w-6xl mx-auto">
                         <div className="grid gril-cols-1 swing-in-top-fwd-2 place-content-center">
                             <div className="bg-white grid grid-cols-1 p-6">
-                                <Quote className="text-orange-500 text-5xl mb-2 text-center" />
+                                <Quote className="text-orange-500 text-5xl mb-2 text-center"/>
                                 <blockquote
                                     className="text-md font-normal italic text-black mb-2 text-center md:text-left">
                                     Cảm ơn các anh đã thiết kế và thi công cho vợ chồng em căn nhà rất ưng ý.
-                                    <br />
+                                    <br/>
                                     Chất lượng thì không cần phải đề cập vì đã tin tưởng làm công trình thứ 3 rồi!
                                 </blockquote>
-                                <Quote className="text-orange-500 text-5xl justify-self-end mb-6" />
+                                <Quote className="text-orange-500 text-5xl justify-self-end mb-6"/>
                                 <a
                                     href="#"
                                     className="justify-self-end underline text-orange-400"
@@ -395,7 +397,7 @@ export default async function Home() {
                                 className="text-orange-400 p-2 text-center flex items-center justify-center gap-4 mt-4">
                                 <div className="w-12 h-12">
                                     <Image src="/images/quote.jpg" alt="Profile"
-                                        className="rounded-full object-cover w-full h-full" width={50} height={50} />
+                                           className="rounded-full object-cover w-full h-full" width={50} height={50}/>
                                 </div>
                                 <div>
                                     Chị Thảo Duyên | Nhà phố 2 tầng | Vĩnh Phú – Thuận An
@@ -405,8 +407,8 @@ export default async function Home() {
                     </div>
                 </div>
             </section>
-            <ContactForm />
-            <div className="pb-70 bg-white" />
+            <ContactForm/>
+            <div className="pb-70 bg-white"/>
         </div>
     )
         ;

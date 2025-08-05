@@ -228,8 +228,8 @@ export default function AboutPage() {
             </div>
             <div>
                 {/*Office pictures*/}
-                <section className="pt-12 px-4">
-                    <div className="w-screen mx-auto text-center">
+                <section className="pt-12">
+                    <div className="w-full mx-auto text-center">
                         <h2 className="text-white text-extrabold text-3xl font-bold my-20  p-4 inline-block border-2 border-white">
                             HÌNH ẢNH VĂN PHÒNG
                         </h2>
@@ -250,9 +250,9 @@ export default function AboutPage() {
                     </div>
                 </section>
                 {/*5 qualities*/}
-                <section className="px-4">
-                    <div
-                        className="z-0 pointer-events-none bg-[url('/images/5khong-bg.jpg')] bg-cover bg-top bg-no-repeat w-screen">
+                <section>
+                    <div className="relative w-full">
+                        <div className="absolute inset-0 z-0 pointer-events-none bg-[url('/images/5khong-bg.jpg')] bg-cover bg-bottom scale-x-[-1]"/>
                         {/*Content*/}
                         <div className="max-w-6xl py-30 mx-auto">
                             <div className="pt-18 mx-auto px-16 swing-in-top-fwd-2">

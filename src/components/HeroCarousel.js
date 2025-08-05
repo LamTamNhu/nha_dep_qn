@@ -15,7 +15,7 @@ export default function HeroCarousel({data}) {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen
-                className="w-screen h-full pointer-events-none"
+                className="max-w-full h-full pointer-events-none"
             />
 
             {/* Overlay */}
