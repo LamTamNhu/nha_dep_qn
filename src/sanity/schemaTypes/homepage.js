@@ -1,7 +1,7 @@
 export default {
     name: 'homepage',
     type: 'document',
-    title: 'Trang chủ nội dung',
+    title: 'Nội dung trang chủ',
     fields: [
         {
             name: 'videoBanner',
@@ -117,14 +117,14 @@ export default {
                             type: "titleAndDescription"
                         },
                         {
-                            name: "thumbnails",
-                            title: "Các hình showcase",
+                            name: "projects",
+                            title: "Các dự án showcase",
                             type: "array",
                             of: [
                                 {
-                                    name: "thumbnail",
-                                    title: "Hình thumbnail",
-                                    type: 'imageAndThumbnail'
+                                    name: "individualProject",
+                                    title: "Dự án",
+                                    type: 'project'
                                 }
                             ]
                         }
@@ -132,7 +132,23 @@ export default {
                 }
             ]
         },
-
+        {
+            name: 'partners',
+            title: 'Danh sách đối tác',
+            type: 'array',
+            of: [
+                {
+                    name: 'partnerIndividual',
+                    title: 'Đối tác',
+                    type: 'partner'
+                }
+            ]
+        },
+        {
+            name: 'testimonialSection',
+            title: 'Khách hàng nói gì',
+            type: 'testimonial'
+        }
     ],
     preview: {
         prepare() {

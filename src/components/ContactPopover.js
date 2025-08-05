@@ -2,7 +2,7 @@
 import * as Popover from '@radix-ui/react-popover';
 import ContactForm from '@/components/ContactForm';
 
-export default function ContactPopover({trigger}) {
+export default function ContactPopover({ trigger }) {
     return (
         <Popover.Root>
             <Popover.Trigger asChild>
@@ -11,12 +11,16 @@ export default function ContactPopover({trigger}) {
 
             <Popover.Portal>
                 <Popover.Content
-                    side="left" // or "top", "bottom", "right"
-                    sideOffset={12}
+                    side="left"
                     align="end"
-                    className="bg-transparent shadow-xl z-50"
+                    sideOffset={12}
+                    avoidCollisions
+                    collisionPadding={16}
+                    className="z-50 w-auto rounded-xl shadow-2xl overflow-y-auto max-h-[90vh] scale-90 bg-white"
                 >
-                    <ContactForm/>
+                    <div className="p-6">
+                        <ContactForm isPopover />
+                    </div>
                 </Popover.Content>
             </Popover.Portal>
         </Popover.Root>

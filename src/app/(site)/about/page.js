@@ -20,47 +20,6 @@ export default function AboutPage() {
             </blockquote>
             <br/>
         </div>
-    const aboutFull =
-        <div className="text-white">
-            <p>
-                `Mỗi ngày, đội ngũ Nhà Đẹp Quảng Nam bước ra công trường không chỉ với vai trò là những người thợ, những
-                kỹ sư, những kiến trúc sư, mà còn là những người đồng hành cùng khách hàng trên hành trình hiện thực hóa
-                giấc mơ an cư.`
-            </p>
-            <br/>
-            <p>
-                ` Chúng tôi hiểu rằng, phía sau mỗi bản thiết kế, mỗi viên gạch đặt xuống là biết bao tâm tư, kỳ vọng,
-                bao năm tích góp của gia chủ.
-                Nhiều năm qua, từ những ngày đầu chập chững vào nghề, chúng tôi đã trải qua biết bao công trình, chứng
-                kiến niềm vui ngày nhận nhà của hàng trăm
-                gia đình. Ngoài ra chúng tôi đã cùng khách hàng đi qua rất nhiều nỗi lo: Lo lắng về chất lượng –
-                liệu ngôi nhà có thực sự bền vững? Băn khoăn về thẩm mỹ – làm sao để công trình vừa đẹp vừa đúng với
-                mong muốn?`
-
-            </p>
-            <br/>
-            <p>
-                `Đau đầu vì tiến độ và chi phí – liệu công trình có đúng kế hoạch, không phát sinh chi phí bất ngờ?
-                Chính những trăn trở ấy đã trở thành động lực
-                để chúng tôi xây dựng một quy trình thi công CHẶT CHẼ - MINH BẠCH - CHẤT LƯỢNG, đảm bảo mỗi ngôi nhà khi
-                bàn giao không chỉ đạt chuẩn kỹ thuật,
-                mà còn mang đến sự an tâm tuyệt đối cho gia chủ.
-                kinh nghiệm chuyên môn.`
-            </p>
-            <br/>
-            <p>
-                `Trên hành trình hơn 10 năm thực chiến, đội ngũ đã không ngừng nỗ lực, học hỏi và đúc kết kinh
-                nghiệm để mang đến những giải pháp thiết kế và thi công chất lượng – tối ưu – bền vững. Chúng tôi hiểu
-                rằng, mỗi công trình là cả một hành
-                trình, và gia chủ luôn cần một đơn vị đồng hành có tâm – có tầm sẵn sàng cam kết đồng hành đến cùng. Tại
-                NĐQN các công trình luôn được quản lý
-                bởi kỹ sư có chuyên môn và năng lực. Quá trình thi công luôn có sự theo sát và phối hợp cùng bộ phận
-                thiết kế kiến trúc, kết cấu, điện nước,
-                để đảm bảo công trình luôn được diễn ra suôn sẻ, nếu có vướng mắc hoặc có những sự thay đổi sẽ có giải
-                pháp hợp lý kịp thời dựa trên những kinh nghiệm chuyên môn.`
-            </p>
-        </div>;
-
     const khongItems = [
         {
             text: "KHÔNG sử dụng vật tư kém chất lượng",

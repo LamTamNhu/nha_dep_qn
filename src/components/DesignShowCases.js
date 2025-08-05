@@ -1,0 +1,73 @@
+'use client'
+import * as React from "react";
+import Image from "next/image";
+import SectionHeading from "@/components/SectionHeading";
+import { ArrowUpRight } from "lucide-react";
+import { useNextSanityImage } from "next-sanity-image";
+import { client } from "@/sanity/lib/client";
+
+export default function DesignShowCases({ data }) {
+    // Extract design section
+    const designSection = data?.find((section) => section.id === "design");
+
+    // Extract title, description, and projects
+    const title = designSection?.titleAndDescription?.title || "Công trình thiết kế";
+    const description =
+        designSection?.description ||
+        "Mỗi năm, NHÀ ĐẸP QUẢNG NAM thực hiện hàng trăm công trình thiết kế ở mọi miền đất nước. Phong cách thiết kế chính là hiện đại - tối giản - tiện nghi - thông thoáng. Ngoài ra, những ý tưởng và sở thích của gia chủ cũng được ưu tiên hàng đầu, để tạo nên một công trình nhà ở độc bản, mang đậm dấu ấn cá nhân.";
+    const projects = designSection?.projects || [];
+
+    return (
+        <section className="py-12 px-4 md:px-10 bg-black">
+            <div className="max-w-370 grid grid-cols-1 md:grid-cols-4 gap-8 items-end ml-auto">
+                {/* Text Column */}
+                <div className="md:col-span-1 flex flex-col h-full">
+                    <div>
+                        <SectionHeading>{title}</SectionHeading>
+                        <p className="text-base mb-8 leading-relaxed text-white whitespace-pre-line">
+                            {description}
+                        </p>
+                    </div>
+                    <a
+                        href="/projects/"
+                        className="inline-flex items-center gap-2 bg-orange-400 hover:bg-orange-500 text-white font-semibold px-6 py-3 rounded transition-colors duration-200 w-max"
+                    >
+                        Xem thêm <ArrowUpRight />
+                    </a>
+                </div>
+
+                {/* Images Grid */}
+                <div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 slide-in-right">
+                    {projects.map((project, index) => {
+                        const imageProps = useNextSanityImage(client, project.thumbnail);
+                        return (
+                            <div
+                                key={index}
+                                className="group aspect-[3/2] bg-gray-200 rounded-2xl overflow-hidden relative cursor-pointer"
+                            >
+                                {imageProps ? (
+                                    <Image
+                                        {...imageProps}
+                                        alt={project.alt || "Project image"}
+                                        className="w-full h-full object-cover"
+                                    />
+                                ) : (
+                                    <div className="bg-gray-400 w-full h-full" />
+                                )}
+
+                                <div className="absolute text-center flex flex-col justify-center items-center inset-0 bg-orange-400 opacity-0 group-hover:opacity-90 transition-opacity duration-300">
+                                    <div className="text-white text-xl font-semibold px-4">
+                                        {project.alt || "Dự án"}
+                                    </div>
+                                    <div className="text-black text-md font-normal px-4">
+                                        {project.description || ""}
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
+        </section>
+    );
+}

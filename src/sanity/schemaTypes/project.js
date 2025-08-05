@@ -1,11 +1,11 @@
 export default {
-    name: 'imageAndThumbnail',
+    name: 'project',
     title: 'Hình ảnh',
     type: 'object',
     fields: [
         {
             name: 'title',
-            title: 'Tiêu đề / Alt (giữ nguyên)',
+            title: 'Tiêu đề',
             type: 'string'
         },
         {
@@ -13,6 +13,11 @@ export default {
             title: 'Thumbnail',
             type: 'image',
             options: {hotspot: true}
+        },
+        {
+            name: 'description',
+            title: 'Mô tả',
+            type: 'text',
         }
     ]
 }

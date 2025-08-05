@@ -1,6 +1,5 @@
-import {ArrowUpRight, Eye, Goal, HandCoins, HeartHandshake, Paintbrush, Quote, ShieldCheck, Users,} from "lucide-react";
+import {ArrowUpRight, Eye, Goal, HeartHandshake, Quote,} from "lucide-react";
 import * as React from "react";
-import Image from "next/image";
 import PartnerCarousel from "@/components/PartnerCarousel";
 import SectionHeading from "@/components/SectionHeading";
 import HeroCarousel from "@/components/HeroCarousel";
@@ -9,8 +8,11 @@ import ContactForm from "@/components/ContactForm";
 import {client} from "@/sanity/lib/client";
 import ProcessTabs from "@/components/ProcessTabs";
 import ClientSideAnimations from "@/lib/clientSideAnimations";
-import {homepageQuery} from "@/sanity/lib/queries";
+import {contactFormQuery, homepageQuery} from "@/sanity/lib/queries";
 import ConstructionVideo from "@/components/ConstructionVideo";
+import DesignShowCases from "@/components/DesignShowCases";
+import ConstructionShowCases from "@/components/ConstructionShowCases";
+import Testimonial from "@/components/Testimonial";
 
 const cardData = [
     {
@@ -53,35 +55,10 @@ const cardData = [
         iconBorderColor: "border-gray-800",
     },
 ];
-// Partners data
-const partners = [
-    {
-        logo: "/images/logo_kimdinh.png",
-        alt: "Kim Đỉnh Partner Logo",
-    },
-    {
-        logo: "/images/hoaphat.png",
-        alt: "logo Hoa Phat",
-    },
-    {
-        logo: "/images/songgianh.png",
-        alt: "Songgianh logo",
-    },
-    {
-        logo: "/images/vina.png",
-        alt: "Vina logo",
-    },
-    {
-        logo: "/images/dongtam.jpg",
-        alt: "Dong Tam Logo",
-    },
-    {
-        logo: "/images/vigla.png",
-        alt: "Viglacera Logo",
-    },
-];
+
 export default async function Home() {
     const data = await client.fetch(homepageQuery);
+    const contactData = await client.fetch(contactFormQuery);
 
     return (
         <div className="min-h-screen overflow-x-hidden relative bg-white">
@@ -140,7 +117,7 @@ export default async function Home() {
             {/* Why Choose Us Section */
             }
             <section className="py-12 px-4 bg-white">
-                <div className="container mx-auto max-w-6xl mx-auto px-4">
+                <div className="container max-w-6xl mx-auto px-4">
                     <SectionHeading>
                         {data?.whyChooseUs?.title || "Tại sao chọn chúng tôi"}
                     </SectionHeading>
@@ -195,219 +172,22 @@ export default async function Home() {
 
             <ProcessTabs data={data?.processesTabs}/>
 
-            {/* Công trình thiết kế Section */
-            }
-            <section className="py-12 px-4 md:px-10 bg-black">
-                <div className="max-w-370 grid grid-cols-1 md:grid-cols-4 gap-8 items-end ml-auto">
-                    {/* Text Column */}
-                    <div className="md:col-span-1 flex flex-col h-full ">
-                        <div>
-                            <SectionHeading>
-                                {data?.showcases?.find((showCase) => showCase.id === "design")?.titleAndDescription.title || 'Công trình thiết kế'}
-                            </SectionHeading>
+            {/* Công trình thiết kế Section */}
+            <DesignShowCases data={data?.showcases}/>
 
-                            <p className="text-base mb-8 leading-relaxed text-white">
-                                {data?.showcases?.find((showCase) => showCase.id === "design")?.
-                                        description || 'Mỗi năm, NHÀ ĐẸP QUẢNG NAM thực hiện hàng trăm công trình thiết\n' +
-                                    '                                kế ở mọi miền đất nước. Phong cách thiết kế chính là hiện đại -\n' +
-                                    '                                tối giản - tiện nghi - thông thoáng. Ngoài ra, những ý tưởng và\n' +
-                                    '                                sở thích của gia chủ cũng được ưu tiên hàng đầu, để tạo nên một\n' +
-                                    '                                công trình nhà ở độc bản, mang đậm dấu ấn cá nhân.'}
-
-                            </p>
-                        </div>
-                        <a
-                            href="/projects"
-                            className="inline-flex items-center gap-2 bg-orange-400 hover:bg-orange-500 text-white font-semibold px-6 py-3 rounded transition-colors duration-200 w-max"
-                        >
-                            Xem thêm
-                            <ArrowUpRight/>
-                        </a>
-                    </div>
-                    {/* Images Grid */}
-                    <div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 slide-in-right">
-                        {[
-                            {
-                                img: "/thumbnails/1.jpg",
-                                alt: "Tổng hợp 30+ mẫu nhà phố đẹp nhất",
-                                desc: "Nhà phố hiện đại 3 tầng, tối ưu ánh sáng tự nhiên và không gian xanh.",
-                            },
-                            {
-                                img: "/thumbnails/2.jpg",
-                                alt: "Project 2",
-                                desc: "Biệt thự sân vườn sang trọng, không gian mở kết nối thiên nhiên.",
-                            },
-                            {
-                                img: "/thumbnails/3.jpg",
-                                alt: "Project 3",
-                                desc: "Nội thất phòng khách hiện đại, tối giản, tiện nghi và ấm cúng.",
-                            },
-                            {
-                                img: "/thumbnails/4.jpg",
-                                alt: "Project 4",
-                                desc: "Nhà cấp 4 mái Nhật, thiết kế tối ưu công năng cho gia đình trẻ.",
-                            },
-                            {
-                                img: "/thumbnails/5.jpg",
-                                alt: "Project 5",
-                                desc: "Biệt thự phố 2 mặt tiền, phong cách hiện đại, sang trọng.",
-                            },
-                            {
-                                img: "/thumbnails/6.jpg",
-                                alt: "Project 6",
-                                desc: "Nhà phố 4 tầng, thiết kế thông thoáng, tối ưu diện tích đất.",
-                            },
-                        ].map((project, i) => (
-                            <div
-                                key={i}
-                                className="group aspect-[3/2] bg-gray-200 rounded-2xl overflow-hidden relative cursor-pointer"
-                            >
-                                <Image
-                                    src={project.img}
-                                    alt={project.alt}
-                                    width={500}
-                                    height={500}
-                                    className="w-full h-full object-cover"
-                                />
-                                <div
-                                    className="absolute text-center flex flex-col justify-center items-center inset-0 bg-orange-400 opacity-0 group-hover:opacity-90 transition-opacity duration-300">
-                                    <div className="text-white text-xl font-semibold px-4">{project.alt}</div>
-                                    <div className="text-black text-md font-normal px-4">
-                                        {project.desc}
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-            {/*THI CÔNG THỰC TẾ section*/
-            }
-            <section className="py-12 px-4 md:px-10 bg-gray-50">
-                <div className="max-w-370 grid grid-cols-1 md:grid-cols-4 gap-8 items-end mr-auto">
-                    {/* Images Grid */}
-                    <div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 puff-in-center">
-                        {[
-                            {
-                                img: "/thumbnails/7.jpg",
-                                alt: "Project 1",
-                                desc: "Nhà phố hiện đại 3 tầng, tối ưu ánh sáng tự nhiên và không gian xanh.",
-                            },
-                            {
-                                img: "/thumbnails/8.jpg",
-                                alt: "Project 2",
-                                desc: "Biệt thự sân vườn sang trọng, không gian mở kết nối thiên nhiên.",
-                            },
-                            {
-                                img: "/thumbnails/9.jpg",
-                                alt: "Project 3",
-                                desc: "Nội thất phòng khách hiện đại, tối giản, tiện nghi và ấm cúng.",
-                            },
-                            {
-                                img: "/thumbnails/10.jpg",
-                                alt: "Project 4",
-                                desc: "Nhà cấp 4 mái Nhật, thiết kế tối ưu công năng cho gia đình trẻ.",
-                            },
-                            {
-                                img: "/thumbnails/11.jpg",
-                                alt: "Project 5",
-                                desc: "Biệt thự phố 2 mặt tiền, phong cách hiện đại, sang trọng.",
-                            },
-                            {
-                                img: "/thumbnails/12.jpg",
-                                alt: "Project 6",
-                                desc: "Nhà phố 4 tầng, thiết kế thông thoáng, tối ưu diện tích đất.",
-                            },
-                        ].map((project, i) => (
-                            <div
-                                key={i}
-                                className="group aspect-[3/2] bg-gray-200 rounded-2xl overflow-hidden relative cursor-pointer"
-                            >
-                                <Image
-                                    src={project.img}
-                                    alt={project.alt}
-                                    width={500}
-                                    height={500}
-                                    className="w-full h-full object-cover"
-                                />
-                                <div
-                                    className="absolute text-center flex flex-col justify-center items-center inset-0 bg-orange-400 opacity-0 group-hover:opacity-90 transition-opacity duration-300">
-                                    <div className="text-white text-xl font-semibold px-4">{project.alt}</div>
-                                    <div className="text-black text-md font-normal px-4">
-                                        {project.desc}
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                    {/* Text Column */}
-                    <div className="md:col-span-1 flex flex-col h-full">
-                        <div>
-                            <SectionHeading>
-                                Thi công thực tế
-                            </SectionHeading>
-                            <p className="text-base mb-8 leading-relaxed">
-                                Mỗi năm, NHÀ ĐẸP QUẢNG NAM thực hiện hàng trăm công trình thiết
-                                kế ở mọi miền đất nước. Phong cách thiết kế chính là hiện đại -
-                                tối giản - tiện nghi - thông thoáng. Ngoài ra, những ý tưởng và
-                                sở thích của gia chủ cũng được ưu tiên hàng đầu, để tạo nên một
-                                công trình nhà ở độc bản, mang đậm dấu ấn cá nhân.
-                            </p>
-                        </div>
-                        <a
-                            href="/completed-projects"
-                            className="inline-flex items-center gap-2 bg-orange-400 hover:bg-orange-500 text-white font-semibold px-6 py-3 rounded transition-colors duration-200 w-max"
-                        >
-                            Xem thêm
-                            <ArrowUpRight/>
-                        </a>
-                    </div>
-                </div>
-            </section>
+            {/*THI CÔNG THỰC TẾ section*/}
+            <ConstructionShowCases data={data.showcases}/>
             {/* Video Công trình */}
             <ConstructionVideo data={data?.constructionVideoSection}/>
             {/*Partners*/
             }
-            <PartnerCarousel/>
+            <PartnerCarousel data={data?.partners}/>
 
             {/* Testimonial Section */
             }
-            <section className="py-12 px-4 bg-black">
-                <div className="max-w-6xl mx-auto px-4">
-                    <div className="max-w-6xl mx-auto">
-                        <div className="grid gril-cols-1 swing-in-top-fwd-2 place-content-center">
-                            <div className="bg-white grid grid-cols-1 p-6">
-                                <Quote className="text-orange-500 text-5xl mb-2 text-center"/>
-                                <blockquote
-                                    className="text-md font-normal italic text-black mb-2 text-center md:text-left">
-                                    Cảm ơn các anh đã thiết kế và thi công cho vợ chồng em căn nhà rất ưng ý.
-                                    <br/>
-                                    Chất lượng thì không cần phải đề cập vì đã tin tưởng làm công trình thứ 3 rồi!
-                                </blockquote>
-                                <Quote className="text-orange-500 text-5xl justify-self-end mb-6"/>
-                                <a
-                                    href="#"
-                                    className="justify-self-end underline text-orange-400"
-                                >
-                                    Tham quan nhà hoàn thiện
-                                </a>
-                            </div>
+            <Testimonial data={data?.testimonialSection}/>
 
-                            <div
-                                className="text-orange-400 p-2 text-center flex items-center justify-center gap-4 mt-4">
-                                <div className="w-12 h-12">
-                                    <Image src="/images/quote.jpg" alt="Profile"
-                                           className="rounded-full object-cover w-full h-full" width={50} height={50}/>
-                                </div>
-                                <div>
-                                    Chị Thảo Duyên | Nhà phố 2 tầng | Vĩnh Phú – Thuận An
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <ContactForm/>
+            <ContactForm data={contactData}/>
             <div className="pb-70 bg-white"/>
         </div>
     )
