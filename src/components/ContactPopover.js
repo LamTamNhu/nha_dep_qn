@@ -16,7 +16,7 @@ export default function ContactPopover({ trigger }) {
                     sideOffset={12}
                     avoidCollisions
                     collisionPadding={16}
-                    className="z-50 w-auto rounded-xl shadow-2xl overflow-y-auto max-h-[90vh] scale-90 bg-white"
+                    className="z-50 max-w-4xl rounded-xl shadow-2xl overflow-y-auto max-h-[90vh] scale-90 bg-white"
                 >
                     <div className="p-6">
                         <ContactForm isPopover />

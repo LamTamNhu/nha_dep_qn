@@ -31,7 +31,6 @@ const fallback = {
 
 export default function Footer({data}) {
     const content = data || fallback;
-
     const company = content.companyName || fallback.companyName;
     const logo = content.logo || fallback.logo;
     const ctaText = content.ctaText || fallback.ctaText;
@@ -46,7 +45,7 @@ export default function Footer({data}) {
 
     return (
         <div className="bg-black">
-            <footer className="relative">
+            <footer className="relative overflow-visible">
                 {/* Decorative circle layers */}
                 <div
                     className="absolute ping border-8 border-orange-400 top-0 -translate-y-1/2 right-50 rounded-full pointer-events-none z-0 opacity-60 invisible lg:visible"
@@ -57,12 +56,11 @@ export default function Footer({data}) {
                     style={{width: circleSize, height: circleSize}}
                 />
                 <div
-                    className="absolute top-0 -translate-y-1/2 right-50 rounded-full z-20 invisible lg:visible"
+                    className="absolute top-0 -translate-y-1/2 right-50 rounded-full z-20 invisible lg:visible overflow-visible"
                     style={{width: circleSize, height: circleSize}}
                 >
                     {/* CTA Circle Content */}
-                    <div
-                        className="absolute inset-6 bg-orange-400 rounded-full z-20 text-center flex flex-col items-center justify-center px-8">
+                    <div className="absolute inset-6 bg-orange-400 rounded-full z-20 text-center flex flex-col items-center justify-center px-8 overflow-visible">
                         <Image
                             src={logo}
                             alt="Logo"
@@ -72,21 +70,22 @@ export default function Footer({data}) {
                         />
                         <h2 className="text-white font-bold text-lg mb-6">{ctaText}</h2>
                         <p className="text-gray-50 text-sm text-justify leading-relaxed mb-8">{description}</p>
-                        <ContactPopover
-                            className="z-50"
-                            trigger={
-                                <button
-                                    className="heartbeat bg-white text-black px-6 py-4 rounded-full font-semibold hover:bg-black hover:text-white transition-colors z-50">
-                                    Liên hệ ngay
-                                </button>
-                            }
-                        />
+
+                        {/* ContactPopover with fixed positioning */}
+                        <div className="relative z-[9999]">
+                            <ContactPopover
+                                trigger={
+                                    <button className="heartbeat bg-white text-black px-6 py-4 rounded-full font-semibold hover:bg-black hover:text-orange-400 transition-colors relative z-[9999]">
+                                        Liên hệ ngay
+                                    </button>
+                                }
+                            />
+                        </div>
                     </div>
                 </div>
 
                 {/* Main footer layout */}
-                <div
-                    className="relative z-10 w-full h-full flex items-center justify-center bg-black text-white pt-12 pb-8 px-4">
+                <div className="relative z-10 w-full h-full flex items-center justify-center bg-black text-white pt-12 pb-8 px-4">
                     <div className="max-w-6xl text-left flex flex-col gap-8">
                         {/* Column 1: Main Branch */}
                         <div>

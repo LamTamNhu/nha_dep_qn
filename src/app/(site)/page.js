@@ -187,7 +187,7 @@ export default async function Home() {
             }
             <Testimonial data={data?.testimonialSection}/>
 
-            <ContactForm data={contactData}/>
+            <ContactForm id="contact" data={contactData}/>
             <div className="pb-70 bg-white"/>
         </div>
     )

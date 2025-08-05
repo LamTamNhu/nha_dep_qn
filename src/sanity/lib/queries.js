@@ -22,7 +22,7 @@ export const contactFormQuery = `*[_type == "contactSettings"][0]{
 }
 `;
 
-export const FooterQuery = `*[_type == "footerSettings"][0]{
+export const footerQuery = `*[_type == "footerSettings"][0]{
   companyName,
   ctaText,
   description,
