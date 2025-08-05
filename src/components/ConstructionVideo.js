@@ -76,10 +76,8 @@ export default function ConstructionVideo({ data }) {
     // Create sanity config object for next-sanity-image
     const sanityConfig = { projectId, dataset };
     
-    // Use next-sanity-image if we have a Sanity image object
-    const sanityImageProps = video.thumbnail 
-      ? useNextSanityImage(sanityConfig, video.thumbnail)
-      : null;
+    // Always call the hook, but pass null if no thumbnail
+    const sanityImageProps = useNextSanityImage(sanityConfig, video.thumbnail);
 
     return (
       <div
@@ -88,7 +86,7 @@ export default function ConstructionVideo({ data }) {
         className="group aspect-[3/2] bg-gray-200 rounded-2xl overflow-hidden relative cursor-pointer hover:scale-105 transition-transform duration-200"
       >
         {/* Render Sanity image with optimization */}
-        {video.thumbnail && sanityImageProps ? (
+        {video.thumbnail && sanityImageProps?.src ? (
           <Image
             {...sanityImageProps}
             alt={video.alt}
