@@ -29,4 +29,36 @@ export const footerQuery = `*[_type == "footerSettings"][0]{
   "logo": logo.asset->url,
   branches
 }
-`
+`;
+
+export const aboutPageQuery = `*[_type == "aboutPage"][0]{
+  aboutShort,
+  ceoQuote,
+  members[]{
+    name,
+    title,
+    "thumbnailUrl": thumbnail.asset->url
+  },
+  coreValues[]{
+    title,
+    description,
+    "iconUrl": icon.asset->url
+  },
+  coreValues2[]{
+    title,
+    description,
+    "iconUrl": icon.asset->url
+  },
+  officeImages[]{
+    "url": asset->url
+  },
+  commitments[]{
+    text,
+    description
+  },
+  policies[]{
+    title,
+    icon
+  }
+}`
+

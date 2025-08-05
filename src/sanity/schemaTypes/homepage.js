@@ -92,11 +92,6 @@ export default {
             type: 'process'
         },
         {
-            name: 'constructionVideoSection',
-            title: 'Video công trình',
-            type: 'constructionVideo'
-        },
-        {
             name: 'showcases',
             title: 'Các phần showcase',
             type: 'array',
@@ -131,6 +126,11 @@ export default {
                     ]
                 }
             ]
+        },
+        {
+            name: 'constructionVideoSection',
+            title: 'Video công trình',
+            type: 'constructionVideo'
         },
         {
             name: 'partners',

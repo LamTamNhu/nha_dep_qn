@@ -117,7 +117,7 @@ const ServicesPage = () => {
               <p className="text-white mb-4">{service.description}</p>
               <a
                 href={`/services/${service.id}`}
-                className="w-fit inline-block px-3 py-2 border border-orange-400 bg-white text-orange-400 text-center hover:bg-orange-400 hover:text-white font-semibold rounded-full transition-colors duration-200 text-lg"
+                className="w-fit inline-block px-4 py-2 border border-orange-400 bg-white text-orange-400 text-center hover:text-white hover:!bg-orange-400 font-semibold rounded-full duration-200 text-lg"
               >
                 Liên hệ
               </a>
