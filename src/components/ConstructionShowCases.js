@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import * as React from "react";
 import Image from "next/image";
 import SectionHeading from "@/components/SectionHeading";
@@ -6,11 +6,38 @@ import { ArrowUpRight } from "lucide-react";
 import { useNextSanityImage } from "next-sanity-image";
 import { client } from "@/sanity/lib/client";
 
-export default function ConstructionShowCases({ data }) {
-    // Extract design section
-    const designSection = data?.find((section) => section.id === "construction");
+// ✅ Component con để gọi hook đúng cách
+function ProjectImage({ project }) {
+    const imageProps = useNextSanityImage(client, project.thumbnail);
 
-    // Extract title, description, and projects
+    return (
+        <div
+            className="group aspect-[3/2] bg-gray-200 rounded-2xl overflow-hidden relative cursor-pointer"
+        >
+            {imageProps ? (
+                <Image
+                    {...imageProps}
+                    alt={project.alt || "Project image"}
+                    className="w-full h-full object-cover"
+                />
+            ) : (
+                <div className="bg-gray-400 w-full h-full" />
+            )}
+
+            <div className="absolute text-center flex flex-col justify-center items-center inset-0 bg-orange-400 opacity-0 group-hover:opacity-90 transition-opacity duration-300">
+                <div className="text-white text-xl font-semibold px-4">
+                    {project.alt || "Dự án"}
+                </div>
+                <div className="text-black text-md font-normal px-4">
+                    {project.description || ""}
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default function ConstructionShowCases({ data }) {
+    const designSection = data?.find((section) => section.id === "construction");
     const title = designSection?.titleAndDescription?.title || "Thi công thực tế";
     const description =
         designSection?.description ||
@@ -22,35 +49,11 @@ export default function ConstructionShowCases({ data }) {
             <div className="max-w-370 grid grid-cols-1 md:grid-cols-4 gap-8 items-end ml-auto">
                 {/* Images Grid */}
                 <div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 slide-in-right">
-                    {projects.map((project, index) => {
-                        const imageProps = useNextSanityImage(client, project.thumbnail);
-                        return (
-                            <div
-                                key={index}
-                                className="group aspect-[3/2] bg-gray-200 rounded-2xl overflow-hidden relative cursor-pointer"
-                            >
-                                {imageProps ? (
-                                    <Image
-                                        {...imageProps}
-                                        alt={project.alt || "Project image"}
-                                        className="w-full h-full object-cover"
-                                    />
-                                ) : (
-                                    <div className="bg-gray-400 w-full h-full" />
-                                )}
-
-                                <div className="absolute text-center flex flex-col justify-center items-center inset-0 bg-orange-400 opacity-0 group-hover:opacity-90 transition-opacity duration-300">
-                                    <div className="text-white text-xl font-semibold px-4">
-                                        {project.alt || "Dự án"}
-                                    </div>
-                                    <div className="text-black text-md font-normal px-4">
-                                        {project.description || ""}
-                                    </div>
-                                </div>
-                            </div>
-                        );
-                    })}
+                    {projects.map((project, index) => (
+                        <ProjectImage key={index} project={project} />
+                    ))}
                 </div>
+
                 {/* Text Column */}
                 <div className="md:col-span-1 flex flex-col h-full">
                     <div>
@@ -66,8 +69,6 @@ export default function ConstructionShowCases({ data }) {
                         Xem thêm <ArrowUpRight />
                     </a>
                 </div>
-
-
             </div>
         </section>
     );

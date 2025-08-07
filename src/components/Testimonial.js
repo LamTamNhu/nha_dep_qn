@@ -16,14 +16,25 @@ const fallback = {
     avatar: '/images/quote.jpg',
 };
 
+// ✅ Component con dùng hook hợp lệ
+function AvatarImage({ avatar, alt }) {
+    const imageProps = useNextSanityImage(client, avatar);
+    return (
+        <Image
+            {...imageProps}
+            alt={alt}
+            className="rounded-full object-cover w-full h-full"
+        />
+    );
+}
+
 export default function Testimonial({ data }) {
     const testimonial = data || fallback;
 
-    // Check if avatar is a Sanity image or fallback path
     const isSanityImage =
-        testimonial.avatar && typeof testimonial.avatar === 'object' && testimonial.avatar.asset;
-
-    const imageProps = isSanityImage ? useNextSanityImage(client, testimonial.avatar) : null;
+        testimonial.avatar &&
+        typeof testimonial.avatar === 'object' &&
+        testimonial.avatar.asset;
 
     return (
         <section className="py-12 px-4 bg-black">
@@ -35,19 +46,18 @@ export default function Testimonial({ data }) {
                             {testimonial.quote}
                         </blockquote>
                         <Quote className="text-orange-500 text-5xl justify-self-end mb-6" />
-                        <a href={testimonial?.link || '#'} className="justify-self-end underline text-orange-400">
+                        <a
+                            href={testimonial?.link || '#'}
+                            className="justify-self-end underline text-orange-400"
+                        >
                             Tham quan nhà hoàn thiện
                         </a>
                     </div>
 
                     <div className="text-orange-400 p-2 text-center flex items-center justify-center gap-4 mt-4">
                         <div className="w-12 h-12">
-                            {imageProps ? (
-                                <Image
-                                    {...imageProps}
-                                    alt={testimonial.authorName}
-                                    className="rounded-full object-cover w-full h-full"
-                                />
+                            {isSanityImage ? (
+                                <AvatarImage avatar={testimonial.avatar} alt={testimonial.authorName} />
                             ) : (
                                 <Image
                                     src={testimonial.avatar}
@@ -60,7 +70,9 @@ export default function Testimonial({ data }) {
                         </div>
                         <div>
                             <div>{testimonial.authorName}</div>
-                            <div className="text-sm text-white/80">{testimonial.authorInfo}</div>
+                            <div className="text-sm text-white/80">
+                                {testimonial.authorInfo}
+                            </div>
                         </div>
                     </div>
                 </div>

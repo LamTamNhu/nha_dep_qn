@@ -5,6 +5,32 @@ import SectionHeading from "@/components/SectionHeading";
 import { ArrowUpRight } from "lucide-react";
 import { useNextSanityImage } from "next-sanity-image";
 import { client } from "@/sanity/lib/client";
+function ProjectCard({ project }) {
+    const imageProps = useNextSanityImage(client, project.thumbnail);
+
+    return (
+        <div className="group aspect-[3/2] bg-gray-200 rounded-2xl overflow-hidden relative cursor-pointer">
+            {imageProps ? (
+                <Image
+                    {...imageProps}
+                    alt={project.alt || "Project image"}
+                    className="w-full h-full object-cover"
+                />
+            ) : (
+                <div className="bg-gray-400 w-full h-full" />
+            )}
+
+            <div className="absolute text-center flex flex-col justify-center items-center inset-0 bg-orange-400 opacity-0 group-hover:opacity-90 transition-opacity duration-300">
+                <div className="text-white text-xl font-semibold px-4">
+                    {project.alt || "Dự án"}
+                </div>
+                <div className="text-black text-md font-normal px-4">
+                    {project.description || ""}
+                </div>
+            </div>
+        </div>
+    );
+}
 
 export default function DesignShowCases({ data }) {
     // Extract design section
@@ -38,34 +64,9 @@ export default function DesignShowCases({ data }) {
 
                 {/* Images Grid */}
                 <div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 slide-in-right">
-                    {projects.map((project, index) => {
-                        const imageProps = useNextSanityImage(client, project.thumbnail);
-                        return (
-                            <div
-                                key={index}
-                                className="group aspect-[3/2] bg-gray-200 rounded-2xl overflow-hidden relative cursor-pointer"
-                            >
-                                {imageProps ? (
-                                    <Image
-                                        {...imageProps}
-                                        alt={project.alt || "Project image"}
-                                        className="w-full h-full object-cover"
-                                    />
-                                ) : (
-                                    <div className="bg-gray-400 w-full h-full" />
-                                )}
-
-                                <div className="absolute text-center flex flex-col justify-center items-center inset-0 bg-orange-400 opacity-0 group-hover:opacity-90 transition-opacity duration-300">
-                                    <div className="text-white text-xl font-semibold px-4">
-                                        {project.alt || "Dự án"}
-                                    </div>
-                                    <div className="text-black text-md font-normal px-4">
-                                        {project.description || ""}
-                                    </div>
-                                </div>
-                            </div>
-                        );
-                    })}
+                    {projects.map((project, index) => (
+                        <ProjectCard key={index} project={project} />
+                    ))}
                 </div>
             </div>
         </section>
