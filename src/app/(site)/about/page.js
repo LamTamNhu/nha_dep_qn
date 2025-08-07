@@ -211,7 +211,7 @@ export default function AboutPage() {
                 {/*5 qualities*/}
                 <section>
                     <div className="relative w-full">
-                        <div className="absolute inset-0 z-0 pointer-events-none bg-[url('/images/5khong-bg.png')] bg-cover bg-bottom"/>
+                        <div className="brightness-65 absolute inset-0 z-0 pointer-events-none bg-[url('/images/5khong-bg.png')] bg-cover bg-bottom"/>
                         {/*Content*/}
                         <div className="max-w-6xl py-30 mx-auto">
                             <div className="pt-18 mx-auto px-16 swing-in-top-fwd-2">
