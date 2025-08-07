@@ -72,17 +72,6 @@ function FloatingButtons() {
     return (
         <TooltipProvider delayDuration={0}>
             <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end gap-3 sm:bottom-6 sm:right-6 sm:gap-3">
-                {/* Collapse/Expand Button */}
-                <button
-                    aria-label={collapsed ? "Mở liên hệ" : "Thu gọn liên hệ"}
-                    onClick={() => setCollapsed((c) => !c)}
-                    className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-orange-300 shadow-lg flex items-center justify-center mb-2 hover:bg-orange-400 transition-colors"
-                    style={{transition: "transform 0.2s"}}
-                >
-                    {collapsed ? <lucide.ChevronUp size={20} className="sm:size-6" color="#fff"/> :
-                        <lucide.ChevronDown size={20} className="sm:size-6" color="#fff"/>}
-                </button>
-
                 {/* Social/contact buttons */}
                 {!collapsed && (
                     <div
@@ -145,6 +134,16 @@ function FloatingButtons() {
                         )}
                     </div>
                 )}
+                {/* Collapse/Expand Button */}
+                <button
+                    aria-label={collapsed ? "Mở liên hệ" : "Thu gọn liên hệ"}
+                    onClick={() => setCollapsed((c) => !c)}
+                    className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-orange-300 shadow-lg flex items-center justify-center mb-2 hover:bg-orange-400 transition-colors"
+                    style={{transition: "transform 0.2s"}}
+                >
+                    {collapsed ? <lucide.ChevronUp size={20} className="sm:size-6" color="#fff"/> :
+                        <lucide.ChevronDown size={20} className="sm:size-6" color="#fff"/>}
+                </button>
             </div>
         </TooltipProvider>
     );
