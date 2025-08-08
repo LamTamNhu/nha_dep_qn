@@ -211,21 +211,20 @@ export default function AboutPage() {
                 {/*5 qualities*/}
                 <section>
                     <div className="relative w-full">
-                        <div className="brightness-65 absolute inset-0 z-0 pointer-events-none bg-[url('/images/5khong-bg.png')] bg-cover bg-bottom"/>
+                        <div className="brightness-65 filter blur-[1px] absolute inset-0 z-0 pointer-events-none bg-[url('/images/5khong-bg.png')] bg-cover bg-bottom"/>
                         {/*Content*/}
                         <div className="max-w-6xl py-30 mx-auto">
                             <div className="pt-18 mx-auto px-16 swing-in-top-fwd-2">
                                 <div
-                                    className="text-orange-400 text-extrabold text-6xl font-bold mb-2 opacity-70">
-                                    5 GIÁ TRỊ
+                                    className="text-orange-400 text-extrabold text-6xl font-bold mb-2">
+                                    5 KHÔNG
                                 </div>
-                                <div className="flex h-16 gap-2">
-                                    <div className={`${fancyFont.className} text-white text-6xl self-start`}>Khác
-                                        biệt
+                                <div className="flex h-16 gap-2 items-center">
+                                    <div className="text-white text-lg">Tại
                                     </div>
                                     <div
-                                        className="text-white text-extrabold text-xl  self-end">
-                                        của Nhà Đẹp
+                                        className={`${fancyFont.className} text-white text-extrabold text-6xl`}>
+                                        Nhà đẹp Quảng Nam
                                     </div>
                                 </div>
                             </div>
