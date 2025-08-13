@@ -116,11 +116,11 @@ export default {
                             title: "Các dự án showcase",
                             type: "array",
                             of: [
-                                {
-                                    name: "individualProject",
-                                    title: "Dự án",
-                                    type: 'project'
-                                }
+                                                        {
+                            name: "individualProject",
+                            title: "Dự án",
+                            type: 'projectCard'
+                        }
                             ]
                         }
                     ]

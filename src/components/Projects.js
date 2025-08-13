@@ -8,7 +8,7 @@ import Banner from '@/components/ui/banner';
 import {useSearchParams} from "next/navigation";
 
 // Separate component for search params logic
-function ProjectsContent({pageTitle}) {
+function ProjectsContent({pageTitle, projects}) {
     const searchParams = useSearchParams();
     const [categoryFromUrl, setCategoryFromUrl] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
@@ -17,94 +17,9 @@ function ProjectsContent({pageTitle}) {
     const [selectedCategory, setSelectedCategory] = useState('Tất cả');
     const projectsPerPage = 10;
 
-    const projects = [
-        {
-            id: 1,
-            title: "Da House",
-            disc: "Hiện đại hóa không gian nhưng vẫn vẹn nguyên hồn Việt",
-            image: "https://nhadepquangnam.vn/wp-content/uploads/2025/06/Thiet-ke-chua-co-ten-2025-06-11T103306.138-1-700x700.jpg",
-            category: "Nhà Phố",
-        },
-        {
-            id: 2,
-            title: "H's House",
-            disc: "Sống tiện nghi, kinh doanh hiệu quả, riêng tư trọn vẹn",
-            image: "https://nhadepquangnam.vn/wp-content/uploads/2025/06/Thiet-ke-chua-co-ten-41-700x700.jpg",
-            category: "Nhà Phố",
-        },
-        {
-            id: 3,
-            title: "Anh House",
-            disc: "Ngôi nhà không cần quá lớn chắc chắn chị em sẽ say mê",
-            image: "https://nhadepquangnam.vn/wp-content/uploads/2024/07/a4-700x700.jpg",
-            category: "Nhà Phố",
-        },
-        {
-            id: 4,
-            title: "DT VILLA",
-            disc: "Hiện đại hoà quyện cùng thiên nhiên",
-            image: "https://nhadepquangnam.vn/wp-content/uploads/2024/07/d1-700x670.jpg",
-            category: "Biệt thự",
-        },
-        {
-            id: 5,
-            title: "L VILLA",
-            disc: "Vẻ đẹp hiện đại hút mọi ánh nhìn",
-            image: "https://nhadepquangnam.vn/wp-content/uploads/2024/07/l4-700x700.jpg",
-            category: "Biệt thự",
-        },
-        {
-            id: 6,
-            title: "HUNG VILLA",
-            disc: "Đẳng cấp, tinh tế và sang trọng",
-            image: "https://nhadepquangnam.vn/wp-content/uploads/2024/05/z5584607005888_b33eb55a459a8eb774068487c34ea2a5-700x700.jpg",
-            category: "Biệt thự",
-        },
-        {
-            id: 7,
-            title: "NH Villa",
-            disc: "Dấu ấn khác biệt",
-            image: "https://nhadepquangnam.vn/wp-content/uploads/2024/05/z5438947266194_10ce32f18288a95eb825ced27ce28bc1-700x700.jpg",
-            category: "Biệt thự",
-        },
-        {
-            id: 8,
-            title: "ND House",
-            disc: "Nhà của đôi vợ chồng trẻ đam mê Kiến trúc mộc mạc và sự khác biệt",
-            image: "https://nhadepquangnam.vn/wp-content/uploads/2024/05/z5315711468255_2c6acce84a5ee9d59065c4df5fb51761-700x700.jpg",
-            category: "Nhà Phố",
-        },
-        {
-            id: 9,
-            title: "TC House",
-            disc: "Câu chuyện nhà phố",
-            image: "https://nhadepquangnam.vn/wp-content/uploads/2024/05/ANH3-700x700.jpg",
-            category: "Nhà Phố",
-        },
-        {
-            id: 10,
-            title: "T House",
-            disc: "Sự kết nối giữa không gian và ánh sáng",
-            image: "https://nhadepquangnam.vn/wp-content/uploads/2024/05/z5424216518033_6d660521e1217af6c8203395aad94446-700x700.jpg",
-            category: "Nhà Phố",
-        },
-        {
-            id: 11,
-            title: "NH House",
-            disc: "Nhà phố hướng tây, giải pháp tránh nắng",
-            image: "https://nhadepquangnam.vn/wp-content/uploads/2024/05/z5424216518033_6d660521e1217af6c8203395aad94446-700x700.jpg",
-            category: "Nhà Phố",
-        },
-        {
-            id: 12,
-            title: "T2 House",
-            disc: "Vẻ đẹp từ sự tinh tế và sang trọng",
-            image: "https://nhadepquangnam.vn/wp-content/uploads/2024/05/z5584642502208_30b3615bced844af16480f624b70d914-700x700.jpg",
-            category: "Nhà Phố",
-        },
-    ];
+    const projectsList = Array.isArray(projects) ? projects : [];
 
-    const categories = ['Tất cả', 'Nhà Phố', 'Biệt thự', 'Nhà vườn', 'Nhà tân cổ điển', 'Công trình dịch vụ', 'Mẫu nhà 2 tầng đẹp', 'Mẫu nhà 3 tầng đẹp', 'Nhà phố 4 tầng đẹp', 'Căn hộ cho thuê, Nhà trọ, Chung cư, Văn phòng', '55+ mẫu nhà cấp 4 đẹp, hiện đại và đơn giản nhất 2025'];
+    const categories = ['Tất cả', 'Nhà phố', 'Biệt thự', 'Nhà vườn', 'Nhà tân cổ điển', 'Công trình dịch vụ', 'Mẫu nhà 2 tầng đẹp', 'Mẫu nhà 3 tầng đẹp', 'Nhà phố 4 tầng đẹp', 'Căn hộ cho thuê, Nhà trọ, Chung cư, Văn phòng', '55+ mẫu nhà cấp 4 đẹp, hiện đại và đơn giản nhất 2025'];
 
     useEffect(() => {
         try {
@@ -115,11 +30,11 @@ function ProjectsContent({pageTitle}) {
                 setSelectedCategory(categoryParam);
             }
 
-            const filtered = projects.filter(
+            const filtered = projectsList.filter(
                 (project) =>
                     (selectedCategory === 'Tất cả' || project.category === selectedCategory) &&
-                    (project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                        project.disc.toLowerCase().includes(searchTerm.toLowerCase()))
+                    ((project.title || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+                        (project.disc || '').toLowerCase().includes(searchTerm.toLowerCase()))
             );
             setFilteredProjects(filtered);
             setCurrentPage(1);
@@ -212,8 +127,8 @@ function ProjectsContent({pageTitle}) {
                         {currentProjects.length > 0 ? (
                             currentProjects.map((project) => (
                                 <Link
-                                    key={project.id}
-                                    href={`/projects/${project.id}`}
+                                    key={project.slug || project.id}
+                                    href={`/${project.slug}/`}
                                     className="relative bg-white border border-gray-200 overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 group"
                                 >
                                     <div className="relative w-full h-80 overflow-hidden">
@@ -303,10 +218,10 @@ function ProjectsLoading() {
 }
 
 // Main component with Suspense boundary
-export default function Projects({pageTitle}) {
+export default function Projects({pageTitle, projects}) {
     return (
         <Suspense fallback={<ProjectsLoading />}>
-            <ProjectsContent pageTitle={pageTitle} />
+            <ProjectsContent pageTitle={pageTitle} projects={projects} />
         </Suspense>
     );
 }

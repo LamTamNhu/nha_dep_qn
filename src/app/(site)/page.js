@@ -13,6 +13,9 @@ import ConstructionVideo from "@/components/ConstructionVideo";
 import DesignShowCases from "@/components/DesignShowCases";
 import ConstructionShowCases from "@/components/ConstructionShowCases";
 import Testimonial from "@/components/Testimonial";
+import { projectId, dataset } from "@/sanity/env";
+
+export const revalidate = 60
 
 const cardData = [
     {
@@ -57,8 +60,17 @@ const cardData = [
 ];
 
 export default async function Home() {
-    const data = await client.fetch(homepageQuery);
-    const contactData = await client.fetch(contactFormQuery);
+    let data = null
+    let contactData = null
+    if (projectId && dataset) {
+        try {
+            data = await client.fetch(homepageQuery)
+            contactData = await client.fetch(contactFormQuery)
+        } catch {
+            data = null
+            contactData = null
+        }
+    }
 
     return (
         <div className="min-h-screen overflow-x-hidden relative bg-white">
@@ -118,78 +130,53 @@ export default async function Home() {
             }
             <section className="py-12 px-4 bg-white">
                 <div className="container max-w-6xl mx-auto px-4">
-                    <SectionHeading>
-                        {data?.whyChooseUs?.title || "Tại sao chọn chúng tôi"}
-                    </SectionHeading>
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-40 items-center">
-                        <div className="swing-in-top-fwd-2">
-                            <WhyChooseUs data={data}/>
-                        </div>
-                        <div className="slide-in-bottom">
-                            <p className="w-full text-md text-justify leading-relaxed">
-                                {data?.whyChooseUs?.text1 ||
-                                    <><span className="font-semibold">Ưu tiên chất lượng hàng đầu:</span> Sử dụng vật
-                                        liệu đạt
-                                        chuẩn, đảm bảo an toàn và bền vững lâu dài cam kết chất lượng 100% như báo giá
-                                    </>}
-
-                            </p>
-                            <p className="w-full text-md text-justify leading-relaxed">
-                                {data?.whyChooseUs?.text2 ||
-                                    <>
-                                        <span className="font-semibold">Đầu tư chất lượng đội ngũ:</span> Hầu hết KTS,
-                                        kỹ
-                                        sư,
-                                        chuyên viên có kinh nghiệm 7-15 năm trong lĩnh vực nghiên cứu, thiết kế kiến
-                                        trúc và
-                                        thi
-                                        công xây dựng
-                                    </>}
-
-                            </p>
-                            <p className="w-full text-md text-justify leading-relaxed">
-                                {data?.whyChooseUs?.text3 ||
-                                    <>
-                                        <span className="font-semibold">Đa dạng mẫu mã:</span> Sở hữu hơn 3000 mẫu thiết
-                                        kế hiện
-                                        đại, liên tục cập nhật xu hướng sẵn sàng điều chỉnh đến khi khách hàng thật sự
-                                        hài lòng
-                                    </>}
-
-                            </p>
-                            <p className="w-full text-md text-justify leading-relaxed">
-                                {data?.whyChooseUs?.text4 ||
-                                    <>
-                                        <span className="font-semibold">Giá cả cạnh tranh:</span> Báo đúng giá rõ ràng,
-                                        minh
-                                        bạch đảm bảo cạnh tranh trên thị trường
-                                    </>}
-                            </p>
-                        </div>
-                    </div>
+                    <WhyChooseUs data={data}/>
                 </div>
             </section>
 
-            <ProcessTabs data={data?.processesTabs}/>
+            {/* Process Section */}
+            <section className="py-16 px-4 bg-black">
+                <div className="max-w-6xl mx-auto">
+                    <ProcessTabs data={data}/>
+                </div>
+            </section>
 
-            {/* Công trình thiết kế Section */}
+            {/* Construction Video */}
+            <section className="py-16 px-4 bg-white">
+                <div className="max-w-6xl mx-auto">
+                    <ConstructionVideo data={data?.constructionVideoSection}/>
+                </div>
+            </section>
+
+            {/* Design Showcases */}
             <DesignShowCases data={data?.showcases}/>
+            {/* Construction Showcases */}
+            <ConstructionShowCases data={data?.showcases}/>
 
-            {/*THI CÔNG THỰC TẾ section*/}
-            <ConstructionShowCases data={data.showcases}/>
-            {/* Video Công trình */}
-            <ConstructionVideo data={data?.constructionVideoSection}/>
-            {/*Partners*/
-            }
-            <PartnerCarousel data={data?.partners}/>
+            {/* Partner Carousel */}
+            <section className="py-16 px-4 bg-black">
+                <div className="max-w-6xl mx-auto">
+                    <PartnerCarousel data={data?.partners}/>
+                </div>
+            </section>
 
-            {/* Testimonial Section */
-            }
-            <Testimonial data={data?.testimonialSection}/>
+            {/* Testimonial */}
+            <section className="py-16 px-4 bg-white">
+                <div className="max-w-6xl mx-auto">
+                    <Testimonial data={data?.testimonialSection}/>
+                </div>
+            </section>
 
-            <ContactForm id="contact" data={contactData}/>
-            <div className="pb-70 bg-white"/>
+            {/* Contact section */}
+            <section className="py-16 px-4 bg-white">
+                <div className="max-w-6xl mx-auto">
+                    <SectionHeading>THIẾT KẾ VÀ THI CÔNG NHÀ</SectionHeading>
+                    <ContactForm data={contactData}/>
+                </div>
+            </section>
+
+            {/* Floating buttons */}
+            <div className="fixed bottom-4 right-4 z-50"></div>
         </div>
-    )
-        ;
+    );
 }

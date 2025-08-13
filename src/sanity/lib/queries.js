@@ -62,3 +62,31 @@ export const aboutPageQuery = `*[_type == "aboutPage"][0]{
   }
 }`
 
+export const projectsListQuery = `*[_type == "project"] | order(_createdAt desc) {
+  title,
+  "slug": slug.current,
+  "category": select(
+    category == "urbanHome" => "Nhà phố",
+    category == "countryHome" => "Nhà vườn",
+    category == "commercial" => "Công trình dịch vụ",
+    category == "villa" => "Biệt thự",
+    category == "neoClassic" => "Nhà tân cổ điển",
+    defined(category) => category,
+    true => ""
+  ),
+  "image": mainImage.asset->url,
+  "disc": description,
+}`
+
+export const projectDetailQuery = `*[_type == "project" && slug.current == $slug][0]{
+  title,
+  "slug": slug.current,
+  address,
+  size,
+  startYear,
+  category,
+  description,
+  "mainImageUrl": mainImage.asset->url,
+  "galleryUrls": projectGallery[].asset->url
+}`
+
