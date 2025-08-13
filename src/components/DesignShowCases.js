@@ -33,10 +33,9 @@ function ProjectCard({ project }) {
 }
 
 export default function DesignShowCases({ data }) {
-    // Extract design section
-    const designSection = data?.find((section) => section.id === "design");
+    const sections = Array.isArray(data) ? data : [];
+    const designSection = sections.find((section) => section.id === "design");
 
-    // Extract title, description, and projects
     const title = designSection?.titleAndDescription?.title || "Công trình thiết kế";
     const description =
         designSection?.description ||

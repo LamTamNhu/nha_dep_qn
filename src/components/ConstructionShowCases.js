@@ -37,7 +37,8 @@ function ProjectImage({ project }) {
 }
 
 export default function ConstructionShowCases({ data }) {
-    const designSection = data?.find((section) => section.id === "construction");
+    const sections = Array.isArray(data) ? data : [];
+    const designSection = sections.find((section) => section.id === "construction");
     const title = designSection?.titleAndDescription?.title || "Thi công thực tế";
     const description =
         designSection?.description ||

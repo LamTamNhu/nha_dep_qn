@@ -78,9 +78,11 @@ export default function ProcessTabs({ data }) {
     },
   ];
 
+  const sanityTabs = Array.isArray(data?.processesTabs) ? data.processesTabs : Array.isArray(data) ? data : []
+
   // ✅ Merge Sanity data with fallback
   const tabs = fallbackTabs.map((fallbackTab) => {
-    const sanityTab = data?.find((tab) => tab.id === fallbackTab.id);
+    const sanityTab = sanityTabs.find((tab) => tab.id === fallbackTab.id);
     return {
       ...fallbackTab,
       label: sanityTab?.label || fallbackTab.label,
