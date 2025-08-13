@@ -124,7 +124,7 @@ export default function Navbar() {
                                             <li key={subItem.name}>
                                                 <Link
                                                     href={`/${item.name === "DỰ ÁN" ? "projects" : "completed-projects"}?category=${encodeURIComponent(subItem.name)}#projects-section`}
-                                                    className="block px-4 py-2 hover:bg-gray-100"
+                                                    className="block px-4 py-2 hover:text-orange-400"
                                                 >
                                                     {subItem.name}
                                                 </Link>
