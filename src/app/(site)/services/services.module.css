@@ -1,0 +1,30 @@
+.serviceDescription,
+.serviceImage {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+@media (min-width: 768px) {
+  .odd .serviceDescription,
+  .even .serviceImage {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  .odd .serviceImage,
+  .even .serviceDescription {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+
+  .animate.odd .serviceDescription,
+  .animate.even .serviceImage {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .animate.odd .serviceImage,
+  .animate.even .serviceDescription {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

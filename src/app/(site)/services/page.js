@@ -6,6 +6,7 @@ import React, { useEffect } from 'react';
 import ContactForm from '../../../components/ContactForm';
 import SectionHeading from "@/components/SectionHeading";
 import HeroCarousel from "@/components/HeroCarousel";
+import styles from './services.module.css'
 
 const services = [
   {
@@ -65,7 +66,7 @@ const ServicesPage = () => {
             const totalImages = images.length;
 
             if (totalImages === 0) {
-              entry.target.classList.add('animate');
+              entry.target.classList.add(styles.animate);
               return;
             }
 
@@ -73,19 +74,19 @@ const ServicesPage = () => {
               if (img.complete) {
                 loadedCount++;
                 if (loadedCount === totalImages) {
-                  entry.target.classList.add('animate');
+                  entry.target.classList.add(styles.animate);
                 }
               } else {
                 img.addEventListener('load', () => {
                   loadedCount++;
                   if (loadedCount === totalImages) {
-                    entry.target.classList.add('animate');
+                    entry.target.classList.add(styles.animate);
                   }
                 });
               }
             });
           } else {
-            entry.target.classList.remove('animate');
+            entry.target.classList.remove(styles.animate);
           }
         });
       },
@@ -108,9 +109,9 @@ const ServicesPage = () => {
             key={service.id}
             className={`service-section flex flex-col md:flex-row min-h-[630px] justify-center w-full max-w-[1240px] mb-30 mx-auto px-20 gap-10 ${
               index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-            } ${service.id % 2 === 1 ? 'odd' : 'even'}`}
+            } ${service.id % 2 === 1 ? styles.odd : styles.even}`}
           >
-            <div className="w-full md:w-1/2 p-4 service-description flex flex-col justify-center">
+            <div className={`w-full md:w-1/2 p-4 ${styles.serviceDescription} flex flex-col justify-center`}>
               <h2 className="text-lg md:text-4xl md:whitespace-nowrap font-bold text-left text-orange-400 mb-6 ">
                 {service.title}
               </h2>
@@ -122,7 +123,7 @@ const ServicesPage = () => {
                 Liên hệ
               </a>
             </div>
-            <div className="w-full md:w-1/2 p-4 service-image relative">
+            <div className={`w-full md:w-1/2 p-4 ${styles.serviceImage} relative`}>
               <Image
                 src={service.image}
                 alt={service.alt}
@@ -135,38 +136,6 @@ const ServicesPage = () => {
           </div>
         ))}
       </div>
-      <style jsx>{`
-        .service-description,
-        .service-image {
-          opacity: 1;
-          transform: translateX(0);
-          transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        @media (min-width: 768px) {
-          .odd .service-description,
-          .even .service-image {
-            opacity: 0;
-            transform: translateX(-100px);
-          }
-          .odd .service-image,
-          .even .service-description {
-            opacity: 0;
-            transform: translateX(100px);
-          }
-
-          .animate.odd .service-description,
-          .animate.even .service-image {
-            opacity: 1;
-            transform: translateX(0);
-          }
-          .animate.odd .service-image,
-          .animate.even .service-description {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-      `}</style>
       <ContactForm />
       <div className="h-70 bg-[#272727]"/>
     </div>
