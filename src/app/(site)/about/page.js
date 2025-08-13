@@ -123,68 +123,68 @@ export default function AboutPage() {
     }, []);
 
     return (
-        <div className="relative w-full bg-[#373737]">
+        <div className="w-full bg-[#373737]">
             {/* Hero section with background image */}
-            <div className="relative">
-                {/* Background image */}
-                <div className="absolute inset-0 bg-[url('/images/bg-about.jpg')] bg-cover bg-center bg-no-repeat"/>
-
-                {/* Dark overlay */}
-                <div className="absolute inset-0 bg-black/40"/>
-
-                {/* Gradient fade to gray at bottom */}
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#373737]"/>
-
-                {/* Content */}
-                <div className="relative z-10">
-                    <h1 className="text-white text-center text-extrabold text-3xl font-bold py-70 py-2">
-                        GIỚI THIỆU
+            <section className="w-screen bg-orange-400 pt-30">
+                <div className="grid grid-cols-5 h-180 mx-auto p-6 gap-8">
+                    <h1 className="text-white text-xl font-bold [writing-mode:vertical-rl] text-nowrap">
+                        VỀ CHÚNG TÔI
                     </h1>
-                    <section className="py-12 px-4">
-                        <div className="container mx-auto max-w-6xl mx-auto px-4">
-                            <h2 className="text-white text-center text-extrabold text-5xl font-bold mb-12">
-                                NÂNG TẦM NHỮNG NGÔI NHÀ XỨ QUẢNG
-                            </h2>
-                        </div>
-                    </section>
-                    <section className="py-12">
-                        <div className="container mx-auto max-w-6xl mx-auto px-4">
-                            <div className="text-center">
-                                {/*Title*/}
-                                <h2 className="text-white text-extrabold text-3xl font-bold my-20  p-4 inline-block border-2 border-white">
-                                    ĐỘI NGŨ
-                                </h2>
-
-                            </div>
-                            <div className="grid grid-cols-3 gap-4">
-                                <div className="text-center slide-in-bottom">
-                                    <Image width={300} height={300} src="/thumbnails/nguyen-tuong.jpg"
-                                           alt="nguyen-tuong"
-                                           className="size-70 object-cover mx-auto mb-4"/>
-                                    <h3 className="text-white font-bold text-xl mb-2">
-                                        KTS. TRẦN NGUYÊN TƯƠNG
-                                    </h3>
-                                    <p className="text-white font-base text-sm">GIÁM ĐỐC</p>
-                                </div>
-                                <div className="col-span-2 slide-in-bottom">{aboutShort}</div>
-                                {members.map((member) => (
-                                    <div className="text-center slide-in-bottom" key={member.name}>
-                                        <Image width={300} height={300} src={member.thumbnail}
-                                               alt={member.name}
-                                               className="size-70 object-top object-cover mx-auto mb-4"/>
-                                        <h3 className="text-white font-bold text-xl mb-2">
-                                            {member.name}
-                                        </h3>
-                                        <p className="text-white font-base text-sm">
-                                            {member.title}
-                                        </p>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </section>
+                    <div className="flex flex-col px-4 border-l-1 border-white gap-4 col-span-2">
+                        <h2 className="text-white text-5xl mb-8">
+                            CÔNG TY TNHH NHÀ ĐẸP QUẢNG NAM
+                        </h2>
+                        <p className="text-white text-base">Công ty TNHH NHÀ ĐẸP QUẢNG NAM do KTS Nguyên Tương thành
+                            lập. Với sự nhiệt huyết cùng đội
+                            ngũ nhân sự trẻ trung và năng động, NĐQN mong muốn mang đến cho các bạn nhưng bản thiết
+                            kế đa dạng phong cách, mới lạ và tất nhiên sẽ phù hợp với từng đối tượng.
+                        </p>
+                        <p className="text-white text-base">Với ước mơ tạo ra những ngôi nhà thật đẹp chàng kĩ sư trẻ
+                            Nguyên Tương Tổng Giám Đốc tại công ty Nhà Đẹp Quảng Nam chia sẻ.
+                            "Chúng tôi không chỉ đơn thuần xây dựng những công trình, mà còn kiến tạo nên những tổ ấm -
+                            nơi gia đình sum vầy, nơi nuôi dưỡng những khoảnh khắc hạnh phúc."
+                        </p>
+                    </div>
+                    <div className="relative h-full col-span-2">
+                        <Image src="/thumbnails/nguyen-tuong.jpg" fill alt="founder image" className="object-cover"/>
+                    </div>
                 </div>
-            </div>
+            </section>
+            <section className="py-12">
+                <div className="container max-w-6xl mx-auto px-4">
+                    <div className="text-center">
+                        {/*Title*/}
+                        <h2 className="text-white text-extrabold text-3xl font-bold my-20  p-4 inline-block border-2 border-white">
+                            ĐỘI NGŨ
+                        </h2>
+                    </div>
+                    <div className="grid grid-cols-3 gap-4">
+                        <div className="text-center slide-in-bottom">
+                            <Image width={300} height={300} src="/thumbnails/nguyen-tuong.jpg"
+                                   alt="nguyen-tuong"
+                                   className="size-70 object-cover mx-auto mb-4"/>
+                            <h3 className="text-white font-bold text-xl mb-2">
+                                KTS. TRẦN NGUYÊN TƯƠNG
+                            </h3>
+                            <p className="text-white font-base text-sm">GIÁM ĐỐC</p>
+                        </div>
+                        <div className="col-span-2 slide-in-bottom">{aboutShort}</div>
+                        {members.map((member) => (
+                            <div className="text-center slide-in-bottom" key={member.name}>
+                                <Image width={300} height={300} src={member.thumbnail}
+                                       alt={member.name}
+                                       className="size-70 object-top object-cover mx-auto mb-4"/>
+                                <h3 className="text-white font-bold text-xl mb-2">
+                                    {member.name}
+                                </h3>
+                                <p className="text-white font-base text-sm">
+                                    {member.title}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
             <div>
                 {/*Office pictures*/}
                 <section className="pt-12">
@@ -211,7 +211,8 @@ export default function AboutPage() {
                 {/*5 qualities*/}
                 <section>
                     <div className="relative w-full">
-                        <div className="brightness-65 filter blur-[1px] absolute inset-0 z-0 pointer-events-none bg-[url('/images/5khong-bg.png')] bg-cover bg-bottom"/>
+                        <div
+                            className="brightness-65 filter blur-[1px] absolute inset-0 z-0 pointer-events-none bg-[url('/images/5khong-bg.png')] bg-cover bg-bottom"/>
                         {/*Content*/}
                         <div className="max-w-6xl py-30 mx-auto">
                             <div className="pt-18 mx-auto px-16 swing-in-top-fwd-2">
@@ -238,7 +239,8 @@ export default function AboutPage() {
                                                     className="shrink opacity-40 text-orange-400 text-extrabold text-5xl font-bold swing-in-top-fwd-2">
                                                     {`0${index + 1}`}
                                                 </div>
-                                                <div className="mt-1 text-white font-semibold text-md swing-in-top-fwd-2 line-clamp-2">
+                                                <div
+                                                    className="mt-1 text-white font-semibold text-md swing-in-top-fwd-2 line-clamp-2">
                                                     {item.text}
                                                 </div>
                                                 <div/>

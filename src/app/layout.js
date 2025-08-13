@@ -1,6 +1,6 @@
 // src/app/layout.js (minimal root)
 import "./globals.css";
-import {utmAvo} from "@/app/fonts";
+import {mulish} from "@/app/fonts";
 
 
 export const metadata = {
@@ -10,7 +10,7 @@ export const metadata = {
 
 export default function RootLayout({children}) {
     return (
-        <html lang="en" suppressHydrationWarning className={`${utmAvo.className} antialiased`}>
+        <html lang="en" suppressHydrationWarning className={`${mulish.className} antialiased`}>
         <body suppressHydrationWarning>
         {children}
         </body>
