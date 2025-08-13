@@ -117,9 +117,8 @@ export default {
                             type: "array",
                             of: [
                                                         {
-                            name: "individualProject",
-                            title: "Dự án",
-                            type: 'projectCard'
+                            type: 'reference',
+                            to: [{ type: 'project' }]
                         }
                             ]
                         }

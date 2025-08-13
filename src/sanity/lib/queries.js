@@ -7,7 +7,15 @@ export const homepageQuery = `*[_type == "homepage"][0] {
   whyChooseUs,
   processesTabs,
   constructionVideoSection,
-  showcases,
+  showcases[]{
+    ...,
+    projects[]->{
+      title,
+      description,
+      thumbnail: mainImage,
+      "thumbnailUrl": mainImage.asset->url
+    }
+  },
   partners,
   testimonialSection
 }`;

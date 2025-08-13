@@ -3,13 +3,12 @@ import youtubeEmbed from "@/sanity/schemaTypes/youtubeEmbed";
 import titleAndDescription from "@/sanity/schemaTypes/titleAndDescription";
 import process from "@/sanity/schemaTypes/process";
 import constructionVideo from "@/sanity/schemaTypes/constructionVideo";
-import projectCard from "@/sanity/schemaTypes/projectCard";
+import project from "@/sanity/schemaTypes/project";
 import partner from "@/sanity/schemaTypes/partner";
 import testimonial from "@/sanity/schemaTypes/testimonial";
 import contactSettings from "@/sanity/schemaTypes/contactSettings";
 import footerSettings from "@/sanity/schemaTypes/footerSettings";
 import aboutPage from "@/sanity/schemaTypes/aboutPage";
-import projectDocument from "@/sanity/schemaTypes/projectDocument";
 
 export const schemas = {
     types: [
@@ -18,12 +17,11 @@ export const schemas = {
         titleAndDescription,
         process,
         constructionVideo,
-        projectCard,
+        project,
         partner,
         testimonial,
         contactSettings,
         footerSettings,
         aboutPage,
-        projectDocument,
     ],
 }
