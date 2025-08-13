@@ -20,13 +20,16 @@ export const getClient = () => {
 export const client = new Proxy(
   {},
   {
-    get(_target, prop) {
+    get(_target, prop, receiver) {
       const c = getClient()
       if (!c) {
         throw new Error('Sanity client not configured')
       }
-      // @ts-ignore
-      return c[prop]
+      const value = Reflect.get(c, prop, receiver)
+      if (typeof value === 'function') {
+        return value.bind(c)
+      }
+      return value
     },
   }
 )
