@@ -5,6 +5,7 @@ import {CreditCard, Lock, ShieldUser} from "lucide-react";
 import animateOnObserve from "@/lib/animateOnObserve";
 import {fancyFont} from "@/app/fonts";
 import Commitments from "@/components/Commitments";
+import CoreValues from "@/components/CoreValues";
 
 export default function AboutPage() {
     const [expanded, setExpanded] = useState(false);
@@ -21,59 +22,6 @@ export default function AboutPage() {
             </blockquote>
             <br/>
         </div>
-    const khongItems = [
-        {
-            text: "KHÔNG sử dụng vật tư kém chất lượng",
-            description: "Chỉ sử dụng vật liệu chất lượng cao, đạt tiêu chuẩn nghiêm ngặt, đảm bảo độ bền và hiệu quả lâu dài"
-        },
-        {
-            text: "KHÔNG sử dụng vật tư khác với báo giá",
-            description: "Giá cả minh bạch theo đúng thông số thực tế, không có chi phí ẩn hay báo giá sai lệch"
-        },
-        {
-            text: "KHÔNG cắt giảm vật tư, thi công đủ và đúng tiêu chuẩn",
-            description: "Mọi công trình được thực hiện với đủ khối lượng vật tư và phương pháp thi công đúng kỹ thuật, tuân thủ tiêu chuẩn không cắt giảm"
-        },
-        {
-            text: "KHÔNG bán thầu, kiểm soát chất lượng từ A-Z",
-            description: "Giám sát chất lượng toàn bộ quy trình từ đầu đến cuối, loại bỏ rủi ro bán thầu, đảm bảo chất lượng thống nhất"
-        },
-        {
-            text: "KHÔNG giấu giếm, minh bạch trong từng khâu thi công",
-            description: "Mọi giai đoạn thi công được thực hiện công khai, khách hàng có thể theo dõi tiến độ và phương pháp mọi lúc"
-        }
-    ];
-
-    const coreValues = [
-        {
-            img: "/images/honest.png",
-            title: "Chân thành",
-            description: "Trong phong cách làm việc Nhà Đẹp Quảng Nam luôn ưu tiên tư vấn trung thực, không tô vẽ những điều xa vời mà tập trung vào giá trị thực tế cho khách hàng."
-        },
-        {
-            img: "/images/trust.png",
-            title: "Chính trực",
-            description: "Trong quá trình thi công xây dựng chúng tôi tuân thủ đạo đức nghề nghiệp, không gian dối hay làm trái nguyên tắc, không chạy theo lợi nhuận mà bỏ qua yếu tố an toàn."
-        },
-        {
-            img: "/images/responsibility.png",
-            title: "Trách nhiệm",
-            description: "Không phải cứ bàn giao xong là hết nghĩa vụ, mà là đảm bảo công trình ấy thực sự đáng sống, đáng tin cậy trong nhiều năm sau."
-        }
-    ];
-    const coreValues2 = [
-        {
-            img: "/images/compass.png",
-            title: "Hiểu và Thương",
-            description: "Chúng tôi không đơn thuần là đơn vị thi công theo yêu cầu, mà còn là thấu hiểu mong muốn của họ, để tư vấn giải pháp phù hợp nhất."
-        },
-        {
-            img: "/images/design-thinking.png",
-            title: "Sáng tạo",
-            description: "Với phương châm không ngừng phát triển Nhà Đẹp Quảng Nam luôn tập trung cải tiến toàn diện để mang đến dịch vụ tốt nhất đáp ứng mọi nhu cầu khách hàng."
-        }
-    ];
-
     const members = [
         {
             thumbnail: "/thumbnails/nhu-hien.jpg",
@@ -193,7 +141,7 @@ export default function AboutPage() {
                 <div className="container max-w-6xl mx-auto px-4">
                     <div className="text-center">
                         {/*Title*/}
-                        <h2 className="text-white text-extrabold text-3xl font-bold my-20  p-4 inline-block border-2 border-white">
+                        <h2 className="text-white  text-3xl font-bold my-20  p-4 inline-block border-2 border-white">
                             ĐỘI NGŨ
                         </h2>
                     </div>
@@ -228,7 +176,7 @@ export default function AboutPage() {
                 {/*Office pictures*/}
                 <section className="pt-12">
                     <div className="w-full mx-auto text-center">
-                        <h2 className="text-white text-extrabold text-3xl font-bold my-20  p-4 inline-block border-2 border-white">
+                        <h2 className="text-white text-3xl font-bold my-20 p-4 inline-block border-2 border-white">
                             HÌNH ẢNH VĂN PHÒNG
                         </h2>
                         <div className="flex justify-center">
@@ -247,75 +195,14 @@ export default function AboutPage() {
                         </div>
                     </div>
                 </section>
-                {/*5 qualities*/}
                 <Commitments/>
-
-                <section className="py-12 px-4">
-                    <div className="max-w-6xl mx-auto">
-                        {/* Header */}
-                        <div className="text-center mb-12">
-                            <h2 className="text-white text-extrabold text-3xl font-bold my-20  p-4 border-2 border-white inline-block">
-                                GIÁ TRỊ CỐT LÕI
-                            </h2>
-                        </div>
-                        {/* Cards Grid - 5 Individual Cards */}
-                        <div className="grid grid-cols-3 gap-4 justify-center">
-                            {coreValues.map((item, index) => (
-                                <div key={index}
-                                     className="relative overflow-hidden rounded-lg shadow-lg group puff-in-center overflow-hidden">
-                                    {/* Content Section */}
-                                    <div className="bg-white h-full p-6 hover:scale-110 duration-300 ease-in-out">
-                                        <div
-                                            className="rounded-full bg-orange-400 w-24 h-24 flex items-center justify-center text-white mx-auto p-4 my-6">
-                                            <Image src={item.img} alt="res" width={50} height={50}
-                                                   className="object-cover fill-white"/>
-                                        </div>
-                                        {/* Large Title */}
-                                        <h3 className="text-lg items-center flex justify-center font-bold text-black mb-4 leading-tight h-12 px-6">
-                                            {item.title}
-                                        </h3>
-
-                                        {/* Subtitle */}
-                                        <p className="text-black mb-6 leading-relaxed px-6 text-justify">
-                                            {item.description}
-                                        </p>
-                                    </div>
-                                </div>
-                            ))}
-
-                        </div>
-                        <div className="flex justify-center mt-8 gap-4">
-                            {coreValues2.map((item, index) => (
-                                <div key={index}
-                                     className="relative overflow-hidden rounded-lg shadow-lg group puff-in-center w-sm overflow-hidden">
-                                    {/* Content Section */}
-                                    <div className="bg-white h-full p-6 hover:scale-110 duration-300 ease-in-out">
-                                        <div
-                                            className="rounded-full bg-orange-400 w-24 h-24 flex items-center justify-center text-white mx-auto p-4 my-6">
-                                            <Image src={item.img} alt="res" width={50} height={50}
-                                                   className="object-cover"/>
-                                        </div>
-                                        {/* Large Title */}
-                                        <h3 className="text-lg items-center flex justify-center font-bold text-black mb-4 leading-tight h-12 px-6">
-                                            {item.title}
-                                        </h3>
-
-                                        {/* Subtitle */}
-                                        <p className="text-black mb-6 leading-relaxed px-6 text-justify">
-                                            {item.description}
-                                        </p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
+                <CoreValues/>
                 <section className="py-12 px-4 sm:px-6 lg:px-8">
-                    {/* Policies and Commitments Section */}
+                    {/* Policies Section */}
                     <div className="max-w-6xl mx-auto mt-20">
                         {/* Header */}
                         <div className="mb-12 text-center">
-                            <h2 className="text-white text-extrabold text-3xl font-bold my-20  p-4 border-2 border-white inline-block">
+                            <h2 className="text-white  text-3xl font-bold my-20  p-4 border-2 border-white inline-block">
                                 CHÍNH SÁCH TẠI NHÀ ĐẸP QUẢNG NAM
                             </h2>
                         </div>
