@@ -60,7 +60,8 @@ export default function Footer({data}) {
                     style={{width: circleSize, height: circleSize}}
                 >
                     {/* CTA Circle Content */}
-                    <div className="absolute inset-6 bg-orange-400 rounded-full z-20 text-center flex flex-col items-center justify-center px-8 overflow-visible">
+                    <div
+                        className="absolute inset-6 bg-orange-400 rounded-full z-20 text-center flex flex-col items-center justify-center px-8 overflow-visible">
                         <Image
                             src={logo}
                             alt="Logo"
@@ -75,7 +76,8 @@ export default function Footer({data}) {
                         <div className="relative z-[9999]">
                             <ContactPopover
                                 trigger={
-                                    <button className="heartbeat bg-white text-black px-6 py-4 rounded-full font-semibold hover:bg-black hover:text-orange-400 transition-colors relative z-[9999]">
+                                    <button
+                                        className="heartbeat bg-white text-black px-6 py-4 rounded-full font-semibold hover:bg-black hover:text-orange-400 transition-colors relative z-[9999]">
                                         Liên hệ ngay
                                     </button>
                                 }
@@ -85,7 +87,7 @@ export default function Footer({data}) {
                 </div>
 
                 {/* Main footer layout */}
-                <div className="relative z-10 w-full h-full flex items-center justify-center bg-black text-white pt-12 pb-8 px-4">
+                <div className="relative z-10 w-full h-full flex bg-black text-white p-12">
                     <div className="max-w-6xl text-left flex flex-col gap-8">
                         {/* Column 1: Main Branch */}
                         <div>
@@ -98,14 +100,15 @@ export default function Footer({data}) {
                         </div>
 
                         {/* Columns 2 & 3: Other branches */}
-                        <div className="grid grid-cols-1 lg:grid-cols-2 w-full">
-                            {otherBranches.map((branch, idx) => (
-                                <div key={idx}>
-                                    <h4 className="text-lg font-bold mb-2">{branch.city}</h4>
-                                    <div className="mb-1">{branch.address}</div>
-                                    {branch.phones?.length > 0 && <div>Hotline: {branch.phones[0]}</div>}
-                                </div>
-                            ))}
+                        <div className="w-full">
+                            <p className="italic">
+                                Với ước mơ tạo ra những ngôi nhà thật đẹp chàng kĩ sư trẻ Nguyên Tương Tổng Giám Đốc tại
+                                công ty Nhà Đẹp Quảng Nam chia sẻ.
+                            </p>
+                            <p>
+                                "Chúng tôi không chỉ đơn thuần xây dựng những công trình, mà còn kiến tạo nên những tổ
+                                ấm - nơi gia đình sum vầy, nơi nuôi dưỡng những khoảnh khắc hạnh phúc."
+                            </p>
                         </div>
                     </div>
                 </div>

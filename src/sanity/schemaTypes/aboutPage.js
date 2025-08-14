@@ -21,9 +21,9 @@ export default {
                 {
                     type: 'object',
                     fields: [
-                        { name: 'name', type: 'string', title: 'Họ tên' },
-                        { name: 'title', type: 'string', title: 'Chức vụ' },
-                        { name: 'thumbnail', type: 'image', title: 'Ảnh đại diện' },
+                        {name: 'name', type: 'string', title: 'Họ tên'},
+                        {name: 'title', type: 'string', title: 'Chức vụ'},
+                        {name: 'thumbnail', type: 'image', title: 'Ảnh đại diện'},
                     ]
                 }
             ]
@@ -36,9 +36,9 @@ export default {
                 {
                     type: 'object',
                     fields: [
-                        { name: 'title', type: 'string', title: 'Tiêu đề' },
-                        { name: 'description', type: 'text', title: 'Mô tả' },
-                        { name: 'icon', type: 'image', title: 'Biểu tượng' },
+                        {name: 'title', type: 'string', title: 'Tiêu đề'},
+                        {name: 'description', type: 'text', title: 'Mô tả'},
+                        {name: 'icon', type: 'image', title: 'Biểu tượng'},
                     ]
                 }
             ]
@@ -51,9 +51,9 @@ export default {
                 {
                     type: 'object',
                     fields: [
-                        { name: 'title', type: 'string', title: 'Tiêu đề' },
-                        { name: 'description', type: 'text', title: 'Mô tả' },
-                        { name: 'icon', type: 'image', title: 'Biểu tượng' },
+                        {name: 'title', type: 'string', title: 'Tiêu đề'},
+                        {name: 'description', type: 'text', title: 'Mô tả'},
+                        {name: 'icon', type: 'image', title: 'Biểu tượng'},
                     ]
                 }
             ]
@@ -63,7 +63,7 @@ export default {
             type: 'array',
             title: 'Hình ảnh văn phòng',
             of: [
-                { type: 'image' }
+                {type: 'image'}
             ]
         },
         {
@@ -74,8 +74,11 @@ export default {
                 {
                     type: 'object',
                     fields: [
-                        { name: 'text', type: 'string', title: 'Nội dung chính' },
-                        { name: 'description', type: 'text', title: 'Mô tả' },
+                        {name: 'icon', type: 'image', title: "Icon"},
+                        {name: 'alt', type: 'string',  initialValue: (parent) => parent?.title ? `${parent.title} image` : ''
+                        },
+                        {name: 'title', type: 'string', title: 'Tiêu đề mục con'},
+                        {name: 'description', type: 'text', title: 'Mô tả'},
                     ]
                 }
             ]
@@ -88,8 +91,8 @@ export default {
                 {
                     type: 'object',
                     fields: [
-                        { name: 'title', type: 'string', title: 'Tiêu đề' },
-                        { name: 'icon', type: 'string', title: 'Tên icon LucideReact' }
+                        {name: 'title', type: 'string', title: 'Tiêu đề'},
+                        {name: 'icon', type: 'string', title: 'Tên icon LucideReact'}
                     ]
                 }
             ]

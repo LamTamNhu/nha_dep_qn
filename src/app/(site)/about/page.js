@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import {CreditCard, Lock, ShieldUser} from "lucide-react";
 import animateOnObserve from "@/lib/animateOnObserve";
 import {fancyFont} from "@/app/fonts";
+import Commitments from "@/components/Commitments";
 
 export default function AboutPage() {
     const [expanded, setExpanded] = useState(false);
@@ -125,28 +126,66 @@ export default function AboutPage() {
     return (
         <div className="w-full bg-[#373737]">
             {/* Hero section with background image */}
-            <section className="w-screen bg-orange-400 pt-30">
-                <div className="grid grid-cols-5 h-180 mx-auto p-6 gap-8">
-                    <h1 className="text-white text-xl font-bold [writing-mode:vertical-rl] text-nowrap">
-                        VỀ CHÚNG TÔI
-                    </h1>
-                    <div className="flex flex-col px-4 border-l-1 border-white gap-4 col-span-2">
-                        <h2 className="text-white text-5xl mb-8">
-                            CÔNG TY TNHH NHÀ ĐẸP QUẢNG NAM
-                        </h2>
-                        <p className="text-white text-base">Công ty TNHH NHÀ ĐẸP QUẢNG NAM do KTS Nguyên Tương thành
-                            lập. Với sự nhiệt huyết cùng đội
-                            ngũ nhân sự trẻ trung và năng động, NĐQN mong muốn mang đến cho các bạn nhưng bản thiết
-                            kế đa dạng phong cách, mới lạ và tất nhiên sẽ phù hợp với từng đối tượng.
-                        </p>
-                        <p className="text-white text-base">Với ước mơ tạo ra những ngôi nhà thật đẹp chàng kĩ sư trẻ
-                            Nguyên Tương Tổng Giám Đốc tại công ty Nhà Đẹp Quảng Nam chia sẻ.
-                            "Chúng tôi không chỉ đơn thuần xây dựng những công trình, mà còn kiến tạo nên những tổ ấm -
-                            nơi gia đình sum vầy, nơi nuôi dưỡng những khoảnh khắc hạnh phúc."
-                        </p>
-                    </div>
-                    <div className="relative h-full col-span-2">
-                        <Image src="/thumbnails/nguyen-tuong.jpg" fill alt="founder image" className="object-cover"/>
+            <section className="w-full bg-orange-400 py-30 overflow-x-clip">
+                <div className="mx-auto max-w-7xl px-6 md:px-12">
+                    <div className="flex gap-8">
+                        <h1 className="text-white text-xl font-bold [writing-mode:vertical-rl] text-nowrap shrink-0">
+                            VỀ CHÚNG TÔI
+                        </h1>
+
+                        <div className="grid min-w-0 grid-cols-1 md:grid-cols-2 gap-12 border-l border-white pl-4">
+                            {/* Cột text */}
+                            <div className="relative min-w-0 px-10">
+                                <h2 className="text-white text-5xl mb-8">
+                                    CÔNG TY TNHH NHÀ ĐẸP QUẢNG NAM
+                                </h2>
+                                <br/>
+                                <p className="text-white text-base">Công ty TNHH NHÀ ĐẸP QUẢNG NAM do KTS Nguyên Tương
+                                    thành
+                                    lập. Với sự nhiệt huyết cùng đội
+                                    ngũ nhân sự trẻ trung và năng động, NĐQN mong muốn mang đến cho các bạn nhưng bản
+                                    thiết
+                                    kế đa dạng phong cách, mới lạ và tất nhiên sẽ phù hợp với từng đối tượng.
+                                </p>
+                                <br/>
+                                <p className="text-white text-base">Với ước mơ tạo ra những ngôi nhà thật đẹp chàng kĩ
+                                    sư
+                                    trẻ
+                                    Nguyên Tương Tổng Giám Đốc tại công ty Nhà Đẹp Quảng Nam chia sẻ.
+                                    "Chúng tôi không chỉ đơn thuần xây dựng những công trình, mà còn kiến tạo nên những
+                                    tổ
+                                    ấm -
+                                    nơi gia đình sum vầy, nơi nuôi dưỡng những khoảnh khắc hạnh phúc."
+                                </p>
+                                <br/>
+                                <p className="text-white text-base">Công ty TNHH NHÀ ĐẸP QUẢNG NAM do KTS Nguyên Tương
+                                    thành
+                                    lập. Với sự nhiệt huyết cùng đội
+                                    ngũ nhân sự trẻ trung và năng động, NĐQN mong muốn mang đến cho các bạn nhưng bản
+                                    thiết
+                                    kế đa dạng phong cách, mới lạ và tất nhiên sẽ phù hợp với từng đối tượng.
+                                </p>
+                                <br/>
+                                <p className="text-white text-base">Với ước mơ tạo ra những ngôi nhà thật đẹp chàng kĩ
+                                    sư
+                                    trẻ
+                                    Nguyên Tương Tổng Giám Đốc tại công ty Nhà Đẹp Quảng Nam chia sẻ.
+                                    "Chúng tôi không chỉ đơn thuần xây dựng những công trình, mà còn kiến tạo nên những
+                                    tổ
+                                    ấm -
+                                    nơi gia đình sum vầy, nơi nuôi dưỡng những khoảnh khắc hạnh phúc."
+                                </p>
+                            </div>
+                            {/* Cột ảnh */}
+                            <Image
+                                src="/thumbnails/nguyen-tuong.jpg"
+                                alt="founder image"
+                                width={900}
+                                height={1600}
+                                className="w-full max-w-md object-cover aspect-[3/5]"
+                                priority
+                            />
+                        </div>
                     </div>
                 </div>
             </section>
@@ -209,52 +248,7 @@ export default function AboutPage() {
                     </div>
                 </section>
                 {/*5 qualities*/}
-                <section>
-                    <div className="relative w-full">
-                        <div
-                            className="brightness-65 filter blur-[1px] absolute inset-0 z-0 pointer-events-none bg-[url('/images/5khong-bg.png')] bg-cover bg-bottom"/>
-                        {/*Content*/}
-                        <div className="max-w-6xl py-30 mx-auto">
-                            <div className="pt-18 mx-auto px-16 swing-in-top-fwd-2">
-                                <div
-                                    className="text-orange-400 text-extrabold text-6xl font-bold mb-2">
-                                    5 KHÔNG
-                                </div>
-                                <div className="flex h-16 gap-2 items-center">
-                                    <div className="text-white text-lg">Tại
-                                    </div>
-                                    <div
-                                        className={`${fancyFont.className} text-white text-extrabold text-6xl`}>
-                                        Nhà đẹp Quảng Nam
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="grid grid-cols-3 divide-orange-500 max-w-6xl">
-                                {khongItems.map((item, index) => {
-                                        return (
-                                            <div
-                                                className={`grid grid-cols-[auto_1fr] justify-items-end gap-2 p-4 ${index < 3 ? `border-b-1 border-b-orange-400/20` : ""} ${index === 2 ? "" : "border-r-1 border-r-orange-400/20"}`}
-                                                key={index}>
-                                                <div
-                                                    className="shrink opacity-40 text-orange-400 text-extrabold text-5xl font-bold swing-in-top-fwd-2">
-                                                    {`0${index + 1}`}
-                                                </div>
-                                                <div
-                                                    className="mt-1 text-white font-semibold text-md swing-in-top-fwd-2 line-clamp-2">
-                                                    {item.text}
-                                                </div>
-                                                <div/>
-                                                <div className="text-white text-xs swing-in-top-fwd-2">
-                                                    {item.description}
-                                                </div>
-                                            </div>
-                                        )
-                                    }
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                <Commitments khongItems={khongItems}/>
 
                 <section className="py-12 px-4">
                     <div className="max-w-6xl mx-auto">
