@@ -1,4 +1,3 @@
-import {ArrowUpRight, Eye, Goal, HeartHandshake, Quote,} from "lucide-react";
 import * as React from "react";
 import PartnerCarousel from "@/components/PartnerCarousel";
 import SectionHeading from "@/components/SectionHeading";
@@ -13,48 +12,7 @@ import ConstructionVideo from "@/components/ConstructionVideo";
 import DesignShowCases from "@/components/DesignShowCases";
 import ConstructionShowCases from "@/components/ConstructionShowCases";
 import Testimonial from "@/components/Testimonial";
-
-const cardData = [
-    {
-        id: "core-values",
-        icon: <HeartHandshake size={70}/>,
-        title: "Giá trị cốt lõi",
-        description:
-            "Chúng tôi cam kết chất lượng xây dựng, an toàn lao động và đổi mới công nghệ để mang lại những công trình bền vững và hiệu quả nhất. Sự hài lòng của khách hàng là ưu tiên hàng đầu của chúng tôi.",
-        cardBgColor: "bg-orange-400",
-        titleColor: "text-white",
-        descriptionColor: "text-white",
-        iconWrapperBgColor: "bg-orange-50",
-        iconColorClass: "text-orange-500",
-        iconBorderColor: "border-orange-500",
-    },
-    {
-        id: "mission",
-        icon: <Goal/>,
-        title: "Sứ mệnh",
-        description:
-            "Xây dựng những công trình chất lượng cao, an toàn và thân thiện với môi trường, góp phần phát triển hạ tầng và nâng cao chất lượng cuộc sống cộng đồng. Chúng tôi luôn đồng hành cùng đối tác để hiện thực hóa mọi dự án.",
-        cardBgColor: "bg-gray-50",
-        titleColor: "text-gray-800",
-        descriptionColor: "text-gray-500",
-        iconWrapperBgColor: "bg-gray-50",
-        iconColorClass: "text-gray-800",
-        iconBorderColor: "border-gray-800",
-    },
-    {
-        id: "vision",
-        icon: <Eye/>,
-        title: "Tầm nhìn",
-        description:
-            "Trở thành công ty xây dựng hàng đầu tại Việt Nam, được công nhận về sự xuất sắc trong thiết kế, thi công và quản lý dự án. Chúng tôi hướng tới việc tạo ra những công trình mang tính biểu tượng, đóng góp vào sự phát triển bền vững của đất nước.",
-        cardBgColor: "bg-gray-50",
-        titleColor: "text-gray-800",
-        descriptionColor: "text-gray-500",
-        iconWrapperBgColor: "bg-gray-50",
-        iconColorClass: "text-gray-800",
-        iconBorderColor: "border-gray-800",
-    },
-];
+import VisionSection from "@/components/VisionSection";
 
 export default async function Home() {
     const data = await client.fetch(homepageQuery);
@@ -76,44 +34,7 @@ export default async function Home() {
                     </h3>
                 </div>
             </div>
-
-            {/* Core Values Section */}
-            <section className="py-16 px-4 bg-black">
-                <div className="max-w-6xl flex gap-4 mx-auto">
-                    {/* Cards Grid */}
-                    {cardData.map((card, index) => (
-                        <div
-                            key={card.id}
-                            className={`slide-in-right relative rounded-4xl shadow-xl p-8 flex flex-col items-center text-justify transition-transform duration-300 hover:scale-105 ${card.cardBgColor}`}
-                        >
-                            {/* Icon Wrapper */}
-                            <div
-                                className={`absolute -top-12 w-24 h-24 ${card.iconWrapperBgColor} rounded-full flex items-center justify-center shadow-md border-4 ${card.iconBorderColor}`}
-                            >
-                                {/* Clone the icon and apply specific color for the icon itself */}
-                                {React.cloneElement(card.icon, {
-                                    className: `w-12 h-12 ${card.iconColorClass}`,
-                                })}
-                            </div>
-
-                            {/* Adjust padding-top for content to account for the absolute icon */}
-                            <div className="pt-10">
-                                {/* Title */}
-                                <h3 className={`text-2xl text-center font-bold mb-4 ${card.titleColor}`}>
-                                    {data?.coreValues?.[index].title || card.title}
-                                </h3>
-
-                                {/* Description */}
-                                <p className={`leading-relaxed ${card.descriptionColor}`}>
-                                    {data?.coreValues?.[index].description || card.description}
-                                </p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </section>
-
-
+            <VisionSection/>
             {/* Why Choose Us Section */
             }
             <section className="py-12 px-4 bg-white">
@@ -186,9 +107,6 @@ export default async function Home() {
             {/* Testimonial Section */
             }
             <Testimonial data={data?.testimonialSection}/>
-
-            <ContactForm id="contact" data={contactData}/>
-            <div className="pb-70 bg-white"/>
         </div>
     )
         ;
