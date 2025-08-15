@@ -14,7 +14,6 @@ export default function Contact() {
         className="py-20 border-0"
       />
       <ContactForm />
-      <div className="bg-[#272727] pb-70"/>
     </div>
   );
 }
