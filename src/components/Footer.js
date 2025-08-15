@@ -45,7 +45,7 @@ export default function Footer({data}) {
 
     return (
         <div>
-            <div className="bg-black h-32"/>
+            <div className="bg-transparent h-32"/>
             <div className="bg-black">
                 <footer className="relative overflow-visible">
                     {/* Decorative circle layers */}
