@@ -9,7 +9,25 @@ import testimonial from "@/sanity/schemaTypes/testimonial";
 import contactSettings from "@/sanity/schemaTypes/contactSettings";
 import footerSettings from "@/sanity/schemaTypes/footerSettings";
 import aboutPage from "@/sanity/schemaTypes/aboutPage";
+import visionSection from "@/sanity/schemaTypes/visionSection";
+import service from "@/sanity/schemaTypes/service";
+import servicesPage from "@/sanity/schemaTypes/servicesPage";
 
 export const schemas = {
-    types: [homepage, youtubeEmbed, titleAndDescription, process, constructionVideo, project, partner, testimonial, contactSettings, footerSettings, aboutPage],
+    types: [
+        homepage,
+        youtubeEmbed,
+        titleAndDescription,
+        process,
+        constructionVideo,
+        project,
+        partner,
+        testimonial,
+        contactSettings,
+        footerSettings,
+        aboutPage,
+        visionSection,
+        service,
+        servicesPage,
+    ],
 }

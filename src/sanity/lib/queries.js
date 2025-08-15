@@ -3,6 +3,20 @@ export const homepageQuery = `*[_type == "homepage"][0] {
   bannerTitle,
   sale,
   introduction,
+  visionSection{
+    vision{
+      title,
+      description1,
+      description2,
+      images[]{"url": asset->url}
+    },
+    mission{
+      title,
+      description1,
+      description2,
+      images[]{"url": asset->url}
+    }
+  },
   coreValues,
   whyChooseUs,
   processesTabs,
@@ -59,6 +73,16 @@ export const aboutPageQuery = `*[_type == "aboutPage"][0]{
   policies[]{
     title,
     icon
+  }
+}`
+
+export const servicesPageQuery = `*[_type == "servicesPage"][0]{
+  services[]{
+    title,
+    description,
+    alt,
+    "image": image.asset->url,
+    "slug": slug.current
   }
 }`
 
