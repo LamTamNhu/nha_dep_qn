@@ -12,10 +12,10 @@ export default function AboutHeroSection({ data }) {
                     <div className="grid min-w-0 grid-cols-1 lg:grid-cols-2 gap-12 border-l border-white pl-4">
                         {/* Text Column */}
                         <div className="relative min-w-0 px-10">
-                            <p className="text-white md:text-2xl lg:text-4xl">
+                            <p className="text-white text-2xl lg:text-4xl">
                                 CÔNG TY TNHH
                             </p>
-                            <p className="text-white md:text-2xl text-4xl whitespace-nowrap">
+                            <p className="text-white text-2xl lg:text-4xl whitespace-nowrap mb-6">
                                 NHÀ ĐẸP QUẢNG NAM
                             </p>
                             {data?.descriptions?.map((paragraph, index) => (
