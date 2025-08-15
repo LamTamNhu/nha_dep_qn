@@ -176,7 +176,6 @@ const ServicesPage = () => {
           }
         }
       `}</style>
-      <ContactForm />
       <div className="h-70 bg-[#272727]"/>
     </div>
   );
