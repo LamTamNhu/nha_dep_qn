@@ -9,7 +9,31 @@ import testimonial from "@/sanity/schemaTypes/testimonial";
 import contactSettings from "@/sanity/schemaTypes/contactSettings";
 import footerSettings from "@/sanity/schemaTypes/footerSettings";
 import aboutPage from "@/sanity/schemaTypes/aboutPage";
+import visionSection from "@/sanity/schemaTypes/visionSection";
+import service from "@/sanity/schemaTypes/service";
+import servicesPage from "@/sanity/schemaTypes/servicesPage";
+import aboutHeroSection from "@/sanity/schemaTypes/aboutHeroSection";
+import teamSection from "@/sanity/schemaTypes/teamSection";
+import projectDetail from "@/sanity/schemaTypes/projectDetail";
 
 export const schemas = {
-    types: [homepage, youtubeEmbed, titleAndDescription, process, constructionVideo, project, partner, testimonial, contactSettings, footerSettings, aboutPage],
+    types: [
+        homepage,
+        youtubeEmbed,
+        titleAndDescription,
+        process,
+        constructionVideo,
+        project,
+        partner,
+        testimonial,
+        contactSettings,
+        footerSettings,
+        aboutPage,
+        visionSection,
+        service,
+        servicesPage,
+        aboutHeroSection,
+        teamSection,
+        projectDetail,
+    ],
 }

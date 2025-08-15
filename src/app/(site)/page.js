@@ -34,7 +34,7 @@ export default async function Home() {
                     </h3>
                 </div>
             </div>
-            <VisionSection/>
+            <VisionSection data={data?.visionSection}/>
             {/* Why Choose Us Section */
             }
             <section className="py-12 px-4 bg-white">

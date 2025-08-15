@@ -43,6 +43,11 @@ export default {
             type: 'titleAndDescription'
         },
         {
+            name: 'visionSection',
+            title: 'Tầm nhìn và Sứ mệnh',
+            type: 'visionSection'
+        },
+        {
             name: 'coreValues',
             title: 'Giá trị cốt lõi',
             type: "array",

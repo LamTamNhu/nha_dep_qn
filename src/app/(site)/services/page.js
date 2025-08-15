@@ -2,12 +2,12 @@
 
 import Banner from '@/components/ui/banner';
 import Image from 'next/image';
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import ContactForm from '../../../components/ContactForm';
-import SectionHeading from "@/components/SectionHeading";
-import HeroCarousel from "@/components/HeroCarousel";
+import { client } from "@/sanity/lib/client";
+import { servicesPageQuery } from "@/sanity/lib/queries";
 
-const services = [
+const fallbackServices = [
   {
     id: 1,
     title: "Thiết kế thi công trọn gói",
@@ -51,8 +51,15 @@ const services = [
     alt: "Thi công nhà đã có bảng vẽ",
   },
 ];
-
 const ServicesPage = () => {
+  const [services, setServices] = useState([]);
+
+  useEffect(() => {
+    client.fetch(servicesPageQuery).then((data) => {
+      setServices(data?.services || []);
+    });
+  }, []);
+
   useEffect(() => {
     const sections = document.querySelectorAll('.service-section');
 
@@ -97,18 +104,20 @@ const ServicesPage = () => {
     return () => {
       sections.forEach((section) => observer.unobserve(section));
     };
-  }, []);
+  }, [services]);
+
+  const displayServices = services.length ? services : fallbackServices;
 
   return (
     <div className="min-h-screen bg-[#272727]">
       <Banner title="DỊCH VỤ" />
       <div className="container mx-auto px-6 md:px-10">
-        {services.map((service, index) => (
+        {displayServices.map((service, index) => (
           <div
-            key={service.id}
+            key={service.slug || service.id}
             className={`service-section flex flex-col md:flex-row min-h-[630px] justify-center w-full max-w-[1240px] mb-30 mx-auto px-20 gap-10 ${
               index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-            } ${service.id % 2 === 1 ? 'odd' : 'even'}`}
+            } ${index % 2 === 0 ? 'odd' : 'even'}`}
           >
             <div className="w-full md:w-1/2 p-4 service-description flex flex-col justify-center">
               <h2 className="text-lg md:text-4xl md:whitespace-nowrap font-bold text-left text-orange-400 mb-6 ">
@@ -116,7 +125,7 @@ const ServicesPage = () => {
               </h2>
               <p className="text-white mb-4">{service.description}</p>
               <a
-                href={`/services/${service.id}`}
+                href={`/services/${service.slug || service.id}`}
                 className="w-fit inline-block px-4 py-2 border border-orange-400 bg-white text-orange-400 text-center hover:text-white hover:!bg-orange-400 font-semibold rounded-full duration-200 text-lg"
               >
                 Liên hệ
@@ -125,7 +134,7 @@ const ServicesPage = () => {
             <div className="w-full md:w-1/2 p-4 service-image relative">
               <Image
                 src={service.image}
-                alt={service.alt}
+                alt={service.alt || service.title}
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
