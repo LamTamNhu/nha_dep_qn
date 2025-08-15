@@ -9,14 +9,17 @@ export default function AboutHeroSection({ data }) {
                         {data?.title || 'VỀ CHÚNG TÔI'}
                     </h1>
 
-                    <div className="grid min-w-0 grid-cols-1 md:grid-cols-2 gap-12 border-l border-white pl-4">
+                    <div className="grid min-w-0 grid-cols-1 lg:grid-cols-2 gap-12 border-l border-white pl-4">
                         {/* Text Column */}
                         <div className="relative min-w-0 px-10">
-                            <h2 className="text-white text-5xl mb-8">
-                                {data?.companyName || 'CÔNG TY TNHH NHÀ ĐẸP QUẢNG NAM'}
-                            </h2>
+                            <p className="text-white md:text-2xl lg:text-4xl">
+                                CÔNG TY TNHH
+                            </p>
+                            <p className="text-white md:text-2xl text-4xl whitespace-nowrap">
+                                NHÀ ĐẸP QUẢNG NAM
+                            </p>
                             {data?.descriptions?.map((paragraph, index) => (
-                                <p key={index} className="text-white text-lg mb-4">
+                                <p key={index} className="text-white text-justify text-lg mb-4">
                                     {paragraph}
                                 </p>
                             ))}
