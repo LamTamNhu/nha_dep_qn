@@ -74,7 +74,7 @@ export default function AboutPage() {
     return (
         <div className="w-full bg-[#373737]">
             {/* Hero section with background image */}
-            <section className="w-full bg-orange-400 py-30 overflow-x-clip">
+            <section className="w-full bg-[#cb6d0d] py-30 overflow-x-clip">
                 <div className="mx-auto max-w-7xl px-6 md:px-12">
                     <div className="flex gap-8">
                         <h1 className="text-white text-xl font-bold [writing-mode:vertical-rl] text-nowrap shrink-0">
