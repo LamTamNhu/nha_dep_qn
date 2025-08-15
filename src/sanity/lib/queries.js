@@ -99,3 +99,26 @@ export const servicesPageQuery = `*[_type == "servicesPage"][0]{
   }
 }`
 
+export const projectSlugsQuery = `*[_type == "projectDetail" && defined(slug.current)]{
+  "slug": slug.current
+}`;
+
+export const projectBySlugQuery = `*[_type == "projectDetail" && slug.current == $slug][0]{
+  title,
+  information,
+  "slug": slug.current,
+  gallery[]{
+    "url": asset->url,
+    alt
+  },
+  description,
+  sections[]{
+    content,
+    image{
+      "url": asset->url,
+      alt
+    },
+    imageSubtitle
+  }
+}`;
+

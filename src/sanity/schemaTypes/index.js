@@ -15,6 +15,9 @@ import servicesPage from "@/sanity/schemaTypes/servicesPage";
 import aboutHeroSection from "@/sanity/schemaTypes/aboutHeroSection";
 import teamSection from "@/sanity/schemaTypes/teamSection";
 
+import projectDetail from "@/sanity/schemaTypes/projectDetail";
+
+
 export const schemas = {
     types: [
         homepage,
@@ -33,5 +36,7 @@ export const schemas = {
         servicesPage,
         aboutHeroSection,
         teamSection,
+        projectDetail,
+
     ],
 }

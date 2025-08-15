@@ -8,7 +8,6 @@ export default function AboutHeroSection({ data }) {
                     <h1 className="text-white text-xl font-bold [writing-mode:vertical-rl] text-nowrap shrink-0">
                         {data?.title || 'VỀ CHÚNG TÔI'}
                     </h1>
-
                     <div className="grid min-w-0 grid-cols-1 lg:grid-cols-2 gap-12 border-l border-white pl-4">
                         {/* Text Column */}
                         <div className="relative min-w-0 px-10">
