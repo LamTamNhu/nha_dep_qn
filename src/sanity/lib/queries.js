@@ -46,12 +46,25 @@ export const footerQuery = `*[_type == "footerSettings"][0]{
 `;
 
 export const aboutPageQuery = `*[_type == "aboutPage"][0]{
-  aboutShort,
-  ceoQuote,
-  members[]{
-    name,
+  heroSection{
     title,
-    "thumbnailUrl": thumbnail.asset->url
+    companyName,
+    descriptions,
+    "imageUrl": image.asset->url,
+    imageAlt
+  },
+  teamSection{
+    aboutShort,
+    ceo{
+      name,
+      title,
+      "thumbnailUrl": thumbnail.asset->url
+    },
+    members[]{
+      name,
+      title,
+      "thumbnailUrl": thumbnail.asset->url
+    }
   },
   coreValues[]{
     title,

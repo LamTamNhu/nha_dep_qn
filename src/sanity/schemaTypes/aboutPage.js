@@ -4,29 +4,14 @@ export default {
     title: 'Giới thiệu',
     fields: [
         {
-            name: 'aboutShort',
-            type: 'text',
-            title: 'Giới thiệu ngắn',
+            name: 'heroSection',
+            type: 'aboutHeroSection',
+            title: 'Hero Section'
         },
         {
-            name: 'ceoQuote',
-            type: 'text',
-            title: 'Trích dẫn CEO'
-        },
-        {
-            name: 'members',
-            type: 'array',
-            title: 'Thành viên đội ngũ',
-            of: [
-                {
-                    type: 'object',
-                    fields: [
-                        {name: 'name', type: 'string', title: 'Họ tên'},
-                        {name: 'title', type: 'string', title: 'Chức vụ'},
-                        {name: 'thumbnail', type: 'image', title: 'Ảnh đại diện'},
-                    ]
-                }
-            ]
+            name: 'teamSection',
+            type: 'teamSection',
+            title: 'Đội ngũ'
         },
         {
             name: 'coreValues',
@@ -104,8 +89,6 @@ export default {
         }
     },
     initialValue: {
-        aboutShort: 'Với ước mơ tạo ra những ngôi nhà thật đẹp chàng kĩ sư trẻ Nguyên Tương Tổng Giám Đốc tại công ty Nhà Đẹp Quảng Nam chia sẻ.',
-        ceoQuote: 'Chúng tôi không chỉ đơn thuần xây dựng những công trình, mà còn kiến tạo nên những tổ ấm - nơi gia đình sum vầy, nơi nuôi dưỡng những khoảnh khắc hạnh phúc.',
         commitments: [
             {
                 text: 'KHÔNG sử dụng vật tư kém chất lượng',
