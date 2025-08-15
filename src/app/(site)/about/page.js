@@ -81,14 +81,17 @@ export default function AboutPage() {
                             VỀ CHÚNG TÔI
                         </h1>
 
-                        <div className="grid min-w-0 grid-cols-1 md:grid-cols-2 gap-12 border-l border-white pl-4">
+                        <div className="grid min-w-0 grid-cols-1 lg:grid-cols-2 gap-12 border-l border-white pl-4">
                             {/* Cột text */}
                             <div className="relative min-w-0 px-10">
-                                <h2 className="text-white text-5xl mb-8">
-                                    CÔNG TY TNHH NHÀ ĐẸP QUẢNG NAM
-                                </h2>
+                                <p className="text-white text-4xl">
+                                    CÔNG TY TNHH
+                                </p>
+                                <p className="text-white text-4xl whitespace-nowrap">
+                                    NHÀ ĐẸP QUẢNG NAM
+                                </p>
                                 <br/>
-                                <p className="text-white text-lg">Công ty TNHH NHÀ ĐẸP QUẢNG NAM do KTS Nguyên Tương
+                                <p className="text-white text-lg text-justify">Công ty TNHH NHÀ ĐẸP QUẢNG NAM do KTS Nguyên Tương
                                     thành
                                     lập. Với sự nhiệt huyết cùng đội
                                     ngũ nhân sự trẻ trung và năng động, NĐQN mong muốn mang đến cho các bạn nhưng bản
@@ -96,7 +99,7 @@ export default function AboutPage() {
                                     kế đa dạng phong cách, mới lạ và tất nhiên sẽ phù hợp với từng đối tượng.
                                 </p>
                                 <br/>
-                                <p className="text-white text-lg">Với ước mơ tạo ra những ngôi nhà thật đẹp chàng kĩ
+                                <p className="text-white text-lg text-justify">Với ước mơ tạo ra những ngôi nhà thật đẹp chàng kĩ
                                     sư
                                     trẻ
                                     Nguyên Tương Tổng Giám Đốc tại công ty Nhà Đẹp Quảng Nam chia sẻ.
@@ -106,7 +109,7 @@ export default function AboutPage() {
                                     nơi gia đình sum vầy, nơi nuôi dưỡng những khoảnh khắc hạnh phúc."
                                 </p>
                                 <br/>
-                                <p className="text-white text-lg">Công ty TNHH NHÀ ĐẸP QUẢNG NAM do KTS Nguyên Tương
+                                <p className="text-white text-lg text-justify">Công ty TNHH NHÀ ĐẸP QUẢNG NAM do KTS Nguyên Tương
                                     thành
                                     lập. Với sự nhiệt huyết cùng đội
                                     ngũ nhân sự trẻ trung và năng động, NĐQN mong muốn mang đến cho các bạn nhưng bản
@@ -114,7 +117,7 @@ export default function AboutPage() {
                                     kế đa dạng phong cách, mới lạ và tất nhiên sẽ phù hợp với từng đối tượng.
                                 </p>
                                 <br/>
-                                <p className="text-white text-lg">Với ước mơ tạo ra những ngôi nhà thật đẹp chàng kĩ
+                                <p className="text-white text-lg text-justify">Với ước mơ tạo ra những ngôi nhà thật đẹp chàng kĩ
                                     sư
                                     trẻ
                                     Nguyên Tương Tổng Giám Đốc tại công ty Nhà Đẹp Quảng Nam chia sẻ.
