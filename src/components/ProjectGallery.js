@@ -40,13 +40,13 @@ export default function ProjectGallery({images = []}) {
                 watchSlidesProgress
             >
                 {images.map((img, idx) => (
-                    <SwiperSlide key={`thumb-${idx}`}>
+                    <SwiperSlide key={`thumb-${idx}`} className="!w-20 !h-20">
                         <Image
                             src={img.url}
                             alt={img.alt || `thumb-${idx}`}
                             width={80}
-                            height={60}
-                            className="w-full h-full object-cover cursor-pointer"
+                            height={80}
+                            className="object-cover w-full h-full cursor-pointer"
                         />
                     </SwiperSlide>
                 ))}

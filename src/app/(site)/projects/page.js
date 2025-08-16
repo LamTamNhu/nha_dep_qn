@@ -4,7 +4,7 @@ import Banner from "@/components/ui/banner";
 import ProjectsGrid from "@/components/ProjectsGrid";
 
 export default async function ProjectsPage() {
-    const projects = await client.fetch(projectsQuery, { isCompleted: false });
+    const projects = await client.fetch(projectsQuery);
     return (
         <div className="min-h-screen bg-[#272727] text-white">
             <Banner title="Dự án" />

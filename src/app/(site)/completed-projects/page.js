@@ -1,10 +1,10 @@
 import {client} from "@/sanity/lib/client";
-import {projectsQuery} from "@/sanity/lib/queries";
+import {completedProjectsQuery} from "@/sanity/lib/queries";
 import Banner from "@/components/ui/banner";
 import ProjectsGrid from "@/components/ProjectsGrid";
 
 export default async function CompletedProject() {
-  const projects = await client.fetch(projectsQuery, { isCompleted: true });
+  const projects = await client.fetch(completedProjectsQuery);
   return (
     <div className="min-h-screen bg-[#272727] text-white">
       <Banner title="Thi công thực tế" />

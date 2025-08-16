@@ -125,7 +125,18 @@ export const projectBySlugQuery = `*[_type == "projectDetail" && slug.current ==
   }
 }`;
 
-export const projectsQuery = `*[_type == "projectDetail" && (!defined(isCompleted) || isCompleted == $isCompleted)]{
+export const projectsQuery = `*[_type == "projectDetail" && isCompleted != true]{
+  _id,
+  title,
+  "slug": slug.current,
+  "image": gallery[0].asset->url,
+  "shortDescription": information.shortDescription,
+  category,
+  isCompleted,
+  _createdAt
+}`;
+
+export const completedProjectsQuery = `*[_type == "projectDetail" && isCompleted == true]{
   _id,
   title,
   "slug": slug.current,
