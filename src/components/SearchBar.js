@@ -1,6 +1,6 @@
 'use client';
 
-export default function SearchBar({ searchTerm, onSearchChange }) {
+export default function SearchBar({ searchTerm, onSearchChange, placeholder = 'Tìm kiếm dự án...' }) {
     const handleChange = (e) => {
         onSearchChange(e.target.value);
     };
@@ -18,7 +18,7 @@ export default function SearchBar({ searchTerm, onSearchChange }) {
             </div>
             <input
                 type="text"
-                placeholder="Tìm kiếm dự án..."
+                placeholder={placeholder}
                 value={searchTerm}
                 onChange={handleChange}
                 className="block w-full pl-10 pr-10 py-3 border border-gray-600 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent"

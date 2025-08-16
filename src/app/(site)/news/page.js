@@ -1,9 +1,16 @@
-import WhyChooseUs from "@/components/WhyChooseUs";
+import { client } from '@/sanity/lib/client';
+import { newsQuery } from '@/sanity/lib/queries';
+import Banner from '@/components/ui/banner';
+import NewsFilter from '@/components/NewsFilter';
 
-export default function  News(){
-    return(
-        <div className="bg-[#272727] py-70">
-
+export default async function NewsPage() {
+    const news = await client.fetch(newsQuery);
+    return (
+        <div className="min-h-screen bg-[#272727] text-center">
+            <Banner title="Tin tức" />
+            <div className="px-6 md:px-10 container mx-auto pb-30">
+                <NewsFilter news={news} />
+            </div>
         </div>
-    )
+    );
 }

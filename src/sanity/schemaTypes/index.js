@@ -17,6 +17,7 @@ import teamSection from "@/sanity/schemaTypes/teamSection";
 
 import projectDetail from "@/sanity/schemaTypes/projectDetail";
 import siteSettings from "@/sanity/schemaTypes/siteSettings";
+import news from "@/sanity/schemaTypes/news";
 
 
 export const schemas = {
@@ -39,6 +40,7 @@ export const schemas = {
         teamSection,
         projectDetail,
         siteSettings,
+        news,
 
     ],
 }

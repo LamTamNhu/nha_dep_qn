@@ -159,3 +159,32 @@ export const siteSettingsQuery = `*[_type == "siteSettings"][0]{
   youtube
 }`;
 
+export const newsSlugsQuery = `*[_type == "news" && defined(slug.current)]{
+  "slug": slug.current
+}`;
+
+export const newsBySlugQuery = `*[_type == "news" && slug.current == $slug][0]{
+  title,
+  category,
+  _createdAt,
+  "slug": slug.current,
+  sections[]{
+    header,
+    content,
+    images[]{
+      "url": asset->url,
+      alt
+    }
+  }
+}`;
+
+export const newsQuery = `*[_type == "news"] | order(_createdAt desc){
+  _id,
+  title,
+  "slug": slug.current,
+  "image": thumbnail.asset->url,
+  excerpt,
+  category,
+  _createdAt
+}`;
+
