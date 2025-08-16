@@ -1,6 +1,6 @@
 export default {
     name: 'contactSettings',
-    title: 'Thông tin liên hệ',
+    title: 'Form liên hệ',
     type: 'document',
     fields: [
         {

@@ -1,7 +1,7 @@
 export default {
     name: 'homepage',
     type: 'document',
-    title: 'Nội dung trang chủ',
+    title: 'Trang chủ',
     fields: [
         {
             name: 'videoBanner',
