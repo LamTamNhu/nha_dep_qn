@@ -30,7 +30,7 @@ export default function TeamSection({ data }) {
                             </p>
                         </div>
                     )}
-                    <div className="col-span-2 slide-in-bottom">
+                    <div className="col-span-2 flex items-center slide-in-bottom">
                         <p className="text-white text-lg">
                             {data?.aboutShort || ''}
                         </p>
