@@ -22,6 +22,13 @@ export default async function ProjectDetailPage({ params }) {
     const siteSettings = await client.fetch(siteSettingsQuery);
 
     const { title, information, gallery, description, sections, category, _createdAt } = project;
+    const categoryLabels = {
+        mansion: 'Biệt thự',
+        urbanHouse: 'Nhà phố',
+        countryHouse: 'Nhà vườn',
+        neoClassicHouse: 'Nhà tân cổ điển',
+        serviceBuilding: 'Công trình dịch vụ',
+    };
 
     return (
         <div className="min-h-screen bg-[#272727] text-white">
@@ -33,7 +40,7 @@ export default async function ProjectDetailPage({ params }) {
                     {category && (
                         <>
                             <span className="mx-1">&gt;</span>
-                            <span>{category}</span>
+                            <span>{categoryLabels[category] || category}</span>
                         </>
                     )}
                     <span className="mx-1">&gt;</span>

@@ -3,9 +3,10 @@
 import {useState} from 'react';
 import Image from 'next/image';
 import {Swiper, SwiperSlide} from 'swiper/react';
-import {Thumbs} from 'swiper/modules';
+import {Thumbs, Navigation} from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/thumbs';
+import 'swiper/css/navigation';
 
 export default function ProjectGallery({images = []}) {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -13,9 +14,10 @@ export default function ProjectGallery({images = []}) {
     return (
         <div>
             <Swiper
-                modules={[Thumbs]}
+                modules={[Thumbs, Navigation]}
                 thumbs={{swiper: thumbsSwiper}}
                 spaceBetween={10}
+                navigation
                 className="mb-4"
             >
                 {images.map((img, idx) => (
@@ -34,7 +36,7 @@ export default function ProjectGallery({images = []}) {
                 modules={[Thumbs]}
                 onSwiper={setThumbsSwiper}
                 spaceBetween={10}
-                slidesPerView={Math.min(4, images.length)}
+                slidesPerView={4}
                 watchSlidesProgress
             >
                 {images.map((img, idx) => (
@@ -42,8 +44,8 @@ export default function ProjectGallery({images = []}) {
                         <Image
                             src={img.url}
                             alt={img.alt || `thumb-${idx}`}
-                            width={150}
-                            height={100}
+                            width={80}
+                            height={60}
                             className="w-full h-full object-cover cursor-pointer"
                         />
                     </SwiperSlide>

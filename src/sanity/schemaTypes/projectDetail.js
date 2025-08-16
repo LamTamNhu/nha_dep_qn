@@ -35,7 +35,17 @@ export default {
         {
             name: 'category',
             title: 'Danh mục',
-            type: 'string'
+            type: 'string',
+            options: {
+                list: [
+                    { title: 'Biệt thự', value: 'mansion' },
+                    { title: 'Nhà phố', value: 'urbanHouse' },
+                    { title: 'Nhà vườn', value: 'countryHouse' },
+                    { title: 'Nhà tân cổ điển', value: 'neoClassicHouse' },
+                    { title: 'Công trình dịch vụ', value: 'serviceBuilding' },
+                ],
+            },
+            validation: Rule => Rule.required()
         },
         {
             name: 'isCompleted',
