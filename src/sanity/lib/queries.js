@@ -131,6 +131,9 @@ export const projectsQuery = `*[_type == "projectDetail" && isCompleted != true]
   "slug": slug.current,
   "image": gallery[0].asset->url,
   "shortDescription": information.shortDescription,
+  "landArea": information.landArea,
+  "constructionArea": information.constructionArea,
+  "location": information.location,
   category,
   isCompleted,
   _createdAt
@@ -142,6 +145,9 @@ export const completedProjectsQuery = `*[_type == "projectDetail" && isCompleted
   "slug": slug.current,
   "image": gallery[0].asset->url,
   "shortDescription": information.shortDescription,
+  "landArea": information.landArea,
+  "constructionArea": information.constructionArea,
+  "location": information.location,
   category,
   isCompleted,
   _createdAt

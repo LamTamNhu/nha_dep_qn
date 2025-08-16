@@ -1,41 +1,88 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import {getCategoryTitle} from "@/lib/utils";
+import {MoveUpRight} from "lucide-react";
 
 export default function ProjectsGrid({projects = []}) {
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
             {projects.length > 0 ? (
                 projects.map(project => (
-                    <Link
+                    <div
                         key={project._id}
-                        href={`/projects/${project.slug}`}
-                        className="relative bg-white border border-gray-200 overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 group"
+                        className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 group"
                     >
-                        <div className="relative w-full h-80 overflow-hidden">
+                        {/* Image Section */}
+                        <div className="relative w-full h-64 overflow-hidden">
                             {project.image && (
                                 <Image
                                     src={project.image}
                                     alt={project.title}
-                                    width={700}
-                                    height={700}
-                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                    width={400}
+                                    height={300}
+                                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                                 />
                             )}
-                            <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                                <h3 className="text-lg font-semibold text-white text-center translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                                    {project.title}
-                                </h3>
-                                {project.shortDescription && (
-                                    <p className="text-md text-white text-center translate-y-4 group-hover:translate-y-0 transition-transform duration-500 mt-2 px-4">
-                                        {project.shortDescription}
-                                    </p>
-                                )}
-                            </div>
                         </div>
-                    </Link>
+
+                        {/* Content Section */}
+                        <div className="p-6 space-y-3">
+                            {/* Title */}
+                            <h3 className="text-lg font-semibold text-gray-900 leading-tight line-clamp-2">
+                                {project.title}
+                            </h3>
+
+                            {/* Project Details - 2 Column Grid */}
+                            <div className="grid grid-cols-2 gap-4 text-sm text-gray-600">
+                                {/* Left Column */}
+                                <div className="space-y-1">
+                                    {project.landArea && (
+                                        <div>Diện tích đất: <p className="font-medium">{project.landArea}</p></div>
+                                    )}
+                                    {project.constructionArea && (
+                                        <div>Diện tích xây dựng: <p
+                                            className="font-medium">{project.constructionArea}</p></div>
+                                    )}
+                                </div>
+
+                                {/* Right Column */}
+                                <div className="space-y-1">
+                                    {project.location && (
+                                        <div>Địa điểm: <p className="font-medium">{project.location}</p></div>
+                                    )}
+                                    {project.category && (
+                                        <div>Loại hình: <p
+                                            className="font-medium">{getCategoryTitle(project.category)}</p></div>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* Fallback description if no details available */}
+                            {!project.landArea && !project.constructionArea && !project.location && !project.category && project.shortDescription && (
+                                <p className="text-sm text-gray-600 line-clamp-2">{project.shortDescription}</p>
+                            )}
+
+                            {/* CTA Button */}
+                            <Link
+                                href={`/projects/${project.slug}`}
+                                className="inline-flex text-white items-center gap-2 bg-amber-400 hover:bg-amber-500 text-black font-medium px-4 py-2 rounded transition-colors duration-200 mt-4"
+                            >
+                                Xem thêm
+                                <span><MoveUpRight size={16} strokeWidth={3}/></span>
+                            </Link>
+                        </div>
+                    </div>
                 ))
             ) : (
-                <p className="text-center text-gray-600 col-span-full">Không tìm thấy dự án nào.</p>
+                <div className="col-span-full flex flex-col items-center justify-center py-12">
+                    <div className="text-gray-400 mb-4">
+                        <svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1}
+                                  d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                        </svg>
+                    </div>
+                    <p className="text-center text-gray-600 text-lg">Không tìm thấy dự án nào.</p>
+                </div>
             )}
         </div>
     );
