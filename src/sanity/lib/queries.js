@@ -106,6 +106,9 @@ export const projectSlugsQuery = `*[_type == "projectDetail" && defined(slug.cur
 export const projectBySlugQuery = `*[_type == "projectDetail" && slug.current == $slug][0]{
   title,
   information,
+  category,
+  isCompleted,
+  _createdAt,
   "slug": slug.current,
   gallery[]{
     "url": asset->url,
@@ -120,5 +123,22 @@ export const projectBySlugQuery = `*[_type == "projectDetail" && slug.current ==
     },
     imageSubtitle
   }
+}`;
+
+export const projectsQuery = `*[_type == "projectDetail" && (!defined(isCompleted) || isCompleted == $isCompleted)]{
+  _id,
+  title,
+  "slug": slug.current,
+  "image": gallery[0].asset->url,
+  "shortDescription": information.shortDescription,
+  category,
+  isCompleted,
+  _createdAt
+}`;
+
+export const siteSettingsQuery = `*[_type == "siteSettings"][0]{
+  facebook,
+  zalo,
+  youtube
 }`;
 
