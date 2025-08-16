@@ -11,8 +11,9 @@ function ProjectImage({ project }) {
     const imageProps = useNextSanityImage(client, project.thumbnail);
 
     return (
-        <div
-            className="group aspect-[3/2] bg-gray-200 rounded-2xl overflow-hidden relative cursor-pointer"
+        <a
+            href={project.link || '#'}
+            className="group aspect-[3/2] bg-gray-200 rounded-2xl overflow-hidden relative block"
         >
             {imageProps ? (
                 <Image
@@ -31,8 +32,11 @@ function ProjectImage({ project }) {
                 <div className="text-black text-md font-normal px-4">
                     {project.description || ""}
                 </div>
+                {project.link && (
+                    <span className="mt-2 text-white font-semibold">Xem thêm</span>
+                )}
             </div>
-        </div>
+        </a>
     );
 }
 

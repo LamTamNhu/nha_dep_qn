@@ -1,6 +1,6 @@
 export default {
     name: 'servicesPage',
-    title: 'Nội dung trang dịch vụ',
+    title: 'Trang dịch vụ',
     type: 'document',
     fields: [
         {

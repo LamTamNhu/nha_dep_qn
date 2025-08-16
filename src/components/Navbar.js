@@ -22,6 +22,7 @@ export default function Navbar() {
         { name: "DỊCH VỤ", href: "/services" },
         { name: "DỰ ÁN", href: "/projects", dropdown: true, chevron: true },
         { name: "THI CÔNG THỰC TẾ", href: "/completed-projects", dropdown: true, chevron: true },
+        { name: "TIN TỨC", href: "/news" },
         { name: "LIÊN HỆ", href: "/contact" },
     ]
 

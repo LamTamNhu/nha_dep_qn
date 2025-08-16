@@ -17,28 +17,29 @@ import teamSection from "@/sanity/schemaTypes/teamSection";
 
 import projectDetail from "@/sanity/schemaTypes/projectDetail";
 import siteSettings from "@/sanity/schemaTypes/siteSettings";
+import news from "@/sanity/schemaTypes/news";
 
 
 export const schemas = {
     types: [
         homepage,
+        aboutPage,
+        servicesPage,
         youtubeEmbed,
         titleAndDescription,
         process,
         constructionVideo,
         project,
+        projectDetail,
+        news,
         partner,
         testimonial,
         contactSettings,
-        footerSettings,
-        aboutPage,
         visionSection,
         service,
-        servicesPage,
         aboutHeroSection,
         teamSection,
-        projectDetail,
+        footerSettings,
         siteSettings,
-
     ],
 }
