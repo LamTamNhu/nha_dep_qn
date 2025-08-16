@@ -1,6 +1,8 @@
 // src/app/layout.js (minimal root)
 import "./globals.css";
 import {mulish} from "@/app/fonts";
+import {DefaultSeo} from "next-seo";
+import SEO from "@/seo.config";
 
 
 export const metadata = {
@@ -12,6 +14,7 @@ export default function RootLayout({children}) {
     return (
         <html lang="en" suppressHydrationWarning className={`${mulish.className} antialiased`}>
         <body suppressHydrationWarning>
+        <DefaultSeo {...SEO} />
         {children}
         </body>
         </html>
