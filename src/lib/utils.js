@@ -11,7 +11,7 @@ export const getCategoryTitle = (categoryValue) => {
     'countryHouse': 'Nhà vườn',
     'neoClassicHouse': 'Nhà tân cổ điển',
     'serviceBuilding': 'Công trình dịch vụ',
-    'news': 'Tin tức',
+    'generalNews': 'Tin tức chung',
     'activities': 'Hoạt động công ty'
   };
   return categoryMap[categoryValue] || categoryValue;

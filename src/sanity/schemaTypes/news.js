@@ -51,7 +51,7 @@ export default {
             type: 'string',
             options: {
                 list: [
-                    { title: 'Tin tức', value: 'news' },
+                    { title: 'Tin tức chung', value: 'generalNews' },
                     { title: 'Hoạt động công ty', value: 'activities' },
                 ],
             },

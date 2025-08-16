@@ -9,7 +9,7 @@ import { SearchX } from 'lucide-react';
 
 const categories = [
     { value: 'all', title: 'Tất cả' },
-    { value: 'news', title: 'Tin tức' },
+    { value: 'generalNews', title: 'Tin tức chung' },
     { value: 'activities', title: 'Hoạt động công ty' },
 ];
 

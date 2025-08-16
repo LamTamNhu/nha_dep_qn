@@ -22,7 +22,7 @@ export default async function NewsDetailPage({ params }) {
 
     const { title, sections, category, _createdAt } = news;
     const categoryLabels = {
-        news: 'Tin tức',
+        generalNews: 'Tin tức chung',
         activities: 'Hoạt động công ty',
     };
 
