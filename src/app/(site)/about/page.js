@@ -1,180 +1,21 @@
-"use client";
 import Image from "next/image";
-import {useEffect, useState} from "react";
 import {CreditCard, Lock, ShieldUser} from "lucide-react";
-import animateOnObserve from "@/lib/animateOnObserve";
-import {fancyFont} from "@/app/fonts";
 import Commitments from "@/components/Commitments";
 import CoreValues from "@/components/CoreValues";
+import AboutHeroSection from "@/components/AboutHeroSection";
+import TeamSection from "@/components/TeamSection";
+import AboutPageAnimations from "@/components/AboutPageAnimations";
+import {client} from "@/sanity/lib/client";
+import {aboutPageQuery} from "@/sanity/lib/queries";
 
-export default function AboutPage() {
-    const [expanded, setExpanded] = useState(false);
-    const aboutShort =
-        <div className="text-white text-lg">
-            <p>
-                Với ước mơ tạo ra những ngôi nhà thật đẹp chàng kĩ sư trẻ Nguyên Tương Tổng Giám Đốc tại công ty Nhà Đẹp
-                Quảng Nam chia sẻ.
-            </p>
-            <br/>
-            <blockquote className="text-2xl italic mb-6 text-center md:text-left">
-                "Chúng tôi không chỉ đơn thuần xây dựng những công trình, mà còn kiến tạo nên những tổ ấm
-                - nơi gia đình sum vầy, nơi nuôi dưỡng những khoảnh khắc hạnh phúc."
-            </blockquote>
-            <br/>
-        </div>
-    const members = [
-        {
-            thumbnail: "/thumbnails/nhu-hien.jpg",
-            name: "TRẦN NHƯ HIỀN",
-            title: "PHÓ GIÁM ĐỐC"
-        },
-        {
-            thumbnail: "/thumbnails/thanh-my.jpg",
-            name: "KTS. ĐINH THANH MỸ",
-            title: "CHỦ TRÌ THIẾT KẾ"
-        },
-        {
-            thumbnail: "/thumbnails/thanh-tuan.jpg",
-            name: "KTS. LÂM THANH TUẤN",
-            title: "KIẾN TRÚC SƯ"
-        },
-        {
-            thumbnail: "/thumbnails/thuy-duong.jpg",
-            name: "KTS. LÊ THỊ THÙY DƯƠNG",
-            title: "KIẾN TRÚC SƯ"
-        },
-        {
-            thumbnail: "/thumbnails/hong-tham.jpg",
-            name: "PHẠM HỒNG THẮM",
-            title: "THIẾT KẾ NỘI THẤT"
-        },
-        {
-            thumbnail: "/thumbnails/van-thong.jpg",
-            name: "KS. NGUYỄN VĂN THỐNG",
-            title: "KỸ SƯ KẾT CẤU "
-        },
-
-    ]
-    useEffect(() => {
-        // Set up animations after DOM is ready
-        const swingObserver = animateOnObserve('.swing-in-top-fwd-2');
-        const borderObserver = animateOnObserve('.border-draw')
-        const puffObserver = animateOnObserve('.puff-in-center')
-        const slideObserver = animateOnObserve('.slide-in-bottom')
-
-        // Cleanup function to disconnect observers
-        return () => {
-            swingObserver.disconnect()
-            puffObserver.disconnect();
-            borderObserver.disconnect()
-            slideObserver.disconnect();
-        };
-    }, []);
+export default async function AboutPage() {
+    const data = await client.fetch(aboutPageQuery);
 
     return (
         <div className="w-full bg-[#373737]">
-            {/* Hero section with background image */}
-            <section className="w-full bg-[#cb6d0d] py-30 overflow-x-clip">
-                <div className="mx-auto max-w-7xl px-6 md:px-12">
-                    <div className="flex gap-8">
-                        <h1 className="text-white text-xl font-bold [writing-mode:vertical-rl] text-nowrap shrink-0">
-                            VỀ CHÚNG TÔI
-                        </h1>
-
-                        <div className="grid min-w-0 grid-cols-1 lg:grid-cols-2 gap-12 border-l border-white pl-4">
-                            {/* Cột text */}
-                            <div className="relative min-w-0 px-10">
-                                <p className="text-white text-4xl">
-                                    CÔNG TY TNHH
-                                </p>
-                                <p className="text-white text-4xl whitespace-nowrap">
-                                    NHÀ ĐẸP QUẢNG NAM
-                                </p>
-                                <br/>
-                                <p className="text-white text-lg text-justify">Công ty TNHH NHÀ ĐẸP QUẢNG NAM do KTS Nguyên Tương
-                                    thành
-                                    lập. Với sự nhiệt huyết cùng đội
-                                    ngũ nhân sự trẻ trung và năng động, NĐQN mong muốn mang đến cho các bạn nhưng bản
-                                    thiết
-                                    kế đa dạng phong cách, mới lạ và tất nhiên sẽ phù hợp với từng đối tượng.
-                                </p>
-                                <br/>
-                                <p className="text-white text-lg text-justify">Với ước mơ tạo ra những ngôi nhà thật đẹp chàng kĩ
-                                    sư
-                                    trẻ
-                                    Nguyên Tương Tổng Giám Đốc tại công ty Nhà Đẹp Quảng Nam chia sẻ.
-                                    "Chúng tôi không chỉ đơn thuần xây dựng những công trình, mà còn kiến tạo nên những
-                                    tổ
-                                    ấm -
-                                    nơi gia đình sum vầy, nơi nuôi dưỡng những khoảnh khắc hạnh phúc."
-                                </p>
-                                <br/>
-                                <p className="text-white text-lg text-justify">Công ty TNHH NHÀ ĐẸP QUẢNG NAM do KTS Nguyên Tương
-                                    thành
-                                    lập. Với sự nhiệt huyết cùng đội
-                                    ngũ nhân sự trẻ trung và năng động, NĐQN mong muốn mang đến cho các bạn nhưng bản
-                                    thiết
-                                    kế đa dạng phong cách, mới lạ và tất nhiên sẽ phù hợp với từng đối tượng.
-                                </p>
-                                <br/>
-                                <p className="text-white text-lg text-justify">Với ước mơ tạo ra những ngôi nhà thật đẹp chàng kĩ
-                                    sư
-                                    trẻ
-                                    Nguyên Tương Tổng Giám Đốc tại công ty Nhà Đẹp Quảng Nam chia sẻ.
-                                    "Chúng tôi không chỉ đơn thuần xây dựng những công trình, mà còn kiến tạo nên những
-                                    tổ
-                                    ấm -
-                                    nơi gia đình sum vầy, nơi nuôi dưỡng những khoảnh khắc hạnh phúc."
-                                </p>
-                            </div>
-                            {/* Cột ảnh */}
-                            <Image
-                                src="/thumbnails/nguyen-tuong.jpg"
-                                alt="founder image"
-                                width={900}
-                                height={1600}
-                                className="w-full max-w-md lg:max-w-2xl object-cover aspect-[3/5]"
-                                priority
-                            />
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section className="py-12">
-                <div className="container max-w-6xl mx-auto px-4">
-                    <div className="text-center">
-                        {/*Title*/}
-                        <h2 className="text-white  text-3xl font-bold my-20  p-4 inline-block border-2 border-white">
-                            ĐỘI NGŨ
-                        </h2>
-                    </div>
-                    <div className="grid grid-cols-3 gap-4">
-                        <div className="text-center slide-in-bottom">
-                            <Image width={300} height={300} src="/thumbnails/nguyen-tuong.jpg"
-                                   alt="nguyen-tuong"
-                                   className="size-70 object-cover mx-auto mb-4"/>
-                            <h3 className="text-white font-bold text-xl mb-2">
-                                KTS. TRẦN NGUYÊN TƯƠNG
-                            </h3>
-                            <p className="text-white font-base text-sm">GIÁM ĐỐC</p>
-                        </div>
-                        <div className="col-span-2 slide-in-bottom">{aboutShort}</div>
-                        {members.map((member) => (
-                            <div className="text-center slide-in-bottom" key={member.name}>
-                                <Image width={300} height={300} src={member.thumbnail}
-                                       alt={member.name}
-                                       className="size-70 object-top object-cover mx-auto mb-4"/>
-                                <h3 className="text-white font-bold text-xl mb-2">
-                                    {member.name}
-                                </h3>
-                                <p className="text-white font-base text-sm">
-                                    {member.title}
-                                </p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            <AboutPageAnimations/>
+            <AboutHeroSection data={data?.heroSection}/>
+            <TeamSection data={data?.teamSection}/>
             <div>
                 {/*Office pictures*/}
                 <section className="pt-12">
@@ -268,3 +109,4 @@ export default function AboutPage() {
         </div>
     );
 }
+

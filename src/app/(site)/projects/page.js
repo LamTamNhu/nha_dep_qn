@@ -1,17 +1,18 @@
-"use client";
+import {client} from "@/sanity/lib/client";
+import {projectsQuery} from "@/sanity/lib/queries";
+import Banner from "@/components/ui/banner";
+import ProjectsGrid from "@/components/ProjectsGrid";
+import ProjectsFilter from "@/components/ProjectsFilter";
 
-import React, {useEffect, useState} from 'react';
-import Image from 'next/image';
-import {Search} from 'lucide-react';
-import Link from 'next/link';
-import ContactForm from '../../../components/ContactForm';
-import Banner from '@/components/ui/banner';
-import SectionHeading from "@/components/SectionHeading";
-import {useSearchParams} from "next/navigation";
-import Projects from "@/components/Projects";
-
-export default function ProjectsPage(effect, deps) {
+export default async function ProjectsPage() {
+    const projects = await client.fetch(projectsQuery);
     return (
-        <Projects pageTitle="Dự án"/>
+        <div className="min-h-screen bg-[#272727] text-center">
+            <Banner title="Dự án" />
+            <div className="px-6 md:px-10 container mx-auto pb-30">
+                <ProjectsFilter projects={projects} />
+            </div>
+        </div>
     );
 }
+

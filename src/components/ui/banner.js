@@ -1,3 +1,5 @@
+"use client";
+
 import { debounce } from "lodash";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from 'next/image';
@@ -79,7 +81,7 @@ export default function Banner({title}) {
     }, []);
 
     return (
-        <div className="bg-[#272727] text-center mb-30">
+        <div className="bg-[#272727] text-center">
             <div
                 ref={bannerRef}
                 className="h-[80vh] w-full relative overflow-hidden flex items-center justify-center"
@@ -127,7 +129,7 @@ export default function Banner({title}) {
                     </div>
                 ))}
             </div>
-            <h2 className="text-white font-extrabold text-3xl my-20 p-4 border-2 border-white inline-block">
+            <h2 className="text-white font-extrabold text-3xl my-12 p-4 border-2 border-white inline-block">
                 {title}
             </h2>
         </div>
