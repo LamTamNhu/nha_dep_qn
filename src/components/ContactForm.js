@@ -22,7 +22,7 @@ const fallback = {
     budgetOptions: ['1 tỷ - 1.5 tỷ', '1.6 tỷ - 2 tỷ', '2 tỷ - 2.5 tỷ', '3 tỷ trở lên'],
 };
 
-export default function ContactForm({ data, isPopover = false }) {
+export default function ContactForm({ data, isPopover = false, compact = false }) {
     // Use Sanity data with per-field fallbacks
     const title = data?.title || fallback.title;
     const subtitle = data?.subtitle || fallback.subtitle;
@@ -48,22 +48,23 @@ export default function ContactForm({ data, isPopover = false }) {
 
     return (
         <div className={`
-            max-w-6xl mx-auto 
-            grid grid-cols-1 ${isPopover ? 'lg:grid-cols-2' : 'md:grid-cols-2'} 
-            gap-6 md:gap-12 
-            items-start 
+            max-w-6xl mx-auto
+            grid grid-cols-1 ${isPopover ? 'lg:grid-cols-2' : 'md:grid-cols-2'}
+            gap-6 md:gap-12
+            items-start
             ${!isPopover ? 'rounded-xl shadow-lg bg-white p-8' : ''}
+            ${compact ? 'p-4 gap-4 md:gap-6' : ''}
         `}>
             {/* Contact Info */}
             <div>
-                <h2 className="text-lg md:text-xl mb-2 flex items-center gap-2 font-bold text-orange-400">
+                <h2 className={`text-lg md:text-xl flex items-center gap-2 font-bold text-orange-400 ${compact ? 'mb-1' : 'mb-2'}` }>
                     {title}
                     <span className="flex-1 h-0.5 bg-orange-300 ml-2" />
                 </h2>
-                <h3 className="text-sm md:text-md italic text-left mb-6 md:mb-8">{subtitle}</h3>
+                <h3 className={`text-sm md:text-md italic text-left ${compact ? 'mb-3 md:mb-4' : 'mb-6 md:mb-8'}`}>{subtitle}</h3>
 
-                <h4 className="text-base md:text-lg font-semibold text-gray-900 mb-4">MỌI THẮC MẮC XIN LIÊN HỆ:</h4>
-                <ul className="space-y-4 md:space-y-6">
+                <h4 className={`text-base md:text-lg font-semibold text-gray-900 ${compact ? 'mb-2' : 'mb-4'}`}>MỌI THẮC MẮC XIN LIÊN HỆ:</h4>
+                <ul className={`${compact ? 'space-y-2 md:space-y-3' : 'space-y-4 md:space-y-6'}`}>
                     <li className="flex items-start gap-3 md:gap-4">
                         <span className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-orange-300 text-white mt-1 flex-shrink-0">
                             <MapPin className="w-4 h-4 md:w-5 md:h-5" />
@@ -102,12 +103,12 @@ export default function ContactForm({ data, isPopover = false }) {
             </div>
 
             {/* Contact Form */}
-            <form className="space-y-4 md:space-y-6 contact" id="contact">
+            <form className={`${compact ? 'space-y-2 md:space-y-3' : 'space-y-4 md:space-y-6'} contact`} id="contact">
                 <p className="text-sm md:text-base">
                     Xin để lại thông tin chi tiết để chúng tôi hiểu rõ nhu cầu và mong muốn của bạn
                 </p>
 
-                <div className="grid grid-cols-1 gap-4 md:gap-6">
+                <div className={`grid grid-cols-1 ${compact ? 'gap-2 md:gap-3' : 'gap-4 md:gap-6'}`}>
                     {['Họ và tên*', 'Email*', 'Số điện thoại*', 'Diện tích đất và tầng muốn xây*', 'Địa phương muốn xây*'].map(
                         (placeholder, index) => (
                             <input
