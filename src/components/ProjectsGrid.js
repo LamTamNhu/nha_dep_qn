@@ -41,7 +41,7 @@ export default function ProjectsGrid({projects = []}) {
                             </Link>
 
                             {/* Project Details - 2 Column Grid */}
-                            <div className="flex gap-2 text-sm text-gray-600">
+                            <div className="flex gap-6 text-sm text-gray-600">
                                 {/* Left Column */}
                                 <div className="flex flex-col space-y-1 text-left">
                                     {project.landArea && (
