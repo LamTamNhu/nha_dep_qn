@@ -1,11 +1,11 @@
 "use client"
 
-import {Facebook, ChevronDown, Menu, Search, Youtube} from "lucide-react"
+import { Facebook, ChevronDown, Menu, Search, Youtube } from "lucide-react"
 import Link from "next/link"
-import {useEffect, useState} from "react"
-import {usePathname} from "next/navigation"
-import {Button} from "@/components/ui/button"
-import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet"
+import { useEffect, useState, useRef } from "react"
+import { usePathname } from "next/navigation"
+import { Button } from "@/components/ui/button"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import Image from "next/image"
 import * as Popover from "@radix-ui/react-popover"
 import BorderDraw from "@/components/ui/BorderDraw"
@@ -14,21 +14,24 @@ export default function Navbar() {
     const pathname = usePathname()
     const [isOpen, setIsOpen] = useState(false)
     const [shouldAnimateBorder, setShouldAnimateBorder] = useState(false)
+    const [searchQuery, setSearchQuery] = useState("")
+    const inputRef = useRef(null) // Ref to focus input and prevent popover close
 
     const navigationItems = [
-        {name: "GIỚI THIỆU", href: "/about"},
-        {name: "DỊCH VỤ", href: "/services"},
-        {name: "DỰ ÁN", href: "/projects", dropdown: true, chevron: true},
-        {name: "THI CÔNG THỰC TẾ", href: "/completed-projects", dropdown: true, chevron: true},
-        {name: "LIÊN HỆ", href: "/contact"},
+        { name: "GIỚI THIỆU", href: "/about" },
+        { name: "DỊCH VỤ", href: "/services" },
+        { name: "DỰ ÁN", href: "/projects", dropdown: true, chevron: true },
+        { name: "THI CÔNG THỰC TẾ", href: "/completed-projects", dropdown: true, chevron: true },
+        { name: "TIN TỨC", href: "/news" },
+        { name: "LIÊN HỆ", href: "/contact" },
     ]
 
     const projectDropdown = [
-        {name: "Biệt thự"},
-        {name: "Nhà phố"},
-        {name: "Nhà vườn"},
-        {name: "Nhà tân cổ điển"},
-        {name: "Công trình dịch vụ"},
+        { name: "Biệt thự" },
+        { name: "Nhà phố" },
+        { name: "Nhà vườn" },
+        { name: "Nhà tân cổ điển" },
+        { name: "Công trình dịch vụ" },
     ]
     const realConstructionDropdown = [...projectDropdown]
 
@@ -67,10 +70,8 @@ export default function Navbar() {
             }
         }
 
-        // Reset classes first
         resetNavbarClasses()
 
-        // Apply styles based on pathname
         if (pathname === "/about" || pathname === "/about/") {
             setAboutPageStyles()
         } else {
@@ -79,11 +80,31 @@ export default function Navbar() {
             window.addEventListener("scroll", handleScroll)
         }
 
-        // Cleanup scroll listener
         return () => {
             window.removeEventListener("scroll", handleScroll)
         }
-    }, [pathname]) // Removed shouldAnimateBorder from dependencies
+    }, [pathname])
+
+    const handleSearchChange = (e) => {
+        setSearchQuery(e.target.value)
+    }
+
+    const handleSearchSubmit = (e) => {
+        e.preventDefault() // Prevent default form behavior
+        if (searchQuery.trim()) {
+            const googleSearchUrl = `https://www.google.com/search?q=site:nhadepquangnam.vn+${encodeURIComponent(
+                searchQuery.trim()
+            )}`
+            window.location.href = googleSearchUrl
+        }
+    }
+
+    const handleKeyPress = (e) => {
+        if (e.key === "Enter") {
+            e.preventDefault() // Prevent popover close on Enter
+            handleSearchSubmit(e)
+        }
+    }
 
     return (
         <nav id="navbar" className="fixed top-0 left-0 right-0 z-50 pr-20 transition-colors duration-300">
@@ -102,7 +123,7 @@ export default function Navbar() {
                             alt="logo"
                             width={50}
                             height={30}
-                            style={{width: "100px", height: "auto"}}
+                            style={{ width: "100px", height: "auto" }}
                             priority
                         />
                     </Link>
@@ -134,20 +155,18 @@ export default function Navbar() {
                   "
                                 >
                                     <ul className="py-2">
-                                        {(item.name === "DỰ ÁN" ? projectDropdown : realConstructionDropdown).map(
-                                            (subItem) => (
-                                                <li key={subItem.name}>
-                                                    <Link
-                                                        href={`/${
-                                                            item.name === "DỰ ÁN" ? "projects" : "completed-projects"
-                                                        }?category=${encodeURIComponent(subItem.name)}#projects-section`}
-                                                        className="block px-4 py-2 hover:bg-gray-100"
-                                                    >
-                                                        {subItem.name}
-                                                    </Link>
-                                                </li>
-                                            )
-                                        )}
+                                        {(item.name === "DỰ ÁN" ? projectDropdown : realConstructionDropdown).map((subItem) => (
+                                            <li key={subItem.name}>
+                                                <Link
+                                                    href={`/${
+                                                        item.name === "DỰ ÁN" ? "projects" : "completed-projects"
+                                                    }?category=${encodeURIComponent(subItem.name)}#projects-section`}
+                                                    className="block px-4 py-2 hover:bg-gray-100"
+                                                >
+                                                    {subItem.name}
+                                                </Link>
+                                            </li>
+                                        ))}
                                     </ul>
                                 </div>
                             )}
@@ -172,14 +191,27 @@ export default function Navbar() {
                         <Popover.Portal>
                             <Popover.Content
                                 sideOffset={8}
+                                onInteractOutside={(e) => {
+                                    // Prevent popover from closing if clicking inside input or button
+                                    if (inputRef.current?.contains(e.target)) {
+                                        e.preventDefault()
+                                    }
+                                }}
                                 className="z-50 rounded-md border border-white/20 bg-white text-black shadow-lg p-2 w-64 flex items-center space-x-2"
                             >
                                 <input
+                                    ref={inputRef}
                                     type="text"
                                     placeholder="Nhập từ khóa cần tìm ..."
                                     className="flex-grow text-sm bg-transparent focus:outline-none placeholder:text-gray-400"
+                                    value={searchQuery}
+                                    onChange={handleSearchChange}
+                                    onKeyDown={handleKeyPress} // Changed to onKeyDown for better Enter detection
                                 />
-                                <button className="text-gray-600 hover:text-black">
+                                <button
+                                    className="text-gray-600 hover:text-black"
+                                    onClick={handleSearchSubmit}
+                                >
                                     <Search size={16} />
                                 </button>
                             </Popover.Content>

@@ -18,6 +18,12 @@ export default {
             name: 'description',
             title: 'Mô tả',
             type: 'text',
+        },
+        {
+            name: 'link',
+            title: 'Link',
+            type: 'url',
+            validation: Rule => Rule.uri({ allowRelative: true })
         }
     ]
 }

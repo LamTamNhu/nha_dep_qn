@@ -1,7 +1,7 @@
 export default {
     name: 'aboutPage',
     type: 'document',
-    title: 'Giới thiệu',
+    title: 'Trang giới thiệu',
     fields: [
         {
             name: 'heroSection',
