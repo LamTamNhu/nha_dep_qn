@@ -5,7 +5,7 @@ import {MoveUpRight} from "lucide-react";
 
 export default function ProjectsGrid({projects = []}) {
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
             {projects.length > 0 ? (
                 projects.map(project => (
                     <div
@@ -15,22 +15,30 @@ export default function ProjectsGrid({projects = []}) {
                         {/* Image Section */}
                         <div className="relative w-full h-64 overflow-hidden">
                             {project.image && (
-                                <Image
-                                    src={project.image}
-                                    alt={project.title}
-                                    width={400}
-                                    height={300}
-                                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                                />
+                                <Link
+                                    href={`/projects/${project.slug}`}
+                                >
+                                    <Image
+                                        src={project.image}
+                                        alt={project.title}
+                                        width={400}
+                                        height={300}
+                                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                    />
+                                </Link>
                             )}
                         </div>
 
                         {/* Content Section */}
-                        <div className="p-6 space-y-3">
+                        <div className="p-4 space-y-3">
                             {/* Title */}
-                            <h3 className="text-lg font-semibold text-gray-900 leading-tight line-clamp-2">
-                                {project.title}
-                            </h3>
+                            <Link
+                                href={`/projects/${project.slug}`}
+                            >
+                                <h3 className="text-md font-semibold text-center text-gray-900 leading-tight line-clamp-1">
+                                    {project.title}
+                                </h3>
+                            </Link>
 
                             {/* Project Details - 2 Column Grid */}
                             <div className="grid grid-cols-2 gap-4 text-sm text-gray-600">
@@ -50,9 +58,8 @@ export default function ProjectsGrid({projects = []}) {
                                     {project.location && (
                                         <div>Địa điểm: <p className="font-medium">{project.location}</p></div>
                                     )}
-                                    {project.category && (
-                                        <div>Loại hình: <p
-                                            className="font-medium">{getCategoryTitle(project.category)}</p></div>
+                                    {project.function && (
+                                        <div>Công năng: <p className="font-medium">{project.function}</p></div>
                                     )}
                                 </div>
                             </div>

@@ -10,16 +10,19 @@ export default {
             validation: Rule => Rule.required()
         },
         {
+            name: 'shortDescription',
+            title: 'Mô tả ngắn',
+            type: 'string'
+        },
+        {
             name: 'information',
             title: 'Thông tin',
             type: 'object',
             fields: [
-                { name: 'shortDescription', title: 'Mô tả ngắn', type: 'string' },
-                { name: 'location', title: 'Địa điểm', type: 'string' },
-                { name: 'floors', title: 'Số tầng', type: 'string' },
                 { name: 'landArea', title: 'Diện tích đất', type: 'string' },
                 { name: 'constructionArea', title: 'Diện tích xây dựng', type: 'string' },
-                { name: 'cost', title: 'Chi phí', type: 'string' },
+                { name: 'location', title: 'Địa điểm', type: 'string' },
+                { name: 'function', title: 'Công năng', type: 'string' },
             ]
         },
         {

@@ -105,6 +105,7 @@ export const projectSlugsQuery = `*[_type == "projectDetail" && defined(slug.cur
 
 export const projectBySlugQuery = `*[_type == "projectDetail" && slug.current == $slug][0]{
   title,
+  shortDescription,
   information,
   category,
   isCompleted,
@@ -128,12 +129,13 @@ export const projectBySlugQuery = `*[_type == "projectDetail" && slug.current ==
 export const projectsQuery = `*[_type == "projectDetail" && isCompleted != true]{
   _id,
   title,
+  shortDescription,
   "slug": slug.current,
   "image": gallery[0].asset->url,
-  "shortDescription": information.shortDescription,
   "landArea": information.landArea,
   "constructionArea": information.constructionArea,
   "location": information.location,
+  "function": information.function,
   category,
   isCompleted,
   _createdAt
@@ -142,12 +144,13 @@ export const projectsQuery = `*[_type == "projectDetail" && isCompleted != true]
 export const completedProjectsQuery = `*[_type == "projectDetail" && isCompleted == true]{
   _id,
   title,
+  shortDescription,
   "slug": slug.current,
   "image": gallery[0].asset->url,
-  "shortDescription": information.shortDescription,
   "landArea": information.landArea,
   "constructionArea": information.constructionArea,
   "location": information.location,
+  "function": information.function,
   category,
   isCompleted,
   _createdAt

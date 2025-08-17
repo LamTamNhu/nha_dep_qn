@@ -46,7 +46,7 @@ export default function ProjectGallery({images = []}) {
                             alt={img.alt || `thumb-${idx}`}
                             width={80}
                             height={80}
-                            className="object-cover w-full h-full cursor-pointer"
+                            className="object-cover object-bottom w-full h-full cursor-pointer"
                         />
                     </SwiperSlide>
                 ))}
