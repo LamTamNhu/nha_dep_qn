@@ -8,20 +8,20 @@ export default function AboutHeroSection({ data }) {
                     <div className="grid min-w-0 grid-cols-1 lg:grid-cols-2 gap-12 pl-4">
                         {/* Text Column */}
                         <div className="relative min-w-0 px-10">
-                            <p className="text-orange-400 text-2xl lg:text-4xl">
+                            <p className="text-orange-400 text-2xl lg:text-4xl swing-in-top-fwd-2">
                                 CÔNG TY TNHH
                             </p>
-                            <p className="text-orange-400 text-2xl lg:text-4xl whitespace-nowrap mb-6">
+                            <p className="text-orange-400 text-2xl lg:text-4xl whitespace-nowrap mb-6 swing-in-top-fwd-2">
                                 NHÀ ĐẸP QUẢNG NAM
                             </p>
                             {data?.descriptions?.map((paragraph, index) => (
-                                <p key={index} className="text-gray-700 text-justify text-lg mb-4">
+                                <p key={index} className="text-gray-700 text-justify text-lg mb-4 swing-in-top-fwd-2">
                                     {paragraph}
                                 </p>
                             ))}
                         </div>
                         {/* Image Column */}
-                        <div className="flex justify-center items-center">
+                        <div className="flex justify-center items-center swing-in-top-fwd-2">
                             <Image
                                 src={data?.imageUrl || '/thumbnails/nguyen-tuong.jpg'}
                                 alt={data?.imageAlt || 'founder image'}

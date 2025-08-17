@@ -43,7 +43,7 @@ export default function CoreValues({data}) {
                 {/* Values Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 items-start">
                     {values.map((item, index) => (
-                        <div key={index} className="flex flex-col items-center text-center group">
+                        <div key={index} className="flex flex-col items-center text-center group puff-in-center">
                             {/* Icon Container */}
                             <div className="relative mb-6">
                                 {/* Background Circle */}

@@ -87,7 +87,7 @@ export default function Commitments({data}) {
                     {/* Flex Section */}
                     <div className="flex z-10 flex-1 max-w-4xl">
                         {/* Left Column */}
-                        <div className="bg-[#373737] flex flex-col justify-center flex-1">
+                        <div className="bg-[#373737] flex flex-col justify-center flex-1 puff-in-center">
                             {leftColumnItems.map((item, index) => (
                                 <CommitmentItem
                                     key={`left-${item.id || index}`}
@@ -103,7 +103,7 @@ export default function Commitments({data}) {
                         <div className="w-40" />
 
                         {/* Right Column - Match left column height */}
-                        <div className="bg-[#373737] flex flex-col flex-1 h-full">
+                        <div className="bg-[#373737] flex flex-col flex-1 h-full puff-in-center">
                             {rightColumnItems.map((item, index) => (
                                 <CommitmentItem
                                     key={`right-${item.id || index}`}
