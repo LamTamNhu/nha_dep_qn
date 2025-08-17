@@ -72,7 +72,9 @@ export default function Navbar() {
 
         resetNavbarClasses()
 
-        if (pathname === "/about" || pathname === "/about/") {
+        if (pathname === "/about" || pathname === "/about/" ||
+            (pathname.startsWith("/projects/") && pathname !== "/projects/") ||
+            (pathname.startsWith("/news/") && pathname !== "/news/")) {
             setAboutPageStyles()
         } else {
             navbar.classList.add("bg-black/60", "backdrop-blur-xs")

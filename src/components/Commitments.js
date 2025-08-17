@@ -38,7 +38,7 @@ const commitmentItems = [
 // Reusable CommitmentItem component
 const CommitmentItem = ({ icon, title, description, isLastInColumn = false }) => (
     <div className={`flex flex-col items-center justify-center p-4 ${!isLastInColumn ? 'border-b border-orange-400' : ''}`}>
-        <div className="w-30 h-30 mb-2 flex items-center justify-center">
+        <div className="w-20 h-20 flex items-center justify-center">
             <Image
                 src={icon}
                 alt={`${title} icon`}
@@ -69,7 +69,7 @@ export default function Commitments() {
                 <div className="brightness-65 filter blur-[1px] absolute inset-0 z-0 pointer-events-none bg-[url('/images/5khong-bg.png')] bg-cover bg-bottom" />
 
                 {/* Content */}
-                <div className="flex items-center justify-center min-h-screen mx-auto gap-22 py-8 px-4">
+                <div className="flex items-center justify-center mx-auto gap-22 px-4">
                     {/* Title Section */}
                     <div className="flex-shrink-0 swing-in-top-fwd-2">
                         <div className="text-orange-400 font-extrabold text-lg sm:text-xl md:text-2xl lg:text-6xl mb-2">
@@ -101,8 +101,8 @@ export default function Commitments() {
                         {/* Middle Spacer */}
                         <div className="w-40" />
 
-                        {/* Right Column - No stretching, content height only */}
-                        <div className="bg-[#373737] flex flex-col flex-1 self-start">
+                        {/* Right Column - Match left column height */}
+                        <div className="bg-[#373737] flex flex-col flex-1 h-full">
                             {rightColumnItems.map((item, index) => (
                                 <CommitmentItem
                                     key={`right-${item.id || index}`}
@@ -112,6 +112,8 @@ export default function Commitments() {
                                     isLastInColumn={index === rightColumnItems.length - 1}
                                 />
                             ))}
+                            {/* Empty spacer to fill remaining height */}
+                            <div className="flex-1"></div>
                         </div>
                     </div>
                 </div>

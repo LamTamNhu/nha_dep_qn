@@ -5,7 +5,7 @@ import { client } from '@/sanity/lib/client';
 import { projectBySlugQuery, projectSlugsQuery, contactFormQuery, siteSettingsQuery } from '@/sanity/lib/queries';
 import ContactForm from '@/components/ContactForm';
 import ProjectGallery from '@/components/ProjectGallery';
-import { Facebook, Youtube, Share2 } from 'lucide-react';
+import { Facebook, Share2 } from 'lucide-react';
 import ProjectInformation from "@/components/ProjectInformation";
 
 export async function generateStaticParams() {
@@ -50,24 +50,6 @@ export default async function ProjectDetailPage({ params }) {
                 <div className="grid md:grid-cols-3 gap-8">
                     <div className="md:col-span-2">
                         <h1 className="text-3xl font-bold mb-8">{title}</h1>
-                        <div className="flex items-center gap-4 mb-6">
-                            {siteSettings?.facebook && (
-                                <a href={siteSettings.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                                    <Facebook className="w-5 h-5" />
-                                </a>
-                            )}
-                            {siteSettings?.zalo && (
-                                <a href={siteSettings.zalo} target="_blank" rel="noopener noreferrer" aria-label="Zalo">
-                                    <Image src="/images/Icon_of_Zalo.svg" alt="Zalo" width={20} height={20} />
-                                </a>
-                            )}
-                            {siteSettings?.youtube && (
-                                <a href={siteSettings.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-                                    <Youtube className="w-5 h-5" />
-                                </a>
-                            )}
-                            <span className="text-sm text-gray-400">{new Date(_createdAt).toLocaleDateString('vi-VN')}</span>
-                        </div>
                         {gallery && gallery.length > 0 && (
                             <div className="mb-8">
                                 <ProjectGallery images={gallery} />
