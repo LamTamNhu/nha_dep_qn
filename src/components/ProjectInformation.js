@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function ProjectInformation({data}) {
+export default function ProjectInformation({data, shortDescription}) {
     if (!data) return null;
 
     // Define information items with their conditions
@@ -9,15 +9,15 @@ export default function ProjectInformation({data}) {
             condition: data.location,
             icon: "/images/Artboard-23.png",
             alt: "Location icon",
-            label: "Vị trí công trình",
+            label: "Địa điểm",
             value: data.location
         },
         {
-            condition: data.floors,
+            condition: data.function,
             icon: "/images/Artboard-24.png",
-            alt: "Floors icon",
-            label: "Số tầng",
-            value: data.floors
+            alt: "Function icon",
+            label: "Công năng",
+            value: data.function
         },
         {
             condition: data.landArea,
@@ -32,13 +32,6 @@ export default function ProjectInformation({data}) {
             alt: "Built area icon",
             label: "Diện tích xây dựng",
             value: data.constructionArea
-        },
-        {
-            condition: data.cost,
-            icon: "/images/icon-chiphi01.png",
-            alt: "Cost icon",
-            label: "Chi phí xây dựng",
-            value: data.cost
         }
     ];
 
@@ -54,9 +47,11 @@ export default function ProjectInformation({data}) {
                 {/* Header */}
                 <div className="text-center py-6">
                     <h2 className="text-orange-400 text-lg mb-2">Giới thiệu chung về dự án</h2>
-                    <h1 className="text-white max-w-2xl mx-auto px-4">
-                        {data.shortDescription}
-                    </h1>
+                    {shortDescription && (
+                        <h1 className="text-white max-w-2xl mx-auto px-4">
+                            {shortDescription}
+                        </h1>
+                    )}
                 </div>
 
                 {/* Information Cards - Only show if there's data */}

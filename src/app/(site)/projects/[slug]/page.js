@@ -22,7 +22,7 @@ export default async function ProjectDetailPage({ params }) {
     const contactData = await client.fetch(contactFormQuery);
     const siteSettings = await client.fetch(siteSettingsQuery);
 
-    const { title, information, gallery, description, sections, category, _createdAt } = project;
+    const { title, shortDescription, information, gallery, description, sections, category, _createdAt } = project;
     const categoryLabels = {
         mansion: 'Biệt thự',
         urbanHouse: 'Nhà phố',
@@ -73,7 +73,7 @@ export default async function ProjectDetailPage({ params }) {
                                 <ProjectGallery images={gallery} />
                             </div>
                         )}
-                        <ProjectInformation data={project?.information}/>
+                        <ProjectInformation data={project?.information} shortDescription={shortDescription}/>
                         {description && <p className="my-8 whitespace-pre-line">{description}</p>}
                         {sections && sections.length > 0 && (
                             <div className="space-y-12">

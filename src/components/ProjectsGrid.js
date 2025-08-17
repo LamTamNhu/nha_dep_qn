@@ -58,6 +58,9 @@ export default function ProjectsGrid({projects = []}) {
                                     {project.location && (
                                         <div>Địa điểm: <p className="font-medium">{project.location}</p></div>
                                     )}
+                                    {project.function && (
+                                        <div>Công năng: <p className="font-medium">{project.function}</p></div>
+                                    )}
                                     {project.category && (
                                         <div>Loại hình: <p
                                             className="font-medium">{getCategoryTitle(project.category)}</p></div>
