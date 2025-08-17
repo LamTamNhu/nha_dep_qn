@@ -17,7 +17,6 @@ export const homepageQuery = `*[_type == "homepage"][0] {
       images[]{"url": asset->url}
     }
   },
-  coreValues,
   whyChooseUs,
   processesTabs,
   constructionVideoSection,
@@ -29,6 +28,7 @@ export const homepageQuery = `*[_type == "homepage"][0] {
 export const contactFormQuery = `*[_type == "contactSettings"][0]{
   title,
   subtitle,
+  contactHeader,
   office,
   fanpage,
   hotline,
@@ -41,9 +41,18 @@ export const footerQuery = `*[_type == "footerSettings"][0]{
   ctaText,
   description,
   "logo": logo.asset->url,
-  branches
-}
-`;
+  mainBranch{
+    address,
+    email,
+    phones
+  },
+  otherBranches[]{
+    city,
+    address,
+    phones
+  }
+ }
+ `;
 
 export const aboutPageQuery = `*[_type == "aboutPage"][0]{
   heroSection{
@@ -65,27 +74,6 @@ export const aboutPageQuery = `*[_type == "aboutPage"][0]{
       title,
       "thumbnailUrl": thumbnail.asset->url
     }
-  },
-  coreValues[]{
-    title,
-    description,
-    "iconUrl": icon.asset->url
-  },
-  coreValues2[]{
-    title,
-    description,
-    "iconUrl": icon.asset->url
-  },
-  officeImages[]{
-    "url": asset->url
-  },
-  commitments[]{
-    text,
-    description
-  },
-  policies[]{
-    title,
-    icon
   }
 }`
 
