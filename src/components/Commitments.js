@@ -37,8 +37,8 @@ const commitmentItems = [
 
 // Reusable CommitmentItem component
 const CommitmentItem = ({ icon, title, description, isLastInColumn = false }) => (
-    <div className={`flex flex-col justify-center p-8 ${!isLastInColumn ? 'border-b border-orange-400' : ''}`}>
-        <div className="w-[100px] h-[100px] mb-4 flex items-center justify-center">
+    <div className={`flex flex-col items-center justify-center p-4 ${!isLastInColumn ? 'border-b border-orange-400' : ''}`}>
+        <div className="w-30 h-30 mb-2 flex items-center justify-center">
             <Image
                 src={icon}
                 alt={`${title} icon`}
@@ -47,10 +47,10 @@ const CommitmentItem = ({ icon, title, description, isLastInColumn = false }) =>
                 className="object-cover rounded-lg"
             />
         </div>
-        <p className='text-orange-400 mb-2 font-bold text-lg'>
+        <p className='text-orange-400 text-center mb-2 font-bold text-lg'>
             {title}
         </p>
-        <p className="text-white">
+        <p className="text-white text-justify">
             {description}
         </p>
     </div>
@@ -69,7 +69,7 @@ export default function Commitments() {
                 <div className="brightness-65 filter blur-[1px] absolute inset-0 z-0 pointer-events-none bg-[url('/images/5khong-bg.png')] bg-cover bg-bottom" />
 
                 {/* Content */}
-                <div className="flex items-center justify-center min-h-screen mx-auto gap-12 py-8 px-4">
+                <div className="flex items-center justify-center min-h-screen mx-auto gap-22 py-8 px-4">
                     {/* Title Section */}
                     <div className="flex-shrink-0 swing-in-top-fwd-2">
                         <div className="text-orange-400 font-extrabold text-lg sm:text-xl md:text-2xl lg:text-6xl mb-2">
@@ -83,10 +83,10 @@ export default function Commitments() {
                         </div>
                     </div>
 
-                    {/* Grid Section */}
-                    <div className="grid grid-cols-3 auto-rows-fr z-10 flex-1 max-w-6xl">
+                    {/* Flex Section */}
+                    <div className="flex z-10 flex-1 max-w-4xl">
                         {/* Left Column */}
-                        <div className="bg-[#373737] flex flex-col justify-center">
+                        <div className="bg-[#373737] flex flex-col justify-center flex-1">
                             {leftColumnItems.map((item, index) => (
                                 <CommitmentItem
                                     key={`left-${item.id || index}`}
@@ -98,11 +98,11 @@ export default function Commitments() {
                             ))}
                         </div>
 
-                        {/* Empty Middle Column */}
-                        <div className="w-full" />
+                        {/* Middle Spacer */}
+                        <div className="w-40" />
 
-                        {/* Right Column */}
-                        <div className="bg-[#373737] flex flex-col justify-center">
+                        {/* Right Column - No stretching, content height only */}
+                        <div className="bg-[#373737] flex flex-col flex-1 self-start">
                             {rightColumnItems.map((item, index) => (
                                 <CommitmentItem
                                     key={`right-${item.id || index}`}
