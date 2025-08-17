@@ -56,29 +56,27 @@ export default function ProjectInformation({data, shortDescription}) {
 
                 {/* Information Cards - Only show if there's data */}
                 {hasInfoCards && (
-                    <div className="bg-yellow-400 text-black flex justify-center">
-                        <div className="flex">
-                            {availableItems.map((item, index) => (
-                                <div
-                                    key={index}
-                                    className={`flex items-center gap-3 p-4 ${
-                                        index < availableItems.length - 1 ? 'border-r border-white' : ''
-                                    }`}
-                                >
-                                    <Image
-                                        src={item.icon}
-                                        alt={item.alt}
-                                        width={32}
-                                        height={32}
-                                        className="text-black"
-                                    />
-                                    <div>
-                                        <div className="font-semibold text-sm">{item.label}</div>
-                                        <div className="text-sm">{item.value}</div>
-                                    </div>
+                    <div className="bg-yellow-400 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 text-black justify-center">
+                        {availableItems.map((item, index) => (
+                            <div
+                                key={index}
+                                className={`flex items-center gap-3 p-4 ${
+                                    index < availableItems.length - 1 ? 'border-r border-white' : ''
+                                }`}
+                            >
+                                <Image
+                                    src={item.icon}
+                                    alt={item.alt}
+                                    width={32}
+                                    height={32}
+                                    className="text-black"
+                                />
+                                <div>
+                                    <div className="font-semibold text-sm">{item.label}</div>
+                                    <div className="text-sm">{item.value}</div>
                                 </div>
-                            ))}
-                        </div>
+                            </div>
+                        ))}
                     </div>
                 )}
             </div>
