@@ -1,6 +1,6 @@
 export default {
     name: 'commitments',
-    title: 'Cam kết',
+    title: '5 không',
     type: 'object',
     fields: [
         {

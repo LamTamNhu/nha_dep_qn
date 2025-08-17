@@ -21,7 +21,7 @@ export default {
         {
             name: 'commitments',
             type: 'commitments',
-            title: 'Cam kết'
+            title: '5 không'
         },
         {
             name: 'coreValues',
