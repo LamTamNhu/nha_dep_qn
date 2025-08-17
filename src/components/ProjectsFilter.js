@@ -40,6 +40,7 @@ export default function ProjectsFilter({ projects }) {
             filtered = filtered.filter(project =>
                 project.title.toLowerCase().includes(searchLower) ||
                 (project.location && project.location.toLowerCase().includes(searchLower)) ||
+                (project.function && project.function.toLowerCase().includes(searchLower)) ||
                 (project.shortDescription && project.shortDescription.toLowerCase().includes(searchLower))
             );
         }
