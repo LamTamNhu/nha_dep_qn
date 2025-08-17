@@ -25,25 +25,25 @@ export default {
             type: 'text',
         },
         {
-            name: 'branches',
-            title: 'Danh sách chi nhánh',
-            type: 'array',
-            of: [
+            name: 'mainBranch',
+            title: 'Chi nhánh chính',
+            type: 'object',
+            fields: [
+                { name: 'address', title: 'Địa chỉ', type: 'string' },
+                { name: 'email', title: 'Email', type: 'string' },
                 {
-                    type: 'object',
-                    fields: [
-                        { name: 'city', type: 'string', title: 'Thành phố' },
-                        { name: 'address', type: 'string', title: 'Địa chỉ' },
-                        { name: 'email', type: 'string', title: 'Email' },
-                        {
-                            name: 'phones',
-                            type: 'array',
-                            title: 'Số điện thoại',
-                            of: [{ type: 'string' }],
-                        },
-                    ],
+                    name: 'phones',
+                    title: 'Số điện thoại',
+                    type: 'array',
+                    of: [{ type: 'string' }],
                 },
             ],
+        },
+        {
+            name: 'footerQuotes',
+            title: 'Trích dẫn footer',
+            type: 'array',
+            of: [{ type: 'text' }],
         },
     ],
 };

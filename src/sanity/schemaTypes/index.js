@@ -14,6 +14,9 @@ import service from "@/sanity/schemaTypes/service";
 import servicesPage from "@/sanity/schemaTypes/servicesPage";
 import aboutHeroSection from "@/sanity/schemaTypes/aboutHeroSection";
 import teamSection from "@/sanity/schemaTypes/teamSection";
+import commitments from "@/sanity/schemaTypes/commitments";
+import officePictures from "@/sanity/schemaTypes/officePictures";
+import coreValues from "@/sanity/schemaTypes/coreValues";
 
 import projectDetail from "@/sanity/schemaTypes/projectDetail";
 import siteSettings from "@/sanity/schemaTypes/siteSettings";
@@ -39,6 +42,9 @@ export const schemas = {
         service,
         aboutHeroSection,
         teamSection,
+        commitments,
+        officePictures,
+        coreValues,
         footerSettings,
         siteSettings,
     ],

@@ -14,6 +14,11 @@ export default {
             type: 'text',
         },
         {
+            name: 'contactHeader',
+            title: 'Tiêu đề liên hệ',
+            type: 'string',
+        },
+        {
             name: 'office',
             title: 'Thông tin văn phòng',
             type: 'object',

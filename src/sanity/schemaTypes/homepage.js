@@ -48,18 +48,6 @@ export default {
             type: 'visionSection'
         },
         {
-            name: 'coreValues',
-            title: 'Giá trị cốt lõi',
-            type: "array",
-            of: [
-                {
-                    name: 'coreValue',
-                    title: "Giá trị",
-                    type: 'titleAndDescription'
-                }
-            ]
-        },
-        {
             name: 'whyChooseUs',
             title: 'Tại sao chọn chúng tôi?',
             type: 'object',

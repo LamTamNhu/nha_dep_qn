@@ -1,34 +1,35 @@
 import Image from "next/image";
 
-const coreValues = [
+const fallbackValues = [
     {
-        img: "/images/responsibility.png",
+        iconUrl: "/images/responsibility.png",
         title: "TRÁCH NHIỆM",
         description: "Không phải cứ bàn giao xong là hết nghĩa vụ, mà là đảm bảo công trình ấy thực sự đáng sống, đáng tin cậy trong nhiều năm sau."
     },
     {
-        img: "/images/design-thinking.png",
+        iconUrl: "/images/design-thinking.png",
         title: "ĐỔI MỚI, SÁNG TẠO",
         description: "Với phương châm không ngừng phát triển Nhà Đẹp Quảng Nam luôn tập trung cải tiến toàn diện để mang đến dịch vụ tốt nhất."
     },
     {
-        img: "/images/trust.png",
+        iconUrl: "/images/trust.png",
         title: "TRUNG THỰC",
         description: "Trong quá trình thi công xây dựng chúng tôi tuân thủ đạo đức nghề nghiệp, không gian dối hay làm trái nguyên tắc."
     },
     {
-        img: "/images/compass.png",
+        iconUrl: "/images/compass.png",
         title: "TÔN TRỌNG",
         description: "Chúng tôi không đơn thuần là đơn vị thi công theo yêu cầu, mà còn là thấu hiểu mong muốn của khách hàng."
     },
     {
-        img: "/images/honest.png",
+        iconUrl: "/images/honest.png",
         title: "ĐOÀN KẾT",
         description: "Trong phong cách làm việc Nhà Đẹp Quảng Nam luôn ưu tiên tư vấn trung thực, tập trung vào giá trị thực tế cho khách hàng."
     }
 ];
 
-export default function CoreValues() {
+export default function CoreValues({data}) {
+    const values = data?.values?.length ? data.values : fallbackValues;
     return (
         <section className="py-16 px-4 bg-white">
             <div className="max-w-7xl mx-auto">
@@ -41,7 +42,7 @@ export default function CoreValues() {
 
                 {/* Values Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 items-start">
-                    {coreValues.map((item, index) => (
+                    {values.map((item, index) => (
                         <div key={index} className="flex flex-col items-center text-center group">
                             {/* Icon Container */}
                             <div className="relative mb-6">
@@ -49,7 +50,7 @@ export default function CoreValues() {
                                 <div
                                     className="w-32 h-32 bg-orange-400 rounded-full flex items-center justify-center group-hover:bg-orange-300 transition-all duration-300">
                                     <Image
-                                        src={item.img}
+                                        src={item.iconUrl || item.img}
                                         alt={item.title}
                                         width={60}
                                         height={60}

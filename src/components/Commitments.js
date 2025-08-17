@@ -2,34 +2,34 @@ import Image from "next/image";
 import { fancyFont } from "@/app/fonts";
 
 // Commitment data
-const commitmentItems = [
+const fallbackItems = [
     {
         id: 1,
-        icon: "/images/Artboard-5.png",
+        iconUrl: "/images/Artboard-5.png",
         title: "KHÔNG sử dụng vật tư kém chất lượng",
         description: "Chỉ sử dụng vật liệu chất lượng cao, đạt tiêu chuẩn nghiêm ngặt, đảm bảo độ bền và hiệu quả lâu dài"
     },
     {
         id: 2,
-        icon: "/images/Artboard-6.png",
+        iconUrl: "/images/Artboard-6.png",
         title: "KHÔNG sử dụng vật tư khác với báo giá",
         description: "Giá cả minh bạch theo đúng thông số thực tế, không có chi phí ẩn hay báo giá sai lệch"
     },
     {
         id: 3,
-        icon: "/images/Artboard-7.png",
+        iconUrl: "/images/Artboard-7.png",
         title: "KHÔNG cắt giảm vật tư, thi công đủ và đúng tiêu chuẩn",
         description: "Mọi công trình được thực hiện với đủ khối lượng vật tư và phương pháp thi công đúng kỹ thuật, tuân thủ tiêu chuẩn không cắt giảm"
     },
     {
         id: 4,
-        icon: "/images/Artboard-8.png",
+        iconUrl: "/images/Artboard-8.png",
         title: "KHÔNG bán thầu, kiểm soát chất lượng từ A-Z",
         description: "Giám sát chất lượng toàn bộ quy trình từ đầu đến cuối, loại bỏ rủi ro bán thầu, đảm bảo chất lượng thống nhất"
     },
     {
         id: 5,
-        icon: "/images/Artboard-9.png",
+        iconUrl: "/images/Artboard-9.png",
         title: "KHÔNG giấu giếm, minh bạch trong từng khâu thi công",
         description: "Mọi giai đoạn thi công được thực hiện công khai, khách hàng có thể theo dõi tiến độ và phương pháp mọi lúc"
     }
@@ -57,10 +57,11 @@ const CommitmentItem = ({ icon, title, description, isLastInColumn = false }) =>
 );
 
 // Main component
-export default function Commitments() {
+export default function Commitments({data}) {
+    const items = data?.items?.length ? data.items : fallbackItems;
     // Split items into two columns
-    const leftColumnItems = commitmentItems.slice(0, 3);
-    const rightColumnItems = commitmentItems.slice(3, 5);
+    const leftColumnItems = items.slice(0, 3);
+    const rightColumnItems = items.slice(3, 5);
 
     return (
         <section>
@@ -90,7 +91,7 @@ export default function Commitments() {
                             {leftColumnItems.map((item, index) => (
                                 <CommitmentItem
                                     key={`left-${item.id || index}`}
-                                    icon={item.icon}
+                                    icon={item.iconUrl || item.icon}
                                     title={item.title}
                                     description={item.description}
                                     isLastInColumn={index === leftColumnItems.length - 1}
@@ -106,7 +107,7 @@ export default function Commitments() {
                             {rightColumnItems.map((item, index) => (
                                 <CommitmentItem
                                     key={`right-${item.id || index}`}
-                                    icon={item.icon}
+                                    icon={item.iconUrl || item.icon}
                                     title={item.title}
                                     description={item.description}
                                     isLastInColumn={index === rightColumnItems.length - 1}
