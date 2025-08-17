@@ -46,13 +46,9 @@ export const footerQuery = `*[_type == "footerSettings"][0]{
     email,
     phones
   },
-  otherBranches[]{
-    city,
-    address,
-    phones
-  }
+  footerQuotes
  }
- `;
+`;
 
 export const aboutPageQuery = `*[_type == "aboutPage"][0]{
   heroSection{
@@ -73,6 +69,25 @@ export const aboutPageQuery = `*[_type == "aboutPage"][0]{
       name,
       title,
       "thumbnailUrl": thumbnail.asset->url
+    }
+  },
+  officePictures{
+    images[]{
+      "imageUrl": asset->url
+    }
+  },
+  commitments{
+    items[]{
+      title,
+      description,
+      "iconUrl": icon.asset->url
+    }
+  },
+  coreValues{
+    values[]{
+      title,
+      description,
+      "iconUrl": icon.asset->url
     }
   }
 }`

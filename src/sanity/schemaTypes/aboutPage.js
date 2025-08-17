@@ -12,6 +12,21 @@ export default {
             name: 'teamSection',
             type: 'teamSection',
             title: 'Đội ngũ'
+        },
+        {
+            name: 'officePictures',
+            type: 'officePictures',
+            title: 'Hình ảnh văn phòng'
+        },
+        {
+            name: 'commitments',
+            type: 'commitments',
+            title: 'Cam kết'
+        },
+        {
+            name: 'coreValues',
+            type: 'coreValues',
+            title: 'Giá trị cốt lõi'
         }
     ],
     preview: {

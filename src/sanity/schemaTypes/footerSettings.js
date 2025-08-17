@@ -40,24 +40,10 @@ export default {
             ],
         },
         {
-            name: 'otherBranches',
-            title: 'Chi nhánh khác',
+            name: 'footerQuotes',
+            title: 'Trích dẫn footer',
             type: 'array',
-            of: [
-                {
-                    type: 'object',
-                    fields: [
-                        { name: 'city', title: 'Thành phố', type: 'string' },
-                        { name: 'address', title: 'Địa chỉ', type: 'string' },
-                        {
-                            name: 'phones',
-                            title: 'Số điện thoại',
-                            type: 'array',
-                            of: [{ type: 'string' }],
-                        },
-                    ],
-                },
-            ],
+            of: [{ type: 'text' }],
         },
     ],
 };

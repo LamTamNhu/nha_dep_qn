@@ -14,18 +14,9 @@ const fallback = {
         email: 'nhadepquangnam@gmail.com',
         phones: ['0914.353.808', '0905.659.036'],
     },
-    otherBranches: [
-        {
-            city: 'Đà Nẵng',
-            address: '20 Đống Đa, P. Thuận Phước, Q. Hải Châu, TP. Đà Nẵng',
-            phones: ['0369 151 115 (Ms. Mai)'],
-        },
-        {
-            city: 'Hà Nội',
-            address:
-                'L5.16 Khu nhà ở liền kề Hải Ngân, thôn Nội, xã Thanh Liệt, H. Thanh Trì, TP. Hà Nội',
-            phones: ['0358 232 514 (Mr. Hiếu)'],
-        },
+    footerQuotes: [
+        'Với ước mơ tạo ra những ngôi nhà thật đẹp chàng kĩ sư trẻ Nguyên Tương Tổng Giám Đốc tại công ty Nhà Đẹp Quảng Nam chia sẻ.',
+        '"Chúng tôi không chỉ đơn thuần xây dựng những công trình, mà còn kiến tạo nên những tổ ấm - nơi gia đình sum vầy, nơi nuôi dưỡng những khoảnh khắc hạnh phúc."'
     ],
 };
 
@@ -36,10 +27,10 @@ export default function Footer({data}) {
     const ctaText = content.ctaText || fallback.ctaText;
     const description = content.description || fallback.description;
     const mainBranch = content.mainBranch || fallback.mainBranch;
-    const otherBranches =
-        Array.isArray(content.otherBranches) && content.otherBranches.length > 0
-            ? content.otherBranches
-            : fallback.otherBranches;
+    const footerQuotes =
+        Array.isArray(content.footerQuotes) && content.footerQuotes.length > 0
+            ? content.footerQuotes
+            : fallback.footerQuotes;
 
     const circleSize = '400px';
 
@@ -101,16 +92,13 @@ export default function Footer({data}) {
                                 )}
                             </div>
 
-                            {/* Columns 2 & 3: Other branches */}
+                            {/* Quotes */}
                             <div className="w-full">
-                                <p className="italic">
-                                    Với ước mơ tạo ra những ngôi nhà thật đẹp chàng kĩ sư trẻ Nguyên Tương Tổng Giám Đốc tại
-                                    công ty Nhà Đẹp Quảng Nam chia sẻ.
-                                </p>
-                                <p>
-                                    "Chúng tôi không chỉ đơn thuần xây dựng những công trình, mà còn kiến tạo nên những tổ
-                                    ấm - nơi gia đình sum vầy, nơi nuôi dưỡng những khoảnh khắc hạnh phúc."
-                                </p>
+                                {footerQuotes.map((quote, index) => (
+                                    <p key={index} className={index === 0 ? 'italic' : ''}>
+                                        {quote}
+                                    </p>
+                                ))}
                             </div>
                         </div>
                     </div>

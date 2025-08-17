@@ -18,9 +18,9 @@ export default async function AboutPage() {
             <AboutHeroSection data={data?.heroSection}/>
             <TeamSection data={data?.teamSection}/>
             {/*Office pictures*/}
-            <OfficePictures/>
-            <Commitments/>
-            <CoreValues/>
+            <OfficePictures data={data?.officePictures}/>
+            <Commitments data={data?.commitments}/>
+            <CoreValues data={data?.coreValues}/>
         </div>
     );
 }
