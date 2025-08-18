@@ -102,16 +102,16 @@ export const servicesPageQuery = `*[_type == "servicesPage"][0]{
   }
 }`
 
-export const projectSlugsQuery = `*[_type == "projectDetail" && defined(slug.current)]{
+export const projectSlugsQuery = `*[_type in ["projectDetail", "completedProject"] && defined(slug.current)]{
   "slug": slug.current
 }`;
 
-export const projectBySlugQuery = `*[_type == "projectDetail" && slug.current == $slug][0]{
+export const projectBySlugQuery = `*[_type in ["projectDetail", "completedProject"] && slug.current == $slug][0]{
+  _type,
   title,
   shortDescription,
   information,
   category,
-  isCompleted,
   _createdAt,
   "slug": slug.current,
   gallery[]{
@@ -121,7 +121,7 @@ export const projectBySlugQuery = `*[_type == "projectDetail" && slug.current ==
   body
 }`;
 
-export const projectsQuery = `*[_type == "projectDetail" && isCompleted != true]{
+export const projectsQuery = `*[_type == "projectDetail"]{
   _id,
   title,
   shortDescription,
@@ -132,11 +132,10 @@ export const projectsQuery = `*[_type == "projectDetail" && isCompleted != true]
   "location": information.location,
   "function": information.function,
   category,
-  isCompleted,
   _createdAt
 }`;
 
-export const completedProjectsQuery = `*[_type == "projectDetail" && isCompleted == true]{
+export const completedProjectsQuery = `*[_type == "completedProject"]{
   _id,
   title,
   shortDescription,
@@ -147,7 +146,6 @@ export const completedProjectsQuery = `*[_type == "projectDetail" && isCompleted
   "location": information.location,
   "function": information.function,
   category,
-  isCompleted,
   _createdAt
 }`;
 
