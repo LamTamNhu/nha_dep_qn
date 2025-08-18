@@ -1,6 +1,6 @@
 export default {
-    name: 'projectDetail',
-    title: 'Dự án',
+    name: 'completedProject',
+    title: 'Thi công thực tế',
     type: 'document',
     fields: [
         {
@@ -48,7 +48,7 @@ export default {
                     { title: 'Công trình dịch vụ', value: 'serviceBuilding' },
                 ],
             },
-            validation: Rule => Rule.required()
+            validation: Rule => Rule.required(),
         },
         {
             name: 'gallery',

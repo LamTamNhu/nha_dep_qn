@@ -19,6 +19,7 @@ import officePictures from "@/sanity/schemaTypes/officePictures";
 import coreValues from "@/sanity/schemaTypes/coreValues";
 
 import projectDetail from "@/sanity/schemaTypes/projectDetail";
+import completedProject from "@/sanity/schemaTypes/completedProject";
 import siteSettings from "@/sanity/schemaTypes/siteSettings";
 import news from "@/sanity/schemaTypes/news";
 import blockContent from "@/sanity/schemaTypes/blockContent";
@@ -35,6 +36,7 @@ export const schemas = {
         constructionVideo,
         project,
         projectDetail,
+        completedProject,
         blockContent,
         news,
         partner,
