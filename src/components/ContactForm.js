@@ -24,6 +24,15 @@ const fallback = {
     contactHeader: 'MỌI THẮC MẮC XIN LIÊN HỆ:'
 };
 
+// Generate a unique session ID
+const generateSessionId = () => {
+    const existingId = sessionStorage.getItem('sessionId');
+    if (existingId) return existingId;
+    const newId = `${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    sessionStorage.setItem('sessionId', newId);
+    return newId;
+};
+
 export default function ContactForm({ data, isPopover = false, sidebarMode = false }) {
     const [formData, setFormData] = React.useState({
         name: '',
@@ -35,6 +44,9 @@ export default function ContactForm({ data, isPopover = false, sidebarMode = fal
         details: ''
     });
     const [status, setStatus] = React.useState(null);
+    const [errors, setErrors] = React.useState({});
+    const [canSubmit, setCanSubmit] = React.useState(true);
+    const [cooldownTime, setCooldownTime] = React.useState(0);
 
     // Use Sanity data with per-field fallbacks
     const title = data?.title || fallback.title;
@@ -60,11 +72,89 @@ export default function ContactForm({ data, isPopover = false, sidebarMode = fal
         ? data.budgetOptions
         : fallback.budgetOptions;
 
+    // Anti-spam logic using sessionStorage
+    React.useEffect(() => {
+        const sessionId = generateSessionId();
+        const lastSubmission = sessionStorage.getItem(`lastSubmission_${sessionId}`);
+        const cooldownMs = 60 * 1000; // 60 seconds
+
+        if (lastSubmission) {
+            const timeDiff = Date.now() - parseInt(lastSubmission, 10);
+            if (timeDiff < cooldownMs) {
+                setCanSubmit(false);
+                const remainingTime = Math.ceil((cooldownMs - timeDiff) / 1000);
+                setCooldownTime(remainingTime);
+
+                // Update countdown
+                const interval = setInterval(() => {
+                    const newTimeDiff = Date.now() - parseInt(lastSubmission, 10);
+                    const newRemainingTime = Math.ceil((cooldownMs - newTimeDiff) / 1000);
+
+                    if (newRemainingTime <= 0) {
+                        setCanSubmit(true);
+                        setCooldownTime(0);
+                        clearInterval(interval);
+                    } else {
+                        setCooldownTime(newRemainingTime);
+                    }
+                }, 1000);
+
+                return () => clearInterval(interval);
+            } else {
+                setCanSubmit(true);
+                setCooldownTime(0);
+            }
+        } else {
+            setCanSubmit(true);
+            setCooldownTime(0);
+        }
+    }, []);
+
+    // Validation function
+    const validateForm = () => {
+        const newErrors = {};
+
+        // Name validation
+        if (!formData.name.trim()) {
+            newErrors.name = 'Vui lòng nhập họ và tên';
+        } else if (formData.name.trim().length < 2) {
+            newErrors.name = 'Họ và tên phải có ít nhất 2 ký tự';
+        }
+
+        // Phone validation
+        if (!formData.phone.trim()) {
+            newErrors.phone = 'Vui lòng nhập số điện thoại';
+        } else if (!/^[0-9+\-\s()]{9,15}$/.test(formData.phone.trim())) {
+            newErrors.phone = 'Số điện thoại không hợp lệ';
+        }
+
+        // Budget validation
+        if (formData.budget.length === 0) {
+            newErrors.budget = 'Vui lòng chọn ít nhất một mức ngân sách';
+        }
+
+        // Email validation (optional but if provided must be valid)
+        if (formData.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+            newErrors.email = 'Email không hợp lệ';
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
     const handleInputChange = (field, value) => {
         setFormData(prev => ({
             ...prev,
             [field]: value
         }));
+
+        // Clear error when user starts typing
+        if (errors[field]) {
+            setErrors(prev => ({
+                ...prev,
+                [field]: null
+            }));
+        }
     };
 
     const handleBudgetChange = (budget, checked) => {
@@ -74,10 +164,31 @@ export default function ContactForm({ data, isPopover = false, sidebarMode = fal
                 ? [...prev.budget, budget]
                 : prev.budget.filter(b => b !== budget)
         }));
+
+        // Clear budget error when user selects an option
+        if (errors.budget) {
+            setErrors(prev => ({
+                ...prev,
+                budget: null
+            }));
+        }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Validate form
+        if (!validateForm()) {
+            toast.error('Vui lòng kiểm tra và điền đầy đủ thông tin bắt buộc');
+            return;
+        }
+
+        // Check anti-spam
+        if (!canSubmit) {
+            toast.error(`Vui lòng đợi ${cooldownTime} giây trước khi gửi lại`);
+            return;
+        }
+
         setStatus('loading');
         try {
             const res = await fetch('/api/contact', {
@@ -88,6 +199,12 @@ export default function ContactForm({ data, isPopover = false, sidebarMode = fal
             if (res.ok) {
                 toast.success('Đã gửi thành công!');
                 setStatus('success');
+
+                // Record submission for anti-spam
+                const sessionId = generateSessionId();
+                sessionStorage.setItem(`lastSubmission_${sessionId}`, Date.now().toString());
+
+                // Reset form
                 setFormData({
                     name: '',
                     email: '',
@@ -97,6 +214,7 @@ export default function ContactForm({ data, isPopover = false, sidebarMode = fal
                     budget: [],
                     details: ''
                 });
+                setErrors({});
             } else {
                 toast.error('Gửi thất bại. Vui lòng thử lại.');
                 setStatus('error');
@@ -105,6 +223,12 @@ export default function ContactForm({ data, isPopover = false, sidebarMode = fal
             toast.error('Gửi thất bại. Vui lòng thử lại.');
             setStatus('error');
         }
+    };
+
+    // Error message component
+    const ErrorMessage = ({ error }) => {
+        if (!error) return null;
+        return <p className="text-red-500 text-xs mt-1">{error}</p>;
     };
 
     // If sidebar mode, render compact version
@@ -121,37 +245,52 @@ export default function ContactForm({ data, isPopover = false, sidebarMode = fal
                 {/* Contact Form */}
                 <div className="space-y-3">
                     <div className="space-y-2">
+                        <div>
+                            <input
+                                type="text"
+                                placeholder="Họ và tên*"
+                                value={formData.name}
+                                onChange={(e) => handleInputChange('name', e.target.value)}
+                                className={`w-full border rounded px-2 py-1.5 text-sm text-gray-900 bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-300 ${
+                                    errors.name ? 'border-red-500' : 'border-gray-300'
+                                }`}
+                            />
+                            <ErrorMessage error={errors.name} />
+                        </div>
+                        <div>
+                            <input
+                                type="email"
+                                placeholder="Email"
+                                value={formData.email}
+                                onChange={(e) => handleInputChange('email', e.target.value)}
+                                className={`w-full border rounded px-2 py-1.5 text-sm text-gray-900 bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-300 ${
+                                    errors.email ? 'border-red-500' : 'border-gray-300'
+                                }`}
+                            />
+                            <ErrorMessage error={errors.email} />
+                        </div>
+                        <div>
+                            <input
+                                type="tel"
+                                placeholder="Số điện thoại*"
+                                value={formData.phone}
+                                onChange={(e) => handleInputChange('phone', e.target.value)}
+                                className={`w-full border rounded px-2 py-1.5 text-sm text-gray-900 bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-300 ${
+                                    errors.phone ? 'border-red-500' : 'border-gray-300'
+                                }`}
+                            />
+                            <ErrorMessage error={errors.phone} />
+                        </div>
                         <input
                             type="text"
-                            placeholder="Họ và tên*"
-                            value={formData.name}
-                            onChange={(e) => handleInputChange('name', e.target.value)}
-                            className="w-full border border-gray-300 rounded px-2 py-1.5 text-sm text-gray-900 bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-300"
-                        />
-                        <input
-                            type="email"
-                            placeholder="Email*"
-                            value={formData.email}
-                            onChange={(e) => handleInputChange('email', e.target.value)}
-                            className="w-full border border-gray-300 rounded px-2 py-1.5 text-sm text-gray-900 bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-300"
-                        />
-                        <input
-                            type="tel"
-                            placeholder="Số điện thoại*"
-                            value={formData.phone}
-                            onChange={(e) => handleInputChange('phone', e.target.value)}
-                            className="w-full border border-gray-300 rounded px-2 py-1.5 text-sm text-gray-900 bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-300"
-                        />
-                        <input
-                            type="text"
-                            placeholder="Diện tích đất và tầng muốn xây*"
+                            placeholder="Diện tích đất và tầng muốn xây"
                             value={formData.area}
                             onChange={(e) => handleInputChange('area', e.target.value)}
                             className="w-full border border-gray-300 rounded px-2 py-1.5 text-sm text-gray-900 bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-300"
                         />
                         <input
                             type="text"
-                            placeholder="Địa phương muốn xây*"
+                            placeholder="Địa phương muốn xây"
                             value={formData.location}
                             onChange={(e) => handleInputChange('location', e.target.value)}
                             className="w-full border border-gray-300 rounded px-2 py-1.5 text-sm text-gray-900 bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-300"
@@ -174,22 +313,30 @@ export default function ContactForm({ data, isPopover = false, sidebarMode = fal
                                 </label>
                             ))}
                         </div>
+                        <ErrorMessage error={errors.budget} />
                     </div>
 
                     {/* Text area */}
                     <textarea
-                        placeholder="Yêu cầu chi tiết nếu có!*"
+                        placeholder="Yêu cầu chi tiết nếu có!"
                         value={formData.details}
                         onChange={(e) => handleInputChange('details', e.target.value)}
                         className="w-full border border-gray-300 rounded px-2 py-1.5 min-h-[60px] text-sm text-gray-900 bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-300"
                     />
 
+                    {/* Anti-spam message */}
+                    {!canSubmit && (
+                        <p className="text-orange-600 text-xs text-center">
+                            Vui lòng đợi {cooldownTime} giây trước khi gửi lại
+                        </p>
+                    )}
+
                     <button
                         onClick={handleSubmit}
-                        disabled={status === 'loading'}
+                        disabled={status === 'loading' || !canSubmit}
                         className="w-full bg-orange-400 hover:bg-orange-500 text-white font-semibold py-2 rounded transition-colors duration-200 text-lg disabled:opacity-50"
                     >
-                        Gửi yêu cầu!
+                        {status === 'loading' ? 'Đang gửi...' : 'Gửi yêu cầu!'}
                     </button>
                 </div>
             </div>
@@ -259,37 +406,52 @@ export default function ContactForm({ data, isPopover = false, sidebarMode = fal
                 </p>
 
                 <div className={`grid grid-cols-1 gap-4 md:gap-6`}>
+                    <div>
+                        <input
+                            type="text"
+                            placeholder="Họ và tên*"
+                            value={formData.name}
+                            onChange={(e) => handleInputChange('name', e.target.value)}
+                            className={`w-full border rounded px-3 md:px-4 py-2 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-orange-300 ${
+                                errors.name ? 'border-red-500' : 'border-gray-300'
+                            }`}
+                        />
+                        <ErrorMessage error={errors.name} />
+                    </div>
+                    <div>
+                        <input
+                            type="email"
+                            placeholder="Email"
+                            value={formData.email}
+                            onChange={(e) => handleInputChange('email', e.target.value)}
+                            className={`w-full border rounded px-3 md:px-4 py-2 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-orange-300 ${
+                                errors.email ? 'border-red-500' : 'border-gray-300'
+                            }`}
+                        />
+                        <ErrorMessage error={errors.email} />
+                    </div>
+                    <div>
+                        <input
+                            type="tel"
+                            placeholder="Số điện thoại*"
+                            value={formData.phone}
+                            onChange={(e) => handleInputChange('phone', e.target.value)}
+                            className={`w-full border rounded px-3 md:px-4 py-2 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-orange-300 ${
+                                errors.phone ? 'border-red-500' : 'border-gray-300'
+                            }`}
+                        />
+                        <ErrorMessage error={errors.phone} />
+                    </div>
                     <input
                         type="text"
-                        placeholder="Họ và tên*"
-                        value={formData.name}
-                        onChange={(e) => handleInputChange('name', e.target.value)}
-                        className="w-full border border-gray-300 rounded px-3 md:px-4 py-2 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-orange-300"
-                    />
-                    <input
-                        type="email"
-                        placeholder="Email*"
-                        value={formData.email}
-                        onChange={(e) => handleInputChange('email', e.target.value)}
-                        className="w-full border border-gray-300 rounded px-3 md:px-4 py-2 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-orange-300"
-                    />
-                    <input
-                        type="tel"
-                        placeholder="Số điện thoại*"
-                        value={formData.phone}
-                        onChange={(e) => handleInputChange('phone', e.target.value)}
-                        className="w-full border border-gray-300 rounded px-3 md:px-4 py-2 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-orange-300"
-                    />
-                    <input
-                        type="text"
-                        placeholder="Diện tích đất và tầng muốn xây*"
+                        placeholder="Diện tích đất và tầng muốn xây"
                         value={formData.area}
                         onChange={(e) => handleInputChange('area', e.target.value)}
                         className="w-full border border-gray-300 rounded px-3 md:px-4 py-2 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-orange-300"
                     />
                     <input
                         type="text"
-                        placeholder="Địa phương muốn xây*"
+                        placeholder="Địa phương muốn xây"
                         value={formData.location}
                         onChange={(e) => handleInputChange('location', e.target.value)}
                         className="w-full border border-gray-300 rounded px-3 md:px-4 py-2 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-orange-300"
@@ -310,27 +472,34 @@ export default function ContactForm({ data, isPopover = false, sidebarMode = fal
                                 <span className="text-sm md:text-base">{budget}</span>
                             </label>
                         ))}
-                </div>
+                    </div>
+                    <ErrorMessage error={errors.budget} />
                 </div>
 
                 <div>
                     <textarea
                         className="w-full border border-gray-300 rounded px-3 md:px-4 py-2 min-h-[80px] md:min-h-[100px] text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-orange-300"
-                        placeholder="Yêu cầu chi tiết nếu có!*"
+                        placeholder="Yêu cầu chi tiết nếu có!"
                         value={formData.details}
                         onChange={(e) => handleInputChange('details', e.target.value)}
                     />
                 </div>
 
+                {/* Anti-spam message */}
+                {!canSubmit && (
+                    <p className="text-orange-600 text-sm text-center">
+                        Vui lòng đợi {cooldownTime} giây trước khi gửi lại
+                    </p>
+                )}
+
                 <button
                     onClick={handleSubmit}
-                    disabled={status === 'loading'}
+                    disabled={status === 'loading' || !canSubmit}
                     className="w-full bg-orange-400 hover:bg-orange-300 text-white font-semibold py-2 md:py-3 rounded transition-colors duration-200 text-base md:text-lg mt-2 disabled:opacity-50"
                 >
-                    Gửi yêu cầu!
+                    {status === 'loading' ? 'Đang gửi...' : 'Gửi yêu cầu!'}
                 </button>
             </div>
         </div>
     );
 }
-
