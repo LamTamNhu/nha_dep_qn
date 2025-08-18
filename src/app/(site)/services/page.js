@@ -55,7 +55,7 @@ export default async function ServicesPage() {
   return (
     <div className="min-h-screen bg-[#272727]">
       <Banner title="DỊCH VỤ" />
-      <div className="container mx-auto px-6 md:px-10">
+      <div className="container mx-auto px-4 sm:px-6 md:px-10">
         <ServiceSections services={services} />
       </div>
       <div className="h-70 bg-[#272727]" />
