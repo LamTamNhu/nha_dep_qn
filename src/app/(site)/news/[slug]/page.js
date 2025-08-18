@@ -1,7 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { PortableText } from 'next-sanity';
 import { client } from '@/sanity/lib/client';
+import { urlFor } from '@/sanity/lib/image';
 import { newsBySlugQuery, newsSlugsQuery, contactFormQuery, siteSettingsQuery } from '@/sanity/lib/queries';
 import ContactForm from '@/components/ContactForm';
 import { Facebook, Youtube, Share2 } from 'lucide-react';
@@ -20,7 +22,7 @@ export default async function NewsDetailPage({ params }) {
     const contactData = await client.fetch(contactFormQuery);
     const siteSettings = await client.fetch(siteSettingsQuery);
 
-    const { title, sections, category, _createdAt } = news;
+    const { title, body, category, _createdAt } = news;
     const categoryLabels = {
         generalNews: 'Tin tức chung',
         activities: 'Hoạt động công ty',
@@ -63,33 +65,23 @@ export default async function NewsDetailPage({ params }) {
                             )}
                             <span className="text-sm text-gray-400">{new Date(_createdAt).toLocaleDateString('vi-VN')}</span>
                         </div>
-                        {sections && sections.length > 0 && (
-                            <div className="space-y-12">
-                                {sections.map((section, idx) => (
-                                    <div key={idx}>
-                                        {section.header && (
-                                            <h2 className="text-2xl font-semibold mb-4">{section.header}</h2>
-                                        )}
-                                        {section.content && (
-                                            <p className="mb-4 whitespace-pre-line">{section.content}</p>
-                                        )}
-                                        {section.images && section.images.length > 0 && (
-                                            <div className="space-y-4">
-                                                {section.images.map((img, i) => (
-                                                    <Image
-                                                        key={i}
-                                                        src={img.url}
-                                                        alt={img.alt || title}
-                                                        width={800}
-                                                        height={600}
-                                                        className="w-full h-auto"
-                                                    />
-                                                ))}
-                                            </div>
-                                        )}
-                                    </div>
-                                ))}
-                            </div>
+                        {body && (
+                            <PortableText
+                                value={body}
+                                components={{
+                                    types: {
+                                        image: ({ value }) => (
+                                            <Image
+                                                src={urlFor(value).width(800).url()}
+                                                alt={value.alt || title}
+                                                width={800}
+                                                height={600}
+                                                className="w-full h-auto my-4"
+                                            />
+                                        ),
+                                    },
+                                }}
+                            />
                         )}
                         <div className="mt-12 pt-8 border-t border-gray-600">
                             <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">

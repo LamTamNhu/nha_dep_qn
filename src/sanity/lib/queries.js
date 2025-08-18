@@ -174,14 +174,7 @@ export const newsBySlugQuery = `*[_type == "news" && slug.current == $slug][0]{
   category,
   _createdAt,
   "slug": slug.current,
-  sections[]{
-    header,
-    content,
-    images[]{
-      "url": asset->url,
-      alt
-    }
-  }
+  body
 }`;
 
 export const newsQuery = `*[_type == "news"] | order(_createdAt desc){
