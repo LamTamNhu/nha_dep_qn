@@ -70,37 +70,9 @@ export default {
             type: 'text',
         },
         {
-            name: 'sections',
-            title: 'Các phần',
-            type: 'array',
-            of: [
-                {
-                    type: 'object',
-                    fields: [
-                        { name: 'header', title: 'Tiêu đề phần', type: 'string' },
-                        { name: 'content', title: 'Nội dung', type: 'text' },
-                        {
-                            name: 'images',
-                            title: 'Hình ảnh',
-                            type: 'array',
-                            of: [
-                                {
-                                    type: 'image',
-                                    options: { hotspot: true },
-                                    fields: [
-                                        {
-                                            name: 'alt',
-                                            title: 'Alt',
-                                            type: 'string',
-                                            description: 'Tự động tạo từ tiêu đề nếu bỏ trống',
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                    ],
-                },
-            ],
+            name: 'body',
+            title: 'Nội dung',
+            type: 'blockContent',
         },
     ],
 };

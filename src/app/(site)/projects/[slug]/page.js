@@ -1,8 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { PortableText } from 'next-sanity';
 import { client } from '@/sanity/lib/client';
-import { projectBySlugQuery, projectSlugsQuery, contactFormQuery, siteSettingsQuery } from '@/sanity/lib/queries';
+import { urlFor } from '@/sanity/lib/image';
+import { projectBySlugQuery, projectSlugsQuery, contactFormQuery } from '@/sanity/lib/queries';
 import ContactForm from '@/components/ContactForm';
 import ProjectGallery from '@/components/ProjectGallery';
 import { Facebook, Share2 } from 'lucide-react';
@@ -13,6 +15,18 @@ export async function generateStaticParams() {
     return slugs.map(({ slug }) => ({ slug }));
 }
 
+export async function generateMetadata({ params }) {
+    const { slug } = await params;
+    const project = await client.fetch(projectBySlugQuery, { slug });
+    if (!project) {
+        return {};
+    }
+    return {
+        title: project.title,
+        description: project.shortDescription,
+    };
+}
+
 export default async function ProjectDetailPage({ params }) {
     const { slug } = await params;
     const project = await client.fetch(projectBySlugQuery, { slug });
@@ -20,9 +34,8 @@ export default async function ProjectDetailPage({ params }) {
         notFound();
     }
     const contactData = await client.fetch(contactFormQuery);
-    const siteSettings = await client.fetch(siteSettingsQuery);
 
-    const { title, shortDescription, information, gallery, description, sections, category, _createdAt } = project;
+    const { title, shortDescription, information, gallery, body, category, _createdAt } = project;
     const categoryLabels = {
         mansion: 'Biệt thự',
         urbanHouse: 'Nhà phố',
@@ -56,31 +69,28 @@ export default async function ProjectDetailPage({ params }) {
                             </div>
                         )}
                         <ProjectInformation data={project?.information} shortDescription={shortDescription}/>
-                        {description && <p className="my-8 whitespace-pre-line">{description}</p>}
-                        {sections && sections.length > 0 && (
-                            <div className="space-y-12">
-                                {sections.map((section, idx) => (
-                                    <div key={idx}>
-                                        {section.image && (
-                                            <div className="mb-4">
-                                                <Image
-                                                    src={section.image.url}
-                                                    alt={section.image.alt || title}
-                                                    width={800}
-                                                    height={600}
-                                                    className="w-full h-auto"
-                                                />
-                                                {section.imageSubtitle && (
-                                                    <p className="text-sm italic mt-2">{section.imageSubtitle}</p>
-                                                )}
-                                            </div>
-                                        )}
-                                        {section.content && (
-                                            <p className="whitespace-pre-line">{section.content}</p>
-                                        )}
-                                    </div>
-                                ))}
-                            </div>
+                        {body && (
+                            <PortableText
+                                value={body}
+                                components={{
+                                    block: {
+                                        h1: ({ children }) => <h1 className="text-3xl font-bold my-4">{children}</h1>,
+                                        h2: ({ children }) => <h2 className="text-2xl font-semibold my-3">{children}</h2>,
+                                        h3: ({ children }) => <h3 className="text-xl font-semibold my-2">{children}</h3>,
+                                    },
+                                    types: {
+                                        image: ({ value }) => (
+                                            <Image
+                                                src={urlFor(value).width(800).url()}
+                                                alt={value.alt || title}
+                                                width={800}
+                                                height={600}
+                                                className="w-full h-auto my-4"
+                                            />
+                                        ),
+                                    },
+                                }}
+                            />
                         )}
 
                         {/* Share Section */}
