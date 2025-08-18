@@ -76,9 +76,6 @@ export default function ContactForm({ data, isPopover = false, sidebarMode = fal
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Form submitted:', formData);
-        // Handle form submission here
-        alert('Yêu cầu đã được gửi!');
     };
 
     // If sidebar mode, render compact version
