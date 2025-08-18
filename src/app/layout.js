@@ -1,6 +1,7 @@
 // src/app/layout.js (minimal root)
 import "./globals.css";
 import {mulish} from "@/app/fonts";
+import {Toaster} from "react-hot-toast";
 
 
 export const metadata = {
@@ -13,6 +14,7 @@ export default function RootLayout({children}) {
         <html lang="en" suppressHydrationWarning className={`${mulish.className} antialiased`}>
         <body suppressHydrationWarning>
         {children}
+        <Toaster/>
         </body>
         </html>
     );

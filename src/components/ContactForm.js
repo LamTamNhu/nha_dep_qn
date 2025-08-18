@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { Facebook, MapPin, Phone } from 'lucide-react';
+import { toast } from 'react-hot-toast';
 
 // Fallback content
 const fallback = {
@@ -85,6 +86,7 @@ export default function ContactForm({ data, isPopover = false, sidebarMode = fal
                 body: JSON.stringify(formData)
             });
             if (res.ok) {
+                toast.success('Đã gửi thành công!');
                 setStatus('success');
                 setFormData({
                     name: '',
@@ -96,9 +98,11 @@ export default function ContactForm({ data, isPopover = false, sidebarMode = fal
                     details: ''
                 });
             } else {
+                toast.error('Gửi thất bại. Vui lòng thử lại.');
                 setStatus('error');
             }
         } catch (err) {
+            toast.error('Gửi thất bại. Vui lòng thử lại.');
             setStatus('error');
         }
     };
@@ -182,16 +186,11 @@ export default function ContactForm({ data, isPopover = false, sidebarMode = fal
 
                     <button
                         onClick={handleSubmit}
-                        className="w-full bg-orange-400 hover:bg-orange-500 text-white font-semibold py-2 rounded transition-colors duration-200 text-lg"
+                        disabled={status === 'loading'}
+                        className="w-full bg-orange-400 hover:bg-orange-500 text-white font-semibold py-2 rounded transition-colors duration-200 text-lg disabled:opacity-50"
                     >
                         Gửi yêu cầu!
                     </button>
-                    {status === 'success' && (
-                        <p className="text-green-600 text-sm">Đã gửi thành công!</p>
-                    )}
-                    {status === 'error' && (
-                        <p className="text-red-600 text-sm">Gửi thất bại. Vui lòng thử lại.</p>
-                    )}
                 </div>
             </div>
         );
@@ -325,17 +324,13 @@ export default function ContactForm({ data, isPopover = false, sidebarMode = fal
 
                 <button
                     onClick={handleSubmit}
-                    className="w-full bg-orange-400 hover:bg-orange-300 text-white font-semibold py-2 md:py-3 rounded transition-colors duration-200 text-base md:text-lg mt-2"
+                    disabled={status === 'loading'}
+                    className="w-full bg-orange-400 hover:bg-orange-300 text-white font-semibold py-2 md:py-3 rounded transition-colors duration-200 text-base md:text-lg mt-2 disabled:opacity-50"
                 >
                     Gửi yêu cầu!
                 </button>
-                {status === 'success' && (
-                    <p className="text-green-600 text-sm">Đã gửi thành công!</p>
-                )}
-                {status === 'error' && (
-                    <p className="text-red-600 text-sm">Gửi thất bại. Vui lòng thử lại.</p>
-                )}
             </div>
         </div>
     );
 }
+
