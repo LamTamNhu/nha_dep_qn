@@ -60,8 +60,11 @@ export default async function ProjectDetailPage({ params }) {
                     <span className="mx-1">&gt;</span>
                     <span className="text-white">{title}</span>
                 </nav>
-                <div className="grid md:grid-cols-3 gap-8">
-                    <div className="md:col-span-2">
+
+                {/* Try flexbox layout instead of grid for sticky positioning */}
+                <div className="flex flex-col md:flex-row gap-8 items-start">
+                    {/* Main content column - flexbox approach */}
+                    <div className="flex-1 md:flex-[2] min-h-screen">
                         <h1 className="text-3xl font-bold mb-8">{title}</h1>
                         {gallery && gallery.length > 0 && (
                             <div className="mb-8">
@@ -70,27 +73,29 @@ export default async function ProjectDetailPage({ params }) {
                         )}
                         <ProjectInformation data={project?.information} shortDescription={shortDescription}/>
                         {body && (
-                            <PortableText
-                                value={body}
-                                components={{
-                                    block: {
-                                        h1: ({ children }) => <h1 className="text-3xl font-bold my-4">{children}</h1>,
-                                        h2: ({ children }) => <h2 className="text-2xl font-semibold my-3">{children}</h2>,
-                                        h3: ({ children }) => <h3 className="text-xl font-semibold my-2">{children}</h3>,
-                                    },
-                                    types: {
-                                        image: ({ value }) => (
-                                            <Image
-                                                src={urlFor(value).width(800).url()}
-                                                alt={value.alt || title}
-                                                width={800}
-                                                height={600}
-                                                className="w-full h-auto my-4"
-                                            />
-                                        ),
-                                    },
-                                }}
-                            />
+                            <div className="prose prose-invert max-w-none mb-12">
+                                <PortableText
+                                    value={body}
+                                    components={{
+                                        block: {
+                                            h1: ({ children }) => <h1 className="text-3xl font-bold my-4">{children}</h1>,
+                                            h2: ({ children }) => <h2 className="text-2xl font-semibold my-3">{children}</h2>,
+                                            h3: ({ children }) => <h3 className="text-xl font-semibold my-2">{children}</h3>,
+                                        },
+                                        types: {
+                                            image: ({ value }) => (
+                                                <Image
+                                                    src={urlFor(value).width(800).url()}
+                                                    alt={value.alt || title}
+                                                    width={800}
+                                                    height={600}
+                                                    className="w-full h-auto my-4"
+                                                />
+                                            ),
+                                        },
+                                    }}
+                                />
+                            </div>
                         )}
 
                         {/* Share Section */}
@@ -128,11 +133,20 @@ export default async function ProjectDetailPage({ params }) {
                                 </a>
                             </div>
                         </div>
-                    </div>
-                    <div className="md:col-span-1">
-                        <div className="sticky top-18">
-                            <ContactForm data={contactData} sidebarMode={true} />
+
+                        {/* Add some extra content to test scrolling */}
+                        <div className="h-96 mt-8">
+                            {/* This empty div ensures we have enough scroll height for testing */}
                         </div>
+                    </div>
+
+                    {/* Sidebar with sticky contact form - flexbox approach */}
+                    <div className="flex-1 md:flex-[1] md:max-w-sm">
+                        <aside className="sticky top-4 z-10" style={{ position: 'sticky', top: '1rem' }}>
+                            <div className="bg-gray-800 p-4 rounded-lg">
+                                <ContactForm data={contactData} sidebarMode={true} />
+                            </div>
+                        </aside>
                     </div>
                 </div>
             </div>
