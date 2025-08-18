@@ -33,6 +33,7 @@ export default function ContactForm({ data, isPopover = false, sidebarMode = fal
         budget: [],
         details: ''
     });
+    const [status, setStatus] = React.useState(null);
 
     // Use Sanity data with per-field fallbacks
     const title = data?.title || fallback.title;
@@ -74,8 +75,32 @@ export default function ContactForm({ data, isPopover = false, sidebarMode = fal
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setStatus('loading');
+        try {
+            const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+            if (res.ok) {
+                setStatus('success');
+                setFormData({
+                    name: '',
+                    email: '',
+                    phone: '',
+                    area: '',
+                    location: '',
+                    budget: [],
+                    details: ''
+                });
+            } else {
+                setStatus('error');
+            }
+        } catch (err) {
+            setStatus('error');
+        }
     };
 
     // If sidebar mode, render compact version
@@ -161,6 +186,12 @@ export default function ContactForm({ data, isPopover = false, sidebarMode = fal
                     >
                         Gửi yêu cầu!
                     </button>
+                    {status === 'success' && (
+                        <p className="text-green-600 text-sm">Đã gửi thành công!</p>
+                    )}
+                    {status === 'error' && (
+                        <p className="text-red-600 text-sm">Gửi thất bại. Vui lòng thử lại.</p>
+                    )}
                 </div>
             </div>
         );
@@ -229,16 +260,41 @@ export default function ContactForm({ data, isPopover = false, sidebarMode = fal
                 </p>
 
                 <div className={`grid grid-cols-1 gap-4 md:gap-6`}>
-                    {['Họ và tên*', 'Email*', 'Số điện thoại*', 'Diện tích đất và tầng muốn xây*', 'Địa phương muốn xây*'].map(
-                        (placeholder, index) => (
-                            <input
-                                key={index}
-                                type="text"
-                                placeholder={placeholder}
-                                className="w-full border border-gray-300 rounded px-3 md:px-4 py-2 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-orange-300"
-                            />
-                        )
-                    )}
+                    <input
+                        type="text"
+                        placeholder="Họ và tên*"
+                        value={formData.name}
+                        onChange={(e) => handleInputChange('name', e.target.value)}
+                        className="w-full border border-gray-300 rounded px-3 md:px-4 py-2 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-orange-300"
+                    />
+                    <input
+                        type="email"
+                        placeholder="Email*"
+                        value={formData.email}
+                        onChange={(e) => handleInputChange('email', e.target.value)}
+                        className="w-full border border-gray-300 rounded px-3 md:px-4 py-2 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-orange-300"
+                    />
+                    <input
+                        type="tel"
+                        placeholder="Số điện thoại*"
+                        value={formData.phone}
+                        onChange={(e) => handleInputChange('phone', e.target.value)}
+                        className="w-full border border-gray-300 rounded px-3 md:px-4 py-2 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-orange-300"
+                    />
+                    <input
+                        type="text"
+                        placeholder="Diện tích đất và tầng muốn xây*"
+                        value={formData.area}
+                        onChange={(e) => handleInputChange('area', e.target.value)}
+                        className="w-full border border-gray-300 rounded px-3 md:px-4 py-2 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-orange-300"
+                    />
+                    <input
+                        type="text"
+                        placeholder="Địa phương muốn xây*"
+                        value={formData.location}
+                        onChange={(e) => handleInputChange('location', e.target.value)}
+                        className="w-full border border-gray-300 rounded px-3 md:px-4 py-2 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-orange-300"
+                    />
                 </div>
 
                 <div>
@@ -246,17 +302,24 @@ export default function ContactForm({ data, isPopover = false, sidebarMode = fal
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-3">
                         {budgetOptions.map((budget, idx) => (
                             <label key={idx} className="flex items-center space-x-2">
-                                <input type="checkbox" className="w-4 h-4 text-orange-400 bg-gray-100 border-gray-300 rounded focus:ring-orange-300 focus:ring-2 flex-shrink-0" />
+                                <input
+                                    type="checkbox"
+                                    checked={formData.budget.includes(budget)}
+                                    onChange={(e) => handleBudgetChange(budget, e.target.checked)}
+                                    className="w-4 h-4 text-orange-400 bg-gray-100 border-gray-300 rounded focus:ring-orange-300 focus:ring-2 flex-shrink-0"
+                                />
                                 <span className="text-sm md:text-base">{budget}</span>
                             </label>
                         ))}
-                    </div>
+                </div>
                 </div>
 
                 <div>
                     <textarea
                         className="w-full border border-gray-300 rounded px-3 md:px-4 py-2 min-h-[80px] md:min-h-[100px] text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-orange-300"
                         placeholder="Yêu cầu chi tiết nếu có!*"
+                        value={formData.details}
+                        onChange={(e) => handleInputChange('details', e.target.value)}
                     />
                 </div>
 
@@ -266,6 +329,12 @@ export default function ContactForm({ data, isPopover = false, sidebarMode = fal
                 >
                     Gửi yêu cầu!
                 </button>
+                {status === 'success' && (
+                    <p className="text-green-600 text-sm">Đã gửi thành công!</p>
+                )}
+                {status === 'error' && (
+                    <p className="text-red-600 text-sm">Gửi thất bại. Vui lòng thử lại.</p>
+                )}
             </div>
         </div>
     );
