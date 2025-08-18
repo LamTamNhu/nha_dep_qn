@@ -9,7 +9,7 @@ export default async function ProjectsPage() {
     return (
         <div className="min-h-screen bg-[#272727] text-center">
             <Banner title="Dự án" />
-            <div className="px-6 md:px-10 container mx-auto pb-30">
+            <div className="container mx-auto px-4 sm:px-6 md:px-10 pb-20 md:pb-30">
                 <ProjectsFilter projects={projects} />
             </div>
         </div>

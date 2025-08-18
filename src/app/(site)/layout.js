@@ -23,9 +23,11 @@ export default function SiteLayout({children}) {
     return (
         <>
             <Navbar/>
-            {children}
+            <div className="overflow-x-hidden">
+                {children}
+            </div>
             <FloatingButtons/>
-            <div className="py-30">
+            <div className="py-30 px-4 sm:px-6 md:px-10">
                 <ContactForm/>
             </div>
             <div>

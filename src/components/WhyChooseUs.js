@@ -51,41 +51,41 @@ const WhyChooseUs = () => {
     }, []);
 
        return (
-        <div className="relative w-[500px] h-[500px] cursor-pointer swing-in-top-fwd-2">
+        <div className="relative w-64 h-64 md:w-[500px] md:h-[500px] cursor-pointer swing-in-top-fwd-2">
             {/* Main ring with white background and drop shadow */}
             <div
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white rounded-full shadow-2xl flex items-center justify-center">
+                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 md:w-64 md:h-64 bg-white rounded-full shadow-2xl flex items-center justify-center">
                 {/* Logo */}
-                <div className="flex items-center space-x-3">
-                    <Image src="/images/logo.png" alt="logo" width={250} height={200}/>
+                <div className="flex items-center">
+                    <Image src="/images/logo.png" alt="logo" width={250} height={200} className="w-[120px] md:w-[250px] h-auto"/>
                 </div>
                 {/* Counter 1 - Top position */}
-                <div className="absolute -top-6 -right-36 flex items-center space-x-6">
+                <div className="absolute -top-4 -right-24 md:-top-6 md:-right-36 flex items-center space-x-3 md:space-x-6">
                     <div className="relative w-4 h-4 rounded-full bg-orange-400 ping"/>
-                    <div className="text-3xl font-bold text-orange-500 counter-trigger">
+                    <div className="text-2xl md:text-3xl font-bold text-orange-500 counter-trigger">
                         {counter1.toLocaleString()}+
-                        <div className="text-sm text-gray-600 uppercase tracking-wide">
+                        <div className="text-xs md:text-sm text-gray-600 uppercase tracking-wide">
                             NĂM KINH NGHIỆM
                         </div>
                     </div>
                 </div>
                 {/* Counter 2 - Middle position */}
-                <div className="absolute -right-57 flex items-center space-x-5">
+                <div className="absolute -right-28 md:-right-57 flex items-center space-x-3 md:space-x-5">
                     <div className="relative w-4 h-4 rounded-full bg-orange-400 ping"/>
-                    <div className="text-3xl font-bold text-orange-500 counter-trigger">
+                    <div className="text-2xl md:text-3xl font-bold text-orange-500 counter-trigger">
                         <div className="mb-2">{counter2.toLocaleString()}+</div>
-                        <div className="text-sm text-gray-600 uppercase tracking-wide">
+                        <div className="text-xs md:text-sm text-gray-600 uppercase tracking-wide">
                             MẪU THIẾT KẾ HIỆN ĐẠI
                         </div>
                     </div>
                 </div>
 
                 {/* Counter 3 - Bottom  position */}
-                <div className="absolute -bottom-6 -right-48 flex items-center space-x-5">
+                <div className="absolute -bottom-4 -right-32 md:-bottom-6 md:-right-48 flex items-center space-x-3 md:space-x-5">
                     <div className="relative w-4 h-4 rounded-full bg-orange-400 ping"/>
-                    <div className="text-3xl font-bold text-orange-500 counter-trigger">
+                    <div className="text-2xl md:text-3xl font-bold text-orange-500 counter-trigger">
                         {counter3.toLocaleString()}+
-                        <div className="text-sm text-gray-600 uppercase tracking-wide">
+                        <div className="text-xs md:text-sm text-gray-600 uppercase tracking-wide">
                             KHÁCH HÀNG THÂN THIẾT
                         </div>
                     </div>
@@ -94,7 +94,7 @@ const WhyChooseUs = () => {
 
             {/* Half ring on the right side */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <div className="w-80 h-80 border-3 border-orange-400 rounded-full relative half-ring">
+                <div className="w-52 h-52 md:w-80 md:h-80 border-3 border-orange-400 rounded-full relative half-ring">
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 "use client"
 
-import { Facebook, ChevronDown, Menu, Search, Youtube } from "lucide-react"
+import {Facebook, ChevronDown, Menu, Search, Youtube, X} from "lucide-react"
 import Link from "next/link"
 import { useEffect, useState, useRef } from "react"
 import { usePathname } from "next/navigation"
@@ -109,7 +109,10 @@ export default function Navbar() {
     }
 
     return (
-        <nav id="navbar" className="fixed top-0 left-0 right-0 z-50 pr-20 transition-colors duration-300">
+        <nav
+            id="navbar"
+            className="fixed top-0 left-0 right-0 z-50 transition-colors duration-300 px-4 lg:px-0 lg:pr-20"
+        >
             <div className="grid grid-cols-2 items-center justify-items-center">
                 {/* Logo */}
                 <BorderDraw
@@ -230,7 +233,18 @@ export default function Navbar() {
                         </Button>
                     </SheetTrigger>
                     <SheetContent side="right" className="bg-black/95 border-gray-800">
-                        <div className="flex flex-col space-y-6 mt-8">
+                        <div className="flex justify-end mb-4">
+                            <Button
+                                variant="ghost"
+                                size="icon"
+                                onClick={() => setIsOpen(false)}
+                                className="text-white hover:bg-white/10"
+                            >
+                                <X className="h-10 w-10" />
+                                <span className="sr-only">Close menu</span>
+                            </Button>
+                        </div>
+                        <div className="flex flex-col space-y-6 mt-8 px-4">
                             {navigationItems.map((item) => (
                                 <Link
                                     key={item.name}

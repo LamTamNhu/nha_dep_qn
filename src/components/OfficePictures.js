@@ -14,7 +14,7 @@ export default function OfficePictures({data}) {
                 <h2 className="text-white text-3xl font-bold my-20 p-4 inline-block border-2 border-white">
                     HÌNH ẢNH VĂN PHÒNG
                 </h2>
-                <div className="flex justify-center">
+                <div className="flex flex-wrap lg:flex-nowrap justify-center">
                     {images.map((img, idx) => (
                         <div key={idx} className="overflow-hidden">
                             <Image

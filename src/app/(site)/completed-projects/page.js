@@ -8,7 +8,7 @@ export default async function CompletedProject() {
     return (
         <div className="min-h-screen bg-[#272727] text-center">
             <Banner title="Thi công thực tế" />
-            <div className="px-6 md:px-10 container mx-auto pb-30">
+            <div className="container mx-auto px-4 sm:px-6 md:px-10 pb-20 md:pb-30">
                 <ProjectsFilter projects={projects} />
             </div>
         </div>

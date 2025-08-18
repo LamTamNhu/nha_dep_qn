@@ -37,12 +37,12 @@ export default async function Home() {
             <VisionSection data={data?.visionSection}/>
             {/* Why Choose Us Section */
             }
-            <section className="py-12 px-4 bg-white">
-                <div className="container max-w-6xl mx-auto px-4">
+            <section className="py-8 sm:py-12 px-4 sm:px-6 md:px-10 bg-white">
+                <div className="container mx-auto">
                     <SectionHeading>
                         {data?.whyChooseUs?.title || "Tại sao chọn chúng tôi"}
                     </SectionHeading>
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-40 items-center">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 items-center">
                         <div className="swing-in-top-fwd-2">
                             <WhyChooseUs data={data}/>
                         </div>
