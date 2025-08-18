@@ -53,20 +53,17 @@ export default function HeroCarousel({ data }) {
 
             {/* Counters */}
             {sale.length >= 2 && (
-                <div className="absolute bottom-0 mx-auto px-4 z-50">
-                    <div className="max-w-6xl mx-auto px-4">
-                        <div className="grid grid-cols-[1fr_2px_1fr_2px_1fr_2px_1fr] justify-center gap-6 border-2 border-black rounded-t-4xl p-8 bg-white">
-                            <div />
-                            <div />
-                            <AnimatedCounter
-                                text={sale[0].topText}
-                                text2={sale[0].bottomText}
-                            />
-                            <div className="bg-black" />
-                            <AnimatedCounter
-                                text={sale[1].topText}
-                                text2={sale[1].bottomText}
-                            />
+                <div className="absolute bottom-0 w-full px-4 z-50">
+                    <div className="max-w-6xl mx-auto">
+                        <div className="flex flex-col sm:flex-row bg-white border-2 border-black rounded-t-4xl p-4 md:p-8 divide-y-2 sm:divide-y-0 sm:divide-x-2 divide-black">
+                            {sale.map((item, index) => (
+                                <AnimatedCounter
+                                    key={index}
+                                    text={item.topText}
+                                    text2={item.bottomText}
+                                    className="flex-1 py-2 px-4"
+                                />
+                            ))}
                         </div>
                     </div>
                 </div>
