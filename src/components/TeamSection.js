@@ -12,7 +12,7 @@ export default function TeamSection({ data }) {
                         ĐỘI NGŨ
                     </h2>
                 </div>
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
                     {ceo && (
                         <div className="text-center slide-in-bottom">
                             <Image

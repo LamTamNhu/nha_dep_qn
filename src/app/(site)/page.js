@@ -42,7 +42,7 @@ export default async function Home() {
                     <SectionHeading>
                         {data?.whyChooseUs?.title || "Tại sao chọn chúng tôi"}
                     </SectionHeading>
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-40 items-center">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 items-center">
                         <div className="swing-in-top-fwd-2">
                             <WhyChooseUs data={data}/>
                         </div>

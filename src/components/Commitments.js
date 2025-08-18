@@ -85,7 +85,7 @@ export default function Commitments({data}) {
                     </div>
 
                     {/* Flex Section */}
-                    <div className="flex z-10 flex-1 max-w-4xl items-center">
+                    <div className="flex flex-wrap lg:flex-nowrap z-10 flex-1 max-w-4xl items-center">
                         {/* Left Column */}
                         <div className="bg-[#373737] flex flex-col justify-center w-80 puff-in-center">
                             {leftColumnItems.map((item, index) => (
