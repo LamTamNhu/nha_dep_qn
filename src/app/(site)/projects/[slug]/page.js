@@ -35,7 +35,8 @@ export default async function ProjectDetailPage({ params }) {
     }
     const contactData = await client.fetch(contactFormQuery);
 
-    const { title, shortDescription, information, gallery, body, category, _createdAt } = project;
+    const { title, shortDescription, information, gallery, body, category, _createdAt, _type } = project;
+    const isCompleted = _type === 'completedProject';
     const categoryLabels = {
         mansion: 'Biệt thự',
         urbanHouse: 'Nhà phố',
@@ -50,11 +51,18 @@ export default async function ProjectDetailPage({ params }) {
                 <nav className="text-sm text-gray-400 mb-4">
                     <Link href="/" className="hover:underline">Trang chủ</Link>
                     <span className="mx-1">&gt;</span>
-                    <Link href="/projects" className="hover:underline">Dự án</Link>
+                    <Link href={isCompleted ? '/completed-projects' : '/projects'} className="hover:underline">
+                        {isCompleted ? 'Thi công thực tế' : 'Dự án'}
+                    </Link>
                     {category && (
                         <>
                             <span className="mx-1">&gt;</span>
-                            <span>{categoryLabels[category] || category}</span>
+                            <Link
+                                href={`${isCompleted ? '/completed-projects' : '/projects'}?category=${category}`}
+                                className="hover:underline"
+                            >
+                                {categoryLabels[category] || category}
+                            </Link>
                         </>
                     )}
                     <span className="mx-1">&gt;</span>

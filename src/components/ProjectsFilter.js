@@ -18,12 +18,16 @@ const categories = [
 
 const ITEMS_PER_PAGE = 12;
 
-export default function ProjectsFilter({ projects }) {
+export default function ProjectsFilter({ projects, initialCategory = 'all' }) {
     const [filteredProjects, setFilteredProjects] = useState(projects);
-    const [selectedCategory, setSelectedCategory] = useState('all');
+    const [selectedCategory, setSelectedCategory] = useState(initialCategory);
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [paginatedProjects, setPaginatedProjects] = useState([]);
+
+    useEffect(() => {
+        setSelectedCategory(initialCategory);
+    }, [initialCategory]);
 
     // Filter projects based on category and search term
     useEffect(() => {
