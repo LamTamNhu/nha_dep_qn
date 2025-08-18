@@ -1,7 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { PortableText } from 'next-sanity';
 import { client } from '@/sanity/lib/client';
+import { urlFor } from '@/sanity/lib/image';
 import { newsBySlugQuery, newsSlugsQuery, contactFormQuery, siteSettingsQuery } from '@/sanity/lib/queries';
 import ContactForm from '@/components/ContactForm';
 import { Facebook, Youtube, Share2 } from 'lucide-react';
@@ -9,6 +11,18 @@ import { Facebook, Youtube, Share2 } from 'lucide-react';
 export async function generateStaticParams() {
     const slugs = await client.fetch(newsSlugsQuery);
     return slugs.map(({ slug }) => ({ slug }));
+}
+
+export async function generateMetadata({ params }) {
+    const { slug } = await params;
+    const news = await client.fetch(newsBySlugQuery, { slug });
+    if (!news) {
+        return {};
+    }
+    return {
+        title: news.title,
+        description: news.excerpt,
+    };
 }
 
 export default async function NewsDetailPage({ params }) {
@@ -20,7 +34,7 @@ export default async function NewsDetailPage({ params }) {
     const contactData = await client.fetch(contactFormQuery);
     const siteSettings = await client.fetch(siteSettingsQuery);
 
-    const { title, sections, category, _createdAt } = news;
+    const { title, body, category, _createdAt } = news;
     const categoryLabels = {
         generalNews: 'Tin tức chung',
         activities: 'Hoạt động công ty',
@@ -63,34 +77,29 @@ export default async function NewsDetailPage({ params }) {
                             )}
                             <span className="text-sm text-gray-400">{new Date(_createdAt).toLocaleDateString('vi-VN')}</span>
                         </div>
-                        {sections && sections.length > 0 && (
-                            <div className="space-y-12">
-                                {sections.map((section, idx) => (
-                                    <div key={idx}>
-                                        {section.header && (
-                                            <h2 className="text-2xl font-semibold mb-4">{section.header}</h2>
-                                        )}
-                                        {section.content && (
-                                            <p className="mb-4 whitespace-pre-line">{section.content}</p>
-                                        )}
-                                        {section.images && section.images.length > 0 && (
-                                            <div className="space-y-4">
-                                                {section.images.map((img, i) => (
-                                                    <Image
-                                                        key={i}
-                                                        src={img.url}
-                                                        alt={img.alt || title}
-                                                        width={800}
-                                                        height={600}
-                                                        className="w-full h-auto"
-                                                    />
-                                                ))}
-                                            </div>
-                                        )}
-                                    </div>
-                                ))}
-                            </div>
-                        )}
+                          {body && (
+                              <PortableText
+                                  value={body}
+                                  components={{
+                                      block: {
+                                          h1: ({ children }) => <h1 className="text-3xl font-bold my-4">{children}</h1>,
+                                          h2: ({ children }) => <h2 className="text-2xl font-semibold my-3">{children}</h2>,
+                                          h3: ({ children }) => <h3 className="text-xl font-semibold my-2">{children}</h3>,
+                                      },
+                                      types: {
+                                          image: ({ value }) => (
+                                              <Image
+                                                  src={urlFor(value).width(800).url()}
+                                                  alt={value.alt || title}
+                                                  width={800}
+                                                  height={600}
+                                                  className="w-full h-auto my-4"
+                                              />
+                                          ),
+                                      },
+                                  }}
+                              />
+                          )}
                         <div className="mt-12 pt-8 border-t border-gray-600">
                             <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
                                 <Share2 className="w-5 h-5" />

@@ -118,15 +118,7 @@ export const projectBySlugQuery = `*[_type == "projectDetail" && slug.current ==
     "url": asset->url,
     alt
   },
-  description,
-  sections[]{
-    content,
-    image{
-      "url": asset->url,
-      alt
-    },
-    imageSubtitle
-  }
+  body
 }`;
 
 export const projectsQuery = `*[_type == "projectDetail" && isCompleted != true]{
@@ -172,16 +164,10 @@ export const newsSlugsQuery = `*[_type == "news" && defined(slug.current)]{
 export const newsBySlugQuery = `*[_type == "news" && slug.current == $slug][0]{
   title,
   category,
+  excerpt,
   _createdAt,
   "slug": slug.current,
-  sections[]{
-    header,
-    content,
-    images[]{
-      "url": asset->url,
-      alt
-    }
-  }
+  body
 }`;
 
 export const newsQuery = `*[_type == "news"] | order(_createdAt desc){

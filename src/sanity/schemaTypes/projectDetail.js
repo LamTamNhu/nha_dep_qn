@@ -76,37 +76,9 @@ export default {
             ]
         },
         {
-            name: 'description',
-            title: 'Mô tả',
-            type: 'text'
-        },
-        {
-            name: 'sections',
-            title: 'Các phần',
-            type: 'array',
-            of: [
-                {
-                    type: 'object',
-                    fields: [
-                        { name: 'content', title: 'Nội dung', type: 'text' },
-                        {
-                            name: 'image',
-                            title: 'Hình ảnh',
-                            type: 'image',
-                            options: { hotspot: true },
-                            fields: [
-                                {
-                                    name: 'alt',
-                                    title: 'Alt',
-                                    type: 'string',
-                                    description: 'Tự động tạo từ tiêu đề nếu bỏ trống'
-                                }
-                            ]
-                        },
-                        { name: 'imageSubtitle', title: 'Chú thích ảnh', type: 'string' }
-                    ]
-                }
-            ]
+            name: 'body',
+            title: 'Nội dung',
+            type: 'blockContent'
         }
     ]
 };
