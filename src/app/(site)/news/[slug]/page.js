@@ -56,50 +56,50 @@ export default async function NewsDetailPage({ params }) {
                     <span className="mx-1">&gt;</span>
                     <span className="text-white">{title}</span>
                 </nav>
+                <h1 className="text-3xl font-bold mb-8">{title}</h1>
+                <div className="flex items-center gap-4 mb-6">
+                    {siteSettings?.facebook && (
+                        <a href={siteSettings.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                            <Facebook className="w-5 h-5" />
+                        </a>
+                    )}
+                    {siteSettings?.zalo && (
+                        <a href={siteSettings.zalo} target="_blank" rel="noopener noreferrer" aria-label="Zalo">
+                            <Image src="/images/Icon_of_Zalo.svg" alt="Zalo" width={20} height={20} />
+                        </a>
+                    )}
+                    {siteSettings?.youtube && (
+                        <a href={siteSettings.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                            <Youtube className="w-5 h-5" />
+                        </a>
+                    )}
+                    <span className="text-sm text-gray-400">{new Date(_createdAt).toLocaleDateString('vi-VN')}</span>
+                </div>
                 <div className="grid md:grid-cols-3 gap-8">
                     <div className="md:col-span-2">
-                        <h1 className="text-3xl font-bold mb-8">{title}</h1>
-                        <div className="flex items-center gap-4 mb-6">
-                            {siteSettings?.facebook && (
-                                <a href={siteSettings.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                                    <Facebook className="w-5 h-5" />
-                                </a>
-                            )}
-                            {siteSettings?.zalo && (
-                                <a href={siteSettings.zalo} target="_blank" rel="noopener noreferrer" aria-label="Zalo">
-                                    <Image src="/images/Icon_of_Zalo.svg" alt="Zalo" width={20} height={20} />
-                                </a>
-                            )}
-                            {siteSettings?.youtube && (
-                                <a href={siteSettings.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-                                    <Youtube className="w-5 h-5" />
-                                </a>
-                            )}
-                            <span className="text-sm text-gray-400">{new Date(_createdAt).toLocaleDateString('vi-VN')}</span>
-                        </div>
-                          {body && (
-                              <PortableText
-                                  value={body}
-                                  components={{
-                                      block: {
-                                          h1: ({ children }) => <h1 className="text-3xl font-bold my-4">{children}</h1>,
-                                          h2: ({ children }) => <h2 className="text-2xl font-semibold my-3">{children}</h2>,
-                                          h3: ({ children }) => <h3 className="text-xl font-semibold my-2">{children}</h3>,
-                                      },
-                                      types: {
-                                          image: ({ value }) => (
-                                              <Image
-                                                  src={urlFor(value).width(800).url()}
-                                                  alt={value.alt || title}
-                                                  width={800}
-                                                  height={600}
-                                                  className="w-full h-auto my-4"
-                                              />
-                                          ),
-                                      },
-                                  }}
-                              />
-                          )}
+                        {body && (
+                            <PortableText
+                                value={body}
+                                components={{
+                                    block: {
+                                        h1: ({ children }) => <h1 className="text-3xl font-bold my-4">{children}</h1>,
+                                        h2: ({ children }) => <h2 className="text-2xl font-semibold my-3">{children}</h2>,
+                                        h3: ({ children }) => <h3 className="text-xl font-semibold my-2">{children}</h3>,
+                                    },
+                                    types: {
+                                        image: ({ value }) => (
+                                            <Image
+                                                src={urlFor(value).width(800).url()}
+                                                alt={value.alt || title}
+                                                width={800}
+                                                height={600}
+                                                className="w-full h-auto my-4"
+                                            />
+                                        ),
+                                    },
+                                }}
+                            />
+                        )}
                         <div className="mt-12 pt-8 border-t border-gray-600">
                             <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
                                 <Share2 className="w-5 h-5" />
@@ -135,10 +135,10 @@ export default async function NewsDetailPage({ params }) {
                             </div>
                         </div>
                     </div>
-                    <div className="md:col-span-1">
-                        <div className="sticky top-18">
+                    <div className="md:col-span-1 md:max-w-sm">
+                        <aside className="sticky top-4">
                             <ContactForm data={contactData} sidebarMode={true} />
-                        </div>
+                        </aside>
                     </div>
                 </div>
             </div>
