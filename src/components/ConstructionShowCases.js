@@ -18,7 +18,7 @@ function ProjectImage({ project }) {
             {imageProps ? (
                 <Image
                     {...imageProps}
-                    alt={project.alt || "Project image"}
+                    alt={project.title || "Project image"}
                     className="w-full h-full object-cover"
                 />
             ) : (
@@ -27,7 +27,7 @@ function ProjectImage({ project }) {
 
             <div className="absolute text-center flex flex-col justify-center items-center inset-0 bg-orange-400 opacity-0 group-hover:opacity-90 transition-opacity duration-300">
                 <div className="text-white text-xl font-semibold px-4">
-                    {project.alt || "Dự án"}
+                    {project.title || "Dự án"}
                 </div>
                 <div className="text-black text-md font-normal px-4">
                     {project.description || ""}
@@ -44,7 +44,7 @@ export default function ConstructionShowCases({ data }) {
     const designSection = data?.find((section) => section.id === "construction");
     const title = designSection?.titleAndDescription?.title || "Thi công thực tế";
     const description =
-        designSection?.description ||
+        designSection?.titleAndDescription?.description ||
         "Mỗi năm, NHÀ ĐẸP QUẢNG NAM thực hiện hàng trăm công trình thiết kế ở mọi miền đất nước. Phong cách thiết kế chính là hiện đại - tối giản - tiện nghi - thông thoáng. Ngoài ra, những ý tưởng và sở thích của gia chủ cũng được ưu tiên hàng đầu, để tạo nên một công trình nhà ở độc bản, mang đậm dấu ấn cá nhân.";
     const projects = designSection?.projects || [];
 

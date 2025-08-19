@@ -2,6 +2,9 @@
 import "./globals.css";
 import {mulish} from "@/app/fonts";
 import {Toaster} from "react-hot-toast";
+import {draftMode} from 'next/headers'
+import {VisualEditing} from 'next-sanity'
+import {SanityLive} from '@/sanity/lib/live'
 
 
 export const metadata = {
@@ -11,12 +14,15 @@ export const metadata = {
     twitter: { card: "summary_large_image" }
 };
 
-export default function RootLayout({children}) {
+export default async function RootLayout({children}) {
+    const {isEnabled} = await draftMode()
     return (
         <html lang="en" suppressHydrationWarning className={`${mulish.className} antialiased`}>
         <body suppressHydrationWarning>
         {children}
         <Toaster/>
+        <SanityLive/>
+        {isEnabled && <VisualEditing/>}
         </body>
         </html>
     );
