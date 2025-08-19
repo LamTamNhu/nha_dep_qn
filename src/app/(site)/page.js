@@ -4,7 +4,7 @@ import SectionHeading from "@/components/SectionHeading";
 import HeroCarousel from "@/components/HeroCarousel";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import ContactForm from "@/components/ContactForm";
-import {client} from "@/sanity/lib/client";
+import {sanityFetch} from "@/sanity/lib/live";
 import ProcessTabs from "@/components/ProcessTabs";
 import ClientSideAnimations from "@/lib/clientSideAnimations";
 import {contactFormQuery, homepageQuery} from "@/sanity/lib/queries";
@@ -15,8 +15,8 @@ import Testimonial from "@/components/Testimonial";
 import VisionSection from "@/components/VisionSection";
 
 export default async function Home() {
-    const data = await client.fetch(homepageQuery);
-    const contactData = await client.fetch(contactFormQuery);
+    const {data} = await sanityFetch({query: homepageQuery});
+    const {data: contactData} = await sanityFetch({query: contactFormQuery});
 
     return (
         <div className="min-h-screen overflow-x-hidden relative bg-white">

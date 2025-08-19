@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { PortableText } from 'next-sanity';
-import { client } from '@/sanity/lib/client';
+import {sanityFetch} from '@/sanity/lib/live';
 import { urlFor } from '@/sanity/lib/image';
 import { newsBySlugQuery, newsSlugsQuery, contactFormQuery, siteSettingsQuery } from '@/sanity/lib/queries';
 import { mapSeoToMetadata } from '@/app/lib/seo';
@@ -10,15 +10,24 @@ import ContactForm from '@/components/ContactForm';
 import { Facebook, Youtube, Share2 } from 'lucide-react';
 
 export async function generateStaticParams() {
-    const slugs = await client.fetch(newsSlugsQuery);
+    const {data: slugs} = await sanityFetch({
+        query: newsSlugsQuery,
+        perspective: 'published',
+        stega: false,
+    });
     return slugs.map(({ slug }) => ({ slug }));
 }
 
 export async function generateMetadata({ params }) {
     const { slug } = await params;
-    const [doc, settings] = await Promise.all([
-        client.fetch(newsBySlugQuery, { slug }),
-        client.fetch(siteSettingsQuery)
+    const [{data: doc}, {data: settings}] = await Promise.all([
+        sanityFetch({
+            query: newsBySlugQuery,
+            params: { slug },
+            perspective: 'published',
+            stega: false,
+        }),
+        sanityFetch({query: siteSettingsQuery, perspective: 'published', stega: false}),
     ]);
     if (!doc) return { title: 'Not found', robots: { index: false } };
     return mapSeoToMetadata({ doc, settings, path: `/news/${doc.slug}` });
@@ -26,12 +35,12 @@ export async function generateMetadata({ params }) {
 
 export default async function NewsDetailPage({ params }) {
     const { slug } = await params;
-    const news = await client.fetch(newsBySlugQuery, { slug });
+    const {data: news} = await sanityFetch({query: newsBySlugQuery, params: { slug }});
     if (!news) {
         notFound();
     }
-    const contactData = await client.fetch(contactFormQuery);
-    const siteSettings = await client.fetch(siteSettingsQuery);
+    const {data: contactData} = await sanityFetch({query: contactFormQuery});
+    const {data: siteSettings} = await sanityFetch({query: siteSettingsQuery});
 
     const { title, body, category, _createdAt, _updatedAt, thumbnail } = news;
     const categoryLabels = {

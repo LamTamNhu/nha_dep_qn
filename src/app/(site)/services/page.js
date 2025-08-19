@@ -1,6 +1,6 @@
 import Banner from '@/components/ui/banner';
 import ServiceSections from '@/components/ServiceSections';
-import { client } from '@/sanity/lib/client';
+import {sanityFetch} from '@/sanity/lib/live';
 import { servicesPageQuery } from '@/sanity/lib/queries';
 
 const fallbackServices = [
@@ -49,7 +49,7 @@ const fallbackServices = [
 ];
 
 export default async function ServicesPage() {
-  const data = await client.fetch(servicesPageQuery);
+  const {data} = await sanityFetch({query: servicesPageQuery});
   const services = data?.services && data.services.length > 0 ? data.services : fallbackServices;
 
   return (
