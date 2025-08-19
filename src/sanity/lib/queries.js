@@ -103,7 +103,8 @@ export const servicesPageQuery = `*[_type == "servicesPage"][0]{
 }`
 
 export const projectSlugsQuery = `*[_type in ["projectDetail", "completedProject"] && defined(slug.current)]{
-  "slug": slug.current
+  "slug": slug.current,
+  _updatedAt
 }`;
 
 export const projectBySlugQuery = `*[_type in ["projectDetail", "completedProject"] && slug.current == $slug][0]{
@@ -153,7 +154,6 @@ export const siteSettingsQuery = `*[_type == "siteSettings"][0]{
   siteName,
   baseUrl,
   defaultSeo,
-  social,
   robots,
   facebook,
   zalo,
@@ -161,14 +161,19 @@ export const siteSettingsQuery = `*[_type == "siteSettings"][0]{
 }`;
 
 export const newsSlugsQuery = `*[_type == "news" && defined(slug.current)]{
-  "slug": slug.current
+  "slug": slug.current,
+  _updatedAt
 }`;
 
 export const newsBySlugQuery = `*[_type == "news" && slug.current == $slug][0]{
+  _id,
   title,
   category,
   excerpt,
+  thumbnail,
+  seo,
   _createdAt,
+  _updatedAt,
   "slug": slug.current,
   body
 }`;
@@ -184,12 +189,3 @@ export const newsQuery = `*[_type == "news"] | order(_createdAt desc){
 }`;
 
 
-export const postBySlugQuery = `*[_type == "post" && slug.current == $slug][0]{
-  _id, title, "slug": slug.current, excerpt, mainImage, _createdAt, _updatedAt,
-  seo,
-  author->{name}
-}`;
-
-export const allPostSlugsQuery = `*[_type=="post" && defined(slug.current)][]{
-  "slug": slug.current, _updatedAt
-}`;

@@ -1,16 +1,16 @@
 # SEO Setup
 
 ## Authoring
-- Use the `SEO` field on documents such as posts and news to control title, description, canonical URL and open graph image.
-- Global defaults and social links live in the **Site Settings** singleton document.
+- Sử dụng trường `SEO` trên các tài liệu như tin tức hoặc trang dự án để quản lý tiêu đề, mô tả, URL chuẩn và ảnh Open Graph.
+- Các giá trị mặc định và liên kết mạng xã hội được quản lý trong tài liệu **Cài đặt trang**.
 
 ## Metadata mapping
 - `app/lib/seo.js` maps Sanity `seo` fields and site settings into the Next.js Metadata API.
 - Dynamic routes call `mapSeoToMetadata` inside `generateMetadata` to populate `<head>` tags.
 
 ## JSON-LD
-- Content pages like blog posts inject structured data via a `<script type="application/ld+json">` tag.
-- To add JSON-LD to other pages, construct the object in the page component and embed it using the same pattern.
+- Các trang nội dung như bài viết tin tức chèn dữ liệu cấu trúc thông qua thẻ `<script type="application/ld+json">`.
+- Để thêm JSON-LD cho trang khác, tạo đối tượng trong component của trang và chèn theo cùng mẫu.
 
 ## Robots & Sitemap
 - `/robots.txt` and `/sitemap.xml` are generated at request time using Sanity data.

@@ -8,7 +8,7 @@ export function mapSeoToMetadata({ doc, settings, path }) {
   const description = d.description || doc?.excerpt || fallback.description || '';
   const canonical = d.canonical || (path ? `${base}${path}` : base);
 
-  const img = d.ogImage || doc?.mainImage || fallback.ogImage;
+  const img = d.ogImage || doc?.mainImage || doc?.thumbnail || fallback.ogImage;
   const images = img ? [{
     url: urlFrom(img),
     width: 1200,
@@ -38,7 +38,6 @@ export function mapSeoToMetadata({ doc, settings, path }) {
       card: 'summary_large_image',
       title,
       description,
-      creator: settings?.social?.twitter || undefined,
       images: images.length ? [images[0].url] : undefined
     },
     robots

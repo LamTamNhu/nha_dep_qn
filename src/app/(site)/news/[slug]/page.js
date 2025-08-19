@@ -5,6 +5,7 @@ import { PortableText } from 'next-sanity';
 import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
 import { newsBySlugQuery, newsSlugsQuery, contactFormQuery, siteSettingsQuery } from '@/sanity/lib/queries';
+import { mapSeoToMetadata } from '@/app/lib/seo';
 import ContactForm from '@/components/ContactForm';
 import { Facebook, Youtube, Share2 } from 'lucide-react';
 
@@ -15,14 +16,12 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }) {
     const { slug } = await params;
-    const news = await client.fetch(newsBySlugQuery, { slug });
-    if (!news) {
-        return {};
-    }
-    return {
-        title: news.title,
-        description: news.excerpt,
-    };
+    const [doc, settings] = await Promise.all([
+        client.fetch(newsBySlugQuery, { slug }),
+        client.fetch(siteSettingsQuery)
+    ]);
+    if (!doc) return { title: 'Not found', robots: { index: false } };
+    return mapSeoToMetadata({ doc, settings, path: `/news/${doc.slug}` });
 }
 
 export default async function NewsDetailPage({ params }) {
@@ -34,13 +33,25 @@ export default async function NewsDetailPage({ params }) {
     const contactData = await client.fetch(contactFormQuery);
     const siteSettings = await client.fetch(siteSettingsQuery);
 
-    const { title, body, category, _createdAt } = news;
+    const { title, body, category, _createdAt, _updatedAt, thumbnail } = news;
     const categoryLabels = {
         generalNews: 'Tin tức chung',
         activities: 'Hoạt động công ty',
     };
 
+    const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || '').replace(/\/$/, '');
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'NewsArticle',
+        headline: title,
+        datePublished: _createdAt,
+        dateModified: _updatedAt || _createdAt,
+        image: thumbnail ? [urlFor(thumbnail).width(1200).height(630).url()] : undefined,
+        mainEntityOfPage: `${baseUrl}/news/${news.slug}`
+    };
+
     return (
+        <>
         <div className="min-h-screen bg-[#272727] text-white pt-26">
             <div className="container mx-auto py-10 px-6">
                 <nav className="text-sm text-gray-400 mb-4">
@@ -143,5 +154,7 @@ export default async function NewsDetailPage({ params }) {
                 </div>
             </div>
         </div>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        </>
     );
 }

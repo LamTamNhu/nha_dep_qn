@@ -1,19 +1,27 @@
 import { client } from '../sanity/lib/client.js';
-import { allPostSlugsQuery } from '../sanity/lib/queries.js';
+import { newsSlugsQuery, projectSlugsQuery } from '../sanity/lib/queries.js';
 
 export default async function sitemap() {
   const base = (process.env.NEXT_PUBLIC_SITE_URL || '').replace(/\/$/, '');
-  const posts = await client.fetch(allPostSlugsQuery);
+  const [news, projects] = await Promise.all([
+    client.fetch(newsSlugsQuery),
+    client.fetch(projectSlugsQuery)
+  ]);
 
-  const staticRoutes = ['', '/about'].map((p) => ({
+  const staticRoutes = ['', '/about', '/services', '/projects', '/contact', '/news'].map((p) => ({
     url: `${base}${p}`,
     lastModified: new Date().toISOString()
   }));
 
-  const postRoutes = (posts || []).map((p) => ({
-    url: `${base}/blog/${p.slug}`,
+  const newsRoutes = (news || []).map((n) => ({
+    url: `${base}/news/${n.slug}`,
+    lastModified: n._updatedAt
+  }));
+
+  const projectRoutes = (projects || []).map((p) => ({
+    url: `${base}/projects/${p.slug}`,
     lastModified: p._updatedAt
   }));
 
-  return [...staticRoutes, ...postRoutes];
+  return [...staticRoutes, ...newsRoutes, ...projectRoutes];
 }
