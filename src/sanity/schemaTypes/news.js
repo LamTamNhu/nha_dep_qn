@@ -74,5 +74,16 @@ export default {
             title: 'Nội dung',
             type: 'blockContent',
         },
+        {
+            name: 'seo',
+            title: 'SEO',
+            type: 'seo',
+            options: { collapsible: true, collapsed: true },
+            initialValue: (_, { document }) => ({
+                title: document?.title,
+                description: document?.excerpt,
+                ogImage: document?.thumbnail
+            })
+        },
     ],
 };

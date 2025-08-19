@@ -15,7 +15,7 @@ export default async function AboutPage() {
     return (
         <div className="w-full overflow-x-hidden bg-[#373737]">
             <AboutPageAnimations/>
-            <div className="px-4 sm:px-6 md:px-10 space-y-12">
+            <div className="space-y-12">
                 <AboutHeroSection data={data?.heroSection}/>
                 <TeamSection data={data?.teamSection}/>
                 {/*Office pictures*/}

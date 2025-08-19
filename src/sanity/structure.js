@@ -2,4 +2,14 @@
 export const structure = (S) =>
     S.list()
         .title('Nội dung')
-        .items(S.documentTypeListItems())
+        .items([
+            S.listItem()
+                .title('Site Settings')
+                .id('siteSettings')
+                .child(
+                    S.document()
+                        .schemaType('siteSettings')
+                        .documentId('siteSettings')
+                ),
+            ...S.documentTypeListItems().filter(item => item.getId() !== 'siteSettings')
+        ])

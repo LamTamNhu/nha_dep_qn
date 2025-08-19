@@ -103,7 +103,8 @@ export const servicesPageQuery = `*[_type == "servicesPage"][0]{
 }`
 
 export const projectSlugsQuery = `*[_type in ["projectDetail", "completedProject"] && defined(slug.current)]{
-  "slug": slug.current
+  "slug": slug.current,
+  _updatedAt
 }`;
 
 export const projectBySlugQuery = `*[_type in ["projectDetail", "completedProject"] && slug.current == $slug][0]{
@@ -113,11 +114,14 @@ export const projectBySlugQuery = `*[_type in ["projectDetail", "completedProjec
   information,
   category,
   _createdAt,
+  _updatedAt,
   "slug": slug.current,
+  "mainImage": gallery[0],
   gallery[]{
     "url": asset->url,
     alt
   },
+  seo,
   body
 }`;
 
@@ -150,20 +154,30 @@ export const completedProjectsQuery = `*[_type == "completedProject"]{
 }`;
 
 export const siteSettingsQuery = `*[_type == "siteSettings"][0]{
+  siteName,
+  baseUrl,
+  defaultSeo,
+  robots,
   facebook,
   zalo,
   youtube
 }`;
 
 export const newsSlugsQuery = `*[_type == "news" && defined(slug.current)]{
-  "slug": slug.current
+  "slug": slug.current,
+  _updatedAt
 }`;
 
 export const newsBySlugQuery = `*[_type == "news" && slug.current == $slug][0]{
+  _id,
   title,
   category,
   excerpt,
+  thumbnail,
+  "mainImage": thumbnail,
+  seo,
   _createdAt,
+  _updatedAt,
   "slug": slug.current,
   body
 }`;
@@ -177,4 +191,5 @@ export const newsQuery = `*[_type == "news"] | order(_createdAt desc){
   category,
   _createdAt
 }`;
+
 
