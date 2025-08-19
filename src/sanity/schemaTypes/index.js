@@ -23,6 +23,9 @@ import completedProject from "@/sanity/schemaTypes/completedProject";
 import siteSettings from "@/sanity/schemaTypes/siteSettings";
 import news from "@/sanity/schemaTypes/news";
 import blockContent from "@/sanity/schemaTypes/blockContent";
+import seo from "@/sanity/schemaTypes/seo";
+import author from "@/sanity/schemaTypes/author";
+import post from "@/sanity/schemaTypes/post";
 
 
 export const schemas = {
@@ -51,5 +54,8 @@ export const schemas = {
         coreValues,
         footerSettings,
         siteSettings,
+        seo,
+        author,
+        post,
     ],
 }

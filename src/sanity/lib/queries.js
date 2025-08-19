@@ -150,6 +150,11 @@ export const completedProjectsQuery = `*[_type == "completedProject"]{
 }`;
 
 export const siteSettingsQuery = `*[_type == "siteSettings"][0]{
+  siteName,
+  baseUrl,
+  defaultSeo,
+  social,
+  robots,
   facebook,
   zalo,
   youtube
@@ -178,3 +183,13 @@ export const newsQuery = `*[_type == "news"] | order(_createdAt desc){
   _createdAt
 }`;
 
+
+export const postBySlugQuery = `*[_type == "post" && slug.current == $slug][0]{
+  _id, title, "slug": slug.current, excerpt, mainImage, _createdAt, _updatedAt,
+  seo,
+  author->{name}
+}`;
+
+export const allPostSlugsQuery = `*[_type=="post" && defined(slug.current)][]{
+  "slug": slug.current, _updatedAt
+}`;
