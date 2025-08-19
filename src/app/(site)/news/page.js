@@ -1,10 +1,10 @@
-import { client } from '@/sanity/lib/client';
+import {sanityFetch} from '@/sanity/lib/live';
 import { newsQuery } from '@/sanity/lib/queries';
 import Banner from '@/components/ui/banner';
 import NewsFilter from '@/components/NewsFilter';
 
 export default async function NewsPage() {
-    const news = await client.fetch(newsQuery);
+    const {data: news} = await sanityFetch({query: newsQuery});
     return (
         <div className="min-h-screen bg-[#272727] text-center">
             <Banner title="Tin tức" />

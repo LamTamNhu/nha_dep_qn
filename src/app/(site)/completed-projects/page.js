@@ -1,11 +1,11 @@
-import { client } from "@/sanity/lib/client";
+import {sanityFetch} from "@/sanity/lib/live";
 import { completedProjectsQuery } from "@/sanity/lib/queries";
 import Banner from "@/components/ui/banner";
 import ProjectsFilter from "@/components/ProjectsFilter";
 
 export default async function CompletedProject({ searchParams }) {
     const { category } = await searchParams;
-    const projects = await client.fetch(completedProjectsQuery);
+    const {data: projects} = await sanityFetch({query: completedProjectsQuery});
     return (
         <div className="min-h-screen bg-[#272727] text-center">
             <Banner title="Thi công thực tế" />
