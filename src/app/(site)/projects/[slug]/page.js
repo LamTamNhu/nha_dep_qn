@@ -4,11 +4,12 @@ import {notFound} from 'next/navigation';
 import {PortableText} from 'next-sanity';
 import {client} from '@/sanity/lib/client';
 import {urlFor} from '@/sanity/lib/image';
-import {projectBySlugQuery, projectSlugsQuery, contactFormQuery} from '@/sanity/lib/queries';
+import { projectBySlugQuery, projectSlugsQuery, contactFormQuery, siteSettingsQuery } from '@/sanity/lib/queries';
+import { mapSeoToMetadata } from '@/app/lib/seo';
 import ContactForm from '@/components/ContactForm';
 import ProjectGallery from '@/components/ProjectGallery';
-import {Facebook, Share2} from 'lucide-react';
-import ProjectInformation from "@/components/ProjectInformation";
+import { Facebook, Share2 } from 'lucide-react';
+import ProjectInformation from '@/components/ProjectInformation';
 
 export async function generateStaticParams() {
     const slugs = await client.fetch(projectSlugsQuery);
@@ -17,14 +18,12 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({params}) {
     const {slug} = await params;
-    const project = await client.fetch(projectBySlugQuery, {slug});
-    if (!project) {
-        return {};
-    }
-    return {
-        title: project.title,
-        description: project.shortDescription,
-    };
+    const [doc, settings] = await Promise.all([
+        client.fetch(projectBySlugQuery, {slug}),
+        client.fetch(siteSettingsQuery)
+    ]);
+    if (!doc) return { title: 'Not found', robots: { index: false } };
+    return mapSeoToMetadata({ doc, settings, path: `/projects/${doc.slug}` });
 }
 
 export default async function ProjectDetailPage({params}) {
@@ -35,7 +34,7 @@ export default async function ProjectDetailPage({params}) {
     }
     const contactData = await client.fetch(contactFormQuery);
 
-    const {title, shortDescription, information, gallery, body, category, _createdAt, _type} = project;
+    const {title, shortDescription, information, gallery, body, category, _createdAt, _updatedAt, _type, mainImage, slug: projectSlug} = project;
     const isCompleted = _type === 'completedProject';
     const categoryLabels = {
         mansion: 'Biệt thự',
@@ -45,7 +44,20 @@ export default async function ProjectDetailPage({params}) {
         serviceBuilding: 'Công trình dịch vụ',
     };
 
+    const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || '').replace(/\/$/, '');
+    const imageUrl = mainImage ? urlFor(mainImage).width(1200).height(630).url() : undefined;
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: title,
+        datePublished: _createdAt,
+        dateModified: _updatedAt || _createdAt,
+        image: imageUrl ? [imageUrl] : undefined,
+        mainEntityOfPage: `${baseUrl}/projects/${projectSlug}`
+    };
+
     return (
+        <>
         <div className="min-h-screen bg-[#272727] text-white">
             {/* Add padding-top here instead of pt-26 class */}
             <div className="container mx-auto py-10 px-6" style={{paddingTop: '6.5rem'}}>
@@ -159,5 +171,7 @@ export default async function ProjectDetailPage({params}) {
                 </div>
             </div>
         </div>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        </>
     );
 }
