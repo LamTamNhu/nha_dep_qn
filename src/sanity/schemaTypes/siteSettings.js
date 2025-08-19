@@ -19,5 +19,7 @@ export default {
         { name: 'facebook', title: 'Facebook', type: 'url' },
         { name: 'zalo', title: 'Zalo', type: 'url' },
         { name: 'youtube', title: 'Youtube', type: 'url' },
+        // thông tin liên hệ
+        { name: 'phoneNumber', title: 'Số điện thoại', type: 'string' },
     ]
 }
