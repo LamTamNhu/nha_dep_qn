@@ -160,7 +160,8 @@ export const siteSettingsQuery = `*[_type == "siteSettings"][0]{
   robots,
   facebook,
   zalo,
-  youtube
+  youtube,
+  phoneNumber
 }`;
 
 export const newsSlugsQuery = `*[_type == "news" && defined(slug.current)]{
