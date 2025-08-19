@@ -114,11 +114,14 @@ export const projectBySlugQuery = `*[_type in ["projectDetail", "completedProjec
   information,
   category,
   _createdAt,
+  _updatedAt,
   "slug": slug.current,
+  "mainImage": gallery[0],
   gallery[]{
     "url": asset->url,
     alt
   },
+  seo,
   body
 }`;
 

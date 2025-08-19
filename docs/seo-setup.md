@@ -1,7 +1,7 @@
 # SEO Setup
 
 ## Authoring
-- Sử dụng trường `SEO` trên các tài liệu như tin tức hoặc trang dự án để quản lý tiêu đề, mô tả, URL chuẩn và ảnh Open Graph.
+- Sử dụng trường `SEO` trên các tài liệu như tin tức, dự án hoặc công trình thi công để quản lý tiêu đề, mô tả, URL chuẩn và ảnh Open Graph.
 - Các giá trị mặc định và liên kết mạng xã hội được quản lý trong tài liệu **Cài đặt trang**.
 
 ## Metadata mapping

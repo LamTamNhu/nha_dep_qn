@@ -69,7 +69,8 @@ export const projectDetailFields = [
         name: 'body',
         title: 'Nội dung',
         type: 'blockContent'
-    }
+    },
+    { name: 'seo', title: 'SEO', type: 'seo', options: { collapsible: true, collapsed: true } }
 ];
 
 export default {
