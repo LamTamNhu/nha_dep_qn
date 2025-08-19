@@ -2,6 +2,7 @@
 
 ## Authoring
 - Sử dụng trường `SEO` trên các tài liệu như tin tức, dự án hoặc công trình thi công để quản lý tiêu đề, mô tả, URL chuẩn và ảnh Open Graph.
+- Khi tạo tài liệu mới, các trường SEO được tự động điền dựa trên tiêu đề, mô tả ngắn và ảnh đầu tiên làm ảnh Open Graph; tác giả có thể chỉnh sửa lại nếu cần.
 - Các giá trị mặc định và liên kết mạng xã hội được quản lý trong tài liệu **Cài đặt trang**.
 
 ## Metadata mapping

@@ -70,7 +70,17 @@ export const projectDetailFields = [
         title: 'Nội dung',
         type: 'blockContent'
     },
-    { name: 'seo', title: 'SEO', type: 'seo', options: { collapsible: true, collapsed: true } }
+    {
+        name: 'seo',
+        title: 'SEO',
+        type: 'seo',
+        options: { collapsible: true, collapsed: true },
+        initialValue: (_, { document }) => ({
+            title: document?.title,
+            description: document?.shortDescription,
+            ogImage: document?.gallery?.[0]
+        })
+    }
 ];
 
 export default {

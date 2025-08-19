@@ -5,7 +5,7 @@ export function mapSeoToMetadata({ doc, settings, path }) {
   const fallback = settings?.defaultSeo || {};
 
   const title = d.title || doc?.title || fallback.title || siteName;
-  const description = d.description || doc?.excerpt || fallback.description || '';
+  const description = d.description || doc?.excerpt || doc?.shortDescription || fallback.description || '';
   const canonical = d.canonical || (path ? `${base}${path}` : base);
 
   const img = d.ogImage || doc?.mainImage || doc?.thumbnail || fallback.ogImage;

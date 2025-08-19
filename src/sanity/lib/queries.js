@@ -174,6 +174,7 @@ export const newsBySlugQuery = `*[_type == "news" && slug.current == $slug][0]{
   category,
   excerpt,
   thumbnail,
+  "mainImage": thumbnail,
   seo,
   _createdAt,
   _updatedAt,
