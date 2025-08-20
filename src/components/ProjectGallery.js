@@ -58,7 +58,11 @@ export default function ProjectGallery({ images = [] }) {
                         className={`relative flex-shrink-0 aspect-square w-40 cursor-pointer border-2 overflow-hidden ${
                             idx === current ? 'border-orange-500' : 'border-transparent'
                         }`}
-                        onClick={() => setCurrent(idx)}
+                        onClick={() => {
+                            setCurrent(idx)
+                            setFullscreen(true);
+                        }
+                    }
                     >
                         <Image
                             src={img.url}
