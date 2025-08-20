@@ -91,7 +91,7 @@ export default async function ProjectDetailPage({params}) {
                     <span className="text-white">{title}</span>
                 </nav>
 
-                <div className="flex gap-8 max-w-screen">
+                <div className="flex flex-col lg:flex-row gap-8 max-w-screen">
                     {/* Main content column */}
                     <div className="min-w-0 flex-grow">
                         <h1 className="text-3xl font-bold mb-8">{title}</h1>
@@ -169,8 +169,8 @@ export default async function ProjectDetailPage({params}) {
                     </div>
 
                     {/* Sidebar with sticky contact form */}
-                    <div className="hidden xl:flex flex-none">
-                        <div className="sticky top-16">
+                    <div className="flex-none mx-auto">
+                        <div className="lg:sticky top-16">
                             <div className="p-4">
                                 <ContactForm data={contactData} sidebarMode={true}/>
                             </div>

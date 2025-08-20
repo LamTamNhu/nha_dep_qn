@@ -5,7 +5,7 @@ import {MoveUpRight} from "lucide-react";
 
 export default function ProjectsGrid({projects = []}) {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 max-w-6xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mx-auto max-w-6xl">
             {projects.length > 0 ? (
                 projects.map(project => (
                     <div
@@ -36,32 +36,25 @@ export default function ProjectsGrid({projects = []}) {
                                 <Link
                                     href={`/projects/${project.slug}`}
                                 >
-                                    <h3 className="text-md text-left font-semibold text-gray-900 leading-tight line-clamp-2">
+                                    <h3 className="text-md h-10 text-left font-semibold text-gray-900 leading-tight line-clamp-2">
                                         {project.title}
                                     </h3>
                                 </Link>
                             </div>
 
                             {/* Project Details - 2 Column Grid */}
-                            <div className="flex gap-2 text-sm justify-between text-gray-600 mb-4 flex-nowrap flex-grow">
+                            <div
+                                className="flex gap-2 text-sm justify-between text-gray-600 mb-4 flex-nowrap flex-grow">
                                 {/* Left Column */}
                                 <div className="flex flex-col space-y-1 text-left flex-none whitespace-nowrap w-max">
-                                    {project.landArea && (
-                                        <p>Diện tích đất: {project.landArea}</p>
-                                    )}
-                                    {project.constructionArea && (
-                                        <p>Diện tích xây dựng: {project.constructionArea}</p>
-                                    )}
+                                    <p>Diện tích đất: {project?.landArea}</p>
+                                    <p>Diện tích xây dựng: {project?.constructionArea}</p>
                                 </div>
 
                                 {/* Right Column */}
                                 <div className="flex flex-col space-y-1 text-left flex-none whitespace-nowrap w-max">
-                                    {project.location && (
-                                        <p>Địa điểm: {project.location}</p>
-                                    )}
-                                    {project.function && (
-                                        <p>Công năng: {project.function}</p>
-                                    )}
+                                    <p>Địa điểm: {project?.location}</p>
+                                    <p>Công năng: {project?.function}</p>
                                 </div>
                             </div>
 
