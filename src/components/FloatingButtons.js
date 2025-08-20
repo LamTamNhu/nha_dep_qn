@@ -6,38 +6,7 @@ import * as Tooltip from "@radix-ui/react-tooltip";
 import {TooltipProvider} from "@radix-ui/react-tooltip";
 import ContactPopover from "@/components/ContactPopover";
 
-const socialLinks = [
-    {
-        id: "messenger",
-        href: "https://m.me/",
-        img: <Image src="/images/Messenger_Icon_Primary_Blue.png" alt="Messenger" width={24} height={24}/>,
-        alt: "Nhắn tin với chúng tôi qua Facebook",
-        external: true,
-    },
-    {
-        id: "zalo",
-        href: "https://zalo.me/",
-        img: <Image src="/images/Icon_of_Zalo.svg" alt="Zalo" width={24} height={24}/>,
-        alt: "Liên hệ với chúng tôi qua Zalo",
-        external: true,
-    },
-    {
-        id: "phone",
-        href: "tel:0123456789",
-        img: <lucide.Phone size={24} className="text-white"/>,
-        alt: "Liên hệ với chúng tôi qua điện thoại",
-        external: false,
-    },
-    {
-        id: "contact",
-        href: "#",
-        img: <lucide.Send size={24} className="text-white"/>,
-        alt: "Xin quý khách để lại thông tin, chúng tôi sẽ liên hệ lại",
-        external: false,
-    }
-];
-
-function FloatingButtons() {
+function FloatingButtons({settings}) {
     const [collapsed, setCollapsed] = useState(false);
     const [isOverflow, setIsOverflow] = useState(false);
     const listRef = React.useRef(null);
@@ -68,6 +37,37 @@ function FloatingButtons() {
             setIsOverflow(rect.height > window.innerHeight - 32);
         }
     }, [collapsed]);
+
+    const socialLinks = [
+        ...(settings?.facebook ? [{
+            id: "messenger",
+            href: settings.facebook,
+            img: <Image src="/images/Messenger_Icon_Primary_Blue.png" alt="Messenger" width={24} height={24}/>,
+            alt: "Nhắn tin với chúng tôi qua Messenger",
+            external: true,
+        }] : []),
+        ...(settings?.zalo ? [{
+            id: "zalo",
+            href: settings.zalo,
+            img: <Image src="/images/Icon_of_Zalo.svg" alt="Zalo" width={24} height={24}/>,
+            alt: "Liên hệ với chúng tôi qua Zalo",
+            external: true,
+        }] : []),
+        ...(settings?.phoneNumber ? [{
+            id: "phone",
+            href: `tel:${settings.phoneNumber}`,
+            img: <lucide.Phone size={24} className="text-white"/>,
+            alt: "Liên hệ với chúng tôi qua điện thoại",
+            external: false,
+        }] : []),
+        {
+            id: "contact",
+            href: "#",
+            img: <lucide.Send size={24} className="text-white"/>,
+            alt: "Xin quý khách để lại thông tin, chúng tôi sẽ liên hệ lại",
+            external: false,
+        }
+    ];
 
     return (
         <TooltipProvider delayDuration={0}>

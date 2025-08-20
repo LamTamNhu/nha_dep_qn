@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import {notFound} from 'next/navigation';
 import {PortableText} from 'next-sanity';
-import {client} from '@/sanity/lib/client';
+import {sanityFetch} from '@/sanity/lib/live';
 import {urlFor} from '@/sanity/lib/image';
 import { projectBySlugQuery, projectSlugsQuery, contactFormQuery, siteSettingsQuery } from '@/sanity/lib/queries';
 import { mapSeoToMetadata } from '@/app/lib/seo';
@@ -12,15 +12,24 @@ import { Facebook, Share2 } from 'lucide-react';
 import ProjectInformation from '@/components/ProjectInformation';
 
 export async function generateStaticParams() {
-    const slugs = await client.fetch(projectSlugsQuery);
+    const {data: slugs} = await sanityFetch({
+        query: projectSlugsQuery,
+        perspective: 'published',
+        stega: false,
+    });
     return slugs.map(({slug}) => ({slug}));
 }
 
 export async function generateMetadata({params}) {
     const {slug} = await params;
-    const [doc, settings] = await Promise.all([
-        client.fetch(projectBySlugQuery, {slug}),
-        client.fetch(siteSettingsQuery)
+    const [{data: doc}, {data: settings}] = await Promise.all([
+        sanityFetch({
+            query: projectBySlugQuery,
+            params: {slug},
+            perspective: 'published',
+            stega: false,
+        }),
+        sanityFetch({query: siteSettingsQuery, perspective: 'published', stega: false}),
     ]);
     if (!doc) return { title: 'Not found', robots: { index: false } };
     return mapSeoToMetadata({ doc, settings, path: `/projects/${doc.slug}` });
@@ -28,11 +37,11 @@ export async function generateMetadata({params}) {
 
 export default async function ProjectDetailPage({params}) {
     const {slug} = await params;
-    const project = await client.fetch(projectBySlugQuery, {slug});
+    const {data: project} = await sanityFetch({query: projectBySlugQuery, params: {slug}});
     if (!project) {
         notFound();
     }
-    const contactData = await client.fetch(contactFormQuery);
+    const {data: contactData} = await sanityFetch({query: contactFormQuery});
 
     const {title, shortDescription, information, gallery, body, category, _createdAt, _updatedAt, _type, mainImage, slug: projectSlug} = project;
     const isCompleted = _type === 'completedProject';

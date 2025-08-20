@@ -5,12 +5,12 @@ import CoreValues from "@/components/CoreValues";
 import AboutHeroSection from "@/components/AboutHeroSection";
 import TeamSection from "@/components/TeamSection";
 import AboutPageAnimations from "@/components/AboutPageAnimations";
-import {client} from "@/sanity/lib/client";
+import {sanityFetch} from "@/sanity/lib/live";
 import {aboutPageQuery} from "@/sanity/lib/queries";
 import OfficePictures from "@/components/OfficePictures";
 
 export default async function AboutPage() {
-    const data = await client.fetch(aboutPageQuery);
+    const {data} = await sanityFetch({query: aboutPageQuery});
 
     return (
         <div className="w-full overflow-x-hidden bg-[#373737]">
