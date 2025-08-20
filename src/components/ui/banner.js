@@ -4,44 +4,30 @@ import { debounce } from "lodash";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from 'next/image';
 
-export default function Banner({title}) {
+export default function Banner({title, images = []}) {
     const bannerRef = useRef(null);
     const [parallax, setParallax] = useState(0);
     const [currentSlide, setCurrentSlide] = useState(0);
     const [imageErrors, setImageErrors] = useState({});
 
-    const slides = [
-        {
-            id: 1,
-            image: "/images/slide1.jpg",
-            alt: "1",
-        },
-        {
-            id: 2,
-            image: "/images/slide2.jpg",
-            alt: "2",
-        },
-        {
-            id: 3,
-            image: "/images/slide3.jpg",
-            alt: "3",
-        },
-        {
-            id: 4,
-            image: "/images/slide4.jpg",
-            alt: "4",
-        },
-        {
-            id: 5,
-            image: "/images/slide5.jpg",
-            alt: "5",
-        },
-        {
-            id: 6,
-            image: "/images/slide6.jpg",
-            alt: "6",
-        },
+    const fallbackSlides = [
+        { id: 1, image: "/images/slide1.jpg", alt: "1" },
+        { id: 2, image: "/images/slide2.jpg", alt: "2" },
+        { id: 3, image: "/images/slide3.jpg", alt: "3" },
+        { id: 4, image: "/images/slide4.jpg", alt: "4" },
+        { id: 5, image: "/images/slide5.jpg", alt: "5" },
+        { id: 6, image: "/images/slide6.jpg", alt: "6" },
     ];
+
+    const cmsSlides = Array.isArray(images) && images.length
+        ? images.map((img, idx) => ({
+            id: idx + 1,
+            image: img?.url || '',
+            alt: img?.alt || String(idx + 1),
+        }))
+        : [];
+
+    const slides = cmsSlides.length ? cmsSlides : fallbackSlides;
 
     const nextSlide = useCallback(() => {
         setCurrentSlide((prev) => (prev + 1) % slides.length);

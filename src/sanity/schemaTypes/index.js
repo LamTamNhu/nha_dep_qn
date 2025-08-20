@@ -24,6 +24,7 @@ import siteSettings from "@/sanity/schemaTypes/siteSettings";
 import news from "@/sanity/schemaTypes/news";
 import blockContent from "@/sanity/schemaTypes/blockContent";
 import seo from "@/sanity/schemaTypes/seo";
+import siteBanner from "@/sanity/schemaTypes/siteBanner";
 
 
 export const schemas = {
@@ -53,5 +54,6 @@ export const schemas = {
         footerSettings,
         siteSettings,
         seo,
+        siteBanner,
     ],
 }

@@ -194,3 +194,14 @@ export const newsQuery = `*[_type == "news"] | order(_createdAt desc){
 }`;
 
 
+export const bannerQuery = `*[_type == "siteBanner"][0]{
+  defaultSlides[]{"url": asset->url, alt},
+  newsUseDefault,
+  newsSlides[]{"url": asset->url, alt},
+  projectsUseDefault,
+  projectsSlides[]{"url": asset->url, alt},
+  servicesUseDefault,
+  servicesSlides[]{"url": asset->url, alt},
+  completedUseDefault,
+  completedSlides[]{"url": asset->url, alt}
+}`;

@@ -1,7 +1,7 @@
 import Banner from '@/components/ui/banner';
 import ServiceSections from '@/components/ServiceSections';
 import {sanityFetch} from '@/sanity/lib/live';
-import { servicesPageQuery } from '@/sanity/lib/queries';
+import { servicesPageQuery, bannerQuery } from '@/sanity/lib/queries';
 
 const fallbackServices = [
   {
@@ -50,11 +50,14 @@ const fallbackServices = [
 
 export default async function ServicesPage() {
   const {data} = await sanityFetch({query: servicesPageQuery});
+  const {data: banner} = await sanityFetch({query: bannerQuery});
   const services = data?.services && data.services.length > 0 ? data.services : fallbackServices;
+  const useDefault = banner?.servicesUseDefault !== false;
+  const images = (useDefault ? banner?.defaultSlides : banner?.servicesSlides) || [];
 
   return (
     <div className="min-h-screen bg-[#272727]">
-      <Banner title="DỊCH VỤ" />
+      <Banner title="DỊCH VỤ" images={images} />
       <div className="container mx-auto px-4 sm:px-6 md:px-10">
         <ServiceSections services={services} />
       </div>
