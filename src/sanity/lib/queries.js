@@ -125,7 +125,7 @@ export const projectBySlugQuery = `*[_type in ["projectDetail", "completedProjec
   body
 }`;
 
-export const projectsQuery = `*[_type == "projectDetail"]{
+export const projectsQuery = `*[_type == "projectDetail"] | order(_createdAt desc){
   _id,
   title,
   shortDescription,
@@ -139,7 +139,7 @@ export const projectsQuery = `*[_type == "projectDetail"]{
   _createdAt
 }`;
 
-export const completedProjectsQuery = `*[_type == "completedProject"]{
+export const completedProjectsQuery = `*[_type == "completedProject"] | order(_createdAt desc){
   _id,
   title,
   shortDescription,
