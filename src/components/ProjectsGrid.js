@@ -69,7 +69,7 @@ export default function ProjectsGrid({projects = []}) {
                             <div className="mt-auto">
                                 <Link
                                     href={`/projects/${project.slug}`}
-                                    className="inline-flex text-white text-center w-50 justify-center gap-2 bg-amber-400 hover:bg-amber-500 text-black font-medium px-4 py-2 rounded transition-colors duration-200"
+                                    className="inline-flex text-white text-center w-40 justify-center gap-2 bg-amber-400 hover:bg-amber-500 font-medium px-4 py-2 rounded transition-colors duration-200"
                                 >
                                     Xem thêm
                                     <span><MoveUpRight size={16} strokeWidth={3}/></span>
