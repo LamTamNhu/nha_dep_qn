@@ -60,7 +60,7 @@ export default async function ProjectDetailPage({params}) {
         <>
         <div className="min-h-screen bg-[#272727] text-white">
             {/* Add padding-top here instead of pt-26 class */}
-            <div className="container mx-auto py-10 px-6" style={{paddingTop: '6.5rem'}}>
+            <div className="container mx-auto py-10 px-6 pt-26">
                 <nav className="text-sm text-gray-400 mb-4">
                     <Link href="/" className="hover:underline">Trang chủ</Link>
                     <span className="mx-1">&gt;</span>
@@ -82,19 +82,18 @@ export default async function ProjectDetailPage({params}) {
                     <span className="text-white">{title}</span>
                 </nav>
 
-                {/* Use CSS Grid instead of Flexbox for better sticky support */}
-                <div className="lg:grid lg:grid-cols-[2fr_320px] lg:gap-8 flex flex-col gap-8">
+                <div className="flex gap-8 max-w-screen">
                     {/* Main content column */}
-                    <div className="w-full">
+                    <div className="min-w-0 flex-grow">
                         <h1 className="text-3xl font-bold mb-8">{title}</h1>
                         {gallery && gallery.length > 0 && (
-                            <div className="mb-8">
+                            <div className="mb-8 w-full">
                                 <ProjectGallery images={gallery}/>
                             </div>
                         )}
                         <ProjectInformation data={project?.information} shortDescription={shortDescription}/>
                         {body && (
-                            <div className="prose prose-invert max-w-none mb-12">
+                            <div className="prose prose-invert mb-12">
                                 <PortableText
                                     value={body}
                                     components={{
@@ -161,7 +160,7 @@ export default async function ProjectDetailPage({params}) {
                     </div>
 
                     {/* Sidebar with sticky contact form */}
-                    <div className="w-full">
+                    <div className="hidden xl:flex flex-none">
                         <div className="sticky top-16">
                             <div className="p-4">
                                 <ContactForm data={contactData} sidebarMode={true}/>

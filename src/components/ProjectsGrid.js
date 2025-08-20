@@ -43,9 +43,9 @@ export default function ProjectsGrid({projects = []}) {
                             </div>
 
                             {/* Project Details - 2 Column Grid */}
-                            <div className="flex gap-6 text-sm text-gray-600 mb-4 flex-grow">
+                            <div className="flex gap-2 text-sm justify-between text-gray-600 mb-4 flex-nowrap flex-grow">
                                 {/* Left Column */}
-                                <div className="flex flex-col space-y-1 text-left flex-1">
+                                <div className="flex flex-col space-y-1 text-left flex-none whitespace-nowrap w-max">
                                     {project.landArea && (
                                         <p>Diện tích đất: {project.landArea}</p>
                                     )}
@@ -55,7 +55,7 @@ export default function ProjectsGrid({projects = []}) {
                                 </div>
 
                                 {/* Right Column */}
-                                <div className="flex flex-col space-y-1 text-left flex-1">
+                                <div className="flex flex-col space-y-1 text-left flex-none whitespace-nowrap w-max">
                                     {project.location && (
                                         <p>Địa điểm: {project.location}</p>
                                     )}

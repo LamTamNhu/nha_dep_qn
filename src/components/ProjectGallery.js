@@ -17,7 +17,7 @@ export default function ProjectGallery({ images = [] }) {
         <div className="w-full">
             {/* Main image */}
             <div
-                className="relative w-full aspect-video overflow-hidden cursor-pointer rounded-lg"
+                className="relative aspect-video overflow-hidden cursor-pointer rounded-lg"
                 onClick={() => setFullscreen(true)}
             >
                 <Image
