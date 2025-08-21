@@ -28,7 +28,7 @@ export default function NewsGrid({news = []}) {
                     <div className="p-4 flex flex-col items-center justify-between flex-grow">
                         <Link
                             href={`/news/${item.slug}`}>
-                            <h3 className="text-md text-left font-semibold text-gray-900 leading-tight line-clamp-2">
+                            <h3 className="text-md h-10 text-left font-semibold text-gray-900 leading-tight line-clamp-2">
                                 {item.title}
                             </h3>
                         </Link>
