@@ -25,6 +25,7 @@ import news from "@/sanity/schemaTypes/news";
 import blockContent from "@/sanity/schemaTypes/blockContent";
 import seo from "@/sanity/schemaTypes/seo";
 import siteBanner from "@/sanity/schemaTypes/siteBanner";
+import projectCategory from "@/sanity/schemaTypes/projectCategory";
 
 
 export const schemas = {
@@ -39,6 +40,7 @@ export const schemas = {
         project,
         projectDetail,
         completedProject,
+        projectCategory,
         blockContent,
         news,
         partner,

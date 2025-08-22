@@ -43,15 +43,8 @@ export default async function ProjectDetailPage({params}) {
     }
     const {data: contactData} = await sanityFetch({query: contactFormQuery});
 
-    const {title, shortDescription, information, gallery, body, category, _createdAt, _updatedAt, _type, mainImage, slug: projectSlug} = project;
+    const {title, shortDescription, information, gallery, body, category, categoryTitle, _createdAt, _updatedAt, _type, mainImage, slug: projectSlug} = project;
     const isCompleted = _type === 'completedProject';
-    const categoryLabels = {
-        mansion: 'Biệt thự',
-        urbanHouse: 'Nhà phố',
-        countryHouse: 'Nhà vườn',
-        neoClassicHouse: 'Nhà tân cổ điển',
-        serviceBuilding: 'Công trình dịch vụ',
-    };
 
     const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || '').replace(/\/$/, '');
     const imageUrl = mainImage ? urlFor(mainImage).width(1200).height(630).url() : undefined;
@@ -83,7 +76,7 @@ export default async function ProjectDetailPage({params}) {
                                 href={`${isCompleted ? '/completed-projects' : '/projects'}?category=${category}`}
                                 className="hover:underline"
                             >
-                                {categoryLabels[category] || category}
+                                {categoryTitle || category}
                             </Link>
                         </>
                     )}

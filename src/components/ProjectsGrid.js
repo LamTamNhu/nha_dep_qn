@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import {getCategoryTitle} from "@/lib/utils";
 import {MoveUpRight} from "lucide-react";
 
 export default function ProjectsGrid({projects = []}) {

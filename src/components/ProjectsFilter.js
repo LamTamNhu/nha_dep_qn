@@ -7,18 +7,10 @@ import CategoryTags from './CategoryTags';
 import Pagination from './Pagination';
 import {SearchX} from "lucide-react";
 
-const categories = [
-    { value: 'all', title: 'Tất cả' },
-    { value: 'mansion', title: 'Biệt thự' },
-    { value: 'urbanHouse', title: 'Nhà phố' },
-    { value: 'countryHouse', title: 'Nhà vườn' },
-    { value: 'neoClassicHouse', title: 'Nhà tân cổ điển' },
-    { value: 'serviceBuilding', title: 'Công trình dịch vụ' }
-];
-
 const ITEMS_PER_PAGE = 12;
 
-export default function ProjectsFilter({ projects, initialCategory = 'all' }) {
+export default function ProjectsFilter({ projects, categories = [], initialCategory = 'all' }) {
+    const allCategories = [{ value: 'all', title: 'Tất cả' }, ...categories];
     const [filteredProjects, setFilteredProjects] = useState(projects);
     const [selectedCategory, setSelectedCategory] = useState(initialCategory);
     const [searchTerm, setSearchTerm] = useState('');
@@ -94,7 +86,7 @@ export default function ProjectsFilter({ projects, initialCategory = 'all' }) {
 
                 {/* Category Tags */}
                 <CategoryTags
-                    categories={categories}
+                    categories={allCategories}
                     selectedCategory={selectedCategory}
                     onCategoryChange={handleCategoryChange}
                 />
@@ -108,7 +100,7 @@ export default function ProjectsFilter({ projects, initialCategory = 'all' }) {
                                 <span> cho "{searchTerm}"</span>
                             )}
                             {selectedCategory !== 'all' && (
-                                <span> trong danh mục "{categories.find(cat => cat.value === selectedCategory)?.title}"</span>
+                                <span> trong danh mục "{allCategories.find(cat => cat.value === selectedCategory)?.title}"</span>
                             )}
             </span>
                     ) : (

@@ -112,7 +112,8 @@ export const projectBySlugQuery = `*[_type in ["projectDetail", "completedProjec
   title,
   shortDescription,
   information,
-  category,
+  "category": category->slug.current,
+  "categoryTitle": category->title,
   _createdAt,
   _updatedAt,
   "slug": slug.current,
@@ -135,7 +136,8 @@ export const projectsQuery = `*[_type == "projectDetail"] | order(_createdAt des
   "constructionArea": information.constructionArea,
   "location": information.location,
   "function": information.function,
-  category,
+  "category": category->slug.current,
+  "categoryTitle": category->title,
   _createdAt
 }`;
 
@@ -149,8 +151,14 @@ export const completedProjectsQuery = `*[_type == "completedProject"] | order(_c
   "constructionArea": information.constructionArea,
   "location": information.location,
   "function": information.function,
-  category,
+  "category": category->slug.current,
+  "categoryTitle": category->title,
   _createdAt
+}`;
+
+export const projectCategoriesQuery = `*[_type == "projectCategory"] | order(title asc){
+  title,
+  "value": slug.current
 }`;
 
 export const siteSettingsQuery = `*[_type == "siteSettings"][0]{
