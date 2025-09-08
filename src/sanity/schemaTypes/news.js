@@ -91,11 +91,6 @@ export default {
             fields: [{ name: 'alt', title: 'Alt', type: 'string', description: 'Tự động tạo từ tiêu đề nếu bỏ trống' }],
         },
         {
-            name: 'excerpt',
-            title: 'Mô tả ngắn',
-            type: 'text',
-        },
-        {
             name: 'body',
             title: 'Nội dung',
             type: 'blockContent',

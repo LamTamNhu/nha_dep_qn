@@ -173,7 +173,6 @@ export const newsBySlugQuery = `*[_type == "news" && slug.current == $slug][0]{
   _id,
   title,
   category,
-  excerpt,
   thumbnail,
   "mainImage": thumbnail,
   seo,
@@ -188,10 +187,18 @@ export const newsQuery = `*[_type == "news"] | order(_createdAt desc){
   title,
   "slug": slug.current,
   "image": thumbnail.asset->url,
-  excerpt,
+  "excerpt": coalesce(
+    excerpt,
+    select(
+      count(body) > 2 => pt::text(body[0..1]) + "…",
+      pt::text(body)
+    ),
+    ""
+  ),
   category,
   _createdAt
 }`;
+
 
 
 export const bannerQuery = `*[_type == "siteBanner"][0]{

@@ -4,7 +4,7 @@ import {MoveUpRight} from 'lucide-react';
 
 export default function NewsGrid({news = []}) {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 max-w-6xl">
+        <div className="grid mx-auto grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 max-w-6xl">
             {news.length > 0 && news.map(item => (
                 <div
                     key={item._id}
