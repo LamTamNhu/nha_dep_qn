@@ -1,5 +1,5 @@
-import {sanityFetch} from '../sanity/lib/live.js';
-import { newsSlugsQuery, projectSlugsQuery } from '../sanity/lib/queries.js';
+import {sanityFetch} from '@/sanity/lib/live';
+import { newsSlugsQuery, projectSlugsQuery } from '@/sanity/lib/queries';
 
 export default async function sitemap() {
   const base = (process.env.NEXT_PUBLIC_SITE_URL || '').replace(/\/$/, '');

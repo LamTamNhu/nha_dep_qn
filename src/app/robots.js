@@ -1,5 +1,5 @@
-import {sanityFetch} from '../sanity/lib/live.js';
-import { siteSettingsQuery } from '../sanity/lib/queries.js';
+import {sanityFetch} from '@/sanity/lib/live';
+import { siteSettingsQuery } from '@/sanity/lib/queries';
 
 export default async function robots() {
   const {data: settings} = await sanityFetch({
