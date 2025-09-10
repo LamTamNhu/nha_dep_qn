@@ -106,19 +106,25 @@ export const projectBySlugQuery = `*[_type in ["projectDetail", "completedProjec
   _type,
   title,
   shortDescription,
-  information,
+  information {
+    landArea,
+    constructionArea,
+    location,
+    function
+  },
   category,
   _createdAt,
   _updatedAt,
   "slug": slug.current,
   "mainImage": gallery[0],
-  gallery[]{
+  gallery[] {
     "url": asset->url,
     alt
   },
   seo,
   body
 }`;
+
 
 export const projectsQuery = `*[_type == "projectDetail"] | order(_createdAt desc){
   _id,

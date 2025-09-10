@@ -13,13 +13,6 @@ export default function ProjectInformation({data, shortDescription}) {
             value: data.location
         },
         {
-            condition: data.function,
-            icon: "/images/Artboard-24.png",
-            alt: "Function icon",
-            label: "Công năng",
-            value: data.function
-        },
-        {
             condition: data.landArea,
             icon: "/images/Artboard-25.png",
             alt: "Area icon",
@@ -32,7 +25,14 @@ export default function ProjectInformation({data, shortDescription}) {
             alt: "Built area icon",
             label: "Diện tích xây dựng",
             value: data.constructionArea
-        }
+        },
+        {
+            condition: data.function,
+            icon: "/images/Artboard-24.png",
+            alt: "Function icon",
+            label: "Công năng",
+            value: data.function
+        },
     ];
 
     // Filter items that have data
@@ -56,7 +56,8 @@ export default function ProjectInformation({data, shortDescription}) {
 
                 {/* Information Cards - Only show if there's data */}
                 {hasInfoCards && (
-                    <div className="bg-orange-400 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 text-black justify-center">
+                    <div
+                        className="bg-orange-400 flex flex-nowrap text-black justify-center">
                         {availableItems.map((item, index) => (
                             <div
                                 key={index}
