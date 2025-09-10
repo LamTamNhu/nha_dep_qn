@@ -55,9 +55,9 @@ export default function ProjectsGrid({projects = []}) {
                                     <span className="font-semibold">Địa điểm: </span>
                                     <span>{project?.location}</span>
                                 </div>
-                                <div className="text-left col-span-2">
+                                <div className="text-left col-span-2 h-12">
                                     <span className="font-semibold">Công năng: </span>
-                                    <span className="line-clamp-2 h-10">{project?.function}</span>
+                                    <span>{project?.function}</span>
                                 </div>
                             </div>
 
