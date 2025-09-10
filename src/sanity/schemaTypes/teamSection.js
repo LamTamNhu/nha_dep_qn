@@ -15,7 +15,14 @@ export default {
                         {name: 'title', type: 'string', title: 'Chức vụ'},
                         {name: 'thumbnail', type: 'image', title: 'Ảnh đại diện'},
                         {name: 'aboutShort', type: 'text', title: 'Giới thiệu ngắn'}
-                    ]
+                    ],
+                    preview: {
+                        select: {
+                            title: 'name',
+                            subtitle: 'title',
+                            media: 'thumbnail'
+                        }
+                    }
                 }
             ]
         }
