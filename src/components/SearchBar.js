@@ -21,7 +21,7 @@ export default function SearchBar({ searchTerm, onSearchChange, placeholder = 'T
                 placeholder={placeholder}
                 value={searchTerm}
                 onChange={handleChange}
-                className="block w-full pl-10 pr-10 py-3 border border-gray-600 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent"
+                className="block w-full pl-10 pr-10 py-3 border border-gray-600 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent-light)] focus:border-transparent"
             />
             {searchTerm && (
                 <button

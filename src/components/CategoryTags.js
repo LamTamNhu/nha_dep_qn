@@ -9,7 +9,7 @@ export default function CategoryTags({ categories, selectedCategory, onCategoryC
                     onClick={() => onCategoryChange(category.value)}
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
                         selectedCategory === category.value
-                            ? 'bg-orange-400 text-black'
+                            ? 'bg-[var(--accent-light)] text-black'
                             : 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white'
                     }`}
                 >
