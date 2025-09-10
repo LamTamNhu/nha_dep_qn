@@ -21,7 +21,7 @@ export default function VisionSection({ data }) {
     const mission = data?.mission || fallback.mission;
 
     const renderImages = (images, altPrefix) => (
-        <div className="flex-1 flex gap-4 overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {images?.map((img, idx) => (
                 <Image
                     key={idx}
@@ -29,7 +29,7 @@ export default function VisionSection({ data }) {
                     alt={`${altPrefix}-${idx + 1}`}
                     width={300}
                     height={400}
-                    className="object-cover aspect-[3/4] flex-1"
+                    className="object-cover aspect-[3/4]"
                 />
             ))}
         </div>

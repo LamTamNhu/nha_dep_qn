@@ -56,7 +56,7 @@ export default function ProjectInformation({data, shortDescription}) {
 
                 {/* Information Cards - Only show if there's data */}
                 {hasInfoCards && (
-                    <div className="bg-yellow-400 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 text-black justify-center">
+                    <div className="bg-orange-400 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 text-black justify-center">
                         {availableItems.map((item, index) => (
                             <div
                                 key={index}
