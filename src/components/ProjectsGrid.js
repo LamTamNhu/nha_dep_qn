@@ -10,10 +10,10 @@ export default function ProjectsGrid({projects = []}) {
                 projects.map(project => (
                     <div
                         key={project._id}
-                        className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 group h-[480px] flex flex-col"
+                        className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 group h-fit flex flex-col"
                     >
                         {/* Image Section */}
-                        <div className="relative w-full h-64 overflow-hidden flex-shrink-0">
+                        <div className="relative w-full h-64 flex-shrink-0 overflow-hidden">
                             {project.image && (
                                 <Link
                                     href={`/projects/${project.slug}`}
@@ -30,9 +30,9 @@ export default function ProjectsGrid({projects = []}) {
                         </div>
 
                         {/* Content Section */}
-                        <div className="p-4 flex flex-col justify-between flex-grow">
+                        <div className="p-4 flex flex-col justify-center flex-grow">
                             {/* Title */}
-                            <div className="mb-3">
+                            <div className="mb-2">
                                 <Link
                                     href={`/projects/${project.slug}`}
                                 >
@@ -43,18 +43,17 @@ export default function ProjectsGrid({projects = []}) {
                             </div>
 
                             {/* Project Details - 2 Column Grid */}
-                            <div
-                                className="flex gap-2 text-sm justify-between text-gray-600 mb-4 flex-nowrap flex-grow">
+                            <div className="grid grid-cols-2 gap-2 text-sm text-gray-600 mb-6">
                                 {/* Left Column */}
-                                <div className="flex flex-col space-y-1 text-left flex-none whitespace-nowrap w-max">
-                                    <p>Diện tích đất: {project?.landArea}</p>
-                                    <p>Diện tích xây dựng: {project?.constructionArea}</p>
+                                <div className="flex flex-col space-y-1 text-left">
+                                    <p className="truncate">Diện tích đất: {project?.landArea}</p>
+                                    <p className="truncate">Diện tích xây dựng: {project?.constructionArea}</p>
                                 </div>
 
                                 {/* Right Column */}
-                                <div className="flex flex-col space-y-1 text-left flex-none whitespace-nowrap w-max">
-                                    <p>Địa điểm: {project?.location}</p>
-                                    <p>Công năng: {project?.function}</p>
+                                <div className="flex flex-col space-y-1 text-left">
+                                    <p className="truncate">Địa điểm: {project?.location}</p>
+                                    <p className="truncate">Công năng: {project?.function}</p>
                                 </div>
                             </div>
 
@@ -69,7 +68,7 @@ export default function ProjectsGrid({projects = []}) {
                             <div className="mt-auto">
                                 <Link
                                     href={`/projects/${project.slug}`}
-                                    className="inline-flex text-white text-center w-40 justify-center gap-2 bg-amber-400 hover:bg-amber-500 font-medium px-4 py-2 rounded transition-colors duration-200"
+                                    className="inline-flex text-white text-center w-40 justify-center gap-2 bg-orange-400 hover:bg-orange-300 font-medium px-4 py-2 rounded transition-colors duration-200"
                                 >
                                     Xem thêm
                                     <span className="my-auto"><MoveUpRight size={16} strokeWidth={3}/></span>

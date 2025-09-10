@@ -37,7 +37,7 @@ export default function NewsGrid({news = []}) {
                         )}
                         <Link
                             href={`/news/${item.slug}`}
-                            className="inline-flex text-white text-center w-50 justify-center gap-2 bg-amber-400 hover:bg-amber-500 text-black font-medium px-4 py-2 rounded transition-colors duration-200"
+                            className="inline-flex text-white text-center w-50 justify-center gap-2 bg-orange-400 hover:bg-orange-300 text-black font-medium px-4 py-2 rounded transition-colors duration-200"
                         >
                             Xem thêm
                             <span><MoveUpRight size={16} strokeWidth={3}/></span>
