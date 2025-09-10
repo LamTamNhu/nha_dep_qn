@@ -111,7 +111,7 @@ export default function Navbar() {
     return (
         <nav
             id="navbar"
-            className="fixed top-0 left-0 right-0 z-50 transition-colors duration-300 px-4 lg:px-0 lg:pr-20"
+            className="fixed top-0 left-0 right-0 z-50 transition-colors duration-300 h-fit px-4 py-4 lg:px-0 lg:pr-20 lg:py-0"
         >
             <div className="grid grid-cols-2 items-center justify-items-center">
                 {/* Logo */}
