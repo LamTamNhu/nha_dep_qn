@@ -1,60 +1,62 @@
-import Image from "next/image";
+"use client";
 
-export default function TeamSection({ data }) {
-    const ceo = data?.ceo;
+import Image from "next/image";
+import {Swiper, SwiperSlide} from "swiper/react";
+import "swiper/css";
+
+export default function TeamSection({data}) {
     const members = data?.members || [];
+
+    const Card = ({person}) => (
+        <div className="text-center relative">
+            <div className="relative aspect-2/3 w-full mb-4">
+                <Image
+                    src={person.thumbnailUrl}
+                    alt={person.name}
+                    fill
+                    className="object-cover object-top mx-auto"
+                />
+                {person.aboutShort && (
+                    <div
+                        className="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 hover:opacity-100 transition-opacity duration-700">
+                        <p className='text-xl text-white'>{person.aboutShort}</p>
+                    </div>
+                )}
+            </div>
+            <h3 className="text-white font-bold text-xl mb-2">
+                {person.name}
+            </h3>
+            <p className="text-gray-300 text-sm">{person.title}</p>
+
+        </div>
+    );
+
     return (
         <section className="py-12">
-            <div className="container max-w-6xl mx-auto px-4">
+            <div className="container mx-auto px-4">
                 <div className="text-center">
-                    {/*Title*/}
-                    <h2 className="text-white  text-3xl font-bold my-20  p-4 inline-block border-2 border-white">
+                    <h2 className="text-white text-3xl font-bold my-20 p-4 inline-block border-2 border-white">
                         ĐỘI NGŨ
                     </h2>
                 </div>
-                <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-                    {ceo && (
-                        <div className="text-center slide-in-bottom">
-                            <Image
-                                width={300}
-                                height={300}
-                                src={ceo.thumbnailUrl || '/thumbnails/nguyen-tuong.jpg'}
-                                alt={ceo.name || 'nguyen-tuong'}
-                                className="size-70 object-cover mx-auto mb-4"
-                            />
-                            <h3 className="text-white font-bold text-xl mb-2">
-                                {ceo.name || 'KTS. TRẦN NGUYÊN TƯƠNG'}
-                            </h3>
-                            <p className="text-white font-base text-sm">
-                                {ceo.title || 'GIÁM ĐỐC'}
-                            </p>
-                        </div>
-                    )}
-                    <div className="col-span-2 flex items-center slide-in-bottom">
-                        <p className="text-white text-lg">
-                            {data?.aboutShort || ''}
-                        </p>
-                    </div>
-                    {members.map((member) => (
-                        <div className="text-center slide-in-bottom" key={member.name}>
-                            <Image
-                                width={300}
-                                height={300}
-                                src={member.thumbnailUrl}
-                                alt={member.name}
-                                className="size-70 object-top object-cover mx-auto mb-4"
-                            />
-                            <h3 className="text-white font-bold text-xl mb-2">
-                                {member.name}
-                            </h3>
-                            <p className="text-white font-base text-sm">
-                                {member.title}
-                            </p>
-                        </div>
+
+                <Swiper
+                    loop
+                    spaceBetween={16}
+                    slidesPerView={2}
+                    breakpoints={{
+                        640: {slidesPerView: 3, spaceBetween: 16},
+                        1024: {slidesPerView: 4, spaceBetween: 24},
+                    }}
+                    className="!px-1 gallery-reveal"
+                >
+                    {members.map((m) => (
+                        <SwiperSlide key={m.name}>
+                            <Card person={m}/>
+                        </SwiperSlide>
                     ))}
-                </div>
+                </Swiper>
             </div>
         </section>
     );
 }
-

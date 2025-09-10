@@ -9,12 +9,14 @@ export default function AboutPageAnimations() {
         const borderObserver = animateOnObserve('.border-draw');
         const puffObserver = animateOnObserve('.puff-in-center');
         const slideObserver = animateOnObserve('.slide-in-bottom');
+        const galleryObserver = animateOnObserve('.gallery-reveal');
 
         return () => {
             swingObserver.disconnect();
             borderObserver.disconnect();
             puffObserver.disconnect();
             slideObserver.disconnect();
+            galleryObserver.disconnect();
         };
     }, []);
 

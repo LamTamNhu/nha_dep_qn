@@ -672,4 +672,33 @@
         @apply text-white;
     }
 }
+@keyframes revealFromBottom {
+    from {
+        clip-path: inset(100% 0 0 0);
+    }
+    /* fully hidden, only bottom line */
+    to {
+        clip-path: inset(0 0 0 0);
+    }
+    /* fully revealed */
+}
 
+.gallery-reveal {
+    opacity: 0;
+}
+
+.gallery-reveal.animate{
+    opacity: 100%;
+    overflow: hidden;
+    clip-path: inset(100% 0 0 0);
+    animation: revealFromBottom 1s ease-in-out forwards, scale-in 1.5s ease-out forwards;
+}
+
+@keyframes scale-in {
+    from {
+        transform: scale(1.4);
+    }
+    to {
+        transform: scale(1);
+    }
+}

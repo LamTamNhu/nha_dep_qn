@@ -58,17 +58,12 @@ export const aboutPageQuery = `*[_type == "aboutPage"][0]{
     "imageUrl": image.asset->url,
     imageAlt
   },
-  teamSection{
-    aboutShort,
-    ceo{
-      name,
-      title,
-      "thumbnailUrl": thumbnail.asset->url
-    },
+  teamSection{    
     members[]{
       name,
       title,
-      "thumbnailUrl": thumbnail.asset->url
+      "thumbnailUrl": thumbnail.asset->url,
+      aboutShort
     }
   },
   officePictures{
