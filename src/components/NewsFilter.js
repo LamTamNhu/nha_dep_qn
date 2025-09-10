@@ -114,7 +114,7 @@ export default function NewsFilter({ news }) {
                     <h3 className="text-xl font-semibold text-gray-300 mb-6">Không tìm thấy bài viết nào</h3>
                     <button
                         onClick={resetFilters}
-                        className="px-6 py-2 bg-amber-400 text-white rounded-lg hover:bg-amber-500 transition-colors"
+                        className="px-6 py-2 bg-orange-400 text-white rounded-lg hover:bg-orange-500 transition-colors"
                     >
                         Xóa tất cả bộ lọc
                     </button>
