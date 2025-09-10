@@ -694,7 +694,7 @@
     opacity: 100%;
     overflow: hidden;
     clip-path: inset(100% 0 0 0);
-    animation: revealFromBottom 1s ease-in-out forwards, scale-in 1.5s ease-out forwards;
+    animation: revealFromBottom 1s ease-in-out forwards
 }
 
 @keyframes scale-in {
