@@ -8,22 +8,18 @@ export default function NewsGrid({news = []}) {
             {news.length > 0 && news.map(item => (
                 <div
                     key={item._id}
-                    className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 group h-fit flex flex-col"
+                    className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 group h-fit flex flex-col overflow-hidden"
                 >
-                    <div className="relative w-full aspect-3/4 flex-shrink-0 overflow-hidden">
+                    <Link href={`/news/${item.slug}`} className="relative h-100 flex-shrink-0 overflow-hidden">
                         {item.image && (
-                            <Link
-                                href={`/news/${item.slug}`}>
-                                <Image
-                                    src={item.image}
-                                    alt={item.title}
-                                    width={400}
-                                    height={300}
-                                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                                />
-                            </Link>
+                            <Image
+                                src={item.image}
+                                alt={item.title}
+                                fill
+                                className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
+                            />
                         )}
-                    </div>
+                    </Link>
                     <div className="p-4 flex flex-col items-center justify-between flex-grow">
                         <Link
                             href={`/news/${item.slug}`}>

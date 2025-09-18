@@ -10,24 +10,19 @@ export default function ProjectsGrid({projects = []}) {
                 projects.map(project => (
                     <div
                         key={project._id}
-                        className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 group h-fit flex flex-col"
+                        className="bg-white overflow-hidden rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 group h-fit flex flex-col"
                     >
                         {/* Image Section */}
-                        <div className="relative w-full aspect-3/4 flex-shrink-0 overflow-hidden">
+                        <Link href={`/projects/${project.slug}`} className="relative h-100 flex-shrink-0 overflow-hidden">
                             {project.image && (
-                                <Link
-                                    href={`/projects/${project.slug}`}
-                                >
-                                    <Image
-                                        src={project.image}
-                                        alt={project.title}
-                                        width={400}
-                                        height={300}
-                                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                                    />
-                                </Link>
+                                <Image
+                                    src={project.image}
+                                    alt={project.title}
+                                    fill
+                                    className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
+                                />
                             )}
-                        </div>
+                        </Link>
 
                         {/* Content Section */}
                         <div className="p-4 flex flex-col justify-center flex-grow">
