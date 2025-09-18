@@ -8,10 +8,9 @@ export default function NewsGrid({news = []}) {
             {news.length > 0 && news.map(item => (
                 <div
                     key={item._id}
-                    className="bg-white items-center rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 group h-[480px] flex flex-col"
+                    className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 group h-fit flex flex-col"
                 >
-                    <div className="relative w-full h-64 overflow-hidden flex-shrink-0">
-
+                    <div className="relative w-full aspect-3/4 flex-shrink-0 overflow-hidden">
                         {item.image && (
                             <Link
                                 href={`/news/${item.slug}`}>
@@ -37,7 +36,7 @@ export default function NewsGrid({news = []}) {
                         )}
                         <Link
                             href={`/news/${item.slug}`}
-                            className="inline-flex text-white text-center w-50 justify-center gap-2 bg-orange-400 hover:bg-orange-300 text-black font-medium px-4 py-2 rounded transition-colors duration-200"
+                            className="inline-flex mt-8 text-white text-center w-50 justify-center gap-2 bg-orange-400 hover:bg-orange-300 text-black font-medium px-4 py-2 rounded transition-colors duration-200"
                         >
                             Xem thêm
                             <span><MoveUpRight size={16} strokeWidth={3}/></span>
