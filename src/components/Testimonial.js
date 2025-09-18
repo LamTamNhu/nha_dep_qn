@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Image from 'next/image';
-import {Quote} from 'lucide-react';
+import {Quote, ChevronLeft, ChevronRight} from 'lucide-react';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {Autoplay, Navigation, Pagination} from 'swiper/modules';
 import 'swiper/css';
@@ -41,7 +41,7 @@ function AvatarImage({avatar, alt}) {
                 {...imageProps}
                 alt={alt}
                 className="h-full w-full rounded-full object-cover"
-                sizes="56px"
+                sizes="48px"
             />
         );
     }
@@ -51,8 +51,8 @@ function AvatarImage({avatar, alt}) {
             <Image
                 src={avatar}
                 alt={alt}
-                width={56}
-                height={56}
+                width={48}
+                height={48}
                 className="h-full w-full rounded-full object-cover"
             />
         );
@@ -60,45 +60,35 @@ function AvatarImage({avatar, alt}) {
 
     return (
         <div className="flex h-full w-full items-center justify-center rounded-full bg-white/10">
-            <Quote className="h-5 w-5 text-white/60" />
+            <Quote className="h-3 w-3 text-white/60"/>
         </div>
     );
 }
 
 function TestimonialCard({testimonial}) {
     return (
-        <div className="flex flex-col items-center gap-6 md:flex-row md:items-start md:justify-between md:gap-10">
-            <div className="w-full rounded-3xl bg-white p-6 shadow-xl md:p-10">
-                <div className="flex flex-col gap-4">
-                    <Quote className="mx-auto text-5xl text-orange-500 md:mx-0" />
-                    <blockquote className="whitespace-pre-line text-center text-base font-normal italic text-black md:text-left md:text-lg">
-                        {testimonial.quote}
-                    </blockquote>
-                    <Quote className="self-end text-5xl text-orange-500" />
-                    {testimonial?.link && (
-                        <div className="flex justify-center md:justify-end">
-                            <a
-                                href={testimonial.link}
-                                className="text-sm font-semibold text-orange-500 underline underline-offset-4"
-                            >
-                                Tham quan nhà hoàn thiện
-                            </a>
-                        </div>
-                    )}
-                </div>
+        <div className="grid grid-cols-1 place-content-center">
+            <div className="flex flex-col bg-white p-6 h-60 max-h-60 overflow-hidden">
+                <Quote className="mb-2 text-center text-5xl text-orange-500 flex-shrink-0"/>
+                <blockquote className="mb-2 whitespace-pre-line text-center text-base font-normal italic text-black flex-1 overflow-hidden">
+                    {testimonial.quote}
+                </blockquote>
+                <Quote className="mb-6 self-end text-5xl text-orange-500 flex-shrink-0"/>
+                {testimonial?.link && (
+                    <a href={testimonial.link} className="self-end text-orange-400 underline flex-shrink-0">
+                        Tham quan nhà hoàn thiện
+                    </a>
+                )}
             </div>
-
-            <div className="flex flex-col items-center gap-3 text-center text-orange-400 md:items-start md:text-left">
-                <div className="h-14 w-14 overflow-hidden rounded-full bg-white/10">
+            <div className="mt-4 flex items-center justify-center gap-4 p-2 text-center text-orange-400">
+                <div className="h-12 w-12">
                     <AvatarImage
                         avatar={testimonial.avatar}
                         alt={testimonial.authorName || 'Khách hàng'}
                     />
                 </div>
                 <div>
-                    <div className="text-lg font-semibold text-orange-400">
-                        {testimonial.authorName}
-                    </div>
+                    <div>{testimonial.authorName}</div>
                     {testimonial.authorInfo && (
                         <div className="text-sm text-white/80">
                             {testimonial.authorInfo}
@@ -129,61 +119,73 @@ export default function Testimonial({data}) {
     return (
         <section className="bg-black px-4 py-12">
             <div className="mx-auto max-w-6xl px-4">
-                <Swiper
-                    modules={[Navigation, Pagination, Autoplay]}
-                    slidesPerView={1}
-                    spaceBetween={32}
-                    loop={hasMultipleTestimonials}
-                    autoplay={hasMultipleTestimonials ? {delay: 7000, disableOnInteraction: false} : false}
-                    navigation={hasMultipleTestimonials ? {
-                        nextEl: '.testimonial-swiper-button-next',
-                        prevEl: '.testimonial-swiper-button-prev',
-                    } : false}
-                    pagination={hasMultipleTestimonials ? {clickable: true} : false}
-                    className="testimonial-swiper pb-10"
-                    style={{
-                        '--swiper-pagination-color': '#fb923c',
-                        '--swiper-pagination-bullet-inactive-color': '#ffffff66',
-                        '--swiper-pagination-bullet-inactive-opacity': '1',
-                    }}
-                >
-                    {testimonialsToRender.map((testimonial, index) => (
-                        <SwiperSlide key={testimonial._key || testimonial._id || index}>
-                            <div className="swing-in-top-fwd-2">
-                                <TestimonialCard testimonial={testimonial} />
-                            </div>
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
+                <div className="relative">
+                    <Swiper
+                        modules={[Navigation, Pagination, Autoplay]}
+                        slidesPerView={1}
+                        spaceBetween={32}
+                        loop={hasMultipleTestimonials}
+                        autoplay={hasMultipleTestimonials ? {delay: 7000, disableOnInteraction: false} : false}
+                        navigation={hasMultipleTestimonials ? {
+                            nextEl: '.testimonial-swiper-button-next',
+                            prevEl: '.testimonial-swiper-button-prev',
+                        } : false}
+                        pagination={hasMultipleTestimonials ? {
+                            clickable: true,
+                            bulletClass: 'swiper-pagination-bullet testimonial-bullet',
+                            bulletActiveClass: 'swiper-pagination-bullet-active testimonial-bullet-active',
+                        } : false}
+                        className="testimonial-swiper pb-16"
+                        style={{
+                            '--swiper-pagination-color': '#fb923c',
+                            '--swiper-pagination-bullet-inactive-color': '#ffffff66',
+                            '--swiper-pagination-bullet-inactive-opacity': '1',
+                            '--swiper-pagination-bottom': '0px',
+                        }}
+                    >
+                        {testimonialsToRender.map((testimonial, index) => (
+                            <SwiperSlide key={testimonial._key || testimonial._id || index}>
+                                <TestimonialCard testimonial={testimonial}/>
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
 
-                {hasMultipleTestimonials && (
-                    <div className="mt-4 flex items-center justify-end gap-3">
-                        <button
-                            className="testimonial-swiper-button-prev rounded-full bg-white p-3 shadow-lg transition-colors duration-200 hover:bg-gray-50"
-                            aria-label="Xem lời chứng thực trước"
-                        >
-                            <svg className="h-5 w-5 text-gray-700" viewBox="0 0 20 20" fill="currentColor">
-                                <path
-                                    fillRule="evenodd"
-                                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                    clipRule="evenodd"
-                                />
-                            </svg>
-                        </button>
-                        <button
-                            className="testimonial-swiper-button-next rounded-full bg-white p-3 shadow-lg transition-colors duration-200 hover:bg-gray-50"
-                            aria-label="Xem lời chứng thực tiếp theo"
-                        >
-                            <svg className="h-5 w-5 text-gray-700" viewBox="0 0 20 20" fill="currentColor">
-                                <path
-                                    fillRule="evenodd"
-                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                    clipRule="evenodd"
-                                />
-                            </svg>
-                        </button>
-                    </div>
-                )}
+                    {/* Custom Navigation Arrows */}
+                    {hasMultipleTestimonials && (
+                        <>
+                            <button
+                                className="testimonial-swiper-button-prev absolute left-4 top-1/2 z-10 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition-all duration-300 hover:bg-orange-500 hover:text-white">
+                                <ChevronLeft className="h-6 w-6"/>
+                            </button>
+                            <button
+                                className="testimonial-swiper-button-next absolute right-4 top-1/2 z-10 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition-all duration-300 hover:bg-orange-500 hover:text-white">
+                                <ChevronRight className="h-6 w-6"/>
+                            </button>
+                        </>
+                    )}
+                </div>
+
+                {/* Custom Pagination Styles */}
+                <style jsx>{`
+                    .testimonial-bullet {
+                        width: 12px !important;
+                        height: 12px !important;
+                        margin: 0 8px !important;
+                        background: rgba(255, 255, 255, 0.4) !important;
+                        opacity: 1 !important;
+                        transition: all 0.3s ease !important;
+                    }
+
+                    .testimonial-bullet-active {
+                        background: #fb923c !important;
+                        transform: scale(1.2) !important;
+                    }
+
+                    .testimonial-bullet:hover {
+                        background: rgba(251, 146, 60, 0.7) !important;
+                        transform: scale(1.1) !important;
+                    }
+                `}</style>
             </div>
         </section>
     );
