@@ -140,7 +140,14 @@ export default {
         {
             name: 'testimonialSection',
             title: 'Khách hàng nói gì',
-            type: 'testimonial'
+            type: 'array',
+            of: [
+                {
+                    name: 'testimonialEntry',
+                    title: 'Lời chứng thực',
+                    type: 'testimonial',
+                },
+            ],
         }
     ],
     preview: {

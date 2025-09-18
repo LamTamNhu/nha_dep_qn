@@ -22,7 +22,14 @@ export const homepageQuery = `*[_type == "homepage"][0] {
   constructionVideoSection,
   showcases,
   partners,
-  testimonialSection
+  testimonialSection[]{
+    _key,
+    quote,
+    authorName,
+    authorInfo,
+    avatar,
+    link
+  }
 }`;
 
 export const contactFormQuery = `*[_type == "contactSettings"][0]{
