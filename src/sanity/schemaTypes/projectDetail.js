@@ -1,3 +1,5 @@
+import { apiVersion } from '@/sanity/env';
+
 export const projectDetailFields = [
     {
         name: 'title',
@@ -29,7 +31,39 @@ export const projectDetailFields = [
             source: 'title',
             maxLength: 96
         },
-        validation: Rule => Rule.required()
+        validation: Rule =>
+            Rule.required().custom(async (slug, context) => {
+                const currentSlug = slug?.current;
+                if (!currentSlug) {
+                    return true;
+                }
+
+                const documentType = context?.document?._type;
+                if (!documentType) {
+                    return true;
+                }
+
+                const getClient = context?.getClient;
+                if (typeof getClient !== 'function') {
+                    return true;
+                }
+
+                const baseId = context?.document?._id?.replace(/^drafts\./, '');
+                const client = getClient({ apiVersion });
+
+                const duplicateCount = await client.fetch(
+                    `count(*[_type == $type && slug.current == $slug && !(_id in [$draftId, $publishedId])])`,
+                    {
+                        type: documentType,
+                        slug: currentSlug,
+                        draftId: baseId ? `drafts.${baseId}` : null,
+                        publishedId: baseId ?? null,
+                    }
+                );
+
+                return duplicateCount === 0
+                    || 'Slug đã được sử dụng cho một tài liệu cùng loại. Vui lòng chọn slug khác.';
+            })
     },
     {
         name: 'category',
