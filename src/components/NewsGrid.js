@@ -10,7 +10,7 @@ export default function NewsGrid({news = []}) {
                     key={item._id}
                     className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 group h-fit flex flex-col overflow-hidden"
                 >
-                    <Link href={`/news/${item.slug}`} className="relative h-80 flex-shrink-0 overflow-hidden">
+                    <Link href={`/news/${item.slug}`} className="relative h-85 flex-shrink-0 overflow-hidden">
                         {item.image && (
                             <Image
                                 src={item.image}

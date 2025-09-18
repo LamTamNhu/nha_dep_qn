@@ -13,7 +13,7 @@ export default function ProjectsGrid({projects = []}) {
                         className="bg-white overflow-hidden rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 group h-fit flex flex-col"
                     >
                         {/* Image Section */}
-                        <Link href={`/projects/${project.slug}`} className="relative h-80 flex-shrink-0 overflow-hidden">
+                        <Link href={`/projects/${project.slug}`} className="relative h-85 flex-shrink-0 overflow-hidden">
                             {project.image && (
                                 <Image
                                     src={project.image}
