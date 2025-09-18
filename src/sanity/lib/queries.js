@@ -113,6 +113,7 @@ export const projectBySlugQuery = `*[_type in ["projectDetail", "completedProjec
     function
   },
   category,
+  "createdDate": coalesce(createdDate, _createdAt),
   _createdAt,
   _updatedAt,
   "slug": slug.current,
@@ -126,7 +127,7 @@ export const projectBySlugQuery = `*[_type in ["projectDetail", "completedProjec
 }`;
 
 
-export const projectsQuery = `*[_type == "projectDetail"] | order(_createdAt desc){
+export const projectsQuery = `*[_type == "projectDetail"] | order(coalesce(createdDate, _createdAt) desc){
   _id,
   title,
   shortDescription,
@@ -137,10 +138,11 @@ export const projectsQuery = `*[_type == "projectDetail"] | order(_createdAt des
   "location": information.location,
   "function": information.function,
   category,
+  "createdDate": coalesce(createdDate, _createdAt),
   _createdAt
 }`;
 
-export const completedProjectsQuery = `*[_type == "completedProject"] | order(_createdAt desc){
+export const completedProjectsQuery = `*[_type == "completedProject"] | order(coalesce(createdDate, _createdAt) desc){
   _id,
   title,
   shortDescription,
@@ -151,6 +153,7 @@ export const completedProjectsQuery = `*[_type == "completedProject"] | order(_c
   "location": information.location,
   "function": information.function,
   category,
+  "createdDate": coalesce(createdDate, _createdAt),
   _createdAt
 }`;
 
@@ -177,13 +180,14 @@ export const newsBySlugQuery = `*[_type == "news" && slug.current == $slug][0]{
   thumbnail,
   "mainImage": thumbnail,
   seo,
+  "createdDate": coalesce(createdDate, _createdAt),
   _createdAt,
   _updatedAt,
   "slug": slug.current,
   body
 }`;
 
-export const newsQuery = `*[_type == "news"] | order(_createdAt desc){
+export const newsQuery = `*[_type == "news"] | order(coalesce(createdDate, _createdAt) desc){
   _id,
   title,
   "slug": slug.current,
@@ -197,6 +201,7 @@ export const newsQuery = `*[_type == "news"] | order(_createdAt desc){
     ""
   ),
   category,
+  "createdDate": coalesce(createdDate, _createdAt),
   _createdAt
 }`;
 

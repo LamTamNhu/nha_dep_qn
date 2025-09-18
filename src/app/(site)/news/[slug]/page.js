@@ -42,7 +42,9 @@ export default async function NewsDetailPage({ params }) {
     const {data: contactData} = await sanityFetch({query: contactFormQuery});
     const {data: siteSettings} = await sanityFetch({query: siteSettingsQuery});
 
-    const { title, body, category, _createdAt, _updatedAt, thumbnail } = news;
+    const { title, body, category, createdDate, _createdAt, _updatedAt, thumbnail } = news;
+    const publishedDate = createdDate || _createdAt;
+    const updatedDate = _updatedAt || publishedDate;
     const categoryLabels = {
         generalNews: 'Tin tức chung',
         activities: 'Hoạt động công ty',
@@ -53,8 +55,8 @@ export default async function NewsDetailPage({ params }) {
         '@context': 'https://schema.org',
         '@type': 'NewsArticle',
         headline: title,
-        datePublished: _createdAt,
-        dateModified: _updatedAt || _createdAt,
+        datePublished: publishedDate,
+        dateModified: updatedDate,
         image: thumbnail ? [urlFor(thumbnail).width(1200).height(630).url()] : undefined,
         mainEntityOfPage: `${baseUrl}/news/${news.slug}`
     };
@@ -95,7 +97,7 @@ export default async function NewsDetailPage({ params }) {
                                     <Youtube className="w-5 h-5" />
                                 </a>
                             )}
-                            <span className="text-sm text-gray-400">{new Date(_createdAt).toLocaleDateString('vi-VN')}</span>
+                            <span className="text-sm text-gray-400">{new Date(publishedDate).toLocaleDateString('vi-VN')}</span>
                         </div>
                           {body && (
                               <PortableText

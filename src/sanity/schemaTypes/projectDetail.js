@@ -66,6 +66,17 @@ export const projectDetailFields = [
             })
     },
     {
+        name: 'createdDate',
+        title: 'Ngày tạo',
+        type: 'datetime',
+        options: {
+            dateFormat: 'DD/MM/YY',
+            timeFormat: 'HH:mm:ss',
+            timeStep: 1
+        },
+        initialValue: () => new Date().toISOString()
+    },
+    {
         name: 'category',
         title: 'Danh mục',
         type: 'string',

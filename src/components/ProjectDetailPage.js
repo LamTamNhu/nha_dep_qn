@@ -60,6 +60,7 @@ export default async function ProjectDetailPage({ params }) {
         gallery,
         body,
         category,
+        createdDate,
         _createdAt,
         _updatedAt,
         _type,
@@ -70,6 +71,8 @@ export default async function ProjectDetailPage({ params }) {
     const isCompleted = _type === 'completedProject'
     const segment = isCompleted ? 'completed-projects' : 'projects'
     const slugStr = getSlug(projectSlug) || slug
+    const publishedDate = createdDate || _createdAt
+    const updatedDate = _updatedAt || publishedDate
 
     const categoryLabels = {
         mansion: 'Biệt thự',
@@ -86,8 +89,8 @@ export default async function ProjectDetailPage({ params }) {
         '@context': 'https://schema.org',
         '@type': 'Article',
         headline: title,
-        datePublished: _createdAt,
-        dateModified: _updatedAt || _createdAt,
+        datePublished: publishedDate,
+        dateModified: updatedDate,
         image: imageUrl ? [imageUrl] : undefined,
         mainEntityOfPage: `${baseUrl}/${segment}/${slugStr}`,
     }

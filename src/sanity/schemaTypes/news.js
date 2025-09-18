@@ -84,6 +84,17 @@ export default {
             validation: Rule => Rule.required(),
         },
         {
+            name: 'createdDate',
+            title: 'Ngày tạo',
+            type: 'datetime',
+            options: {
+                dateFormat: 'DD/MM/YY',
+                timeFormat: 'HH:mm:ss',
+                timeStep: 1,
+            },
+            initialValue: () => new Date().toISOString(),
+        },
+        {
             name: 'thumbnail',
             title: 'Thumbnail',
             type: 'image',
