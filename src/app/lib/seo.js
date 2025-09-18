@@ -4,9 +4,15 @@ export function mapSeoToMetadata({ doc, settings, path }) {
   const d = doc?.seo || {};
   const fallback = settings?.defaultSeo || {};
 
+  // derive path if not passed in
+  const slug = typeof doc?.slug === 'string' ? doc.slug : doc?.slug?.current;
+  const segment = doc?._type === 'completedProject' ? 'completed-projects' : 'projects';
+  const derivedPath = slug ? `/${segment}/${slug}` : '';
+  const canonicalPath = path || derivedPath;
+
   const title = d.title || doc?.title || fallback.title || siteName;
   const description = d.description || doc?.excerpt || doc?.shortDescription || fallback.description || '';
-  const canonical = d.canonical || (path ? `${base}${path}` : base);
+  const canonical = d.canonical || (canonicalPath ? `${base}${canonicalPath}` : base);
 
   const img = d.ogImage || doc?.mainImage || doc?.thumbnail || fallback.ogImage;
   const images = img ? [{
