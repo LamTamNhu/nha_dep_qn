@@ -1,7 +1,10 @@
-import ProjectDetailPage from "@/app/(site)/projects/[slug]/page";
+import ProjectDetailPage, {
+  generateMetadata,
+  generateStaticParams,
+} from "@/components/ProjectDetailPage"
 
-export default function CompletedProjects() {
-    return (
-        <ProjectDetailPage/>
-    )
+export { generateMetadata, generateStaticParams }
+
+export default function CompletedProjectsPage({ params }) {
+  return <ProjectDetailPage params={params} />
 }
