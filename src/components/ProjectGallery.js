@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import FullscreenModal from './FullscreenModal'; // Adjust path as needed
 
 export default function ProjectGallery({ images = [] }) {
     const [current, setCurrent] = useState(0);
@@ -35,7 +36,7 @@ export default function ProjectGallery({ images = [] }) {
                     }}
                     className="absolute left-2 top-1/2 -translate-y-1/2 text-white p-2 rounded-full"
                 >
-                    <ChevronLeft  size={50}/>
+                    <ChevronLeft size={50}/>
                 </button>
 
                 {/* Next button */}
@@ -59,10 +60,9 @@ export default function ProjectGallery({ images = [] }) {
                             idx === current ? 'border-orange-500' : 'border-transparent'
                         }`}
                         onClick={() => {
-                            setCurrent(idx)
+                            setCurrent(idx);
                             setFullscreen(true);
-                        }
-                    }
+                        }}
                     >
                         <Image
                             src={img.url}
@@ -74,53 +74,17 @@ export default function ProjectGallery({ images = [] }) {
                 ))}
             </div>
 
-            {/* Fullscreen modal */}
-            {fullscreen && (
-                <div
-                    className="fixed inset-0 bg-black/95 flex items-center justify-center z-50"
-                    onClick={() => setFullscreen(false)}
-                >
-                    <button
-                        className="absolute top-4 right-4 text-white p-2 bg-black/50 rounded-full hover:bg-black/70 transition"
-                        onClick={() => setFullscreen(false)}
-                    >
-                        <X className="w-6 h-6" />
-                    </button>
-
-                    <button
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            prev();
-                        }}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 text-white p-3 bg-black/50 rounded-full hover:bg-black/70 transition"
-                    >
-                        <ChevronLeft className="w-8 h-8" />
-                    </button>
-
-                    <Image
-                        src={images[current].url}
-                        alt={images[current].alt || 'fullscreen'}
-                        width={1200}
-                        height={800}
-                        className="object-contain max-h-[90vh] max-w-[90vw]"
-                    />
-
-                    <button
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            next();
-                        }}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 text-white p-3 bg-black/50 rounded-full hover:bg-black/70 transition"
-                    >
-                        <ChevronRight className="w-8 h-8" />
-                    </button>
-
-                    {/* Counter */}
-                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white bg-black/60 px-3 py-1 rounded-full text-sm">
-                        {current + 1} / {images.length}
-                    </div>
-                </div>
-            )}
+            {/* Reusable Fullscreen Modal */}
+            <FullscreenModal
+                isOpen={fullscreen}
+                onClose={() => setFullscreen(false)}
+                images={images}
+                currentIndex={current}
+                onNext={next}
+                onPrev={prev}
+                showControls={true}
+                showCounter={true}
+            />
         </div>
     );
 }

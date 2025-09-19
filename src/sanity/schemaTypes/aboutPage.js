@@ -16,7 +16,7 @@ export default {
         {
             name: 'officePictures',
             type: 'officePictures',
-            title: 'Hình ảnh văn phòng'
+            title: 'Hình ảnh hoạt động'
         },
         {
             name: 'commitments',

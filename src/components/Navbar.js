@@ -26,12 +26,13 @@ export default function Navbar() {
         { name: "LIÊN HỆ", href: "/contact" },
     ]
 
+    // Updated dropdown items to use English keys that match your categoryMap
     const projectDropdown = [
-        { name: "Biệt thự" },
-        { name: "Nhà phố" },
-        { name: "Nhà vườn" },
-        { name: "Nhà tân cổ điển" },
-        { name: "Công trình dịch vụ" },
+        { name: "Biệt thự", key: "mansion" },
+        { name: "Nhà phố", key: "urbanHouse" },
+        { name: "Nhà vườn", key: "countryHouse" },
+        { name: "Nhà tân cổ điển", key: "neoClassicHouse" },
+        { name: "Công trình dịch vụ", key: "serviceBuilding" },
     ]
     const realConstructionDropdown = [...projectDropdown]
 
@@ -161,12 +162,12 @@ export default function Navbar() {
                                 >
                                     <ul className="py-2">
                                         {(item.name === "DỰ ÁN" ? projectDropdown : realConstructionDropdown).map((subItem) => (
-                                            <li key={subItem.name}>
+                                            <li key={subItem.key}>
                                                 <Link
                                                     href={`/${
                                                         item.name === "DỰ ÁN" ? "projects" : "completed-projects"
-                                                    }?category=${encodeURIComponent(subItem.name)}#projects-section`}
-                                                    className="block px-4 py-2 hover:bg-gray-100"
+                                                    }?category=${subItem.key}#projects-section`}
+                                                    className="block px-4 py-2 hover:bg-gray-100 hover:text-black"
                                                 >
                                                     {subItem.name}
                                                 </Link>
