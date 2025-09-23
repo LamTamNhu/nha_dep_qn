@@ -29,7 +29,12 @@ export default {
             title: 'Chi nhánh chính',
             type: 'object',
             fields: [
-                { name: 'address', title: 'Địa chỉ', type: 'string' },
+                {
+                    name: 'address',
+                    title: 'Địa chỉ',
+                    type: 'array',
+                    of: [{ type: 'string' }],
+                },
                 { name: 'email', title: 'Email', type: 'string' },
                 {
                     name: 'phones',

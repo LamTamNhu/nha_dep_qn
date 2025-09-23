@@ -10,7 +10,7 @@ const fallback = {
     description:
         'Hãy để chúng tôi kiến tạo không gian sống tuyệt vời dành cho gia đình bạn với những kiến trúc sư hàng đầu trong ngành.',
     mainBranch: {
-        address: '174 Nguyễn Văn Trỗi, P. Tân Thạnh, TP. Tam Kỳ, T. Quảng Nam',
+        address: ['174 Nguyễn Văn Trỗi, P. Tân Thạnh, TP. Tam Kỳ, T. Quảng Nam'],
         email: 'nhadepquangnam@gmail.com',
         phones: ['0914.353.808', '0905.659.036'],
     },
@@ -26,7 +26,15 @@ export default function Footer({data}) {
     const logo = content.logo || fallback.logo;
     const ctaText = content.ctaText || fallback.ctaText;
     const description = content.description || fallback.description;
-    const mainBranch = content.mainBranch || fallback.mainBranch;
+    const mainBranch = {
+        ...fallback.mainBranch,
+        ...(content.mainBranch || {}),
+    };
+    const branchAddresses = Array.isArray(mainBranch.address)
+        ? mainBranch.address
+        : mainBranch.address
+            ? [mainBranch.address]
+            : [];
     const footerQuotes =
         Array.isArray(content.footerQuotes) && content.footerQuotes.length > 0
             ? content.footerQuotes
@@ -85,7 +93,15 @@ export default function Footer({data}) {
                             {/* Column 1: Main Branch */}
                             <div>
                                 <h3 className="text-2xl font-bold mb-3">{company}</h3>
-                                <div className="mb-2">{mainBranch.address}</div>
+                                {branchAddresses.length > 0 && (
+                                    <div className="mb-2 flex flex-col gap-1">
+                                        {branchAddresses.map((addressLine, index) => (
+                                            <p key={index} className="m-0">
+                                                {addressLine}
+                                            </p>
+                                        ))}
+                                    </div>
+                                )}
                                 {mainBranch.email && <div className="mb-2">Email: {mainBranch.email}</div>}
                                 {mainBranch.phones?.length > 0 && (
                                     <div className="mb-2">Số điện thoại: {mainBranch.phones.join(' - ')}</div>
