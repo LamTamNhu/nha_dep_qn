@@ -60,7 +60,7 @@ const WhyChooseUs = () => {
                     <Image src="/images/logo.png" alt="logo" width={250} height={200} className="w-[120px] md:w-[250px] h-auto"/>
                 </div>
                 {/* Counter 1 - Top position */}
-                <div className="absolute -top-4 -right-24 md:-top-6 md:-right-36 flex items-center space-x-2 md:space-x-6">
+                <div className="absolute -top-4 -right-27 md:-top-6 md:-right-36 flex items-center space-x-2 md:space-x-6">
                     <div className="relative w-4 h-4 rounded-full bg-orange-400 ping"/>
                     <div className="text-lg md:text-3xl font-bold text-orange-500 counter-trigger">
                         {counter1.toLocaleString()}+
@@ -70,7 +70,7 @@ const WhyChooseUs = () => {
                     </div>
                 </div>
                 {/* Counter 2 - Middle position */}
-                <div className="absolute -right-28 md:-right-57 flex items-center space-x-2 md:space-x-5">
+                <div className="absolute -right-40 md:-right-57 flex items-center space-x-2 md:space-x-5">
                     <div className="relative w-4 h-4 rounded-full bg-orange-400 ping"/>
                     <div className="text-lg md:text-3xl font-bold text-orange-500 counter-trigger">
                         <div className="mb-1 md:mb-2">{counter2.toLocaleString()}+</div>
@@ -81,7 +81,7 @@ const WhyChooseUs = () => {
                 </div>
 
                 {/* Counter 3 - Bottom  position */}
-                <div className="absolute -bottom-4 -right-32 md:-bottom-6 md:-right-48 flex items-center space-x-2 md:space-x-5">
+                <div className="absolute -bottom-4 -right-36 md:-bottom-6 md:-right-48 flex items-center space-x-2 md:space-x-5">
                     <div className="relative w-4 h-4 rounded-full bg-orange-400 ping"/>
                     <div className="text-lg md:text-3xl font-bold text-orange-500 counter-trigger">
                         {counter3.toLocaleString()}+
