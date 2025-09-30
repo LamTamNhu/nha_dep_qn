@@ -56,15 +56,16 @@ function AvatarImage({avatar, alt}) {
 function TestimonialCard({testimonial}) {
     return (
         <div className="grid grid-cols-1 place-content-center">
-            <div className="flex flex-col bg-white p-6 h-60 max-h-60 overflow-hidden">
-                <Quote className="mb-2 text-center text-5xl text-orange-500 flex-shrink-0"/>
+            <div className="flex flex-col bg-white p-6 md:h-60 md:max-h-60 overflow-hidden">
+                <Quote className="mb-2 hidden text-center text-5xl text-orange-500 flex-shrink-0 sm:flex"/>
                 <blockquote
-                    className="mb-2 whitespace-pre-line text-center text-base font-normal italic text-black flex-1 overflow-hidden">
+                    className="mb-2 whitespace-pre-line text-center text-sm font-normal italic text-black flex-1 overflow-hidden line-clamp-6 md:text-base md:line-clamp-none">
                     {testimonial.quote}
                 </blockquote>
-                <Quote className="mb-6 self-end text-5xl text-orange-500 flex-shrink-0"/>
+                <Quote className="mb-6 hidden self-end text-5xl text-orange-500 flex-shrink-0 sm:flex"/>
                 {testimonial?.link && (
-                    <a href={testimonial.link} className="self-end text-orange-400 underline flex-shrink-0">
+                    <a href={testimonial.link}
+                       className="self-end text-sm text-orange-400 underline flex-shrink-0 md:text-base">
                         Tham quan nhà hoàn thiện
                     </a>
                 )}

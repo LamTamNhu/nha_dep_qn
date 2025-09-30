@@ -101,11 +101,11 @@ export default function ProcessTabs({ data }) {
   return (
     <section>
       {/* ✅ Tabs Header */}
-      <div className="container mx-auto flex justify-center bg-white">
+      <div className="container mx-auto flex flex-col items-center gap-2 bg-white px-4 sm:flex-row sm:justify-center">
         {tabs.map((tab) => (
           <button
             key={tab.id}
-            className={`text-xl w-sm px-4 py-2 ${
+            className={`text-base sm:text-lg w-full sm:w-auto px-4 py-2 transition-colors ${
               activeTab === tab.id
                 ? 'bg-orange-400 text-white'
                 : 'bg-black text-white'
@@ -120,32 +120,33 @@ export default function ProcessTabs({ data }) {
       {/* ✅ Tabs Content */}
       <div className="bg-black py-12 px-4">
         <div className="max-w-6xl mx-auto px-4">
-          <div className="container mx-auto flex justify-between items-center px-4 space-x-8">
+          <div className="container mx-auto grid grid-cols-2 gap-6 sm:gap-8 md:flex md:justify-between md:items-start md:space-x-8 md:px-4">
             {tabs
               .find((tab) => tab.id === activeTab)
               ?.steps.map((step, index, arr) => (
                 <div
                   key={index}
-                  className="flex items-start w-1/4 h-64 text-ellipsis"
+                  className="flex flex-col items-center text-center gap-3 md:flex md:flex-row md:items-start md:text-left md:w-1/4 md:gap-4"
                 >
-                  <div>
-                    <div className="w-32 h-32 mx-auto mb-2">
-                      <Image
-                        src={step.iconSrc}
-                        alt={step.alt}
-                        width={150}
-                        height={150}
-                      />
-                    </div>
-                    <h3 className="text-orange-400 text-lg text-center font-semibold mb-2">
+                  <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mx-auto md:mx-0">
+                    <Image
+                      src={step.iconSrc}
+                      alt={step.alt}
+                      width={150}
+                      height={150}
+                      className="h-full w-full object-contain"
+                    />
+                  </div>
+                  <div className="flex flex-col items-center text-center gap-2 md:items-start md:text-left">
+                    <h3 className="text-orange-400 text-sm sm:text-base md:text-lg font-semibold">
                       {step.title}
                     </h3>
-                    <p className="text-sm text-gray-300 text-center">
+                    <p className="text-xs sm:text-sm text-gray-300">
                       {step.description}
                     </p>
                   </div>
                   {index < arr.length - 1 && (
-                    <div className="w-16 flex justify-center self-center">
+                    <div className="hidden md:flex w-16 justify-center self-center">
                       <ArrowRight className="text-gray-300" size={40} />
                     </div>
                   )}
