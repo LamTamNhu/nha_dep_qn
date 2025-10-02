@@ -51,7 +51,7 @@ const WhyChooseUs = () => {
     }, []);
 
        return (
-        <div className="relative w-64 h-64 md:w-[500px] md:h-[500px] cursor-pointer swing-in-top-fwd-2">
+        <div className="relative w-60 h-60 md:w-[500px] md:h-[500px] cursor-pointer swing-in-top-fwd-2">
             {/* Main ring with white background and drop shadow */}
             <div
                 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 md:w-64 md:h-64 bg-white rounded-full shadow-2xl flex items-center justify-center">

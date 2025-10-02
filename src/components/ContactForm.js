@@ -234,7 +234,7 @@ export default function ContactForm({ data, isPopover = false, sidebarMode = fal
     // If sidebar mode, render compact version
     if (sidebarMode) {
         return (
-            <div className="bg-gray-50 rounded-lg p-4 space-y-4 max-w-xs">
+            <div className="bg-gray-50 rounded-lg p-4 space-y-4 max-w-xs" >
                 {/* Header */}
                 <div>
                     <h3 className="text-orange-400 font-bold text-lg mb-1 flex items-center">

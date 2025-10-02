@@ -5,17 +5,22 @@ import Image from "next/image";
 import * as Tooltip from "@radix-ui/react-tooltip";
 import {TooltipProvider} from "@radix-ui/react-tooltip";
 import ContactPopover from "@/components/ContactPopover";
+import Link from "next/link";
 
 function FloatingButtons({settings}) {
     const [collapsed, setCollapsed] = useState(false);
     const [isOverflow, setIsOverflow] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
     const listRef = React.useRef(null);
 
     useEffect(() => {
         if (typeof window === "undefined") return;
 
         const handleResize = () => {
-            if (window.innerWidth < 640) {
+            const mobile = window.innerWidth < 640;
+            setIsMobile(mobile);
+
+            if (mobile) {
                 setCollapsed(true);
             } else {
                 setCollapsed(false);
@@ -62,7 +67,7 @@ function FloatingButtons({settings}) {
         }] : []),
         {
             id: "contact",
-            href: "#",
+            href: "/contact",
             img: <lucide.Send size={24} className="text-white"/>,
             alt: "Xin quý khách để lại thông tin, chúng tôi sẽ liên hệ lại",
             external: false,
@@ -79,7 +84,7 @@ function FloatingButtons({settings}) {
                         className={`flex flex-col items-end gap-2 sm:gap-3 animate-fade-in max-h-screen overflow-visible ${isOverflow ? 'max-height: 100vh' : ''}`}
                     >
                         {socialLinks.map((item) =>
-                            item.id === 'contact' ? (
+                            item.id === 'contact' && !isMobile ? (
                                 <Tooltip.Root key={item.id}>
                                     <Tooltip.Trigger asChild>
                                         <ContactPopover
@@ -108,7 +113,7 @@ function FloatingButtons({settings}) {
                             ) : (
                                 <Tooltip.Root key={item.id}>
                                     <Tooltip.Trigger asChild>
-                                        <a
+                                        <Link
                                             href={item.href}
                                             target={item.external ? '_blank' : undefined}
                                             rel={item.external ? 'noopener noreferrer' : undefined}
@@ -117,7 +122,7 @@ function FloatingButtons({settings}) {
                                             }`}
                                         >
                                             {item.img}
-                                        </a>
+                                        </Link>
                                     </Tooltip.Trigger>
                                     <Tooltip.Portal>
                                         <Tooltip.Content
