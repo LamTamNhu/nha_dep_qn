@@ -70,7 +70,7 @@ export default function ServiceSections({services}) {
                             Liên hệ
                         </Link>
                     </div>
-                    <div className="w-full md:w-1/2 p-4 service-image relative">
+                    <div className="w-full h-full aspect-3/4 md:w-1/2 p-4 service-image relative">
                         <Image
                             src={service.image}
                             alt={service.alt || service.title}
