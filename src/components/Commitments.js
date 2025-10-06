@@ -65,7 +65,7 @@ export default function Commitments({data}) {
 
     return (
         <section className="py-12 md:py-16">
-            <div className="relative w-full max-h-screen">
+            <div className="relative w-full">
                 {/* Background Image */}
                 <div
                     className="brightness-65 filter blur-[1px] absolute inset-0 z-0 pointer-events-none bg-[url('/images/5khong-bg.png')] bg-cover bg-bottom"/>
