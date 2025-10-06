@@ -6,11 +6,15 @@ import {EarthGlobeIcon} from "@sanity/icons";
 import {FacebookIcon, PhoneIcon} from "lucide-react";
 
 export default function ProcessTabs({ data }) {
+    // 1. Call the hook at the top level of the component.
+    // 2. Use optional chaining `?` to safely get the first item's id.
+    const [activeTab, setActiveTab] = useState(data?.[0]?.id);
+
+    // Now, you can have your conditional early return.
     if (!data || data.length === 0) {
         return null;
     }
 
-    const [activeTab, setActiveTab] = useState(data[0].id);
     const activeTabData = data.find((tab) => tab.id === activeTab);
 
     return (
