@@ -22,8 +22,8 @@ export default function ProcessTabs({ data }) {
                         key={tab.id}
                         className={`w-full px-4 text-white py-2 text-base transition-colors sm:w-auto sm:text-lg ${
                             activeTab === tab.id
-                                ? 'bg-black'
-                                : 'bg-orange-400'
+                                ? 'bg-orange-400'
+                                : 'bg-black'
                         }`}
                         onClick={() => setActiveTab(tab.id)}
                     >
@@ -178,8 +178,8 @@ export default function ProcessTabs({ data }) {
                 </div>
             </div>
             {/*Info*/}
-            <div className="container py-2 bg-orange-400">
-                <div className="max-w-4xl mx-auto flex flex-row items-center justify-between">
+            <div className="container py-2 bg-orange-400 mx-auto w-screen">
+                <div className="max-w-4xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-2">
                     <div className="flex flex-row justify-center gap-2 items-center">
                         <EarthGlobeIcon color="white" className="w-6 h-6"/>
                         <span className="text-white font-bold">nhadepquangnam.vn</span>
