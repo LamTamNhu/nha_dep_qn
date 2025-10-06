@@ -59,7 +59,7 @@ export default {
                             ]
                         }
                     ],
-                    validation: Rule => Rule.min(1).max(6)
+                    validation: Rule => Rule.min(1).max(8)
                 }
             ]
         }

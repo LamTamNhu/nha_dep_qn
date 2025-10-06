@@ -1,160 +1,199 @@
 'use client';
 import { useState } from 'react';
 import Image from 'next/image';
-import { ArrowRight } from 'lucide-react';
+import { urlFor } from '@/sanity/lib/image';
+import {EarthGlobeIcon} from "@sanity/icons";
+import {FacebookIcon, PhoneIcon} from "lucide-react";
 
 export default function ProcessTabs({ data }) {
-  const [activeTab, setActiveTab] = useState('design');
+    if (!data || data.length === 0) {
+        return null;
+    }
 
-  // ✅ Hardcoded fallback
-  const fallbackTabs = [
-    {
-      id: 'design',
-      label: 'QUY TRÌNH THIẾT KẾ',
-      steps: [
-        {
-          iconSrc: '/images/Artboard-5.png',
-          alt: 'icon1',
-          title: 'TRAO ĐỔI TƯ VẤN',
-          description:
-            'Trao đổi yêu cầu, tư vấn định hướng ý tưởng, phong cách và mức đầu tư',
-        },
-        {
-          iconSrc: '/images/Artboard-6.png',
-          alt: 'icon2',
-          title: 'BÁO GIÁ QUY TRÌNH',
-          description:
-            'Gửi khách hàng báo giá theo đúng gói thiết kế mà Khách Hàng đang đề cập, kèm quy trình làm việc cụ thể, chi tiết',
-        },
-        {
-          iconSrc: '/images/Artboard-7.png',
-          alt: 'icon3',
-          title: 'KÝ HỢP ĐỒNG',
-          description:
-            'Thực hiện các thủ tục hành chính và bắt đầu triển khai các công việc theo tiến độ thống nhất',
-        },
-        {
-          iconSrc: '/images/Artboard-8.png',
-          alt: 'icon4',
-          title: 'BÀN GIAO & QUYẾT TOÁN',
-          description:
-            'Sau khi thống nhất hồ sơ báo cáo tiến độ, khách hàng thanh toán lần cuối giá trị HĐ còn lại trước khi nhận hồ sơ hoàn chỉnh.',
-        },
-      ],
-    },
-    {
-      id: 'construction',
-      label: 'QUY TRÌNH THI CÔNG TRỌN GÓI',
-      steps: [
-        {
-          iconSrc: '/images/Artboard-5.png',
-          alt: 'icon1',
-          title: 'TRAO ĐỔI TƯ VẤN',
-          description:
-            'Trao đổi và tư vấn khách hàng về nhu cầu, mong muốn, và định hướng mức đầu tư.',
-        },
-        {
-          iconSrc: '/images/Artboard-6.png',
-          alt: 'icon2',
-          title: 'BÁO GIÁ QUY TRÌNH',
-          description:
-            'Gửi báo giá thi công, chủng loại vật tư và Quy trình thi công để khách hàng nắm được thông tin.',
-        },
-        {
-          iconSrc: '/images/Artboard-9.png',
-          alt: 'icon3',
-          title: 'KÝ HỢP ĐỒNG',
-          description:
-            'Hai bên gặp gỡ trao đổi thống nhất các vấn đề liên quan tiến độ, chất lượng, ngày khởi công và các điều khoản hợp đồng.',
-        },
-        {
-          iconSrc: '/images/Artboard-10.png',
-          alt: 'icon4',
-          title: 'BÀN GIAO & QUYẾT TOÁN',
-          description:
-            'Kiểm tra, nghiệm thu và thanh quyết toán hợp đồng. Tiến hành bảo hành bảo trì dài hạn theo cam kết hợp đồng.',
-        },
-      ],
-    },
-  ];
+    const [activeTab, setActiveTab] = useState(data[0].id);
+    const activeTabData = data.find((tab) => tab.id === activeTab);
 
-  // ✅ Merge Sanity data with fallback
-  const tabs = fallbackTabs.map((fallbackTab) => {
-    const sanityTab = data?.find((tab) => tab.id === fallbackTab.id);
-    return {
-      ...fallbackTab,
-      label: sanityTab?.label || fallbackTab.label,
-      steps:
-        sanityTab?.steps?.length > 0
-          ? sanityTab.steps.map((step, index) => ({
-              iconSrc:
-                step.icon?.asset?.url || fallbackTab.steps[index]?.iconSrc,
-              alt: step.alt || fallbackTab.steps[index]?.alt,
-              title: step.title || fallbackTab.steps[index]?.title,
-              description:
-                step.description || fallbackTab.steps[index]?.description,
-            }))
-          : fallbackTab.steps,
-    };
-  });
+    return (
+        <section>
+            {/* Tabs Header */}
+            <div className="container mx-auto flex flex-col items-center bg-white px-4 sm:flex-row sm:justify-center">
+                {data.map((tab) => (
+                    <button
+                        key={tab.id}
+                        className={`w-full px-4 text-white py-2 text-base transition-colors sm:w-auto sm:text-lg ${
+                            activeTab === tab.id
+                                ? 'bg-black'
+                                : 'bg-orange-400'
+                        }`}
+                        onClick={() => setActiveTab(tab.id)}
+                    >
+                        {tab.label}
+                    </button>
+                ))}
+            </div>
 
-  return (
-    <section>
-      {/* ✅ Tabs Header */}
-      <div className="container mx-auto flex flex-col items-center gap-2 bg-white px-4 sm:flex-row sm:justify-center">
-        {tabs.map((tab) => (
-          <button
-            key={tab.id}
-            className={`text-base sm:text-lg w-full sm:w-auto px-4 py-2 transition-colors ${
-              activeTab === tab.id
-                ? 'bg-orange-400 text-white'
-                : 'bg-black text-white'
-            }`}
-            onClick={() => setActiveTab(tab.id)}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
+            {/* Timeline Content */}
+            <div className="bg-black px-4 py-12 bg-[url('/images/slide3.jpg')] bg-cover bg-center bg-no-repeat relative">
+                <div className="absolute inset-0 bg-black opacity-60"/>
+                <div className="mx-auto max-w-6xl">
+                    {/* Mobile: Vertical Timeline */}
+                    <div className="block lg:hidden">
+                        <div className="relative">
+                            {/* Vertical Timeline Line */}
+                            <div className="absolute left-1/2 top-0 h-full w-1 -translate-x-1/2 bg-orange-400"/>
 
-      {/* ✅ Tabs Content */}
-      <div className="bg-black py-12 px-4">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="container mx-auto grid grid-cols-2 gap-6 sm:gap-8 md:flex md:justify-between md:items-start md:space-x-8 md:px-4">
-            {tabs
-              .find((tab) => tab.id === activeTab)
-              ?.steps.map((step, index, arr) => (
-                <div
-                  key={index}
-                  className="flex flex-col items-center text-center gap-3 md:flex md:flex-row md:items-start md:text-left md:w-1/4 md:gap-4"
-                >
-                  <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mx-auto md:mx-0">
-                    <Image
-                      src={step.iconSrc}
-                      alt={step.alt}
-                      width={150}
-                      height={150}
-                      className="h-full w-full object-contain"
-                    />
-                  </div>
-                  <div className="flex flex-col items-center text-center gap-2 md:items-start md:text-left">
-                    <h3 className="text-orange-400 text-sm sm:text-base md:text-lg font-semibold">
-                      {step.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-gray-300">
-                      {step.description}
-                    </p>
-                  </div>
-                  {index < arr.length - 1 && (
-                    <div className="hidden md:flex w-16 justify-center self-center">
-                      <ArrowRight className="text-gray-300" size={40} />
+                            {/* Timeline Items */}
+                            <div>
+                                {activeTabData?.steps.map((step, index) => (
+                                    <div
+                                        key={step._key}
+                                        className={`relative flex items-center ${
+                                            index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
+                                        }`}
+                                    >
+                                        {/* Content Side */}
+                                        <div className="w-1/2 pr-4" style={index % 2 === 0 ? {} : { paddingRight: 0, paddingLeft: '1rem' }}>
+                                            <div className={`flex flex-col gap-2 ${index % 2 === 0 ? 'items-end' : 'items-start'}`}>
+                                                <div className="h-16 w-16">
+                                                    {step.icon && (
+                                                        <Image
+                                                            src={urlFor(step.icon).url()}
+                                                            alt={step.alt || 'Step Icon'}
+                                                            width={64}
+                                                            height={64}
+                                                            className="h-full w-full object-contain"
+                                                        />
+                                                    )}
+                                                </div>
+                                                <h3 className={`text-sm font-semibold text-orange-400 ${index % 2 === 0 ? 'text-right' : 'text-left'}`}>
+                                                    {step.title}
+                                                </h3>
+                                            </div>
+                                        </div>
+
+                                        {/* Timeline Dot with Number */}
+                                        <div className="absolute left-1/2 top-1/2 z-10 flex h-8 w-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center">
+                                            <div className="flex h-8 w-8 items-center justify-center rounded-full border-4 border-orange-400 bg-black">
+                                                <span className="text-sm font-bold text-orange-400">{index + 1}</span>
+                                            </div>
+                                        </div>
+
+                                        {/* Empty Side */}
+                                        <div className="w-1/2"></div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     </div>
-                  )}
+                    {/* Desktop: Horizontal Timeline */}
+                    <div className="hidden lg:block">
+                        <div className="relative px-8">
+                            {/* This main container uses flex-col to stack the three rows vertically. */}
+                            <div className="z-10 flex flex-col max-w-4xl mx-auto">
+                                {/* Row 1: Odd-indexed items (icon above title) */}
+                                {/* We map the data, but only render content for odd indexes. */}
+                                {/* Each item wrapper takes up equal space (flex-1) to ensure alignment. */}
+                                <div className="flex gap-6">
+                                    {activeTabData?.steps.map((step, index) => (
+                                        <div key={`${step._key}-top`} className="flex-1 flex justify-center py-4 relative">
+                                            {index % 2 !== 0 && (
+                                                <div className="flex bg-orange-400 justify-center flex-col items-center gap-3 h-26 p-6 max-w-xs">
+                                                    <div className="h-20 w-20 lg:h-24 lg:w-24 absolute top-0 -translate-y-1/2">
+                                                        {step.icon && (
+                                                            <Image
+                                                                src={urlFor(step.icon).url()}
+                                                                alt={step.alt || 'Step Icon'}
+                                                                width={96}
+                                                                height={96}
+                                                                className="h-full w-full object-contain"
+                                                            />
+                                                        )}
+                                                    </div>
+                                                    <h3 className="text-center text-sm font-semibold text-gray-200 lg:text-base">
+                                                        {step.title}
+                                                    </h3>
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+
+                                {/* Row 2: Timeline graphic (line and numbered dots) */}
+                                <div className="relative flex items-center justify-between">
+                                    {/* Timeline Dots with Numbers and Lines */}
+                                    {activeTabData?.steps.map((step, index) => (
+                                        <div
+                                            key={`${step._key}-dot`}
+                                            className="relative z-20 flex-1 flex items-center justify-center h-8"
+                                        >
+                                            {/* Horizontal Timeline Line - half width for first/last, full for middle */}
+                                            <div
+                                                className={`absolute top-1/2 h-1 bg-orange-400 -translate-y-1/2 ${
+                                                    index === 0
+                                                        ? 'w-1/2 left-1/2'
+                                                        : index === activeTabData.steps.length - 1
+                                                            ? 'w-1/2 right-1/2'
+                                                            : 'w-full'
+                                                }`}
+                                            />
+
+                                            {/* Dot */}
+                                            <div className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-4 border-orange-400 bg-orange-400">
+                                                <span className="text-sm font-bold text-white">{index + 1}</span>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                {/* Row 3: Even-indexed items (title above icon) */}
+                                {/* We map the data, but only render content for even indexes. */}
+                                <div className="flex gap-6">
+                                    {activeTabData?.steps.map((step, index) => (
+                                        <div key={`${step._key}-bottom`} className="flex-1 py-4 relative">
+                                            {index % 2 === 0 && (
+                                                <div className="flex flex-col items-center gap-3 h-26 p-6 bg-orange-400 justify-center">
+                                                    <h3 className="text-center text-sm font-semibold text-gray-200 lg:text-base">
+                                                        {step.title}
+                                                    </h3>
+                                                    <div className="absolute bottom-2 translate-y-1/2 h-20 w-20 lg:h-24 lg:w-24">
+                                                        {step.icon && (
+                                                            <Image
+                                                                src={urlFor(step.icon).url()}
+                                                                alt={step.alt || 'Step Icon'}
+                                                                width={96}
+                                                                height={96}
+                                                                className="h-full w-full object-contain"
+                                                            />
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+            </div>
+            {/*Info*/}
+            <div className="container py-2 bg-orange-400">
+                <div className="max-w-4xl mx-auto flex flex-row items-center justify-between">
+                    <div className="flex flex-row justify-center gap-2 items-center">
+                        <EarthGlobeIcon color="white" className="w-6 h-6"/>
+                        <span className="text-white font-bold">nhadepquangnam.vn</span>
+                    </div>
+                    <div className="flex flex-row justify-center gap-2 items-center">
+                        <PhoneIcon color="white" className="w-4 h-4"/>
+                        <span className="text-white font-bold">0914.353.808 - 0905.659.036</span>
+                    </div>
+                    <div className="flex flex-row justify-center gap-2 items-center">
+                        <FacebookIcon color="white" className="w-4 h-4"/>
+                        <span className="text-white font-bold">NHÀ ĐẸP QUẢNG NAM</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
 }
