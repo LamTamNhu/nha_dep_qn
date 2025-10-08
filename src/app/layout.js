@@ -11,7 +11,12 @@ export const metadata = {
     title: { default: "Nhà đẹp Quảng Nam", template: "%s | Nhà đẹp Quảng Nam" },
     description: "Nhà đẹp Quảng Nam - Kiến tạo không gian sống hiện đại với phong cách tối giản và tinh tế",
     openGraph: { siteName: "Nhà đẹp Quảng Nam" },
-    twitter: { card: "summary_large_image" }
+    twitter: { card: "summary_large_image" },
+    verification: {
+        other: {
+            'facebook-domain-verification': 'uqityjta44rdgmri0qdhiqjokoj1ij'
+        }
+    }
 };
 
 export default async function RootLayout({children}) {
