@@ -37,7 +37,7 @@ export default function ProcessTabs({ data }) {
             </div>
 
             {/* Timeline Content */}
-            <div className="bg-black px-4 py-12 bg-[url('/images/slide3.jpg')] bg-cover bg-center bg-no-repeat relative">
+            <div className="bg-black px-4 py-12 bg-[url('/images/process.jpg')] bg-cover bg-center bg-no-repeat relative">
                 <div className="absolute inset-0 bg-black opacity-60"/>
                 <div className="mx-auto max-w-6xl">
                     {/* Mobile: Vertical Timeline */}
