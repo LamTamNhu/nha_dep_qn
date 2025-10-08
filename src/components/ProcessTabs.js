@@ -1,21 +1,61 @@
 'use client';
-import { useState } from 'react';
+import {useState} from 'react';
 import Image from 'next/image';
-import { urlFor } from '@/sanity/lib/image';
+import {urlFor} from '@/sanity/lib/image';
 import {EarthGlobeIcon} from "@sanity/icons";
 import {FacebookIcon, PhoneIcon} from "lucide-react";
 
-export default function ProcessTabs({ data }) {
-    // 1. Call the hook at the top level of the component.
-    // 2. Use optional chaining `?` to safely get the first item's id.
+export default function ProcessTabs({data}) {
     const [activeTab, setActiveTab] = useState(data?.[0]?.id);
 
-    // Now, you can have your conditional early return.
     if (!data || data.length === 0) {
         return null;
     }
 
     const activeTabData = data.find((tab) => tab.id === activeTab);
+
+    // Reusable component for timeline step cards
+    const TimelineStepCard = ({step, index, position}) => {
+        const isTop = position === 'top';
+
+        return (
+            <div className="flex bg-orange-400 justify-center flex-col items-center gap-3 h-24 p-2 w-fit max-w-[200px] mx-auto">
+                <div
+                    className={`h-20 w-20 lg:h-24 lg:w-24 absolute ${isTop ? 'top-0 -translate-y-1/2' : 'bottom-2 translate-y-1/2'}`}>
+                    {step.icon && (
+                        <Image
+                            src={urlFor(step.icon).url()}
+                            alt={step.alt || 'Step Icon'}
+                            width={96}
+                            height={96}
+                            className="h-full w-full object-contain"
+                        />
+                    )}
+                </div>
+                <div className="text-center font-semibold text-gray-200 text-sm line-clamp-3">
+                    {step.title}
+                </div>
+            </div>
+        );
+    };
+
+    // Reusable component for timeline row
+    const TimelineRow = ({steps, showOdd}) => (
+        <div className="flex">
+            {steps.map((step, index) => (
+                <div key={`${step._key}-${showOdd ? 'top' : 'bottom'}`}
+                     className="flex-1 flex justify-center py-4 relative">
+                    {(showOdd ? index % 2 !== 0 : index % 2 === 0) && (
+                        <TimelineStepCard
+                            step={step}
+                            index={index}
+                            position={showOdd ? 'top' : 'bottom'}
+                        />
+                    )}
+                </div>
+            ))}
+        </div>
+    );
 
     return (
         <section>
@@ -37,9 +77,10 @@ export default function ProcessTabs({ data }) {
             </div>
 
             {/* Timeline Content */}
-            <div className="bg-black px-4 py-12 bg-[url('/images/process.jpg')] bg-cover bg-center bg-no-repeat relative">
+            <div
+                className="bg-black px-4 py-12 bg-[url('/images/process.jpg')] bg-cover bg-center bg-no-repeat relative">
                 <div className="absolute inset-0 bg-black opacity-60"/>
-                <div className="mx-auto max-w-6xl">
+                <div className="mx-auto">
                     {/* Mobile: Vertical Timeline */}
                     <div className="block lg:hidden">
                         <div className="relative">
@@ -56,8 +97,10 @@ export default function ProcessTabs({ data }) {
                                         }`}
                                     >
                                         {/* Content Side */}
-                                        <div className="w-1/2 pr-4" style={index % 2 === 0 ? {} : { paddingRight: 0, paddingLeft: '1rem' }}>
-                                            <div className={`flex flex-col gap-2 ${index % 2 === 0 ? 'items-end' : 'items-start'}`}>
+                                        <div className="w-1/2 pr-4"
+                                             style={index % 2 === 0 ? {} : {paddingRight: 0, paddingLeft: '1rem'}}>
+                                            <div
+                                                className={`flex flex-col gap-2 ${index % 2 === 0 ? 'items-end' : 'items-start'}`}>
                                                 <div className="h-16 w-16">
                                                     {step.icon && (
                                                         <Image
@@ -76,8 +119,10 @@ export default function ProcessTabs({ data }) {
                                         </div>
 
                                         {/* Timeline Dot with Number */}
-                                        <div className="absolute left-1/2 top-1/2 z-10 flex h-8 w-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center">
-                                            <div className="flex h-8 w-8 items-center justify-center rounded-full border-4 border-orange-400 bg-black">
+                                        <div
+                                            className="absolute left-1/2 top-1/2 z-10 flex h-8 w-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center">
+                                            <div
+                                                className="flex h-8 w-8 items-center justify-center rounded-full border-4 border-orange-400 bg-black">
                                                 <span className="text-sm font-bold text-orange-400">{index + 1}</span>
                                             </div>
                                         </div>
@@ -89,98 +134,47 @@ export default function ProcessTabs({ data }) {
                             </div>
                         </div>
                     </div>
+
                     {/* Desktop: Horizontal Timeline */}
-                    <div className="hidden lg:block">
-                        <div className="relative px-8">
-                            {/* This main container uses flex-col to stack the three rows vertically. */}
-                            <div className="z-10 flex flex-col max-w-4xl mx-auto">
-                                {/* Row 1: Odd-indexed items (icon above title) */}
-                                {/* We map the data, but only render content for odd indexes. */}
-                                {/* Each item wrapper takes up equal space (flex-1) to ensure alignment. */}
-                                <div className="flex gap-6">
-                                    {activeTabData?.steps.map((step, index) => (
-                                        <div key={`${step._key}-top`} className="flex-1 flex justify-center py-4 relative">
-                                            {index % 2 !== 0 && (
-                                                <div className="flex bg-orange-400 justify-center flex-col items-center gap-3 h-26 p-6 max-w-xs">
-                                                    <div className="h-20 w-20 lg:h-24 lg:w-24 absolute top-0 -translate-y-1/2">
-                                                        {step.icon && (
-                                                            <Image
-                                                                src={urlFor(step.icon).url()}
-                                                                alt={step.alt || 'Step Icon'}
-                                                                width={96}
-                                                                height={96}
-                                                                className="h-full w-full object-contain"
-                                                            />
-                                                        )}
-                                                    </div>
-                                                    <h3 className="text-center text-sm font-semibold text-gray-200 lg:text-base">
-                                                        {step.title}
-                                                    </h3>
-                                                </div>
-                                            )}
-                                        </div>
-                                    ))}
-                                </div>
+                    <div className="hidden relative px-8 lg:block">
+                        <div className="z-10 flex flex-col mx-auto max-w-8xl">
+                            {/* Row 1: Odd-indexed items (icon above title) */}
+                            <TimelineRow steps={activeTabData?.steps || []} showOdd={true}/>
 
-                                {/* Row 2: Timeline graphic (line and numbered dots) */}
-                                <div className="relative flex items-center justify-between">
-                                    {/* Timeline Dots with Numbers and Lines */}
-                                    {activeTabData?.steps.map((step, index) => (
+                            {/* Row 2: Timeline graphic (line and numbered dots) */}
+                            <div className="relative flex items-center justify-between">
+                                {activeTabData?.steps.map((step, index) => (
+                                    <div
+                                        key={`${step._key}-dot`}
+                                        className="relative z-20 flex-1 flex items-center justify-center h-8"
+                                    >
+                                        {/* Horizontal Timeline Line */}
                                         <div
-                                            key={`${step._key}-dot`}
-                                            className="relative z-20 flex-1 flex items-center justify-center h-8"
-                                        >
-                                            {/* Horizontal Timeline Line - half width for first/last, full for middle */}
-                                            <div
-                                                className={`absolute top-1/2 h-1 bg-orange-400 -translate-y-1/2 ${
-                                                    index === 0
-                                                        ? 'w-1/2 left-1/2'
-                                                        : index === activeTabData.steps.length - 1
-                                                            ? 'w-1/2 right-1/2'
-                                                            : 'w-full'
-                                                }`}
-                                            />
+                                            className={`absolute top-1/2 h-1 bg-orange-400 -translate-y-1/2 ${
+                                                index === 0
+                                                    ? 'w-1/2 left-1/2'
+                                                    : index === activeTabData.steps.length - 1
+                                                        ? 'w-1/2 right-1/2'
+                                                        : 'w-full'
+                                            }`}
+                                        />
 
-                                            {/* Dot */}
-                                            <div className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-4 border-orange-400 bg-orange-400">
-                                                <span className="text-sm font-bold text-white">{index + 1}</span>
-                                            </div>
+                                        {/* Dot */}
+                                        <div
+                                            className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-4 border-orange-400 bg-orange-400">
+                                            <span className="text-sm font-bold text-white">{index + 1}</span>
                                         </div>
-                                    ))}
-                                </div>
-
-                                {/* Row 3: Even-indexed items (title above icon) */}
-                                {/* We map the data, but only render content for even indexes. */}
-                                <div className="flex gap-6">
-                                    {activeTabData?.steps.map((step, index) => (
-                                        <div key={`${step._key}-bottom`} className="flex-1 py-4 relative">
-                                            {index % 2 === 0 && (
-                                                <div className="flex flex-col items-center gap-3 h-26 p-6 bg-orange-400 justify-center">
-                                                    <h3 className="text-center text-sm font-semibold text-gray-200 lg:text-base">
-                                                        {step.title}
-                                                    </h3>
-                                                    <div className="absolute bottom-2 translate-y-1/2 h-20 w-20 lg:h-24 lg:w-24">
-                                                        {step.icon && (
-                                                            <Image
-                                                                src={urlFor(step.icon).url()}
-                                                                alt={step.alt || 'Step Icon'}
-                                                                width={96}
-                                                                height={96}
-                                                                className="h-full w-full object-contain"
-                                                            />
-                                                        )}
-                                                    </div>
-                                                </div>
-                                            )}
-                                        </div>
-                                    ))}
-                                </div>
-
+                                    </div>
+                                ))}
                             </div>
+
+                            {/* Row 3: Even-indexed items (title above icon) */}
+                            <TimelineRow steps={activeTabData?.steps || []} showOdd={false}/>
                         </div>
                     </div>
                 </div>
             </div>
+
             {/*Info*/}
             <div className="container py-2 bg-orange-400 mx-auto w-screen">
                 <div className="max-w-4xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-2">
