@@ -36,7 +36,7 @@ const WhyChooseUs = () => {
 
         setTimeout(() => animateCounter(setCounter1, 10, 1000), 300);
         setTimeout(() => animateCounter(setCounter2, 3000, 2000), 600);
-        setTimeout(() => animateCounter(setCounter3, 1000, 1500), 900);
+        setTimeout(() => animateCounter(setCounter3, 200, 1500), 900);
 
         setTimeout(() => setIsAnimating(false), 4500);
     };
