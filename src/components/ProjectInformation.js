@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function ProjectInformation({data, shortDescription}) {
     if (!data) return null;
-
+    
     // Define information items with their conditions
     const infoItems = [
         {
@@ -34,50 +34,94 @@ export default function ProjectInformation({data, shortDescription}) {
             value: data.function
         },
     ];
-
+    
     // Filter items that have data
     const availableItems = infoItems.filter(item => item.condition);
-
+    
     // Don't render info cards section if no items have data
     const hasInfoCards = availableItems.length > 0;
-
+    
     return (
         <div>
             <div className="bg-black text-white">
                 {/* Header */}
-                <div className="text-center py-6">
-                    <h2 className="text-orange-400 text-lg mb-2">Giới thiệu chung về dự án</h2>
+                <div className="text-center py-6 px-4">
+                    <h2 className="text-orange-400 text-base md:text-lg mb-2">
+                        Giới thiệu chung về dự án
+                    </h2>
                     {shortDescription && (
-                        <h1 className="text-white max-w-2xl mx-auto px-4">
+                        <h1 className="text-white max-w-2xl mx-auto text-sm md:text-base">
                             {shortDescription}
                         </h1>
                     )}
                 </div>
-
+                
                 {/* Information Cards - Only show if there's data */}
                 {hasInfoCards && (
-                    <div
-                        className="bg-orange-400 flex flex-nowrap text-black justify-center">
-                        {availableItems.map((item, index) => (
-                            <div
-                                key={index}
-                                className={`flex items-center gap-3 p-4 ${
-                                    index < availableItems.length - 1 ? 'border-r border-white' : ''
-                                }`}
-                            >
-                                <Image
-                                    src={item.icon}
-                                    alt={item.alt}
-                                    width={32}
-                                    height={32}
-                                    className="text-black"
-                                />
-                                <div>
-                                    <div className="font-semibold text-sm">{item.label}</div>
-                                    <div className="text-sm">{item.value}</div>
+                    <div className="bg-orange-400 text-black">
+                        {/* Mobile: 2-column grid */}
+                        <div className="grid grid-cols-2 md:hidden">
+                            {availableItems.map((item, index) => {
+                                const isLastItem = index === availableItems.length - 1;
+                                const isOddTotal = availableItems.length % 2 !== 0;
+                                const shouldSpan = isLastItem && isOddTotal;
+                                
+                                // Only right borders on left column items (unless spanning)
+                                const hasRightBorder = !shouldSpan && index % 2 === 0;
+                                
+                                // Top border for all items in second row and beyond (index >= 2)
+                                const hasTopBorder = index >= 2;
+                                
+                                return (
+                                    <div
+                                        key={index}
+                                        className={`flex flex-col items-center gap-2 p-4 text-center ${
+                                            shouldSpan ? 'col-span-2' : ''
+                                        } ${
+                                            hasRightBorder ? 'border-r border-white' : ''
+                                        } ${
+                                            hasTopBorder ? 'border-t border-white' : ''
+                                        }`}
+                                    >
+                                        <Image
+                                            src={item.icon}
+                                            alt={item.alt}
+                                            width={32}
+                                            height={32}
+                                            className="flex-shrink-0"
+                                        />
+                                        <div>
+                                            <div className="font-semibold text-xs">{item.label}</div>
+                                            <div className="text-xs mt-1">{item.value}</div>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                        
+                        {/* Desktop: Horizontal flex layout */}
+                        <div className="hidden md:flex md:flex-nowrap md:justify-center">
+                            {availableItems.map((item, index) => (
+                                <div
+                                    key={index}
+                                    className={`flex items-center gap-3 p-4 ${
+                                        index < availableItems.length - 1 ? 'border-r border-white' : ''
+                                    }`}
+                                >
+                                    <Image
+                                        src={item.icon}
+                                        alt={item.alt}
+                                        width={32}
+                                        height={32}
+                                        className="flex-shrink-0"
+                                    />
+                                    <div>
+                                        <div className="font-semibold text-sm">{item.label}</div>
+                                        <div className="text-sm">{item.value}</div>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
                 )}
             </div>
