@@ -8,6 +8,7 @@ import { newsBySlugQuery, newsSlugsQuery, contactFormQuery, siteSettingsQuery } 
 import { mapSeoToMetadata } from '@/app/lib/seo';
 import ContactForm from '@/components/ContactForm';
 import { Facebook, Youtube, Share2 } from 'lucide-react';
+import PortableTextZoomImage from '@/components/PortableTextZoomImage';
 
 export async function generateStaticParams() {
     const {data: slugs} = await sanityFetch({
@@ -110,13 +111,7 @@ export default async function NewsDetailPage({ params }) {
                                       },
                                       types: {
                                           image: ({ value }) => (
-                                              <Image
-                                                  src={urlFor(value).width(1600).auto('format').quality(90).url()}
-                                                  alt={value.alt || title}
-                                                  width={1600}
-                                                  height={1200}
-                                                  className="w-full h-auto my-4"
-                                              />
+                                              <PortableTextZoomImage value={value} fallbackAlt={title} />
                                           ),
                                       },
                                   }}
