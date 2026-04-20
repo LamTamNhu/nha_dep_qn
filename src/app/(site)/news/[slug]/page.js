@@ -111,10 +111,10 @@ export default async function NewsDetailPage({ params }) {
                                       types: {
                                           image: ({ value }) => (
                                               <Image
-                                                  src={urlFor(value).width(800).url()}
+                                                  src={urlFor(value).width(1600).auto('format').quality(90).url()}
                                                   alt={value.alt || title}
-                                                  width={800}
-                                                  height={600}
+                                                  width={1600}
+                                                  height={1200}
                                                   className="w-full h-auto my-4"
                                               />
                                           ),
