@@ -15,6 +15,7 @@ import ContactForm from '@/components/ContactForm'
 import ProjectGallery from '@/components/ProjectGallery'
 import { Facebook, Share2 } from 'lucide-react'
 import ProjectInformation from '@/components/ProjectInformation'
+import PortableTextZoomImage from '@/components/PortableTextZoomImage'
 
 // helpers
 const getSlug = (v) =>
@@ -141,13 +142,7 @@ export default async function ProjectDetailPage({ params }) {
                                             },
                                             types: {
                                                 image: ({ value }) => (
-                                                    <Image
-                                                        src={urlFor(value).width(800).url()}
-                                                        alt={value.alt || title}
-                                                        width={800}
-                                                        height={600}
-                                                        className="w-full h-auto my-4"
-                                                    />
+                                                    <PortableTextZoomImage value={value} fallbackAlt={title} />
                                                 ),
                                             },
                                         }}
