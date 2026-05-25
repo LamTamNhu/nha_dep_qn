@@ -6,6 +6,22 @@ export default {
     {
       title: 'Block',
       type: 'block',
+      fields: [
+        {
+          name: 'textAlign',
+          title: 'Text Align',
+          type: 'string',
+          initialValue: 'left',
+          options: {
+            list: [
+              { title: 'Left', value: 'left' },
+              { title: 'Center', value: 'center' },
+            ],
+            layout: 'radio',
+            direction: 'horizontal',
+          },
+        },
+      ],
       styles: [
         { title: 'Normal', value: 'normal' },
         { title: 'Heading 1', value: 'h1' },

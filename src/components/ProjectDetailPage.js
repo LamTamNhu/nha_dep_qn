@@ -17,6 +17,11 @@ import { Facebook, Share2 } from 'lucide-react'
 import ProjectInformation from '@/components/ProjectInformation'
 import PortableTextZoomImage from '@/components/PortableTextZoomImage'
 
+const getTextAlignClass = (textAlign) => {
+    if (textAlign === 'center') return 'text-center'
+    return 'text-left'
+}
+
 // helpers
 const getSlug = (v) =>
     typeof v === 'string' ? v : Array.isArray(v) ? v[0] : v && v.current
@@ -136,9 +141,18 @@ export default async function ProjectDetailPage({ params }) {
                                         value={body}
                                         components={{
                                             block: {
-                                                h1: ({ children }) => <h1 className="text-3xl font-bold my-4">{children}</h1>,
-                                                h2: ({ children }) => <h2 className="text-2xl font-semibold my-3">{children}</h2>,
-                                                h3: ({ children }) => <h3 className="text-xl font-semibold my-2">{children}</h3>,
+                                                normal: ({ children, value }) => (
+                                                    <p className={getTextAlignClass(value?.textAlign)}>{children}</p>
+                                                ),
+                                                h1: ({ children, value }) => (
+                                                    <h1 className={`text-3xl font-bold my-4 ${getTextAlignClass(value?.textAlign)}`}>{children}</h1>
+                                                ),
+                                                h2: ({ children, value }) => (
+                                                    <h2 className={`text-2xl font-semibold my-3 ${getTextAlignClass(value?.textAlign)}`}>{children}</h2>
+                                                ),
+                                                h3: ({ children, value }) => (
+                                                    <h3 className={`text-xl font-semibold my-2 ${getTextAlignClass(value?.textAlign)}`}>{children}</h3>
+                                                ),
                                             },
                                             types: {
                                                 image: ({ value }) => (
