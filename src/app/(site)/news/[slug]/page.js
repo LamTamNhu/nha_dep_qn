@@ -10,12 +10,6 @@ import ContactForm from '@/components/ContactForm';
 import { Facebook, Youtube, Share2 } from 'lucide-react';
 import PortableTextZoomImage from '@/components/PortableTextZoomImage';
 
-const getTextAlignClass = (textAlign) => {
-    if (textAlign === 'center') return 'text-center';
-    if (textAlign === 'right') return 'text-right';
-    if (textAlign === 'justify') return 'text-justify';
-    return 'text-left';
-};
 
 export async function generateStaticParams() {
     const {data: slugs} = await sanityFetch({
@@ -112,12 +106,16 @@ export default async function NewsDetailPage({ params }) {
                                   value={body}
                                   components={{
                                       block: {
-                                          normal: ({ children, value }) => (
-                                              <p className={getTextAlignClass(value?.textAlign)}>{children}</p>
-                                          ),
-                                          h1: ({ children, value }) => <h1 className={`text-3xl font-bold my-4 ${getTextAlignClass(value?.textAlign)}`}>{children}</h1>,
-                                          h2: ({ children, value }) => <h2 className={`text-2xl font-semibold my-3 ${getTextAlignClass(value?.textAlign)}`}>{children}</h2>,
-                                          h3: ({ children, value }) => <h3 className={`text-xl font-semibold my-2 ${getTextAlignClass(value?.textAlign)}`}>{children}</h3>,
+                                          normal: ({ children }) => <p>{children}</p>,
+                                          h1: ({ children }) => <h1 className="text-3xl font-bold my-4">{children}</h1>,
+                                          h2: ({ children }) => <h2 className="text-2xl font-semibold my-3">{children}</h2>,
+                                          h3: ({ children }) => <h3 className="text-xl font-semibold my-2">{children}</h3>,
+                                          blockquote: ({ children }) => <blockquote>{children}</blockquote>,
+                                      },
+                                      marks: {
+                                          left: ({ children }) => <div className="text-left w-full">{children}</div>,
+                                          center: ({ children }) => <div className="text-center w-full">{children}</div>,
+                                          right: ({ children }) => <div className="text-right w-full">{children}</div>,
                                       },
                                       types: {
                                           image: ({ value }) => (
