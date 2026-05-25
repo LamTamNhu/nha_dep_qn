@@ -1,6 +1,7 @@
 "use client";
 import React, {useState, useEffect} from 'react';
 import Image from "next/image";
+import {BadgeCheck, Palette, Users} from "lucide-react";
 import animateOnObserve from "@/lib/animateOnObserve";
 
 const WhyChooseUs = () => {
@@ -61,7 +62,9 @@ const WhyChooseUs = () => {
                 </div>
                 {/* Counter 1 - Top position */}
                 <div className="absolute -top-4 -right-27 md:-top-6 md:-right-36 flex items-center space-x-2 md:space-x-6">
-                    <div className="relative w-4 h-4 rounded-full bg-orange-400 ping"/>
+                    <div className="relative w-8 h-8 rounded-full bg-orange-400/15 border border-orange-300 flex items-center justify-center">
+                        <BadgeCheck className="w-4 h-4 text-orange-500"/>
+                    </div>
                     <div className="text-lg md:text-3xl font-bold text-orange-500 counter-trigger">
                         {counter1.toLocaleString()}+
                         <div className="text-[10px] md:text-sm text-gray-600 uppercase tracking-wide">
@@ -71,7 +74,9 @@ const WhyChooseUs = () => {
                 </div>
                 {/* Counter 2 - Middle position */}
                 <div className="absolute -right-40 md:-right-57 flex items-center space-x-2 md:space-x-5">
-                    <div className="relative w-4 h-4 rounded-full bg-orange-400 ping"/>
+                    <div className="relative w-8 h-8 rounded-full bg-orange-400/15 border border-orange-300 flex items-center justify-center">
+                        <Palette className="w-4 h-4 text-orange-500"/>
+                    </div>
                     <div className="text-lg md:text-3xl font-bold text-orange-500 counter-trigger">
                         <div className="mb-1 md:mb-2">{counter2.toLocaleString()}+</div>
                         <div className="text-[10px] md:text-sm text-gray-600 uppercase tracking-wide">
@@ -82,7 +87,9 @@ const WhyChooseUs = () => {
 
                 {/* Counter 3 - Bottom  position */}
                 <div className="absolute -bottom-4 -right-36 md:-bottom-6 md:-right-48 flex items-center space-x-2 md:space-x-5">
-                    <div className="relative w-4 h-4 rounded-full bg-orange-400 ping"/>
+                    <div className="relative w-8 h-8 rounded-full bg-orange-400/15 border border-orange-300 flex items-center justify-center">
+                        <Users className="w-4 h-4 text-orange-500"/>
+                    </div>
                     <div className="text-lg md:text-3xl font-bold text-orange-500 counter-trigger">
                         {counter3.toLocaleString()}+
                         <div className="text-[10px] md:text-sm text-gray-600 uppercase tracking-wide">

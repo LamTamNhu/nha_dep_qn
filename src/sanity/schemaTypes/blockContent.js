@@ -1,3 +1,12 @@
+import React from 'react'
+import {AlignCenter, AlignLeft, AlignRight} from 'lucide-react'
+
+const LeftAlignMarkIcon = () => <AlignLeft size={14} strokeWidth={2} />
+
+const CenterAlignMarkIcon = () => <AlignCenter size={14} strokeWidth={2} />
+
+const RightAlignMarkIcon = () => <AlignRight size={14} strokeWidth={2} />
+
 export default {
   title: 'Block Content',
   name: 'blockContent',
@@ -7,41 +16,39 @@ export default {
       title: 'Block',
       type: 'block',
       styles: [
-        { title: 'Normal', value: 'normal' },
-        { title: 'Heading 1', value: 'h1' },
-        { title: 'Heading 2', value: 'h2' },
-        { title: 'Heading 3', value: 'h3' },
-        { title: 'Quote', value: 'blockquote' },
+        {title: 'Normal', value: 'normal'},
+        {title: 'Heading 1', value: 'h1'},
+        {title: 'Heading 2', value: 'h2'},
+        {title: 'Heading 3', value: 'h3'},
+        {title: 'Quote', value: 'blockquote'},
       ],
       lists: [
-        { title: 'Bullet', value: 'bullet' },
-        { title: 'Numbered', value: 'number' },
+        {title: 'Bullet', value: 'bullet'},
+        {title: 'Numbered', value: 'number'},
       ],
       marks: {
         decorators: [
-          { title: 'Strong', value: 'strong' },
-          { title: 'Emphasis', value: 'em' },
-          { title: 'Code', value: 'code' },
-          { title: 'Left', value: 'left' },
-          { title: 'Center', value: 'center' },
-          { title: 'Right', value: 'right' },
+          {title: 'Strong', value: 'strong'},
+          {title: 'Emphasis', value: 'em'},
+          {title: 'Code', value: 'code'},
+          {title: 'Left', value: 'left', icon: LeftAlignMarkIcon},
+          {title: 'Center', value: 'center', icon: CenterAlignMarkIcon},
+          {title: 'Right', value: 'right', icon: RightAlignMarkIcon},
         ],
         annotations: [
           {
             name: 'link',
             type: 'object',
             title: 'Link',
-            fields: [
-              { name: 'href', type: 'url', title: 'Url' },
-            ],
+            fields: [{name: 'href', type: 'url', title: 'Url'}],
           },
         ],
       },
     },
-    { type: 'table' },
+    {type: 'table'},
     {
       type: 'image',
-      options: { hotspot: true },
+      options: {hotspot: true},
       fields: [
         {
           name: 'alt',
