@@ -1,5 +1,4 @@
 import localFont from 'next/font/local'
-import {Mulish} from 'next/font/google'
 
 export const fancyFont = localFont({
     src: './UTM-Yen-Tu.ttf',
@@ -14,8 +13,4 @@ export const utmAvo = localFont({
     ],
 })
 
-export const mulish = Mulish({
-    subsets: ['latin'],
-    weight: ['400', '700'],
-    variable: '--font-mulish',
-})
+export const mulish = utmAvo
