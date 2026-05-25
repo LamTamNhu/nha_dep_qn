@@ -12,6 +12,8 @@ import PortableTextZoomImage from '@/components/PortableTextZoomImage';
 
 const getTextAlignClass = (textAlign) => {
     if (textAlign === 'center') return 'text-center';
+    if (textAlign === 'right') return 'text-right';
+    if (textAlign === 'justify') return 'text-justify';
     return 'text-left';
 };
 

@@ -16,6 +16,8 @@ export default {
             list: [
               { title: 'Left', value: 'left' },
               { title: 'Center', value: 'center' },
+              { title: 'Right', value: 'right' },
+              { title: 'Justify', value: 'justify' },
             ],
             layout: 'radio',
             direction: 'horizontal',
