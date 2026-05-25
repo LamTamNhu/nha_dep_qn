@@ -17,12 +17,6 @@ import { Facebook, Share2 } from 'lucide-react'
 import ProjectInformation from '@/components/ProjectInformation'
 import PortableTextZoomImage from '@/components/PortableTextZoomImage'
 
-const getTextAlignClassFromStyle = (style) => {
-    if (style?.endsWith('Center')) return 'text-center'
-    if (style?.endsWith('Right')) return 'text-right'
-    if (style?.endsWith('Justify')) return 'text-justify'
-    return 'text-left'
-}
 
 // helpers
 const getSlug = (v) =>
@@ -143,54 +137,16 @@ export default async function ProjectDetailPage({ params }) {
                                         value={body}
                                         components={{
                                             block: {
-                                                normal: ({ children, value }) => (
-                                                    <p className={getTextAlignClassFromStyle(value?.style)}>{children}</p>
-                                                ),
-                                                normalCenter: ({ children, value }) => (
-                                                    <p className={getTextAlignClassFromStyle(value?.style)}>{children}</p>
-                                                ),
-                                                normalRight: ({ children, value }) => (
-                                                    <p className={getTextAlignClassFromStyle(value?.style)}>{children}</p>
-                                                ),
-                                                normalJustify: ({ children, value }) => (
-                                                    <p className={getTextAlignClassFromStyle(value?.style)}>{children}</p>
-                                                ),
-                                                h1: ({ children, value }) => (
-                                                    <h1 className={`text-3xl font-bold my-4 ${getTextAlignClassFromStyle(value?.style)}`}>{children}</h1>
-                                                ),
-                                                h1Center: ({ children, value }) => (
-                                                    <h1 className={`text-3xl font-bold my-4 ${getTextAlignClassFromStyle(value?.style)}`}>{children}</h1>
-                                                ),
-                                                h1Right: ({ children, value }) => (
-                                                    <h1 className={`text-3xl font-bold my-4 ${getTextAlignClassFromStyle(value?.style)}`}>{children}</h1>
-                                                ),
-                                                h1Justify: ({ children, value }) => (
-                                                    <h1 className={`text-3xl font-bold my-4 ${getTextAlignClassFromStyle(value?.style)}`}>{children}</h1>
-                                                ),
-                                                h2: ({ children, value }) => (
-                                                    <h2 className={`text-2xl font-semibold my-3 ${getTextAlignClassFromStyle(value?.style)}`}>{children}</h2>
-                                                ),
-                                                h2Center: ({ children, value }) => (
-                                                    <h2 className={`text-2xl font-semibold my-3 ${getTextAlignClassFromStyle(value?.style)}`}>{children}</h2>
-                                                ),
-                                                h2Right: ({ children, value }) => (
-                                                    <h2 className={`text-2xl font-semibold my-3 ${getTextAlignClassFromStyle(value?.style)}`}>{children}</h2>
-                                                ),
-                                                h2Justify: ({ children, value }) => (
-                                                    <h2 className={`text-2xl font-semibold my-3 ${getTextAlignClassFromStyle(value?.style)}`}>{children}</h2>
-                                                ),
-                                                h3: ({ children, value }) => (
-                                                    <h3 className={`text-xl font-semibold my-2 ${getTextAlignClassFromStyle(value?.style)}`}>{children}</h3>
-                                                ),
-                                                h3Center: ({ children, value }) => (
-                                                    <h3 className={`text-xl font-semibold my-2 ${getTextAlignClassFromStyle(value?.style)}`}>{children}</h3>
-                                                ),
-                                                h3Right: ({ children, value }) => (
-                                                    <h3 className={`text-xl font-semibold my-2 ${getTextAlignClassFromStyle(value?.style)}`}>{children}</h3>
-                                                ),
-                                                h3Justify: ({ children, value }) => (
-                                                    <h3 className={`text-xl font-semibold my-2 ${getTextAlignClassFromStyle(value?.style)}`}>{children}</h3>
-                                                ),
+                                                normal: ({ children }) => <p>{children}</p>,
+                                                h1: ({ children }) => <h1 className="text-3xl font-bold my-4">{children}</h1>,
+                                                h2: ({ children }) => <h2 className="text-2xl font-semibold my-3">{children}</h2>,
+                                                h3: ({ children }) => <h3 className="text-xl font-semibold my-2">{children}</h3>,
+                                                blockquote: ({ children }) => <blockquote>{children}</blockquote>,
+                                            },
+                                            marks: {
+                                                left: ({ children }) => <div className="text-left w-full">{children}</div>,
+                                                center: ({ children }) => <div className="text-center w-full">{children}</div>,
+                                                right: ({ children }) => <div className="text-right w-full">{children}</div>,
                                             },
                                             types: {
                                                 image: ({ value }) => (
