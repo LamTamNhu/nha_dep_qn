@@ -1,16 +1,4 @@
-import React from 'react'
-
-const LeftAlignMarkIcon = () => (
-  <span style={{fontFamily: 'monospace', fontSize: '12px', lineHeight: 1}}>≡</span>
-)
-
-const CenterAlignMarkIcon = () => (
-  <span style={{fontFamily: 'monospace', fontSize: '12px', lineHeight: 1}}>≣</span>
-)
-
-const RightAlignMarkIcon = () => (
-  <span style={{fontFamily: 'monospace', fontSize: '12px', lineHeight: 1}}>☰</span>
-)
+import { AlignLeft, AlignCenter, AlignRight } from 'lucide-react'
 
 export default {
   title: 'Block Content',
@@ -36,9 +24,9 @@ export default {
           { title: 'Strong', value: 'strong' },
           { title: 'Emphasis', value: 'em' },
           { title: 'Code', value: 'code' },
-          { title: 'Left', value: 'left', icon: LeftAlignMarkIcon },
-          { title: 'Center', value: 'center', icon: CenterAlignMarkIcon },
-          { title: 'Right', value: 'right', icon: RightAlignMarkIcon },
+          { title: 'Left', value: 'left', icon: AlignLeft },
+          { title: 'Center', value: 'center', icon: AlignCenter },
+          { title: 'Right', value: 'right', icon: AlignRight },
         ],
         annotations: [
           {
