@@ -22,24 +22,32 @@ function getSanityImageDimensions(image) {
 
 export default function PortableTextZoomImage({ value, fallbackAlt }) {
   const [isOpen, setIsOpen] = useState(false);
+  const hasAssetRef = Boolean(value?.asset?._ref || value?.asset?._id);
   const { width, height } = useMemo(() => getSanityImageDimensions(value), [value]);
 
   const inlineUrl = useMemo(
-    () => urlFor(value).fit('max').auto('format').quality(100).url(),
-    [value]
+    () => (hasAssetRef ? urlFor(value).fit('max').auto('format').quality(100).url() : null),
+    [hasAssetRef, value]
   );
 
-  const fullSizeUrl = useMemo(() => urlFor(value).url(), [value]);
+  const fullSizeUrl = useMemo(() => (hasAssetRef ? urlFor(value).url() : null), [hasAssetRef, value]);
 
   const images = useMemo(
-    () => [
-      {
-        url: fullSizeUrl,
-        alt: value?.alt || fallbackAlt || 'image',
-      },
-    ],
+    () =>
+      fullSizeUrl
+        ? [
+            {
+              url: fullSizeUrl,
+              alt: value?.alt || fallbackAlt || 'image',
+            },
+          ]
+        : [],
     [fallbackAlt, fullSizeUrl, value?.alt]
   );
+
+  if (!inlineUrl || !fullSizeUrl) {
+    return null;
+  }
 
   return (
     <>
