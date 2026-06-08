@@ -42,6 +42,59 @@ export default {
     },
     { type: 'table' },
     {
+      name: 'seeMore',
+      title: 'Xem thêm',
+      type: 'object',
+      fields: [
+        {
+          name: 'mode',
+          title: 'Chế độ',
+          type: 'string',
+          initialValue: 'automatic',
+          options: {
+            list: [
+              { title: 'Tự động (random cùng chủ đề)', value: 'automatic' },
+              { title: 'Thủ công (tự chọn liên kết)', value: 'manual' },
+            ],
+            layout: 'radio',
+          },
+        },
+        {
+          name: 'count',
+          title: 'Số liên kết hiển thị',
+          type: 'number',
+          initialValue: 3,
+          validation: (Rule) => Rule.min(1).max(10).integer(),
+          hidden: ({ parent }) => parent?.mode === 'manual',
+        },
+        {
+          name: 'links',
+          title: 'Danh sách liên kết',
+          type: 'array',
+          hidden: ({ parent }) => parent?.mode !== 'manual',
+          of: [
+            {
+              type: 'object',
+              fields: [
+                { name: 'text', type: 'string', title: 'Tiêu đề' },
+                { name: 'href', type: 'url', title: 'Đường dẫn' },
+              ],
+              preview: { select: { title: 'text', subtitle: 'href' } },
+            },
+          ],
+        },
+      ],
+      preview: {
+        select: { mode: 'mode', count: 'count', links: 'links' },
+        prepare({ mode, count, links }) {
+          if (mode === 'manual') {
+            return { title: `Xem thêm — Thủ công (${(links || []).length} liên kết)` };
+          }
+          return { title: `Xem thêm — Tự động (${count ?? 3} bài)` };
+        },
+      },
+    },
+    {
       type: 'image',
       options: { hotspot: true },
       fields: [

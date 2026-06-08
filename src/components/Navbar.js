@@ -22,7 +22,7 @@ export default function Navbar() {
         { name: "DỊCH VỤ", href: "/services" },
         { name: "DỰ ÁN", href: "/projects", dropdown: true, chevron: true },
         { name: "THI CÔNG THỰC TẾ", href: "/completed-projects", dropdown: true, chevron: true },
-        { name: "TIN TỨC", href: "/news" },
+        { name: "TIN TỨC", href: "/news", dropdown: true, chevron: true },
         { name: "LIÊN HỆ", href: "/contact" },
     ]
 
@@ -35,6 +35,10 @@ export default function Navbar() {
         { name: "Công trình dịch vụ", key: "serviceBuilding" },
     ]
     const realConstructionDropdown = [...projectDropdown]
+    const newsDropdown = [
+        { name: "Tin tức chung", key: "generalNews" },
+        { name: "Hoạt động công ty", key: "activities" },
+    ]
 
     useEffect(() => {
         const navbar = document.getElementById("navbar")
@@ -161,12 +165,14 @@ export default function Navbar() {
                   "
                                 >
                                     <ul className="py-2">
-                                        {(item.name === "DỰ ÁN" ? projectDropdown : realConstructionDropdown).map((subItem) => (
+                                        {(item.name === "DỰ ÁN" ? projectDropdown : item.name === "THI CÔNG THỰC TẾ" ? realConstructionDropdown : newsDropdown).map((subItem) => (
                                             <li key={subItem.key}>
                                                 <Link
-                                                    href={`/${
-                                                        item.name === "DỰ ÁN" ? "projects" : "completed-projects"
-                                                    }?category=${subItem.key}#projects-section`}
+                                                    href={
+                                                        item.name === "TIN TỨC"
+                                                            ? `/news?category=${subItem.key}`
+                                                            : `/${item.name === "DỰ ÁN" ? "projects" : "completed-projects"}?category=${subItem.key}#projects-section`
+                                                    }
                                                     className="block px-4 py-2 hover:bg-gray-100 hover:text-black"
                                                 >
                                                     {subItem.name}

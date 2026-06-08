@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { PortableText } from 'next-sanity';
 import {sanityFetch} from '@/sanity/lib/live';
 import { urlFor } from '@/sanity/lib/image';
-import { newsBySlugQuery, newsSlugsQuery, contactFormQuery, siteSettingsQuery } from '@/sanity/lib/queries';
+import { newsBySlugQuery, newsSlugsQuery, contactFormQuery, siteSettingsQuery, recentNewsQuery, newsByCategoryQuery } from '@/sanity/lib/queries';
 import { mapSeoToMetadata } from '@/app/lib/seo';
 import ContactForm from '@/components/ContactForm';
 import { Facebook, Youtube, Share2 } from 'lucide-react';
@@ -41,8 +41,12 @@ export default async function NewsDetailPage({ params }) {
     if (!news) {
         notFound();
     }
-    const {data: contactData} = await sanityFetch({query: contactFormQuery});
-    const {data: siteSettings} = await sanityFetch({query: siteSettingsQuery});
+    const [{data: contactData}, {data: siteSettings}, {data: recentNews}, {data: sameCategoryNews}] = await Promise.all([
+        sanityFetch({query: contactFormQuery}),
+        sanityFetch({query: siteSettingsQuery}),
+        sanityFetch({query: recentNewsQuery}),
+        sanityFetch({query: newsByCategoryQuery, params: { category: news.category ?? '', excludeId: news._id }}),
+    ]);
 
     const { title, body, category, createdDate, _createdAt, _updatedAt, thumbnail } = news;
     const publishedDate = createdDate || _createdAt;
@@ -113,14 +117,48 @@ export default async function NewsDetailPage({ params }) {
                                           blockquote: ({ children }) => <blockquote>{children}</blockquote>,
                                       },
                                       marks: {
-                                          left: ({ children }) => <div className="text-left w-full">{children}</div>,
-                                          center: ({ children }) => <div className="text-center w-full">{children}</div>,
-                                          right: ({ children }) => <div className="text-right w-full">{children}</div>,
+                                          left: ({ children }) => <span className="block text-left w-full">{children}</span>,
+                                          center: ({ children }) => <span className="block text-center w-full">{children}</span>,
+                                          right: ({ children }) => <span className="block text-right w-full">{children}</span>,
                                       },
                                       types: {
                                           image: ({ value }) => (
                                               <PortableTextZoomImage value={value} fallbackAlt={title} />
                                           ),
+                                          seeMore: ({ value }) => {
+                                              const isManual = value.mode === 'manual';
+                                              let picks = [];
+                                              if (isManual) {
+                                                  picks = (value.links || []).map((l) => ({
+                                                      _id: l.href,
+                                                      title: l.text,
+                                                      href: l.href,
+                                                  }));
+                                              } else {
+                                                  const count = value.count ?? 3;
+                                                  const pool = [...(sameCategoryNews || [])];
+                                                  for (let i = pool.length - 1; i > 0; i--) {
+                                                      const j = Math.floor(Math.random() * (i + 1));
+                                                      [pool[i], pool[j]] = [pool[j], pool[i]];
+                                                  }
+                                                  picks = pool.slice(0, count).map((item) => ({
+                                                      _id: item._id,
+                                                      title: item.title,
+                                                      href: `/news/${item.slug}`,
+                                                  }));
+                                              }
+                                              if (picks.length === 0) return null;
+                                              return (
+                                                  <div className="border-l-4 border-[var(--accent)] pl-4 my-4">
+                                                      <p className="text-sm font-semibold text-gray-300 mb-1">&gt;&gt; Xem thêm:</p>
+                                                      {picks.map((item) => (
+                                                          <Link key={item._id} href={item.href} className="block text-[var(--accent)] hover:underline text-sm mb-1">
+                                                              {item.title}
+                                                          </Link>
+                                                      ))}
+                                                  </div>
+                                              );
+                                          },
                                       },
                                   }}
                               />
@@ -160,10 +198,37 @@ export default async function NewsDetailPage({ params }) {
                             </div>
                         </div>
                     </div>
-                    <div className="md:col-span-1">
-                        <div className="sticky top-18">
-                            <ContactForm data={contactData} sidebarMode={true} />
+                    <div className="md:col-span-1 flex flex-col gap-6">
+                        {/* Sticky zone — ContactForm dừng khi chạm Bài đăng mới */}
+                        <div className="flex-1">
+                            <div className="sticky top-18">
+                                <ContactForm data={contactData} sidebarMode={true} />
+                            </div>
                         </div>
+                        {/* Bài đăng mới cố định ở cuối sidebar */}
+                        {recentNews && recentNews.length > 0 && (
+                            <div>
+                                <div className="bg-black px-4 py-3 mb-3">
+                                    <h3 className="text-[var(--accent)] font-bold text-lg text-center">Bài đăng mới</h3>
+                                </div>
+                                <ul className="flex flex-col divide-y divide-gray-700">
+                                    {recentNews.map((item) => (
+                                        <li key={item._id}>
+                                            <Link href={`/news/${item.slug}`} className="flex gap-3 py-3 hover:opacity-80 transition-opacity">
+                                                {item.image ? (
+                                                    <div className="relative w-16 h-16 flex-shrink-0">
+                                                        <Image src={item.image} alt={item.title} fill className="object-cover" sizes="64px" />
+                                                    </div>
+                                                ) : (
+                                                    <div className="w-16 h-16 flex-shrink-0 bg-gray-700" />
+                                                )}
+                                                <span className="text-sm text-gray-200 line-clamp-3 leading-snug">{item.title}</span>
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

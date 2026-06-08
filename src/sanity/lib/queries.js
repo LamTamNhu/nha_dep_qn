@@ -180,6 +180,19 @@ export const newsSlugsQuery = `*[_type == "news" && defined(slug.current)]{
   _updatedAt
 }`;
 
+export const newsByCategoryQuery = `*[_type == "news" && category == $category && _id != $excludeId]{
+  _id,
+  title,
+  "slug": slug.current
+}`;
+
+export const recentNewsQuery = `*[_type == "news"] | order(coalesce(createdDate, _createdAt) desc)[0...5]{
+  _id,
+  title,
+  "slug": slug.current,
+  "image": thumbnail.asset->url
+}`;
+
 export const newsBySlugQuery = `*[_type == "news" && slug.current == $slug][0]{
   _id,
   title,
