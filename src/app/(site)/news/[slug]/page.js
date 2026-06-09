@@ -8,7 +8,7 @@ import { newsBySlugQuery, newsSlugsQuery, contactFormQuery, siteSettingsQuery, r
 import { mapSeoToMetadata } from '@/app/lib/seo';
 import ContactForm from '@/components/ContactForm';
 import { Facebook, Youtube, Share2 } from 'lucide-react';
-import PortableTextZoomImage from '@/components/PortableTextZoomImage';
+import { makePortableTextComponents } from '@/components/portableTextComponents';
 
 
 export async function generateStaticParams() {
@@ -108,59 +108,7 @@ export default async function NewsDetailPage({ params }) {
                           {body && (
                               <PortableText
                                   value={body}
-                                  components={{
-                                      block: {
-                                          normal: ({ children }) => <p>{children}</p>,
-                                          h1: ({ children }) => <h1 className="text-3xl font-bold my-4">{children}</h1>,
-                                          h2: ({ children }) => <h2 className="text-2xl font-semibold my-3">{children}</h2>,
-                                          h3: ({ children }) => <h3 className="text-xl font-semibold my-2">{children}</h3>,
-                                          blockquote: ({ children }) => <blockquote>{children}</blockquote>,
-                                      },
-                                      marks: {
-                                          left: ({ children }) => <span className="block text-left w-full">{children}</span>,
-                                          center: ({ children }) => <span className="block text-center w-full">{children}</span>,
-                                          right: ({ children }) => <span className="block text-right w-full">{children}</span>,
-                                      },
-                                      types: {
-                                          image: ({ value }) => (
-                                              <PortableTextZoomImage value={value} fallbackAlt={title} />
-                                          ),
-                                          seeMore: ({ value }) => {
-                                              const isManual = value.mode === 'manual';
-                                              let picks = [];
-                                              if (isManual) {
-                                                  picks = (value.links || []).map((l) => ({
-                                                      _id: l.href,
-                                                      title: l.text,
-                                                      href: l.href,
-                                                  }));
-                                              } else {
-                                                  const count = value.count ?? 3;
-                                                  const pool = [...(sameCategoryNews || [])];
-                                                  for (let i = pool.length - 1; i > 0; i--) {
-                                                      const j = Math.floor(Math.random() * (i + 1));
-                                                      [pool[i], pool[j]] = [pool[j], pool[i]];
-                                                  }
-                                                  picks = pool.slice(0, count).map((item) => ({
-                                                      _id: item._id,
-                                                      title: item.title,
-                                                      href: `/news/${item.slug}`,
-                                                  }));
-                                              }
-                                              if (picks.length === 0) return null;
-                                              return (
-                                                  <div className="border-l-4 border-[var(--accent)] pl-4 my-4">
-                                                      <p className="text-sm font-semibold text-gray-300 mb-1">&gt;&gt; Xem thêm:</p>
-                                                      {picks.map((item) => (
-                                                          <Link key={item._id} href={item.href} className="block text-[var(--accent)] hover:underline text-sm mb-1">
-                                                              {item.title}
-                                                          </Link>
-                                                      ))}
-                                                  </div>
-                                              );
-                                          },
-                                      },
-                                  }}
+                                  components={makePortableTextComponents({ title, sameCategoryNews })}
                               />
                           )}
                         <div className="mt-12 pt-8 border-t border-gray-600">
