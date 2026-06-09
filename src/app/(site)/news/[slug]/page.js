@@ -150,7 +150,7 @@ export default async function NewsDetailPage({ params }) {
                         <div className="sticky top-18 flex flex-col gap-6">
                             <ContactForm data={contactData} sidebarMode={true} />
                             {recentNews && recentNews.length > 0 && (
-                                <div>
+                                <div className="max-w-xs w-full">
                                     <div className="bg-black px-4 py-3 mb-3">
                                         <h3 className="text-[var(--accent)] font-bold text-lg text-center">Bài đăng mới</h3>
                                     </div>
