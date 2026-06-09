@@ -146,37 +146,33 @@ export default async function NewsDetailPage({ params }) {
                             </div>
                         </div>
                     </div>
-                    <div className="md:col-span-1 flex flex-col gap-6">
-                        {/* Sticky zone — ContactForm dừng khi chạm Bài đăng mới */}
-                        <div className="flex-1">
-                            <div className="sticky top-18">
-                                <ContactForm data={contactData} sidebarMode={true} />
-                            </div>
-                        </div>
-                        {/* Bài đăng mới cố định ở cuối sidebar */}
-                        {recentNews && recentNews.length > 0 && (
-                            <div>
-                                <div className="bg-black px-4 py-3 mb-3">
-                                    <h3 className="text-[var(--accent)] font-bold text-lg text-center">Bài đăng mới</h3>
+                    <div className="md:col-span-1">
+                        <div className="sticky top-18 flex flex-col gap-6">
+                            <ContactForm data={contactData} sidebarMode={true} />
+                            {recentNews && recentNews.length > 0 && (
+                                <div>
+                                    <div className="bg-black px-4 py-3 mb-3">
+                                        <h3 className="text-[var(--accent)] font-bold text-lg text-center">Bài đăng mới</h3>
+                                    </div>
+                                    <ul className="flex flex-col divide-y divide-gray-700">
+                                        {recentNews.map((item) => (
+                                            <li key={item._id}>
+                                                <Link href={`/news/${item.slug}`} className="flex gap-3 py-3 hover:opacity-80 transition-opacity">
+                                                    {item.image ? (
+                                                        <div className="relative w-16 h-16 flex-shrink-0">
+                                                            <Image src={item.image} alt={item.title} fill className="object-cover" sizes="64px" />
+                                                        </div>
+                                                    ) : (
+                                                        <div className="w-16 h-16 flex-shrink-0 bg-gray-700" />
+                                                    )}
+                                                    <span className="text-sm text-gray-200 line-clamp-3 leading-snug">{item.title}</span>
+                                                </Link>
+                                            </li>
+                                        ))}
+                                    </ul>
                                 </div>
-                                <ul className="flex flex-col divide-y divide-gray-700">
-                                    {recentNews.map((item) => (
-                                        <li key={item._id}>
-                                            <Link href={`/news/${item.slug}`} className="flex gap-3 py-3 hover:opacity-80 transition-opacity">
-                                                {item.image ? (
-                                                    <div className="relative w-16 h-16 flex-shrink-0">
-                                                        <Image src={item.image} alt={item.title} fill className="object-cover" sizes="64px" />
-                                                    </div>
-                                                ) : (
-                                                    <div className="w-16 h-16 flex-shrink-0 bg-gray-700" />
-                                                )}
-                                                <span className="text-sm text-gray-200 line-clamp-3 leading-snug">{item.title}</span>
-                                            </Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        )}
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
