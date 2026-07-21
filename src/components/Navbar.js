@@ -36,8 +36,8 @@ export default function Navbar() {
     ]
     const realConstructionDropdown = [...projectDropdown]
     const newsDropdown = [
-        { name: "Tin tức chung", key: "generalNews" },
-        { name: "Hoạt động công ty", key: "activities" },
+        { name: "Cẩm nang xây dựng", key: "generalNews" },
+        { name: "Kiến thức xây dựng", key: "activities" },
     ]
 
     useEffect(() => {

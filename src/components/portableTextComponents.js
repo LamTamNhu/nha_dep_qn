@@ -11,7 +11,7 @@ import PortableTextZoomImage from '@/components/PortableTextZoomImage';
 export function makePortableTextComponents({ title, sameCategoryNews = [] } = {}) {
     return {
         block: {
-            normal: ({ children }) => <p>{children}</p>,
+            normal: ({ children }) => <p className="my-4 leading-relaxed">{children}</p>,
             h1: ({ children }) => <h1 className="text-3xl font-bold my-4">{children}</h1>,
             h2: ({ children }) => <h2 className="text-2xl font-semibold my-3">{children}</h2>,
             h3: ({ children }) => <h3 className="text-xl font-semibold my-2">{children}</h3>,
@@ -36,6 +36,43 @@ export function makePortableTextComponents({ title, sameCategoryNews = [] } = {}
             image: ({ value }) => (
                 <PortableTextZoomImage value={value} fallbackAlt={title} />
             ),
+            table: ({ value }) => {
+                const rows = value?.rows || [];
+                if (rows.length === 0) return null;
+                const [headRow, ...bodyRows] = rows;
+                return (
+                    <div className="not-prose my-6 overflow-x-auto">
+                        <table className="w-full border-collapse text-sm">
+                            <thead>
+                                <tr>
+                                    {(headRow?.cells || []).map((cell, i) => (
+                                        <th
+                                            key={i}
+                                            className="border border-gray-600 bg-black/40 px-3 py-2 text-left font-semibold"
+                                        >
+                                            {cell}
+                                        </th>
+                                    ))}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {bodyRows.map((row, r) => (
+                                    <tr key={row._key || r}>
+                                        {(row.cells || []).map((cell, c) => (
+                                            <td
+                                                key={c}
+                                                className="border border-gray-600 px-3 py-2 align-top"
+                                            >
+                                                {cell}
+                                            </td>
+                                        ))}
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                );
+            },
             seeMore: ({ value }) => {
                 const isManual = value.mode === 'manual';
                 let picks = [];
