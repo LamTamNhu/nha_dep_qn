@@ -77,8 +77,8 @@ export default {
             type: 'string',
             options: {
                 list: [
-                    { title: 'Tin tức chung', value: 'generalNews' },
-                    { title: 'Hoạt động công ty', value: 'activities' },
+                    { title: 'Cẩm nang xây dựng', value: 'generalNews' },
+                    { title: 'Kiến thức xây dựng', value: 'activities' },
                 ],
             },
             validation: Rule => Rule.required(),

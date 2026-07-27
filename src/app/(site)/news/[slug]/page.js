@@ -52,8 +52,8 @@ export default async function NewsDetailPage({ params }) {
     const publishedDate = createdDate || _createdAt;
     const updatedDate = _updatedAt || publishedDate;
     const categoryLabels = {
-        generalNews: 'Tin tức chung',
-        activities: 'Hoạt động công ty',
+        generalNews: 'Cẩm nang xây dựng',
+        activities: 'Kiến thức xây dựng',
     };
 
     const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || '').replace(/\/$/, '');

@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import NewsGrid from './NewsGrid';
 import SearchBar from './SearchBar';
 import CategoryTags from './CategoryTags';
@@ -9,18 +10,29 @@ import { SearchX } from 'lucide-react';
 
 const categories = [
     { value: 'all', title: 'Tất cả' },
-    { value: 'generalNews', title: 'Tin tức chung' },
-    { value: 'activities', title: 'Hoạt động công ty' },
+    { value: 'generalNews', title: 'Cẩm nang xây dựng' },
+    { value: 'activities', title: 'Kiến thức xây dựng' },
 ];
 
 const ITEMS_PER_PAGE = 12;
 
-export default function NewsFilter({ news }) {
+function NewsFilterContent({ news }) {
+    const searchParams = useSearchParams();
+    const categoryFromUrl = searchParams.get('category');
+    const initialCategory = categories.some(cat => cat.value === categoryFromUrl)
+        ? categoryFromUrl
+        : 'all';
+
     const [filteredNews, setFilteredNews] = useState(news);
-    const [selectedCategory, setSelectedCategory] = useState('all');
+    const [selectedCategory, setSelectedCategory] = useState(initialCategory);
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [paginatedNews, setPaginatedNews] = useState([]);
+
+    // Keep the active tab in sync when the URL category changes (navbar dropdown)
+    useEffect(() => {
+        setSelectedCategory(initialCategory);
+    }, [initialCategory]);
 
     useEffect(() => {
         let filtered = news;
@@ -121,5 +133,13 @@ export default function NewsFilter({ news }) {
                 </div>
             )}
         </>
+    );
+}
+
+export default function NewsFilter({ news }) {
+    return (
+        <Suspense fallback={<div className="text-gray-400 py-8">Đang tải bài viết...</div>}>
+            <NewsFilterContent news={news} />
+        </Suspense>
     );
 }
