@@ -172,7 +172,8 @@ export const siteSettingsQuery = `*[_type == "siteSettings"][0]{
   facebook,
   zalo,
   youtube,
-  phoneNumber
+  phoneNumber,
+  googleTagManagerId
 }`;
 
 export const newsSlugsQuery = `*[_type == "news" && defined(slug.current)]{

@@ -4,6 +4,7 @@ import FloatingButtons from "../../components/FloatingButtons";
 import {client} from "@/sanity/lib/client";
 import {footerQuery, siteSettingsQuery} from "@/sanity/lib/queries";
 import ContactForm from "@/components/ContactForm";
+import GoogleTagManager from "@/components/GoogleTagManager";
 
 export default async function SiteLayout({children}) {
     const [footerData, siteSettings] = await Promise.all([
@@ -13,6 +14,7 @@ export default async function SiteLayout({children}) {
 
     return (
         <>
+            <GoogleTagManager gtmId={siteSettings?.googleTagManagerId}/>
             <Navbar/>
             {children}
             <FloatingButtons settings={siteSettings}/>

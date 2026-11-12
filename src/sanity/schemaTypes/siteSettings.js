@@ -21,5 +21,18 @@ export default {
         { name: 'youtube', title: 'Youtube', type: 'url' },
         // thông tin liên hệ
         { name: 'phoneNumber', title: 'Số điện thoại', type: 'string' },
+        // mã theo dõi (tracking)
+        {
+            name: 'googleTagManagerId',
+            title: 'Mã Google Tag Manager',
+            type: 'string',
+            description:
+                'Dán mã container dạng GTM-XXXXXXX (lấy trong Google Tag Manager → Admin → Container ID). Để trống nếu chưa dùng.',
+            placeholder: 'GTM-XXXXXXX',
+            validation: (Rule) =>
+                Rule.regex(/^GTM-[A-Z0-9]+$/, { name: 'Google Tag Manager ID' }).error(
+                    'Mã phải có dạng GTM-XXXXXXX (chữ in hoa và số).'
+                ),
+        },
     ]
 }
