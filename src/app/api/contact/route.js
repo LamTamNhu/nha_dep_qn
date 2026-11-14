@@ -19,16 +19,33 @@ export async function POST(request) {
       </div>
     `;
 
-    await resend.emails.send({
-      from: 'Nhà Đẹp Quảng Nam <onboarding@resend.dev>',
-      to: 'nhadepquangnam.vn@gmail.com',
-      reply_to: email,
+    // Configurable via env so the sender/recipient can change once a domain
+    // is verified in Resend, without touching code.
+    const fromAddress =
+      process.env.CONTACT_EMAIL_FROM || 'Nhà Đẹp Quảng Nam <onboarding@resend.dev>';
+    const toAddress = process.env.CONTACT_EMAIL_TO || 'nhadepquangnam.vn@gmail.com';
+
+    const { data: sent, error } = await resend.emails.send({
+      from: fromAddress,
+      to: toAddress,
+      replyTo: email || undefined,
       subject: `Thông tin liên hệ của khách hàng ${name} `,
       html: htmlContent,
       text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nArea: ${area}\nLocation: ${location}\nBudget: ${budget.join(', ')}\nDetails: ${details}`,
     });
 
-    return NextResponse.json({ success: true });
+    // Resend SDK v4 returns { data, error } instead of throwing on API errors.
+    // Without this check a rejected send (e.g. unverified domain) still looked
+    // like success, so the form reported "sent" while nothing was delivered.
+    if (error) {
+      console.error('Resend send failed:', error);
+      return NextResponse.json(
+        { error: error.message || 'Failed to send message' },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json({ success: true, id: sent?.id });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ error: 'Failed to send message' }, { status: 500 });

@@ -20,11 +20,8 @@ function FloatingButtons({settings}) {
             const mobile = window.innerWidth < 640;
             setIsMobile(mobile);
 
-            if (mobile) {
-                setCollapsed(true);
-            } else {
-                setCollapsed(false);
-            }
+            // Show the contact buttons expanded by default on every screen size
+            // (including mobile). The toggle button still lets the user collapse them.
             if (listRef.current) {
                 const rect = listRef.current.getBoundingClientRect();
                 setIsOverflow(rect.height > window.innerHeight - 32);
